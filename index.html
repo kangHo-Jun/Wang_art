@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>왕열 Wang Yeul — 현대 한국화</title>
+  <meta name="description" content="현대 한국화가 왕열 작가의 공식 홈페이지. 유토피아를 주제로 한 작품 세계, 전시 이력, 갤러리를 소개합니다." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css?v=20260530" />
+</head>
+<body>
+
+<!-- ============================================================
+  아임웹 이전 가이드
+  ┌─────────────────────────────────────────────────────────────
+  │ 이 주석은 아임웹 섹션 매핑 안내입니다.
+  │ 각 <section> 앞에 [아임웹 섹션 안내] 주석이 달려 있습니다.
+  └─────────────────────────────────────────────────────────────
+============================================================ -->
+
+<!-- ====================== NAVIGATION ====================== -->
+<!-- [아임웹] 헤더 > 고정 메뉴 / 로고 텍스트: "王烈 Wang Yeul" -->
+<header class="site-header scrolled" id="site-header">
+  <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
+    <a href="#hero" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기/닫기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-menu" id="navMenu" role="list">
+      <li><a href="#about" data-i18n="nav.about">작가 소개</a></li>
+      <li><a href="#world" data-i18n="nav.world">작품 세계</a></li>
+      <li><a href="#gallery" data-i18n="nav.gallery">갤러리</a></li>
+      <li><a href="#video" data-i18n="nav.video">영상</a></li>
+      <li><a href="#statement" data-i18n="nav.statement">작가의 말</a></li>
+      <li><a href="#exhibitions" data-i18n="nav.exhibitions">전시 이력</a></li>
+      <li><a href="#collections" data-i18n="nav.collections">소장처</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">문의</a></li>
+    </ul>
+
+    <!-- 언어 선택 버튼 -->
+    <div class="lang-switcher" role="group" aria-label="언어 선택">
+      <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')" aria-label="한국어">KO</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" aria-label="日本語">JP</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-label="中文">ZH</button>
+    </div>
+  </nav>
+</header>
+
+
+<!-- ====================== HERO SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 풀스크린 히어로 (아임웹 > 섹션추가 > 풀사이즈 이미지)
+  권장 배경  : 세로형 or 정방형 한국화 대표작 1장 (최소 1920×1080px, JPG)
+  섹션 제목  : "王烈의 유토피아"
+  부제목     : "UTOPIA — 마음 속 무릉도원을 그리다"
+  버튼 문구  : [작품 보기 →] / [작가 소개 →]
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="hero" id="hero" aria-label="메인 히어로">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow fade-up" data-i18n="hero.eyebrow">wangyeul&#x27;s painting </p>
+    <h1 class="hero-title fade-up delay-1">
+      <span class="title-kr" data-i18n="hero.title.kr">王烈의 유토피아</span>
+      <span class="title-en">UTOPIA</span>
+    </h1>
+    <p class="hero-subtitle fade-up delay-2" data-i18n="hero.subtitle">마음 속 무릉도원을 그리다</p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="#gallery" class="btn btn-primary" data-i18n="hero.cta.gallery">작품 보기 →</a>
+      <a href="#about" class="btn btn-ghost" data-i18n="hero.cta.about">작가 소개 →</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-label="스크롤 안내">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ====================== ABOUT SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 2단 레이아웃 (이미지 + 텍스트)
+  섹션 제목  : "작가 소개"
+  권장 이미지 : 작가 프로필 사진 (세로형 3:4 비율, 최소 800×1067px)
+  소제목     : "Wang Yeul / 왕열 · b. 1961"
+  부제목(텍스트) : "단국대학교 예술대학 동양화과 교수"
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section about-section" id="about" aria-labelledby="about-heading">
+  <div class="section-label" aria-hidden="true">
+    <span data-i18n="about.label">ABOUT THE ARTIST</span>
+    <!-- 아임웹: 섹션 소제목 컴포넌트로 대체 -->
+  </div>
+
+  <div class="container about-grid">
+
+    <!-- 이미지 영역 -->
+    <div class="about-image-wrap fade-left visible">
+      <div class="about-image-placeholder" id="about-photo-box" role="img" aria-label="왕열 작가 프로필 사진">
+        <!-- 사진 없을 때 아이콘 -->
+        <div class="placeholder-inner" id="about-photo-empty">
+          <i class="fas fa-user-circle" aria-hidden="true"></i>
+        </div>
+        <!-- 사진 있을 때 (JS로 src 설정) -->
+        <img id="about-photo-img" src="" alt="왕열 작가 프로필 사진"
+          style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;border-radius:2px;">
+      </div>
+    </div>
+
+    <!-- 텍스트 영역 -->
+    <div class="about-text fade-right">
+      <h2 class="section-heading" id="about-heading">
+        <span class="heading-en" data-i18n="about.heading.en">ABOUT</span>
+        <span class="heading-kr" data-i18n="about.heading.kr">작가 소개</span>
+      </h2>
+
+      <div class="about-name-block">
+        <p class="artist-name-kr">왕 열 <span class="name-hanja">王烈</span></p>
+        <p class="artist-name-en">Wang Yeul &nbsp;·&nbsp; b. 1961</p>
+
+      </div>
+
+      <div class="about-bio">
+        <p data-i18n="about.bio">
+          홍익대학교 미술대학 및 대학원 동양화과를 졸업하고, 홍익대학교 대학원에서 미술학 박사 학위를 취득하였습니다.
+          한국화의 전통적 정신성에 현대적 감각을 더해, 붉은 산수와 긴 다리의 말·목이 긴 새 등 독창적인 형상 언어로
+          '유토피아'라는 보편적 화두를 탐구하고 있습니다.
+        </p>
+      </div>
+
+      <!-- 스탯 카드 – 수치 보수적 처리 -->
+      <div class="about-stats" role="list" aria-label="작가 주요 이력 요약">
+        <!-- [아임웹] 수치 강조 텍스트 컴포넌트 / 과장 수치 카운터 애니메이션 제거됨 -->
+        <div class="stat-card" role="listitem">
+          <p class="stat-num">90여 회 <span class="stat-plus">이상</span></p>
+          <p class="stat-label" data-i18n="about.stat1.label">국내외 개인전</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-num" data-i18n="about.stat2.num">다수</p>
+          <p class="stat-label" data-i18n="about.stat2.label">단체전 참가</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-num">10개국</p>
+          <p class="stat-label"><span data-i18n="about.stat3.label">해외 전시</span><br /><small data-i18n="about.stat3.sub">(중·일·독·스위스·미·불)</small></p>
+        </div>
+      </div>
+
+      <!-- 학력 -->
+      <div class="about-education">
+        <h3 class="sub-heading" data-i18n="about.edu.heading">학력</h3>
+        <ul class="education-list" role="list">
+          <li data-i18n="about.edu.1">홍익대학교 미술대학 동양화과 졸업</li>
+          <li data-i18n="about.edu.2">홍익대학교 대학원 동양화과 졸업 (석사)</li>
+          <li data-i18n="about.edu.3">홍익대학교 대학원 미술학 박사</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== ARTWORK WORLD SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 카드 그리드 (아임웹 > 이미지+텍스트 카드)
+  섹션 제목  : "작품 세계"
+  부제목     : "Wang Yeul's Artistic Universe"
+  카드 수    : 4장 (각 카드: 1:1 정방형 이미지 + 제목 + 설명)
+  권장 이미지 비율 : 각 카드 1:1 정방형 (최소 600 × 600 px)
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section world-section" id="world" aria-labelledby="world-heading">
+  <div class="container">
+    <div class="section-intro fade-up visible">
+      <h2 class="section-heading" id="world-heading">
+        <span class="heading-en">ARTISTIC WORLD</span>
+        <span class="heading-kr">작품 세계</span>
+      </h2>
+      <p class="section-desc">전통 한국화의 정신성과 현대적 조형 언어가 만나는 왕열만의 예술 세계</p>
+    </div>
+
+    <div class="world-grid" id="worldGrid">
+      <!-- JS에서 wy_world 테이블 데이터로 동적 생성 -->
+      <div id="world-loading" style="grid-column:1/-1;text-align:center;padding:40px;color:#888;">
+        <p>로딩 중...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== GALLERY SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 이미지 갤러리 (아임웹 > 갤러리 섹션 또는 포트폴리오)
+  섹션 제목  : "갤러리"
+  필터 버튼  : 전체 / 말 시리즈 / 새 시리즈 / 산수 / 유토피아
+  권장 이미지 비율 : 2:3 세로형 (최소 600 × 900 px) 또는 가로·세로 혼합 가능
+  라이트박스  : 클릭 시 확대 보기 기능 포함
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section gallery-section" id="gallery" aria-labelledby="gallery-heading">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <h2 class="section-heading" id="gallery-heading">
+        <span class="heading-en">GALLERY</span>
+        <span class="heading-kr">갤러리</span>
+      </h2>
+      <p class="section-desc">왕열 작가의 주요 작품을 감상하세요</p>
+    </div>
+
+    <!-- 필터 버튼 -->
+    <!-- [아임웹] 카테고리 필터는 아임웹 포트폴리오 카테고리 기능으로 대체 -->
+    <div class="gallery-filter-wrap fade-up">
+      <!-- 메인 카테고리 -->
+      <div class="gallery-filter" role="group" aria-label="갤러리 필터">
+        <button class="filter-btn active" data-filter="all" aria-pressed="true" data-i18n="gallery.filter.all">전체</button>
+        <button class="filter-btn has-sub" data-filter="2jung" aria-pressed="false" aria-expanded="false">2중구조 <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+        <button class="filter-btn" data-filter="2026" aria-pressed="false">2026해체</button>
+        <button class="filter-btn" data-filter="blue" aria-pressed="false">Blue</button>
+        <button class="filter-btn" data-filter="ink" aria-pressed="false">Ink</button>
+        <button class="filter-btn" data-filter="red" aria-pressed="false">Red</button>
+      </div>
+
+    </div>
+
+    <!-- 갤러리 그리드 — Table API 동적 로딩 -->
+    <div class="gallery-grid" id="galleryGrid" role="list" aria-label="작품 목록">
+      <!-- JS에서 wy_artworks 테이블 데이터로 동적 생성 -->
+      <div id="gallery-loading" style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#888;font-size:0.9rem;">
+        작품을 불러오는 중...
+      </div>
+    </div><!-- /gallery-grid -->
+
+    <!-- 더 보기 버튼 -->
+    <!-- [아임웹] 버튼 문구: "작품 더 보기 →" / 링크: 갤러리 전체 페이지 -->
+    <div class="gallery-more fade-up">
+      <a href="#" class="btn btn-outline">작품 더 보기 →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ====================== VIDEO SECTION ====================== -->
+<section class="section video-section" id="video" aria-labelledby="video-heading">
+  <div class="container">
+    <div class="section-intro fade-up visible">
+      <h2 class="section-heading" id="video-heading">
+        <span class="heading-en">VIDEO</span>
+        <span class="heading-kr">영상</span>
+      </h2>
+      <p class="section-desc" id="video-section-desc">작가의 작업 과정과 전시를 영상으로 만나보세요</p>
+    </div>
+
+    <!-- 영상 그리드 (JS로 동적 렌더) -->
+    <div class="video-grid" id="video-grid">
+      <div class="video-empty" id="video-empty">
+        <div style="font-size:2.5rem;opacity:.25;margin-bottom:12px;">🎬</div>
+        <p>등록된 영상이 없습니다</p>
+        <p style="font-size:.78rem;opacity:.6;margin-top:4px;">관리자 페이지에서 영상을 추가해 주세요</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== ARTIST STATEMENT SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 풀 와이드 인용 섹션 (아임웹 > 텍스트 강조 섹션)
+  섹션 제목  : "작가의 말"
+  배경색     : 짙은 먹색(#1a1208) 또는 배경 이미지
+  권장 배경 이미지 비율 : 16:9 가로형 (최소 1920×1080px)
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section statement-section" id="statement" aria-labelledby="statement-heading">
+  <div class="statement-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="statement-inner fade-up">
+      <h2 class="section-heading light" id="statement-heading">
+        <span class="heading-en">ARTIST'S STATEMENT</span>
+        <span class="heading-kr">작가의 말</span>
+      </h2>
+
+      <blockquote class="statement-quote">
+        <p class="quote-main">
+          "유토피아는 지도 위에 표시된 장소가 아니라,<br />
+          사색하고 명상하는 마음의 상태 속에 있다."
+        </p>
+        <footer class="quote-footer">
+          <cite>— 왕열 Wang Yeul</cite>
+        </footer>
+      </blockquote>
+
+      <div class="statement-body">
+        <p data-i18n="statement.body1">
+          길을 가다가, 버스를 타는 도중에도, 꿈속에서도 나는 주변에서 일어나는 모든 생활에서 느끼는 감정에 따라
+          작업의 영향을 받는다. 우리는 복잡한 도시 속 자그마한 부속물로 존재하지만, 그 안에서도 보다 인간다운 삶을
+          향한 열망을 멈추지 않는다.
+        </p>
+        <p data-i18n="statement.body2">
+          긴 다리의 말과 목이 긴 새는 그 열망의 형상이다. 이번 전시가 관람객 각자의 마음속에 잠시 쉬어갈 수 있는
+          '개인적 무릉도원'을 짓는 시간이 되길 바란다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== EXHIBITIONS SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 탭 + 타임라인 (아임웹 > 아코디언 또는 탭 섹션)
+  섹션 제목  : "전시 이력"
+  탭 버튼    : [주요 개인전] / [수상 경력] / [해외 전시]
+  주의사항   : 개인전 횟수는 '50여 회 이상' 표기 (출처마다 수치 다름)
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section exhibitions-section" id="exhibitions" aria-labelledby="exhibitions-heading">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <h2 class="section-heading" id="exhibitions-heading">
+        <span class="heading-en">EXHIBITIONS</span>
+        <span class="heading-kr">전시 이력</span>
+      </h2>
+      <p class="section-desc">
+        국내외 개인전 90여 회 이상, 다수의 단체전 참가 및 10개국 해외 전시
+        <br />
+        <small class="caution-note">※ 정확한 전시 횟수는 갤러리·작가 측 공식 자료를 기준으로 업데이트 바랍니다.</small>
+      </p>
+    </div>
+
+    <!-- 탭 -->
+    <!-- [아임웹] 탭 버튼 문구: "주요 개인전" / "수상 경력" / "해외 전시" -->
+    <div class="tab-wrap fade-up" role="tablist" aria-label="전시 이력 탭">
+      <button class="tab-btn active" data-tab="solo" role="tab" aria-selected="true" aria-controls="tab-solo">주요 개인전</button>
+      <button class="tab-btn" data-tab="awards" role="tab" aria-selected="false" aria-controls="tab-awards">수상 경력</button>
+      <button class="tab-btn" data-tab="international" role="tab" aria-selected="false" aria-controls="tab-international">해외 전시</button>
+    </div>
+
+    <!-- 탭 콘텐츠: 주요 개인전 -->
+    <div class="tab-content active" id="tab-solo" role="tabpanel" aria-labelledby="solo-tab">
+      <div class="timeline">
+
+        <div class="timeline-item fade-up">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-body">
+            <h3 class="timeline-title">王烈의 말, 말, 말, 말 展</h3>
+            <p class="timeline-venue">G-ART 갤러리, 인사동, 서울</p>
+            <p class="timeline-desc">87번째 개인전. '유토피아'를 화두로 한 신작·근작 20여 점 공개.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up delay-1">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-body">
+            <h3 class="timeline-title">Playing in Utopia</h3>
+            <p class="timeline-venue">네오 갤러리, 서울</p>
+            <p class="timeline-desc">붉은 산수화와 긴 다리의 말·새로 펼쳐지는 유토피아 세계.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up delay-2">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-body">
+            <h3 class="timeline-title">동쪽에서 부는 바람 — Utopia</h3>
+            <p class="timeline-venue">샤토 갤러리, 로스앤젤레스, 미국</p>
+            <p class="timeline-desc">LA 첫 개인전. 현대 한국화의 색채와 정신을 LA에 소개.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up delay-3">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-body">
+            <h3 class="timeline-title">왕열 초대전 — 유토피아</h3>
+            <p class="timeline-venue">아트램프, 서울</p>
+            <p class="timeline-desc">유토피아로 향하는 길목의 다양한 풍경을 화폭에 담은 초대전.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up delay-4">
+          <div class="timeline-year">2017</div>
+          <div class="timeline-body">
+            <h3 class="timeline-title">왕열 개인전</h3>
+            <p class="timeline-venue">갤러리H, 인사동, 서울</p>
+            <p class="timeline-desc">한국화의 현대적 재해석을 보여준 인사동 개인전.</p>
+          </div>
+        </div>
+
+        <div class="timeline-more">
+          <p>· 그 외 국내외 개인전 다수 (정확한 전시 목록은 작가 측 공식 자료 참조)</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 탭 콘텐츠: 수상 경력 -->
+    <div class="tab-content" id="tab-awards" role="tabpanel" aria-labelledby="awards-tab" hidden>
+      <div class="awards-grid">
+
+        <div class="award-card fade-up">
+          <div class="award-icon"><i class="fas fa-medal" aria-hidden="true"></i></div>
+          <h3 class="award-title">동아미술상</h3>
+          <p class="award-org">동아일보사 · 동아미술제</p>
+        </div>
+
+        <div class="award-card fade-up delay-1">
+          <div class="award-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div>
+          <h3 class="award-title">한국미술평론가협회작가상</h3>
+          <p class="award-org">한국미술평론가협회</p>
+        </div>
+
+        <div class="award-card fade-up delay-2">
+          <div class="award-icon"><i class="fas fa-award" aria-hidden="true"></i></div>
+          <h3 class="award-title">한국미술작가대상</h3>
+          <p class="award-org">한국미술작가대상 운영위원회</p>
+        </div>
+
+        <div class="award-card fade-up delay-3">
+          <div class="award-icon"><i class="fas fa-gavel" aria-hidden="true"></i></div>
+          <h3 class="award-title">대한민국미술대전 심사위원</h3>
+          <p class="award-org">역임</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 탭 콘텐츠: 해외 전시 -->
+    <div class="tab-content" id="tab-international" role="tabpanel" aria-labelledby="international-tab" hidden>
+      <div class="intl-grid">
+        <div class="intl-card fade-up"><span class="intl-flag">🇨🇳</span><p>중국</p></div>
+        <div class="intl-card fade-up delay-1"><span class="intl-flag">🇯🇵</span><p>일본</p></div>
+        <div class="intl-card fade-up delay-2"><span class="intl-flag">🇩🇪</span><p>독일</p></div>
+        <div class="intl-card fade-up delay-3"><span class="intl-flag">🇨🇭</span><p>스위스</p></div>
+        <div class="intl-card fade-up delay-4"><span class="intl-flag">🇺🇸</span><p>미국</p></div>
+        <div class="intl-card fade-up delay-5"><span class="intl-flag">🇫🇷</span><p>프랑스</p></div>
+      </div>
+      <p class="intl-note fade-up">10개국에서 개인전을 개최하며 현대 한국화의 위상을 세계에 알리고 있습니다.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ====================== COLLECTIONS SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 로고/텍스트 그리드 (아임웹 > 클라이언트·파트너 섹션)
+  섹션 제목  : "작품 소장처"
+  소제목     : "Major Collections"
+  배경색     : 밝은 크림색 계열 권장
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section collections-section" id="collections" aria-labelledby="collections-heading">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <h2 class="section-heading" id="collections-heading">
+        <span class="heading-en" data-i18n="collections.heading.en">COLLECTIONS</span>
+        <span class="heading-kr" data-i18n="collections.heading.kr">작품 소장처</span>
+      </h2>
+      <p class="section-desc" data-i18n="collections.desc">국내외 주요 미술관 및 기관에 작품이 소장되어 있습니다</p>
+    </div>
+
+    <div class="collections-grid">
+      <div class="collection-item fade-up"><i class="fas fa-landmark" aria-hidden="true"></i><p>국립현대미술관</p></div>
+      <div class="collection-item fade-up delay-1"><i class="fas fa-building" aria-hidden="true"></i><p>경기도미술관</p></div>
+      <div class="collection-item fade-up delay-2"><i class="fas fa-city" aria-hidden="true"></i><p>대전시립미술관</p></div>
+      <div class="collection-item fade-up delay-3"><i class="fas fa-palette" aria-hidden="true"></i><p>미술은행</p></div>
+      <div class="collection-item fade-up delay-4"><i class="fas fa-theater-masks" aria-hidden="true"></i><p>성남아트센터</p></div>
+      <div class="collection-item fade-up delay-5"><i class="fas fa-images" aria-hidden="true"></i><p>성곡미술관</p></div>
+      <div class="collection-item fade-up"><i class="fas fa-university" aria-hidden="true"></i><p>홍익대학교<br/>현대미술관</p></div>
+      <div class="collection-item fade-up delay-1"><i class="fas fa-book" aria-hidden="true"></i><p>고려대학교<br/>박물관</p></div>
+      <div class="collection-item fade-up delay-2"><i class="fas fa-hotel" aria-hidden="true"></i><p>워커힐 미술관</p></div>
+      <div class="collection-item fade-up delay-3"><i class="fas fa-globe-asia" aria-hidden="true"></i><p>한국해외홍보처</p></div>
+      <div class="collection-item fade-up delay-4"><i class="fas fa-won-sign" aria-hidden="true"></i><p>한국은행</p></div>
+      <div class="collection-item fade-up delay-5"><i class="fas fa-school" aria-hidden="true"></i><p>한국종합<br/>예술학교</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== CONTACT SECTION ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 문의 폼 (아임웹 > 폼 섹션)
+  섹션 제목  : "문의 / 컨택트"
+  소제목     : "작품 구입, 전시 섭외, 미디어 문의"
+  버튼 문구  : [문의 보내기 →]
+  SNS 아이콘 : 인스타그램 @wang_yeul / 유튜브
+  ─────────────────────────────────────────────────────────────
+-->
+<section class="section contact-section" id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <h2 class="section-heading" id="contact-heading">
+        <span class="heading-en" data-i18n="contact.heading.en">CONTACT</span>
+        <span class="heading-kr" data-i18n="contact.heading.kr">문의</span>
+      </h2>
+      <p class="section-desc" data-i18n="contact.desc">작품 구입, 전시 섭외, 미디어 문의</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- 연락 정보 -->
+      <div class="contact-info fade-left">
+        <div class="contact-info-item">
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <div>
+            <p class="contact-label" data-i18n="contact.info.affiliation">소속</p>
+            <p>단국대학교 예술대학 동양화과 교수 역임</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <div>
+            <p class="contact-label" data-i18n="contact.info.instagram">인스타그램</p>
+            <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" aria-label="왕열 작가 인스타그램 (새 탭)">@wang_yeul</a>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <div>
+            <p class="contact-label" data-i18n="contact.info.email">이메일 문의</p>
+            <p><a href="mailto:wangyeul2963296@gmail.com" style="color:inherit;text-decoration:none;">wangyeul2963296@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-sns">
+          <!-- [아임웹] SNS 아이콘 링크 / 실제 URL로 교체 -->
+          <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" class="sns-btn" aria-label="인스타그램">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=%EC%99%95%EC%97%B4+%ED%99%94%EA%B0%80" target="_blank" rel="noopener noreferrer" class="sns-btn" aria-label="유튜브">
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.facebook.com/p/%EC%99%95%EC%97%B4-100063101206073/" target="_blank" rel="noopener noreferrer" class="sns-btn" aria-label="페이스북">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- 문의 폼 -->
+      <!-- [아임웹] 아임웹 기본 폼 컴포넌트로 대체하면 이메일 수신 가능 -->
+      <form class="contact-form fade-right" id="contactForm" aria-label="문의 양식" novalidate>
+        <div class="form-group">
+          <label for="formName">이름 <span aria-hidden="true">*</span></label>
+          <input type="text" id="formName" name="name" placeholder="성함을 입력해 주세요" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="formEmail">이메일 <span aria-hidden="true">*</span></label>
+          <input type="email" id="formEmail" name="email" placeholder="이메일 주소를 입력해 주세요" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="formSubject">문의 유형</label>
+          <select id="formSubject" name="subject">
+            <option value="">문의 유형을 선택해 주세요</option>
+            <option value="purchase">작품 구입</option>
+            <option value="exhibition">전시 섭외</option>
+            <option value="media">미디어·인터뷰</option>
+            <option value="other">기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formMessage">내용 <span aria-hidden="true">*</span></label>
+          <textarea id="formMessage" name="message" rows="5" placeholder="문의 내용을 상세히 적어 주세요" required></textarea>
+        </div>
+        <!-- [아임웹] 버튼 문구: "문의 보내기 →" -->
+        <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.form.submit">문의 보내기 →</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== FOOTER ====================== -->
+<!--
+  [아임웹 이전 안내] ──────────────────────────────────────────
+  섹션 유형  : 푸터 (아임웹 > 푸터 편집)
+  저작권 문구 : "© 2024 Wang Yeul. All rights reserved."
+  ─────────────────────────────────────────────────────────────
+-->
+<footer class="site-footer" role="contentinfo" id="site-footer-el">
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </div>
+    <!-- 사업자 정보 (JS로 동적 로딩) -->
+    <div class="footer-biz" id="footer-biz"></div>
+    <!-- 링크 -->
+    <div class="footer-links" id="footer-links"></div>
+    <!-- 고객지원 -->
+    <div class="footer-support" id="footer-support"></div>
+    <!-- 저작권/부제목 -->
+    <p class="footer-copy" id="footer-copy">© 2024 Wang Yeul. All rights reserved.</p>
+    <p class="footer-note" id="footer-note" data-i18n="footer.note">현대 한국화가 · 단국대학교 예술대학 동양화과 교수 역임</p>
+  </div>
+</footer>
+
+
+<!-- 라이트박스 모달 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="닫기"><i class="fas fa-times" aria-hidden="true"></i></button>
+  <div class="lightbox-content" id="lightboxContent">
+    <div class="lightbox-placeholder">
+      <i class="fas fa-image" aria-hidden="true"></i>
+      <p>작품 이미지가 표시됩니다</p>
+    </div>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" style="display:none; max-width:100%; max-height:75vh; object-fit:contain; display:block; margin:0 auto;">
+    <div class="lightbox-info" id="lightboxInfo">
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <p class="lightbox-meta" id="lightboxMeta"></p>
+    </div>
+  </div>
+</div>
+
+<!-- 스크롤 탑 버튼 -->
+<button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
+  <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+<script src="js/main.js?v=20260529"></script>
+<script src="js/i18n.js?v=20260530"></script>
+
+<!-- ====================== 푸터 동적 로딩 ====================== -->
+<script>
+(function initFooter() {
+  function esc(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function applyFooter() {
+    var f = {};
+    try { f = JSON.parse(localStorage.getItem('wy_footer') || '{}'); } catch(e) {}
+
+    /* 사업자 정보 */
+    var bizLines = [];
+    if (f.company)   bizLines.push('<strong>' + esc(f.company) + '</strong>');
+    if (f.ceo)       bizLines.push('대표이사 : ' + esc(f.ceo));
+    if (f.privacy)   bizLines.push('개인정보책임자 : ' + esc(f.privacy));
+    if (f.bizno)     bizLines.push('사업자등록번호 : ' + esc(f.bizno));
+    if (f.mailorder) bizLines.push('통신판매업신고번호 : ' + esc(f.mailorder));
+    if (f.address)   bizLines.push('본사 : ' + esc(f.address));
+    var bizEl = document.getElementById('footer-biz');
+    if (bizEl) bizEl.innerHTML = bizLines.length ? bizLines.join('<br>') : '';
+
+    /* 링크 */
+    var linkParts = [];
+    if (f.terms)      linkParts.push('<a href="' + esc(f.terms) + '" target="_blank" rel="noopener">이용약관</a>');
+    if (f.privacyUrl) linkParts.push('<a href="' + esc(f.privacyUrl) + '" target="_blank" rel="noopener">개인정보처리방침</a>');
+    var linksEl = document.getElementById('footer-links');
+    if (linksEl) linksEl.innerHTML = linkParts.length ? linkParts.join(' &nbsp;|&nbsp; ') : '';
+
+    /* 고객지원 */
+    var supLines = [];
+    if (f.support) supLines.push('고객지원 : ' + esc(f.support));
+    if (f.tel) {
+      var telStr = '대표번호 : ' + esc(f.tel);
+      if (f.telNote) telStr += ' <span class="footer-tel-note">(' + esc(f.telNote) + ')</span>';
+      supLines.push(telStr);
+    }
+    var supEl = document.getElementById('footer-support');
+    if (supEl) supEl.innerHTML = supLines.length ? supLines.join('<br>') : '';
+
+    /* 저작권 */
+    var copyEl = document.getElementById('footer-copy');
+    if (copyEl && f.copy) copyEl.textContent = f.copy;
+
+    /* 부제목 */
+    var noteEl = document.getElementById('footer-note');
+    if (noteEl && f.note) noteEl.textContent = f.note;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyFooter);
+  } else {
+    applyFooter();
+  }
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'wy_footer') applyFooter();
+  });
+})();
+</script>
+
+<!-- ====================== 영상 섹션 동적 로딩 ====================== -->
+<script>
+(function initVideoSection() {
+  function getYoutubeThumbnail(url) {
+    var m = (url||'').match(/(?:youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+    return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : '';
+  }
+
+  function buildVideoCard(v) {
+    var thumb = v.thumbnail || getYoutubeThumbnail(v.url || '');
+    var embedUrl = v.embedUrl || v.url || '';
+    var thumbHtml = thumb
+      ? '<img src="' + thumb + '" alt="' + (v.title||'영상 썸네일') + '" loading="lazy">'
+      : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#222;color:#fff;font-size:3rem;">🎬</div>';
+
+    return '<div class="video-card fade-up visible">' +
+      '<div class="video-thumb-wrap" onclick="playVideo(this,\'' + embedUrl + '\')" data-embed="' + embedUrl + '">' +
+        thumbHtml +
+        '<div class="video-play-btn">' +
+          '<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M66.52 7.74C65.7 4.62 63.27 2.2 60.15 1.38 54.9 0 34 0 34 0S13.1 0 7.85 1.38C4.73 2.2 2.3 4.62 1.48 7.74 0 13 0 24 0 24s0 11 1.48 16.26c.82 3.12 3.25 5.54 6.37 6.36C13.1 48 34 48 34 48s20.9 0 26.15-1.38c3.12-.82 5.55-3.24 6.37-6.36C68 35 68 24 68 24s0-11-1.48-16.26z" fill="rgba(0,0,0,0.7)"/>' +
+            '<path d="M45 24L27 14v20z" fill="#fff"/>' +
+          '</svg>' +
+        '</div>' +
+      '</div>' +
+      '<div class="video-card-body">' +
+        (v.title ? '<p class="video-card-title">' + v.title + '</p>' : '') +
+        (v.desc  ? '<p class="video-card-desc">'  + v.desc  + '</p>' : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  async function loadVideos() {
+    var grid = document.getElementById('video-grid');
+    var empty = document.getElementById('video-empty');
+    if (!grid) return;
+    try {
+      var res = await fetch('tables/wy_videos?limit=100&sort=order&_t=' + Date.now(), { cache: 'no-store' });
+      var json = await res.json();
+      var data = (json.data || []).sort(function(a,b){ return (a.order||0)-(b.order||0); });
+      if (!data.length) { if(empty) empty.style.display=''; return; }
+      if(empty) empty.style.display = 'none';
+      grid.innerHTML = data.map(function(v){ return buildVideoCard(v); }).join('');
+    } catch(e) { console.warn('[영상] 로드 실패', e); }
+  }
+
+  // 썸네일 클릭 → iframe으로 교체 (자동재생)
+  window.playVideo = function(wrap, embedUrl) {
+    if (!embedUrl) return;
+    var sep = embedUrl.indexOf('?') >= 0 ? '&' : '?';
+    wrap.innerHTML = '<iframe src="' + embedUrl + sep + 'autoplay=1" allowfullscreen allow="autoplay; encrypted-media" style="position:absolute;inset:0;width:100%;height:100%;border:none;"></iframe>';
+    wrap.style.cursor = 'default';
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadVideos);
+  } else {
+    loadVideos();
+  }
+})();
+</script>
+
+<!-- ====================== 작가 프로필 사진 동적 로딩 ====================== -->
+<script>
+(function initProfilePhotoDisplay() {
+  function applyProfilePhoto() {
+    var img   = document.getElementById('about-photo-img');
+    var empty = document.getElementById('about-photo-empty');
+    var box   = document.getElementById('about-photo-box');
+    if (!img || !box) return;
+
+    var profile = {};
+    try { profile = JSON.parse(localStorage.getItem('wy_profile') || '{}'); } catch(e) {}
+
+    var photoSrc = (profile.photo || '').trim();
+    if (!photoSrc) {
+      // 사진 없음 → 빈 아이콘 표시
+      img.style.display = 'none';
+      if (empty) empty.style.display = '';
+      box.style.border = '';
+      box.style.background = '';
+      return;
+    }
+
+    // 위치값 적용
+    var posX = (profile.photoPositionX !== undefined ? profile.photoPositionX : 50) + '%';
+    var posY = (profile.photoPositionY !== undefined ? profile.photoPositionY : 50) + '%';
+    img.style.objectPosition = posX + ' ' + posY;
+
+    img.onload = function() {
+      img.style.display = 'block';
+      if (empty) empty.style.display = 'none';
+      box.style.border = 'none';
+      box.style.background = 'transparent';
+      console.log('[프로필 사진] 로드 성공');
+    };
+    img.onerror = function() {
+      img.style.display = 'none';
+      if (empty) empty.style.display = '';
+      console.warn('[프로필 사진] 로드 실패 — src:', photoSrc.substring(0,80));
+    };
+
+    // 같은 src면 onload 안 발생하므로 미리 display 처리
+    if (img.src === photoSrc) {
+      img.style.display = 'block';
+      if (empty) empty.style.display = 'none';
+      box.style.border = 'none';
+      box.style.background = 'transparent';
+    } else {
+      img.src = photoSrc;
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyProfilePhoto);
+  } else {
+    applyProfilePhoto();
+  }
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'wy_profile') applyProfilePhoto();
+  });
+})();
+</script>
+</body>
+</html>
