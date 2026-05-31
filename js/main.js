@@ -107,8 +107,7 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  // 페이지 최상단에서도 항상 scrolled 스타일 유지
-  header.classList.add('scrolled');
+  onScroll();
 })();
 
 
@@ -199,29 +198,55 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
 (function initLightbox() {
   const lightbox     = document.getElementById('lightbox');
   const lightboxClose = document.getElementById('lightboxClose');
-  const zoomBtns     = document.querySelectorAll('.gallery-zoom');
-  if (!lightbox || !lightboxClose) return;
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxMeta = document.getElementById('lightboxMeta');
+  const lightboxNote = document.getElementById('lightboxNote');
+  const lightboxPlaceholder = document.getElementById('lightboxPlaceholder');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  if (!lightbox || !lightboxClose || !lightboxImg) return;
 
-  function openLightbox(item) {
+  let items = [];
+  let currentIndex = 0;
+
+  function renderCurrent() {
+    const aw = items[currentIndex];
+    if (!aw) return;
+
+    const title = aw.title || '';
+    const metaParts = [];
+    if (aw.year) metaParts.push(aw.year);
+    if (aw.series) metaParts.push(aw.series);
+    if (aw.material) metaParts.push(aw.material);
+    const meta = metaParts.join(' · ') || aw.meta || '';
+
+    if (lightboxTitle) lightboxTitle.textContent = title;
+    if (lightboxMeta) lightboxMeta.textContent = meta;
+    if (lightboxNote) lightboxNote.textContent = aw.note || '';
+
+    if (aw.img) {
+      lightboxImg.src = aw.img;
+      lightboxImg.alt = title;
+      lightboxImg.style.display = 'block';
+      if (lightboxPlaceholder) lightboxPlaceholder.hidden = true;
+    } else {
+      lightboxImg.removeAttribute('src');
+      lightboxImg.style.display = 'none';
+      if (lightboxPlaceholder) lightboxPlaceholder.hidden = false;
+    }
+
+    if (lightboxPrev) lightboxPrev.disabled = currentIndex === 0;
+    if (lightboxNext) lightboxNext.disabled = currentIndex >= items.length - 1;
+  }
+
+  function openLightbox(payloadItems, startIndex) {
+    items = Array.isArray(payloadItems) ? payloadItems : [];
+    currentIndex = Math.max(0, Math.min(startIndex || 0, items.length - 1));
+    renderCurrent();
     lightbox.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
     lightbox.focus();
-
-    // 타이틀/메타 정보 표시
-    const title = item.querySelector('.gallery-title')?.textContent || '';
-    const meta  = item.querySelector('.gallery-meta')?.textContent  || '';
-    const content = document.getElementById('lightboxContent');
-    if (content) {
-      content.innerHTML = `
-        <div class="lightbox-placeholder">
-          <i class="fas fa-image" aria-hidden="true"></i>
-          <p style="font-size:1rem; font-weight:600; color:#c9a84c;">${title}</p>
-          <p style="font-size:0.8rem; opacity:0.6;">${meta}</p>
-          <p style="font-size:0.72rem; opacity:0.4; margin-top:12px;">
-            [아임웹] 실제 작품 이미지를 이 자리에 교체하세요
-          </p>
-        </div>`;
-    }
   }
 
   function closeLightbox() {
@@ -229,23 +254,42 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
     document.body.style.overflow = '';
   }
 
-  zoomBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const item = btn.closest('.gallery-item');
-      openLightbox(item);
-    });
-  });
-
   lightboxClose.addEventListener('click', closeLightbox);
 
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
 
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', () => {
+      if (currentIndex === 0) return;
+      currentIndex -= 1;
+      renderCurrent();
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', () => {
+      if (currentIndex >= items.length - 1) return;
+      currentIndex += 1;
+      renderCurrent();
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) closeLightbox();
+    if (lightbox.hasAttribute('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && currentIndex > 0) {
+      currentIndex -= 1;
+      renderCurrent();
+    }
+    if (e.key === 'ArrowRight' && currentIndex < items.length - 1) {
+      currentIndex += 1;
+      renderCurrent();
+    }
   });
+
+  window.__wyLightbox = { openLightbox, closeLightbox };
 })();
 
 
@@ -410,14 +454,21 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
     red: "🔴"
   };
   const DELAYS = ['', 'delay-1', 'delay-2', 'delay-3'];
+  let currentRenderedArtworks = [];
+
+  function extractYear(text) {
+    const m = String(text || '').match(/(?:19|20)\d{2}/);
+    return m ? m[0] : '';
+  }
+
+  function buildSeriesName(aw, cat) {
+    if (aw.series) return aw.series;
+    return CAT_LABEL[cat] || cat || '';
+  }
 
   // 플레이스홀더 기본 작품 (JSON에 데이터 없을 때 표시)
   const DEFAULT_ARTWORKS = [
-    { title:'작품 준비 중', meta:'2중구조', category:'2jung' },
-    { title:'작품 준비 중', meta:'2026해체', category:'2026' },
-    { title:'작품 준비 중', meta:'Blue', category:'blue' },
-    { title:'작품 준비 중', meta:'Ink', category:'ink' },
-    { title:'작품 준비 중', meta:'Red', category:'red' },
+    { title:'작품 정보를 불러오는 중입니다', meta:'잠시 후 다시 확인해 주세요', category:'2jung' },
   ];
 
   function buildItem(aw, idx) {
@@ -426,15 +477,22 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
     const subcat  = (aw.subcategory || '').trim();
     const imgSrc  = (aw.image || '').trim();
     const hasImg  = imgSrc !== '';
+    const year    = (aw.year || extractYear(aw.title || aw.caption || '')).trim();
+    const series  = buildSeriesName(aw, cat).trim();
+    const material = (aw.material || '').trim();
 
     // caption 우선, 없으면 재료 · 연도 조합
     const captionText = (aw.caption || '').trim();
     const parts = [];
-    if (aw.material) parts.push(aw.material);
-    if (aw.year)     parts.push(aw.year);
+    if (material) parts.push(material);
+    if (year)     parts.push(year);
     const metaFallback = parts.join(' · ');
     const lightboxMeta = captionText || metaFallback;
-    const captionLine  = captionText || metaFallback;
+    const captionParts = [];
+    if (year) captionParts.push(year);
+    if (series) captionParts.push(series);
+    if (material) captionParts.push(material);
+    const captionLine  = captionParts.join(' · ') || captionText || metaFallback;
 
     return `
       <div class="gallery-item fade-up ${delay} visible"
@@ -463,10 +521,9 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
           </div>
           <div class="gallery-overlay">
             <button class="gallery-zoom" aria-label="작품 크게 보기"
-              data-img="${imgSrc}"
-              data-title="${(aw.title||'').replace(/"/g,'&quot;')}"
-              data-meta="${lightboxMeta.replace(/"/g,'&quot;')}">
+              data-render-index="${idx}">
               <i class="fas fa-expand-alt" aria-hidden="true"></i>
+              <span>View</span>
             </button>
           </div>
         </div>
@@ -489,6 +546,7 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
     const filtered = cat === 'all'
       ? allArtworks
       : allArtworks.filter(aw => (aw.category || '').trim().toLowerCase() === cat);
+    currentRenderedArtworks = filtered;
     grid.innerHTML = filtered.map((aw, i) => buildItem(aw, i)).join('');
     attachLightbox();
   }
@@ -497,20 +555,23 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   function attachLightbox() {
     grid.querySelectorAll('.gallery-zoom').forEach(btn => {
       btn.addEventListener('click', () => {
-        const img   = btn.dataset.img;
-        const title = btn.dataset.title;
-        const meta  = btn.dataset.meta;
-        const lb = document.getElementById('lightbox');
-        if (!lb) return;
-        const lbImg   = lb.querySelector('.lightbox-img, #lightboxImg');
-        const lbTitle = lb.querySelector('.lightbox-title, #lightboxTitle');
-        const lbMeta  = lb.querySelector('.lightbox-meta, #lightboxMeta');
-        if (lbImg)   { if (img) { lbImg.src = img; lbImg.style.display='block'; } else lbImg.style.display='none'; }
-        if (lbTitle) lbTitle.textContent = title;
-        if (lbMeta)  lbMeta.textContent  = meta;
-        lb.removeAttribute('hidden');
-        lb.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const startIndex = Number(btn.dataset.renderIndex || 0);
+        const payload = currentRenderedArtworks.map(aw => {
+          const cat = (aw.category || '').trim().toLowerCase();
+          const year = (aw.year || extractYear(aw.title || aw.caption || '')).trim();
+          return {
+            img: (aw.image || '').trim(),
+            title: aw.title || '',
+            year,
+            series: buildSeriesName(aw, cat).trim(),
+            material: (aw.material || '').trim(),
+            meta: (aw.caption || '').trim(),
+            note: ''
+          };
+        });
+        if (window.__wyLightbox && typeof window.__wyLightbox.openLightbox === 'function') {
+          window.__wyLightbox.openLightbox(payload, startIndex);
+        }
       });
     });
   }

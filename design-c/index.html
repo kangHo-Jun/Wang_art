@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design C — Museum Luxury</title>
+  <meta name="description" content="Wang_Art 비교용 시안 C. 고급 갤러리/전시장 느낌, 큰 여백, 느린 흐름." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/design-showcase.css" />
+</head>
+<body class="design-showcase variant-c" data-variant="c">
+  <div class="showcase-shell" data-showcase-root data-variant="c">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand-block">
+          <span class="brand-kicker">Wang_Art</span>
+          <strong class="brand-name">Museum Luxury</strong>
+        </div>
+        <nav class="variant-nav" aria-label="시안 비교 내비게이션">
+          <a class="variant-link" href="../design-a/">A</a>
+          <span class="variant-link active" aria-current="page">C</span>
+          <a class="home-link" href="../index.html">Original Home</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow fade-in" data-hero-eyebrow></p>
+            <h1 class="hero-title fade-in delay-1" data-hero-title></h1>
+            <p class="hero-summary fade-in delay-2" data-hero-summary></p>
+            <div class="hero-actions fade-in delay-3">
+              <a class="text-button" href="#works">Enter Sequence</a>
+            </div>
+          </div>
+          <div class="hero-stage">
+            <div class="hero-art fade-in delay-1">
+              <img data-hero-image src="" alt="" />
+              <div class="hero-meta">
+                <div>
+                  <p class="hero-meta-title" data-hero-meta-title></p>
+                  <p class="hero-meta-sub" data-hero-meta-sub></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-column fade-in delay-2" data-hero-notes></div>
+      </section>
+
+      <section class="section" id="works">
+        <div class="section-shell section-shell-luxury">
+          <div class="section-heading-row">
+            <div>
+              <p class="section-kicker" data-works-kicker></p>
+              <h2 class="section-title" data-works-title></h2>
+            </div>
+            <p class="section-text" data-works-text></p>
+          </div>
+          <div class="works-grid" data-works></div>
+        </div>
+      </section>
+
+      <section class="section" id="archive">
+        <div class="section-shell section-shell-luxury">
+          <div class="section-heading-row">
+            <div>
+              <p class="section-kicker">Detail</p>
+              <h2 class="section-title" data-archive-title></h2>
+            </div>
+            <p class="section-text" data-archive-text></p>
+          </div>
+          <div class="archive-grid" data-archive-grid></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sheet" hidden data-sheet>
+      <div class="sheet-panel">
+        <div class="detail-copy">
+          <div class="detail-actions" style="justify-content: space-between;">
+            <p class="detail-kicker" data-sheet-kicker></p>
+            <button class="quiet-button" type="button" data-close-sheet>Close</button>
+          </div>
+          <div class="sheet-media">
+            <img data-sheet-image src="" alt="" />
+          </div>
+          <h2 class="detail-title" data-sheet-title></h2>
+          <div class="detail-meta" data-sheet-meta></div>
+          <p class="detail-description" data-sheet-description></p>
+          <div class="detail-nav">
+            <button class="quiet-button quiet-nav" type="button" data-detail-nav="-1">Previous</button>
+            <button class="quiet-button quiet-nav" type="button" data-detail-nav="1">Next</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <script src="../js/design-showcase.js"></script>
+</body>
+</html>

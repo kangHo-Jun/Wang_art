@@ -28,7 +28,7 @@
 
 <!-- ====================== NAVIGATION ====================== -->
 <!-- [아임웹] 헤더 > 고정 메뉴 / 로고 텍스트: "王烈 Wang Yeul" -->
-<header class="site-header scrolled" id="site-header">
+<header class="site-header" id="site-header">
   <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
     <a href="#hero" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
       <span class="logo-kr">王烈</span>
@@ -43,7 +43,7 @@
       <li><a href="#about" data-i18n="nav.about">작가 소개</a></li>
       <li><a href="#world" data-i18n="nav.world">작품 세계</a></li>
       <li><a href="#gallery" data-i18n="nav.gallery">갤러리</a></li>
-      <li><a href="#video" data-i18n="nav.video">영상</a></li>
+      <li id="nav-video-item"><a href="#video" data-i18n="nav.video">영상</a></li>
       <li><a href="#statement" data-i18n="nav.statement">작가의 말</a></li>
       <li><a href="#exhibitions" data-i18n="nav.exhibitions">전시 이력</a></li>
       <li><a href="#collections" data-i18n="nav.collections">소장처</a></li>
@@ -76,16 +76,25 @@
 
   <div class="hero-overlay" aria-hidden="true"></div>
 
+  <div class="hero-art-frame" aria-hidden="true">
+    <img
+      class="hero-feature-image"
+      src="images/2026/gallery-front.jpg"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
   <div class="hero-content">
     <p class="hero-eyebrow fade-up" data-i18n="hero.eyebrow">wangyeul&#x27;s painting </p>
     <h1 class="hero-title fade-up delay-1">
       <span class="title-kr" data-i18n="hero.title.kr">王烈의 유토피아</span>
       <span class="title-en">UTOPIA</span>
     </h1>
-    <p class="hero-subtitle fade-up delay-2" data-i18n="hero.subtitle">마음 속 무릉도원을 그리다</p>
+    <p class="hero-subtitle fade-up delay-2" data-i18n="hero.subtitle">마음 속 무릉도원</p>
     <div class="hero-cta fade-up delay-3">
-      <a href="#gallery" class="btn btn-primary" data-i18n="hero.cta.gallery">작품 보기 →</a>
-      <a href="#about" class="btn btn-ghost" data-i18n="hero.cta.about">작가 소개 →</a>
+      <a href="#gallery" class="hero-link" data-i18n="hero.cta.gallery">작품 보기</a>
     </div>
   </div>
 
@@ -226,7 +235,7 @@
         <span class="heading-en">GALLERY</span>
         <span class="heading-kr">갤러리</span>
       </h2>
-      <p class="section-desc">왕열 작가의 주요 작품을 감상하세요</p>
+      <p class="section-desc">대표작을 조용히 감상하는 작품 아카이브</p>
     </div>
 
     <!-- 필터 버튼 -->
@@ -255,7 +264,7 @@
     <!-- 더 보기 버튼 -->
     <!-- [아임웹] 버튼 문구: "작품 더 보기 →" / 링크: 갤러리 전체 페이지 -->
     <div class="gallery-more fade-up">
-      <a href="#" class="btn btn-outline">작품 더 보기 →</a>
+      <span class="gallery-more-link" aria-hidden="true">작품 더 보기</span>
     </div>
 
   </div>
@@ -263,7 +272,7 @@
 
 
 <!-- ====================== VIDEO SECTION ====================== -->
-<section class="section video-section" id="video" aria-labelledby="video-heading">
+<section class="section video-section" id="video" aria-labelledby="video-heading" hidden>
   <div class="container">
     <div class="section-intro fade-up visible">
       <h2 class="section-heading" id="video-heading">
@@ -275,11 +284,7 @@
 
     <!-- 영상 그리드 (JS로 동적 렌더) -->
     <div class="video-grid" id="video-grid">
-      <div class="video-empty" id="video-empty">
-        <div style="font-size:2.5rem;opacity:.25;margin-bottom:12px;">🎬</div>
-        <p>등록된 영상이 없습니다</p>
-        <p style="font-size:.78rem;opacity:.6;margin-top:4px;">관리자 페이지에서 영상을 추가해 주세요</p>
-      </div>
+      <div class="video-empty" id="video-empty" hidden aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -627,14 +632,22 @@
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
   <button class="lightbox-close" id="lightboxClose" aria-label="닫기"><i class="fas fa-times" aria-hidden="true"></i></button>
   <div class="lightbox-content" id="lightboxContent">
-    <div class="lightbox-placeholder">
-      <i class="fas fa-image" aria-hidden="true"></i>
-      <p>작품 이미지가 표시됩니다</p>
+    <div class="lightbox-stage">
+      <div class="lightbox-placeholder" id="lightboxPlaceholder">
+        <i class="fas fa-image" aria-hidden="true"></i>
+        <p>작품 이미지가 표시됩니다</p>
+      </div>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
     </div>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="" style="display:none; max-width:100%; max-height:75vh; object-fit:contain; display:block; margin:0 auto;">
     <div class="lightbox-info" id="lightboxInfo">
+      <p class="lightbox-kicker">Wall Label</p>
       <p class="lightbox-title" id="lightboxTitle"></p>
       <p class="lightbox-meta" id="lightboxMeta"></p>
+      <p class="lightbox-note" id="lightboxNote"></p>
+      <div class="lightbox-nav" aria-label="작품 이동">
+        <button class="lightbox-nav-link" id="lightboxPrev" type="button">Previous</button>
+        <button class="lightbox-nav-link" id="lightboxNext" type="button">Next</button>
+      </div>
     </div>
   </div>
 </div>
@@ -709,6 +722,20 @@
 <!-- ====================== 영상 섹션 동적 로딩 ====================== -->
 <script>
 (function initVideoSection() {
+  function hideVideoSection() {
+    var section = document.getElementById('video');
+    var navItem = document.getElementById('nav-video-item');
+    if (section) section.hidden = true;
+    if (navItem) navItem.hidden = true;
+  }
+
+  function showVideoSection() {
+    var section = document.getElementById('video');
+    var navItem = document.getElementById('nav-video-item');
+    if (section) section.hidden = false;
+    if (navItem) navItem.hidden = false;
+  }
+
   function getYoutubeThumbnail(url) {
     var m = (url||'').match(/(?:youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
     return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : '';
@@ -744,12 +771,17 @@
     if (!grid) return;
     try {
       var res = await fetch('tables/wy_videos?limit=100&sort=order&_t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('video response ' + res.status);
       var json = await res.json();
       var data = (json.data || []).sort(function(a,b){ return (a.order||0)-(b.order||0); });
-      if (!data.length) { if(empty) empty.style.display=''; return; }
+      if (!data.length) { hideVideoSection(); return; }
+      showVideoSection();
       if(empty) empty.style.display = 'none';
       grid.innerHTML = data.map(function(v){ return buildVideoCard(v); }).join('');
-    } catch(e) { console.warn('[영상] 로드 실패', e); }
+    } catch(e) {
+      hideVideoSection();
+      console.warn('[영상] 로드 실패', e);
+    }
   }
 
   // 썸네일 클릭 → iframe으로 교체 (자동재생)
