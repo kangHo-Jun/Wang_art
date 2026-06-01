@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>왕열 Wang Yeul — 작품</title>
+  <meta name="description" content="왕열 작가의 전체 작품 아카이브." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css?v=20260531" />
+</head>
+<body data-page="works" data-asset-base="..">
+<header class="site-header" id="site-header">
+  <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
+    <a href="../" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기/닫기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="navMenu" role="list">
+      <li><a href="../" data-nav-page="home">대표작품</a></li>
+      <li><a href="../works/" data-nav-page="works">작품</a></li>
+      <li><a href="../worlds/" data-nav-page="worlds">작품세계</a></li>
+      <li><a href="../artist/" data-nav-page="artist">작가</a></li>
+      <li><a href="../collections/" data-nav-page="collections">소장처</a></li>
+    </ul>
+    <div class="lang-switcher" role="group" aria-label="언어 선택">
+      <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')" aria-label="한국어">KO</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" aria-label="日本語">JP</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-label="中文">ZH</button>
+    </div>
+  </nav>
+</header>
+
+<section class="section featured-section" aria-labelledby="works-page-heading">
+  <div class="container">
+    <div class="section-intro fade-up visible featured-intro">
+      <h1 class="section-heading" id="works-page-heading">
+        <span class="heading-en">WORKS</span>
+        <span class="heading-kr">작품</span>
+      </h1>
+      <p class="section-desc">전체 작품을 탐색하는 아카이브 페이지입니다. 필터는 작게 두고, 감상은 이미지 중심으로 유지합니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery-section" id="gallery" aria-labelledby="gallery-heading">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <h2 class="section-heading" id="gallery-heading">
+        <span class="heading-en">WORKS ARCHIVE</span>
+        <span class="heading-kr">작품 아카이브</span>
+      </h2>
+      <p class="section-desc">전체 작품을 시리즈별로 탐색하는 아카이브입니다.</p>
+    </div>
+    <div class="gallery-filter-wrap fade-up">
+      <div class="gallery-filter" role="group" aria-label="갤러리 필터">
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">전체</button>
+        <button class="filter-btn has-sub" data-filter="2jung" aria-pressed="false" aria-expanded="false">2중구조 <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+        <button class="filter-btn" data-filter="2026" aria-pressed="false">2026해체</button>
+        <button class="filter-btn" data-filter="blue" aria-pressed="false">Blue</button>
+        <button class="filter-btn" data-filter="ink" aria-pressed="false">Ink</button>
+        <button class="filter-btn" data-filter="red" aria-pressed="false">Red</button>
+      </div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid" role="list" aria-label="작품 목록">
+      <div id="gallery-loading" style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#888;font-size:0.9rem;">
+        작품 아카이브를 불러오는 중입니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </div>
+    <p class="footer-copy">© 2026 Wang Yeul. All rights reserved.</p>
+    <p class="footer-note">현대 한국화가 · 단국대학교 예술대학 동양화과 교수 역임</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="닫기"><i class="fas fa-times" aria-hidden="true"></i></button>
+  <div class="lightbox-content" id="lightboxContent">
+    <div class="lightbox-stage">
+      <div class="lightbox-placeholder" id="lightboxPlaceholder">
+        <i class="fas fa-image" aria-hidden="true"></i>
+        <p>작품 이미지가 표시됩니다</p>
+      </div>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-info" id="lightboxInfo">
+      <p class="lightbox-kicker">Wall Label</p>
+      <p class="lightbox-title" id="lightboxTitle"></p>
+      <p class="lightbox-meta" id="lightboxMeta"></p>
+      <p class="lightbox-note" id="lightboxNote"></p>
+      <div class="lightbox-nav" aria-label="작품 이동">
+        <button class="lightbox-nav-link" id="lightboxPrev" type="button">Previous</button>
+        <button class="lightbox-nav-link" id="lightboxNext" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
+  <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+<script src="../js/main.js?v=20260531"></script>
+<script src="../js/i18n.js?v=20260530"></script>
+</body>
+</html>

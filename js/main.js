@@ -6,6 +6,19 @@
 
 console.log('✅ Wang Yeul Website — JavaScript Loaded');
 
+const ASSET_BASE = (document.body?.dataset?.assetBase || '.').replace(/\/$/, '');
+
+function assetPath(path) {
+  const value = String(path || '').trim();
+  if (!value) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(value) || value.startsWith('data:') || value.startsWith('#')) {
+    return value;
+  }
+  const normalized = value.replace(/^\.?\//, '');
+  if (!ASSET_BASE || ASSET_BASE === '.') return normalized;
+  return `${ASSET_BASE}/${normalized}`;
+}
+
 /* ══════════════════════════════════════════════════════════
    1. 히어로 캔버스 파티클 (먹물·금빛 파티클)
    [아임웹] 이 효과는 배경 이미지 또는 비디오로 대체 권장
@@ -179,6 +192,77 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   );
 
   filtered.forEach(el => observer.observe(el));
+})();
+
+
+/* ══════════════════════════════════════════════════════════
+   Hero Parallax
+   ══════════════════════════════════════════════════════════ */
+(function initHeroParallax() {
+  const hero = document.getElementById('hero');
+  const motionLayer = document.getElementById('heroMediaMotion');
+  const image = document.getElementById('heroFeatureImage');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!hero || !image || !motionLayer) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let rafId = 0;
+
+  function isDesktopMotionAllowed() {
+    return window.innerWidth > 980 && !reduceMotion.matches;
+  }
+
+  function render() {
+    rafId = 0;
+    motionLayer.style.setProperty('--hero-mouse-x', `${mouseX}px`);
+    motionLayer.style.setProperty('--hero-mouse-y', `${mouseY}px`);
+  }
+
+  function queueRender() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(render);
+  }
+
+  function onScroll() {
+    const rect = hero.getBoundingClientRect();
+    const viewport = window.innerHeight || 1;
+    if (rect.bottom <= 0 || rect.top >= viewport) return;
+    const travel = Math.max(0, Math.min(1, Math.abs(rect.top) / (viewport * 0.9)));
+    const scrollY = travel * -14;
+    const labelShift = travel * -22;
+    const labelOpacity = Math.max(0, 1 - travel * 1.15);
+    const hintOpacity = Math.max(0, 1 - travel * 1.6);
+
+    motionLayer.style.setProperty('--hero-scroll-y', `${scrollY}px`);
+    hero.style.setProperty('--hero-label-shift', `${labelShift}px`);
+    hero.style.setProperty('--hero-label-opacity', labelOpacity.toFixed(3));
+    hero.style.setProperty('--hero-hint-opacity', hintOpacity.toFixed(3));
+  }
+
+  function onMouseMove(event) {
+    if (!isDesktopMotionAllowed()) return;
+    const rect = hero.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width - 0.5;
+    const py = (event.clientY - rect.top) / rect.height - 0.5;
+    mouseX = px * 14;
+    mouseY = py * 10;
+    queueRender();
+  }
+
+  function resetMouseMotion() {
+    mouseX = 0;
+    mouseY = 0;
+    queueRender();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  hero.addEventListener('mousemove', onMouseMove);
+  hero.addEventListener('mouseleave', resetMouseMotion);
+  window.addEventListener('resize', resetMouseMotion, { passive: true });
+  reduceMotion.addEventListener?.('change', resetMouseMotion);
+  onScroll();
+  resetMouseMotion();
 })();
 
 
@@ -406,6 +490,15 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
    10. 네비게이션 액티브 링크 하이라이트
    ══════════════════════════════════════════════════════════ */
 (function initActiveNav() {
+  const pageLinks = document.querySelectorAll('.nav-menu a[data-nav-page]');
+  const pageId = document.body?.dataset?.page || '';
+  if (pageLinks.length && pageId) {
+    pageLinks.forEach(link => {
+      link.classList.toggle('active-link', link.dataset.navPage === pageId);
+    });
+    return;
+  }
+
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
   if (!sections.length || !navLinks.length) return;
@@ -431,7 +524,141 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
 
 
 /* ══════════════════════════════════════════════════════════
-   11. 갤러리 동적 로딩 — 로컬 JSON (GitHub Pages)
+   11. 메인 큐레이션 로딩 — featured-works.json
+   Hero / Selected Works / Work Worlds
+   ══════════════════════════════════════════════════════════ */
+(function initFeaturedWorks() {
+  const heroImage = document.getElementById('heroFeatureImage');
+  const heroEyebrow = document.getElementById('heroEyebrow');
+  const heroTitleEn = document.getElementById('heroTitleEn');
+  const heroYear = document.getElementById('heroYear');
+  const heroMedium = document.getElementById('heroMedium');
+  const heroSize = document.getElementById('heroSize');
+  const selectedGrid = document.getElementById('selectedWorksGrid');
+  const worldsGrid = document.getElementById('worldsGrid');
+  if (!heroImage && !selectedGrid && !worldsGrid) return;
+
+  let selectedItems = [];
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function metaLine(item) {
+    return [item.year, item.medium, item.size].filter(Boolean).join(' · ');
+  }
+
+  function buildLightboxPayload(items) {
+    return items.map(item => ({
+      img: assetPath(item.image || ''),
+      title: item.title_ko || item.title_en || '',
+      year: item.year || '',
+      series: item.series || '',
+      material: item.medium || '',
+      meta: metaLine(item),
+      note: item.display_note || ''
+    }));
+  }
+
+  function renderHero(hero) {
+    if (!hero || !heroImage) return;
+    heroImage.src = assetPath(hero.image || heroImage.src);
+    heroImage.alt = hero.title_en || hero.title_ko || '';
+    if (heroEyebrow) heroEyebrow.textContent = 'WANGYEUL';
+    if (heroTitleEn) heroTitleEn.textContent = hero.title_en || '';
+    if (heroYear) heroYear.textContent = hero.year || '';
+    if (heroMedium) heroMedium.textContent = hero.medium || '';
+    if (heroSize) heroSize.textContent = hero.size || '';
+  }
+
+  function buildSelectedWork(item, index) {
+    return `
+      <article class="selected-work-card fade-up visible" role="listitem">
+        <button class="selected-work-media" type="button" data-selected-index="${index}" aria-label="${escapeHtml(item.title_ko || item.title_en || '작품')} 감상하기">
+          <img src="${escapeHtml(assetPath(item.image))}" alt="${escapeHtml(item.title_ko || item.title_en || '작품')}" loading="lazy">
+        </button>
+        <div class="selected-work-label">
+          <p class="selected-work-title">${escapeHtml(item.title_ko || item.title_en || '')}</p>
+          <p class="selected-work-meta">${escapeHtml([item.year, item.medium].filter(Boolean).join(' · '))}</p>
+        </div>
+      </article>`;
+  }
+
+  function buildWorldItem(item, index) {
+    const reverse = index % 2 === 1 ? ' world-item-reverse' : '';
+    return `
+      <article class="world-item fade-up visible${reverse}">
+        <div class="world-art">
+          <figure class="world-primary">
+            <img src="${escapeHtml(assetPath(item.primary_image))}" alt="${escapeHtml(item.title_ko || item.title_en || '작품세계 대표 이미지')}" loading="lazy">
+          </figure>
+          <figure class="world-secondary">
+            <img src="${escapeHtml(assetPath(item.secondary_image))}" alt="${escapeHtml((item.title_ko || item.title_en || '작품세계') + ' 보조 이미지')}" loading="lazy">
+          </figure>
+        </div>
+        <div class="world-copy">
+          <p class="world-kicker">${escapeHtml(item.title_en || '')}</p>
+          <h3 class="world-title">${escapeHtml(item.title_ko || '')}</h3>
+          <p class="world-note">${escapeHtml(item.description || '')}</p>
+          <p class="world-caption">${escapeHtml(item.display_note || '')}</p>
+        </div>
+      </article>`;
+  }
+
+  function attachSelectedLightbox() {
+    if (!selectedGrid) return;
+    selectedGrid.querySelectorAll('[data-selected-index]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const startIndex = Number(btn.dataset.selectedIndex || 0);
+        if (window.__wyLightbox && typeof window.__wyLightbox.openLightbox === 'function') {
+          window.__wyLightbox.openLightbox(buildLightboxPayload(selectedItems), startIndex);
+        }
+      });
+    });
+  }
+
+  async function loadFeaturedWorks() {
+    try {
+      const res = await fetch(assetPath('data/featured-works.json') + '?_t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('featured-works 응답 오류: ' + res.status);
+      const json = await res.json();
+      renderHero(json.hero || {});
+      selectedItems = Array.isArray(json.selected_works) ? json.selected_works : [];
+      const worldItems = Array.isArray(json.work_worlds) ? json.work_worlds : [];
+
+      if (selectedGrid) {
+        selectedGrid.innerHTML = selectedItems.length
+          ? selectedItems.map(buildSelectedWork).join('')
+          : '<p class="featured-empty">선별 작품이 준비되는 중입니다.</p>';
+      }
+      if (worldsGrid) {
+        worldsGrid.innerHTML = worldItems.length
+          ? worldItems.map(buildWorldItem).join('')
+          : '<p class="featured-empty">작품세계 정보가 준비되는 중입니다.</p>';
+      }
+
+      attachSelectedLightbox();
+    } catch (error) {
+      console.error('[Featured Works] 오류:', error.message);
+      if (selectedGrid) {
+        selectedGrid.innerHTML = '<p class="featured-empty">선별 작품 정보를 잠시 불러오지 못했습니다.</p>';
+      }
+      if (worldsGrid) {
+        worldsGrid.innerHTML = '<p class="featured-empty">작품세계 정보를 잠시 불러오지 못했습니다.</p>';
+      }
+    }
+  }
+
+  loadFeaturedWorks();
+})();
+
+
+/* ══════════════════════════════════════════════════════════
+   12. 갤러리 동적 로딩 — 로컬 JSON (GitHub Pages)
    data/artworks.json 파일을 수정하면 갤러리가 반영됩니다.
    ══════════════════════════════════════════════════════════ */
 (function initDynamicGallery() {
@@ -445,13 +672,6 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
     blue: "Blue",
     ink: "Ink",
     red: "Red"
-  };
-  const CAT_ICON = {
-    "2jung": "🖤",
-    "2026": "🌀",
-    blue: "💙",
-    ink: "🖋",
-    red: "🔴"
   };
   const DELAYS = ['', 'delay-1', 'delay-2', 'delay-3'];
   let currentRenderedArtworks = [];
@@ -501,7 +721,7 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
            role="listitem">
         <div class="gallery-img-wrap" id="wrap-${idx}">
           ${hasImg ? `
-          <img src="${imgSrc}"
+          <img src="${assetPath(imgSrc)}"
                alt="${(aw.title||'').replace(/"/g,'&quot;')}"
                loading="lazy"
                class="gallery-img-natural"
@@ -516,8 +736,8 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
           <div id="ph-${idx}" class="gallery-placeholder" role="img"
                aria-label="${(aw.title||cat)} 이미지"
                style="${hasImg ? 'display:none' : ''}">
-            <span style="font-size:2rem">${CAT_ICON[cat] || '🎨'}</span>
-            <span>${CAT_LABEL[cat] || cat || '작품'}</span>
+            <i class="fas fa-image" aria-hidden="true"></i>
+            <span>${CAT_LABEL[cat] || cat || '작품 이미지'}</span>
           </div>
           <div class="gallery-overlay">
             <button class="gallery-zoom" aria-label="작품 크게 보기"
@@ -560,7 +780,7 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
           const cat = (aw.category || '').trim().toLowerCase();
           const year = (aw.year || extractYear(aw.title || aw.caption || '')).trim();
           return {
-            img: (aw.image || '').trim(),
+            img: assetPath((aw.image || '').trim()),
             title: aw.title || '',
             year,
             series: buildSeriesName(aw, cat).trim(),
@@ -601,7 +821,7 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
 
   async function loadFromJSON() {
     try {
-      const url = 'data/artworks.json?_t=' + Date.now();
+      const url = assetPath('data/artworks.json') + '?_t=' + Date.now();
       const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw new Error('JSON 응답 오류: ' + res.status);
       const data = await res.json();
@@ -616,62 +836,4 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   }
 
   loadFromJSON();
-})();
-
-
-/* ══════════════════════════════════════════════════════════
-   12. 작품세계 동적 로딩 — Table API (wy_world)
-   ══════════════════════════════════════════════════════════ */
-(function initDynamicWorld() {
-  const grid = document.getElementById('worldGrid');
-  if (!grid) return;
-
-  const DELAYS = ['delay-1','delay-2','delay-3','delay-4'];
-
-  function buildWorldCard(w, idx) {
-    const delay = DELAYS[idx % 4];
-    const hasImg = w.image && w.image.trim();
-    const imgHtml = hasImg
-      ? `<img src="${w.image}" alt="${(w.title||'').replace(/"/g,'&quot;')}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;\\'>${w.icon||'🎨'}</div>'">`
-      : `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;">
-           <span style="font-size:3rem;">${w.icon||'🎨'}</span>
-         </div>`;
-
-    return `
-      <article class="world-card fade-up ${delay}" aria-label="${(w.title||'')} 시리즈">
-        <div class="world-card-img" role="img" aria-label="${w.title||''} 이미지" style="overflow:hidden;">
-          ${imgHtml}
-        </div>
-        <div class="world-card-body">
-          <h3 class="world-card-title">${w.title||''}</h3>
-          ${w.title_en ? `<p class="world-card-subtitle">${w.title_en}</p>` : ''}
-          ${w.desc ? `<p class="world-card-desc">${w.desc}</p>` : ''}
-        </div>
-      </article>`;
-  }
-
-  // 기본 카드 (DB 데이터 없을 때)
-  const DEFAULT_WORLD = [
-    { title:'긴 다리의 말', title_en:'Long-legged Horse Series', desc:'현실의 결핍을 초월한 자유와 해방의 상징.', icon:'🐎' },
-    { title:'목이 긴 새',   title_en:'Long-necked Bird Series',  desc:'우아한 비행과 고결한 자태.', icon:'🦢' },
-    { title:'붉은 산수',   title_en:'Red Landscape (山水)',      desc:'전통 산수화를 대담한 적색으로 재해석.', icon:'🏔️' },
-    { title:'유토피아',    title_en:'Utopia — 무릉도원',          desc:'마음속의 이상향. 황홀한 색채와 빛으로.', icon:'✨' },
-  ];
-
-  async function loadWorld() {
-    try {
-      const res = await fetch('tables/wy_world?limit=100&sort=order', { cache: 'no-cache' });
-      if (!res.ok) throw new Error('API 오류');
-      const json = await res.json();
-      const data = (json.data || []).sort((a,b) => (a.order||0) - (b.order||0));
-      const list = data.length > 0 ? data : DEFAULT_WORLD;
-      grid.innerHTML = list.map((w,i) => buildWorldCard(w,i)).join('');
-      grid.querySelectorAll('.world-card').forEach(el => el.classList.add('visible'));
-    } catch(e) {
-      grid.innerHTML = DEFAULT_WORLD.map((w,i) => buildWorldCard(w,i)).join('');
-      grid.querySelectorAll('.world-card').forEach(el => el.classList.add('visible'));
-    }
-  }
-
-  loadWorld();
 })();
