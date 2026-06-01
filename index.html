@@ -9,9 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=20260601" />
+  <link rel="stylesheet" href="css/style.css?v=20260602" />
 </head>
 <body data-page="home" data-asset-base=".">
+<div class="g-loading" id="gLoading" aria-label="로딩 중" role="status">
+  <p class="g-loading-name">王烈 · Wang Yeul</p>
+  <div class="g-loading-ring-wrap">
+    <svg class="g-loading-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle class="g-ring-track" cx="50" cy="50" r="40"/>
+      <circle class="g-ring-fill" id="gRingFill" cx="50" cy="50" r="40"/>
+    </svg>
+    <span class="g-loading-pct" id="gLoadingPct">0%</span>
+  </div>
+</div>
 <header class="site-header" id="site-header">
   <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
     <a href="./" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
@@ -263,11 +273,23 @@
   </div>
 </div>
 
+<nav class="g-float-nav" id="gFloatNav" aria-label="플로팅 네비게이션">
+  <a href="./" class="g-float-link" data-nav="home">대표작품</a>
+  <div class="g-float-divider"></div>
+  <a href="./works/" class="g-float-link" data-nav="works">작품</a>
+  <div class="g-float-divider"></div>
+  <a href="./worlds/" class="g-float-link" data-nav="worlds">작품세계</a>
+  <div class="g-float-divider"></div>
+  <a href="./artist/" class="g-float-link" data-nav="artist">작가</a>
+  <div class="g-float-divider"></div>
+  <a href="./collections/" class="g-float-link" data-nav="collections">소장처</a>
+</nav>
+
 <button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
   <i class="fas fa-chevron-up" aria-hidden="true"></i>
 </button>
 
-<script src="js/main.js?v=20260601"></script>
+<script src="js/main.js?v=20260602"></script>
 <script src="js/i18n.js?v=20260530"></script>
 </body>
 </html>

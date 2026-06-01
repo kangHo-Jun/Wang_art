@@ -6,6 +6,84 @@
 
 console.log('✅ Wang Yeul Website — JavaScript Loaded');
 
+/* ── 로딩 인트로 ─────────────────────────────────────────── */
+(function initLoading() {
+  const loader  = document.getElementById('gLoading');
+  const ring    = document.getElementById('gRingFill');
+  const pctText = document.getElementById('gLoadingPct');
+  if (!loader) return;
+
+  const CIRCUMFERENCE = 251.2;
+
+  function setProgress(pct) {
+    const p = Math.min(pct, 100);
+    ring.style.strokeDashoffset = CIRCUMFERENCE * (1 - p / 100);
+    pctText.textContent = Math.round(p) + '%';
+  }
+
+  function finish() {
+    setProgress(100);
+    setTimeout(() => {
+      loader.classList.add('done');
+      document.body.style.overflow = '';
+    }, 600);
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  const images = [...document.querySelectorAll('img[src]')]
+    .map(img => img.src).filter(Boolean);
+
+  if (images.length === 0) {
+    let fake = 0;
+    const timer = setInterval(() => {
+      fake += Math.random() * 18 + 8;
+      if (fake >= 100) { clearInterval(timer); finish(); }
+      else setProgress(fake);
+    }, 120);
+    return;
+  }
+
+  const total = images.length;
+  let loaded = 0;
+  images.forEach(src => {
+    const img = new Image();
+    img.onload = img.onerror = () => {
+      loaded++;
+      setProgress((loaded / total) * 100);
+      if (loaded >= total) finish();
+    };
+    img.src = src;
+  });
+
+  setTimeout(finish, 4000);
+})();
+
+/* ── 플로팅 글래스 네비 ──────────────────────────────────── */
+(function initFloatNav() {
+  const nav = document.getElementById('gFloatNav');
+  if (!nav) return;
+
+  const page = document.body.dataset.page;
+  nav.querySelectorAll('.g-float-link').forEach(a => {
+    if (a.dataset.nav === page) a.classList.add('active');
+  });
+
+  let lastY = window.scrollY;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y > lastY + 10)      nav.classList.add('hidden');
+      else if (y < lastY - 10) nav.classList.remove('hidden');
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
 const ASSET_BASE = (document.body?.dataset?.assetBase || '.').replace(/\/$/, '');
 
 function assetPath(path) {
