@@ -10,10 +10,14 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
 (function initLoading() {
   const loader  = document.getElementById('gLoading');
   const ring    = document.getElementById('gRingFill');
+  const ringEl  = loader && loader.querySelector('.g-loading-ring');
   const pctText = document.getElementById('gLoadingPct');
   if (!loader) return;
 
   const CIRCUMFERENCE = 251.2;
+  const MIN_DURATION  = 2500;
+  const startTime     = Date.now();
+  let finished        = false;
 
   function setProgress(pct) {
     const p = Math.min(pct, 100);
@@ -22,11 +26,18 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   }
 
   function finish() {
+    if (finished) return;
+    finished = true;
     setProgress(100);
+    const elapsed = Date.now() - startTime;
+    const delay = Math.max(0, MIN_DURATION - elapsed);
     setTimeout(() => {
-      loader.classList.add('done');
-      document.body.style.overflow = '';
-    }, 600);
+      ringEl.classList.add('out');
+      setTimeout(() => {
+        loader.classList.add('done');
+        document.body.style.overflow = '';
+      }, 500);
+    }, delay);
   }
 
   document.body.style.overflow = 'hidden';
@@ -59,30 +70,6 @@ console.log('✅ Wang Yeul Website — JavaScript Loaded');
   setTimeout(finish, 4000);
 })();
 
-/* ── 플로팅 글래스 네비 ──────────────────────────────────── */
-(function initFloatNav() {
-  const nav = document.getElementById('gFloatNav');
-  if (!nav) return;
-
-  const page = document.body.dataset.page;
-  nav.querySelectorAll('.g-float-link').forEach(a => {
-    if (a.dataset.nav === page) a.classList.add('active');
-  });
-
-  let lastY = window.scrollY;
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      if (y > lastY + 10)      nav.classList.add('hidden');
-      else if (y < lastY - 10) nav.classList.remove('hidden');
-      lastY = y;
-      ticking = false;
-    });
-  }, { passive: true });
-})();
 
 const ASSET_BASE = (document.body?.dataset?.assetBase || '.').replace(/\/$/, '');
 
