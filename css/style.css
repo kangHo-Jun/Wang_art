@@ -1835,6 +1835,30 @@ input, select, textarea { font-family: inherit; }
   font-size: 0.9rem;
 }
 
+/* ── 스켈레톤 shimmer ─────────────────────────────────────── */
+@keyframes wy-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.wy-skeleton {
+  background: linear-gradient(90deg, #ede7da 25%, #f5efe3 50%, #ede7da 75%);
+  background-size: 200% 100%;
+  animation: wy-shimmer 1.4s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.skeleton-img-area    { aspect-ratio: 4/5; width: 100%; }
+.skeleton-label-line  { height: 13px; margin-top: 10px; width: 68%; }
+.skeleton-meta-line   { height: 10px; margin-top:  6px; width: 45%; }
+
+.skeleton-world-img   { aspect-ratio: 4/3; width: 100%; }
+.skeleton-world-thumb { aspect-ratio: 1/1; width: 100%; }
+.skeleton-world-kicker { height: 10px; width: 32%; margin-bottom: 10px; }
+.skeleton-world-title  { height: 22px; width: 58%; margin-bottom: 14px; }
+.skeleton-world-text   { height: 10px; width: 88%; margin-bottom:  7px; }
+.skeleton-world-text-s { height: 10px; width: 65%; }
+
 .gallery-placeholder i {
   font-size: 1.6rem;
   opacity: 0.28;

@@ -637,11 +637,13 @@ function assetPath(path) {
         selectedGrid.innerHTML = selectedItems.length
           ? selectedItems.map(buildSelectedWork).join('')
           : '<p class="featured-empty">선별 작품이 준비되는 중입니다.</p>';
+        selectedGrid.removeAttribute('aria-busy');
       }
       if (worldsGrid) {
         worldsGrid.innerHTML = worldItems.length
           ? worldItems.map(buildWorldItem).join('')
           : '<p class="featured-empty">작품세계 정보가 준비되는 중입니다.</p>';
+        worldsGrid.removeAttribute('aria-busy');
       }
 
       attachSelectedLightbox();
