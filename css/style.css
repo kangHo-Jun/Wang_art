@@ -1498,6 +1498,23 @@ input, select, textarea { font-family: inherit; }
   overflow: hidden;
 }
 
+.hero-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
 .hero-media-motion {
   width: 100%;
   height: 100%;
@@ -1513,12 +1530,8 @@ input, select, textarea { font-family: inherit; }
   width: 100%;
   height: 100%;
   filter: none;
-  transform: scale(1);
-  animation:
-    heroImageFade 1.2s ease forwards,
-    heroSlowZoom 12s ease-out 1.2s forwards;
-  opacity: 0;
-  will-change: transform, opacity;
+  opacity: 1;
+  will-change: transform;
 }
 
 .hero-content {
@@ -1893,6 +1906,45 @@ input, select, textarea { font-family: inherit; }
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
+/* ── 슬라이드쇼 dot 인디케이터 ─────────────────────────────── */
+.hero-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(196, 162, 101, 0.32);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.hero-dot::before {
+  content: '';
+  position: absolute;
+  inset: -16px -14px;
+}
+
+.hero-dot.is-active {
+  background: var(--color-gold);
+  transform: scale(1.5);
+}
+
+.hero-dot:hover:not(.is-active) {
+  background: rgba(196, 162, 101, 0.65);
+}
+
 @keyframes heroImageFade {
   from {
     opacity: 0;
@@ -1950,6 +2002,10 @@ input, select, textarea { font-family: inherit; }
     transform: none;
     transition: none;
   }
+
+  .hero-slide .hero-feature-image {
+    animation: none !important;
+  }
 }
 
 @media (max-width: 980px) {
@@ -2003,6 +2059,29 @@ input, select, textarea { font-family: inherit; }
     min-height: auto;
     padding: 18px 18px 0;
     overflow: visible;
+  }
+
+  .hero-slides {
+    min-height: 62svh;
+  }
+
+  .hero-slide {
+    display: none;
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transition: none;
+  }
+
+  .hero-slide.is-active {
+    display: block;
+  }
+
+  .hero-dots {
+    left: auto;
+    right: 20px;
+    transform: none;
+    bottom: 20px;
   }
 
   .hero-media-motion {

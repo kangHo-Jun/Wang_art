@@ -20,6 +20,155 @@ function assetPath(path) {
 }
 
 /* ══════════════════════════════════════════════════════════
+   슬라이드쇼 데이터 — Ken Burns + Crossfade
+   ══════════════════════════════════════════════════════════ */
+const HERO_SLIDES = [
+  {
+    src: 'images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg',
+    titleKo: '유토피아-명상', titleEn: 'Utopia Meditation',
+    year: '2025', medium: 'Acrylic on canvas', size: '280 × 140 cm'
+  },
+  {
+    src: 'images/red/39-utopia-a-meditation-ink-stick-and-acrylic-on-canvas-222x222cm2023.jpg',
+    titleKo: '유토피아-명상', titleEn: 'Utopia Meditation',
+    year: '2023', medium: 'Ink stick and acrylic on canvas', size: '222 × 222 cm'
+  },
+  {
+    src: 'images/blue/10-utopia-meditation-acrylic-on-canvas-140x140cm-2023.jpg',
+    titleKo: '유토피아-명상', titleEn: 'Utopia Meditation',
+    year: '2023', medium: 'Acrylic on canvas', size: '140 × 140 cm'
+  },
+  {
+    src: 'images/red/22-utopia-meditation-acrylic-on-canvas-116x91cm-2023.jpg',
+    titleKo: '유토피아-명상', titleEn: 'Utopia Meditation',
+    year: '2023', medium: 'Acrylic on canvas', size: '116 × 91 cm'
+  },
+  {
+    src: 'images/2026/14-utopia-meditation-acrylic-on-canvas-140x140cm-2023-19-000.jpg',
+    titleKo: '유토피아-명상', titleEn: 'Utopia Meditation',
+    year: '2023', medium: 'Acrylic on canvas', size: '140 × 140 cm'
+  }
+];
+
+/* ══════════════════════════════════════════════════════════
+   2. 히어로 슬라이드쇼 — Ken Burns + Crossfade
+   ══════════════════════════════════════════════════════════ */
+(function initHeroSlideshow() {
+  const hero     = document.getElementById('hero');
+  const slides   = document.getElementById('heroSlides');
+  const dotsEl   = document.getElementById('heroDots');
+  const labelInner = document.querySelector('.hero-label-inner');
+  const titleEl  = document.getElementById('heroTitleEn');
+  const yearEl   = document.getElementById('heroYear');
+  const mediumEl = document.getElementById('heroMedium');
+  const sizeEl   = document.getElementById('heroSize');
+  if (!hero || !slides) return;
+
+  const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 슬라이드 1~4 DOM 생성 (슬라이드 0은 HTML에 이미 있음)
+  for (let i = 1; i < HERO_SLIDES.length; i++) {
+    const slide = document.createElement('div');
+    slide.className = 'hero-slide';
+    slide.dataset.slide = i;
+    const motion = document.createElement('div');
+    motion.className = 'hero-media-motion';
+    const img = document.createElement('img');
+    img.className = 'hero-feature-image';
+    img.src = assetPath(HERO_SLIDES[i].src);
+    img.alt = HERO_SLIDES[i].titleEn;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    motion.appendChild(img);
+    slide.appendChild(motion);
+    slides.appendChild(slide);
+  }
+
+  // dot 인디케이터 생성
+  if (dotsEl) {
+    dotsEl.innerHTML = HERO_SLIDES.map((_, i) =>
+      `<button class="hero-dot${i === 0 ? ' is-active' : ''}" data-index="${i}"
+               type="button" aria-label="슬라이드 ${i + 1}"></button>`
+    ).join('');
+    dotsEl.querySelectorAll('.hero-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(Number(dot.dataset.index));
+        restartTimer();
+      });
+    });
+  }
+
+  let current = 0;
+  let timer = null;
+
+  function allSlides() { return slides.querySelectorAll('.hero-slide'); }
+  function allDots()   { return dotsEl ? dotsEl.querySelectorAll('.hero-dot') : []; }
+
+  function startKenBurns(slideEl) {
+    if (reducedMotion()) return;
+    const img = slideEl.querySelector('.hero-feature-image');
+    if (!img) return;
+    img.style.animation = 'none';
+    void img.offsetWidth;
+    img.style.animation = 'heroSlowZoom 12s ease-out forwards';
+  }
+
+  function setLabels(slide) {
+    if (titleEl)  titleEl.textContent  = slide.titleEn || '';
+    if (yearEl)   yearEl.textContent   = slide.year    || '';
+    if (mediumEl) mediumEl.textContent = slide.medium  || '';
+    if (sizeEl)   sizeEl.textContent   = slide.size    || '';
+  }
+
+  function fadeLabels(slide) {
+    if (!labelInner) { setLabels(slide); return; }
+    labelInner.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    labelInner.style.opacity    = '0';
+    labelInner.style.transform  = 'translateY(6px)';
+    setTimeout(() => {
+      setLabels(slide);
+      labelInner.style.opacity   = '1';
+      labelInner.style.transform = 'translateY(0)';
+      setTimeout(() => { labelInner.style.transition = ''; }, 280);
+    }, 260);
+  }
+
+  function goToSlide(index) {
+    if (index === current) return;
+    const sls  = allSlides();
+    const dots = allDots();
+    sls[current]?.classList.remove('is-active');
+    dots[current]?.classList.remove('is-active');
+    current = index;
+    const next = sls[current];
+    next?.classList.add('is-active');
+    dots[current]?.classList.add('is-active');
+    startKenBurns(next);
+    fadeLabels(HERO_SLIDES[current]);
+  }
+
+  function startTimer()   { timer = setInterval(() => goToSlide((current + 1) % HERO_SLIDES.length), 5000); }
+  function stopTimer()    { clearInterval(timer); timer = null; }
+  function restartTimer() { stopTimer(); startTimer(); }
+
+  hero.addEventListener('mouseenter', stopTimer);
+  hero.addEventListener('mouseleave', () => { if (!timer) startTimer(); });
+
+  // 초기 Ken Burns (슬라이드 0)
+  startKenBurns(allSlides()[0]);
+
+  // 초기 입장 페이드 — 슬라이드 0의 opacity 0→1
+  const firstSlide = allSlides()[0];
+  firstSlide.classList.remove('is-active');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    firstSlide.classList.add('is-active');
+  }));
+
+  window.__heroSlideshow = true;
+  startTimer();
+})();
+
+/* ══════════════════════════════════════════════════════════
    1. 히어로 캔버스 파티클 (먹물·금빛 파티클)
    [아임웹] 이 효과는 배경 이미지 또는 비디오로 대체 권장
    ══════════════════════════════════════════════════════════ */
@@ -571,6 +720,7 @@ function assetPath(path) {
     if (!hero || !heroImage) return;
     heroImage.src = assetPath(hero.image || heroImage.src);
     heroImage.alt = hero.title_en || hero.title_ko || '';
+    if (window.__heroSlideshow) return; // 슬라이드쇼가 라벨을 관리
     if (heroEyebrow) heroEyebrow.textContent = 'WANGYEUL';
     if (heroTitleEn) heroTitleEn.textContent = hero.title_en || '';
     if (heroYear) heroYear.textContent = hero.year || '';

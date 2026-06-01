@@ -38,28 +38,32 @@
 </header>
 
 <section class="hero" id="hero" aria-label="대표작품 히어로">
-  <div class="hero-art-frame">
-    <div class="hero-media-motion" id="heroMediaMotion">
-      <picture>
-        <source
-          type="image/webp"
-          srcset="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-800w.webp 800w,
-                  images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-1200w.webp 1200w,
-                  images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.webp 1920w"
-          sizes="100vw"
-        />
-        <img
-          class="hero-feature-image"
-          id="heroFeatureImage"
-          src="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg"
-          alt="Utopia Meditation"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          width="1920"
-          height="957"
-        />
-      </picture>
+  <div class="hero-art-frame" id="heroArtFrame">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide is-active" data-slide="0">
+        <div class="hero-media-motion" id="heroMediaMotion">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-800w.webp 800w,
+                      images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-1200w.webp 1200w,
+                      images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.webp 1920w"
+              sizes="100vw"
+            />
+            <img
+              class="hero-feature-image"
+              id="heroFeatureImage"
+              src="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg"
+              alt="Utopia Meditation"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+              width="1920"
+              height="957"
+            />
+          </picture>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-content hero-label fade-up">
@@ -75,6 +79,7 @@
       <a href="#works" class="hero-link hero-label-link" id="heroLink">Selected Works</a>
     </div>
   </div>
+  <nav class="hero-dots" id="heroDots" aria-label="슬라이드 이동" role="group"></nav>
   <div class="hero-scroll-hint fade-up delay-1" aria-label="스크롤 안내">
     <span>Scroll</span>
     <div class="scroll-line"></div>
