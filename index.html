@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=20260531" />
+  <link rel="stylesheet" href="css/style.css?v=20260601" />
 </head>
 <body data-page="home" data-asset-base=".">
 <header class="site-header" id="site-header">
@@ -217,24 +217,47 @@
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
-  <button class="lightbox-close" id="lightboxClose" aria-label="닫기"><i class="fas fa-times" aria-hidden="true"></i></button>
-  <div class="lightbox-content" id="lightboxContent">
-    <div class="lightbox-stage">
-      <div class="lightbox-placeholder" id="lightboxPlaceholder">
-        <i class="fas fa-image" aria-hidden="true"></i>
-        <p>작품 이미지가 표시됩니다</p>
-      </div>
-      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+<div class="glass-viewer" id="glassViewer" role="dialog" aria-modal="true" aria-label="작품 상세 보기" hidden>
+  <div class="glass-backdrop" id="glassBackdrop"></div>
+  <div class="glass-panel" id="glassPanel">
+    <button class="glass-close" id="glassClose" aria-label="닫기">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <div class="glass-artwork">
+      <img class="glass-img" id="glassImg" src="" alt="">
     </div>
-    <div class="lightbox-info" id="lightboxInfo">
-      <p class="lightbox-kicker">Wall Label</p>
-      <p class="lightbox-title" id="lightboxTitle"></p>
-      <p class="lightbox-meta" id="lightboxMeta"></p>
-      <p class="lightbox-note" id="lightboxNote"></p>
-      <div class="lightbox-nav" aria-label="작품 이동">
-        <button class="lightbox-nav-link" id="lightboxPrev" type="button">Previous</button>
-        <button class="lightbox-nav-link" id="lightboxNext" type="button">Next</button>
+    <div class="glass-info">
+      <p class="glass-kicker">Wang Yeul · 王烈</p>
+      <h2 class="glass-title" id="glassTitle"></h2>
+      <p class="glass-title-kr" id="glassTitleKr"></p>
+      <div class="glass-divider"></div>
+      <div class="glass-meta">
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">연도</span>
+          <span class="glass-meta-val" id="glassYear"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">재료</span>
+          <span class="glass-meta-val" id="glassMedium"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">크기</span>
+          <span class="glass-meta-val" id="glassSize"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">소장</span>
+          <span class="glass-meta-val" id="glassCollection"></span>
+        </div>
+      </div>
+      <p class="glass-note" id="glassNote"></p>
+      <div class="glass-nav">
+        <button class="glass-nav-btn" id="glassPrev">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Prev
+        </button>
+        <div class="glass-dots" id="glassDots"></div>
+        <button class="glass-nav-btn" id="glassNext">
+          Next <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -244,7 +267,7 @@
   <i class="fas fa-chevron-up" aria-hidden="true"></i>
 </button>
 
-<script src="js/main.js?v=20260531"></script>
+<script src="js/main.js?v=20260601"></script>
 <script src="js/i18n.js?v=20260530"></script>
 </body>
 </html>

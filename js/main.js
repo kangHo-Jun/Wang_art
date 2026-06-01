@@ -425,104 +425,92 @@ const HERO_SLIDES = [
 
 
 /* ══════════════════════════════════════════════════════════
-   6. 갤러리 라이트박스
-   [아임웹] 실제 이미지 삽입 후 이 로직 작동 / 아임웹 라이트박스 설정으로 대체 가능
+   6. Glass Viewer — Frosted Glass 작품 뷰어
    ══════════════════════════════════════════════════════════ */
-(function initLightbox() {
-  const lightbox     = document.getElementById('lightbox');
-  const lightboxClose = document.getElementById('lightboxClose');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxTitle = document.getElementById('lightboxTitle');
-  const lightboxMeta = document.getElementById('lightboxMeta');
-  const lightboxNote = document.getElementById('lightboxNote');
-  const lightboxPlaceholder = document.getElementById('lightboxPlaceholder');
-  const lightboxPrev = document.getElementById('lightboxPrev');
-  const lightboxNext = document.getElementById('lightboxNext');
-  if (!lightbox || !lightboxClose || !lightboxImg) return;
+(function initGlassViewer() {
+  const viewer     = document.getElementById('glassViewer');
+  const backdrop   = document.getElementById('glassBackdrop');
+  const closeBtn   = document.getElementById('glassClose');
+  const img        = document.getElementById('glassImg');
+  const title      = document.getElementById('glassTitle');
+  const titleKr    = document.getElementById('glassTitleKr');
+  const year       = document.getElementById('glassYear');
+  const medium     = document.getElementById('glassMedium');
+  const size       = document.getElementById('glassSize');
+  const collection = document.getElementById('glassCollection');
+  const note       = document.getElementById('glassNote');
+  const prevBtn    = document.getElementById('glassPrev');
+  const nextBtn    = document.getElementById('glassNext');
+  const dotsWrap   = document.getElementById('glassDots');
+  if (!viewer) return;
 
   let items = [];
-  let currentIndex = 0;
+  let current = 0;
 
-  function renderCurrent() {
-    const aw = items[currentIndex];
-    if (!aw) return;
+  function getItems() {
+    return [...document.querySelectorAll('.gallery-zoom')];
+  }
 
-    const title = aw.title || '';
-    const metaParts = [];
-    if (aw.year) metaParts.push(aw.year);
-    if (aw.series) metaParts.push(aw.series);
-    if (aw.material) metaParts.push(aw.material);
-    const meta = metaParts.join(' · ') || aw.meta || '';
-
-    if (lightboxTitle) lightboxTitle.textContent = title;
-    if (lightboxMeta) lightboxMeta.textContent = meta;
-    if (lightboxNote) lightboxNote.textContent = aw.note || '';
-
-    if (aw.img) {
-      lightboxImg.src = aw.img;
-      lightboxImg.alt = title;
-      lightboxImg.style.display = 'block';
-      if (lightboxPlaceholder) lightboxPlaceholder.hidden = true;
-    } else {
-      lightboxImg.removeAttribute('src');
-      lightboxImg.style.display = 'none';
-      if (lightboxPlaceholder) lightboxPlaceholder.hidden = false;
+  function renderDots(count, active) {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = 'glass-dot' + (i === active ? ' active' : '');
+      d.setAttribute('aria-label', (i + 1) + '번 작품');
+      d.addEventListener('click', () => show(i));
+      dotsWrap.appendChild(d);
     }
-
-    if (lightboxPrev) lightboxPrev.disabled = currentIndex === 0;
-    if (lightboxNext) lightboxNext.disabled = currentIndex >= items.length - 1;
   }
 
-  function openLightbox(payloadItems, startIndex) {
-    items = Array.isArray(payloadItems) ? payloadItems : [];
-    currentIndex = Math.max(0, Math.min(startIndex || 0, items.length - 1));
-    renderCurrent();
-    lightbox.removeAttribute('hidden');
+  function show(idx) {
+    items = getItems();
+    current = Math.max(0, Math.min(idx, items.length - 1));
+    const btn = items[current];
+
+    img.src = btn.dataset.img || '';
+    img.alt = btn.dataset.title || '';
+    title.textContent      = btn.dataset.title      || '';
+    titleKr.textContent    = btn.dataset.titleKr    || '';
+    year.textContent       = btn.dataset.year       || '';
+    medium.textContent     = btn.dataset.medium     || '';
+    size.textContent       = btn.dataset.size       || '';
+    collection.textContent = btn.dataset.collection || '';
+    note.textContent       = btn.dataset.note       || '';
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === items.length - 1;
+    renderDots(items.length, current);
+
+    viewer.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
-    lightbox.focus();
+    requestAnimationFrame(() => closeBtn.focus());
   }
 
-  function closeLightbox() {
-    lightbox.setAttribute('hidden', '');
+  function close() {
+    viewer.setAttribute('hidden', '');
     document.body.style.overflow = '';
   }
 
-  lightboxClose.addEventListener('click', closeLightbox);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.gallery-zoom');
+    if (!btn) return;
+    e.stopPropagation();
+    items = getItems();
+    const idx = items.indexOf(btn);
+    show(idx >= 0 ? idx : 0);
   });
 
-  if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', () => {
-      if (currentIndex === 0) return;
-      currentIndex -= 1;
-      renderCurrent();
-    });
-  }
+  backdrop.addEventListener('click', close);
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', () => show(current - 1));
+  nextBtn.addEventListener('click', () => show(current + 1));
 
-  if (lightboxNext) {
-    lightboxNext.addEventListener('click', () => {
-      if (currentIndex >= items.length - 1) return;
-      currentIndex += 1;
-      renderCurrent();
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.hasAttribute('hidden')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft' && currentIndex > 0) {
-      currentIndex -= 1;
-      renderCurrent();
-    }
-    if (e.key === 'ArrowRight' && currentIndex < items.length - 1) {
-      currentIndex += 1;
-      renderCurrent();
-    }
+  document.addEventListener('keydown', e => {
+    if (viewer.hasAttribute('hidden')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
   });
-
-  window.__wyLightbox = { openLightbox, closeLightbox };
 })();
 
 
@@ -704,18 +692,6 @@ const HERO_SLIDES = [
     return [item.year, item.medium, item.size].filter(Boolean).join(' · ');
   }
 
-  function buildLightboxPayload(items) {
-    return items.map(item => ({
-      img: assetPath(item.image || ''),
-      title: item.title_ko || item.title_en || '',
-      year: item.year || '',
-      series: item.series || '',
-      material: item.medium || '',
-      meta: metaLine(item),
-      note: item.display_note || ''
-    }));
-  }
-
   function renderHero(hero) {
     if (!hero || !heroImage) return;
     heroImage.src = assetPath(hero.image || heroImage.src);
@@ -731,7 +707,16 @@ const HERO_SLIDES = [
   function buildSelectedWork(item, index) {
     return `
       <article class="selected-work-card fade-up visible" role="listitem">
-        <button class="selected-work-media" type="button" data-selected-index="${index}" aria-label="${escapeHtml(item.title_ko || item.title_en || '작품')} 감상하기">
+        <button class="selected-work-media gallery-zoom" type="button"
+          aria-label="${escapeHtml(item.title_ko || item.title_en || '작품')} 감상하기"
+          data-img="${escapeHtml(assetPath(item.image || ''))}"
+          data-title="${escapeHtml(item.title_en || item.title_ko || '')}"
+          data-title-kr="${escapeHtml(item.title_ko || item.title_en || '')}"
+          data-year="${escapeHtml(item.year || '')}"
+          data-medium="${escapeHtml(item.medium || '')}"
+          data-size="${escapeHtml(item.size || '')}"
+          data-collection=""
+          data-note="${escapeHtml(item.display_note || '')}">
           <img src="${escapeHtml(assetPath(item.image))}" alt="${escapeHtml(item.title_ko || item.title_en || '작품')}" loading="lazy">
         </button>
         <div class="selected-work-label">
@@ -762,17 +747,6 @@ const HERO_SLIDES = [
       </article>`;
   }
 
-  function attachSelectedLightbox() {
-    if (!selectedGrid) return;
-    selectedGrid.querySelectorAll('[data-selected-index]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const startIndex = Number(btn.dataset.selectedIndex || 0);
-        if (window.__wyLightbox && typeof window.__wyLightbox.openLightbox === 'function') {
-          window.__wyLightbox.openLightbox(buildLightboxPayload(selectedItems), startIndex);
-        }
-      });
-    });
-  }
 
   async function loadFeaturedWorks() {
     try {
@@ -796,7 +770,6 @@ const HERO_SLIDES = [
         worldsGrid.removeAttribute('aria-busy');
       }
 
-      attachSelectedLightbox();
     } catch (error) {
       console.error('[Featured Works] 오류:', error.message);
       if (selectedGrid) {
@@ -896,7 +869,15 @@ const HERO_SLIDES = [
           </div>
           <div class="gallery-overlay">
             <button class="gallery-zoom" aria-label="작품 크게 보기"
-              data-render-index="${idx}">
+              data-render-index="${idx}"
+              data-img="${hasImg ? assetPath(imgSrc).replace(/"/g,'&quot;') : ''}"
+              data-title="${(aw.title||'').replace(/"/g,'&quot;')}"
+              data-title-kr="${(aw.title||'').replace(/"/g,'&quot;')}"
+              data-year="${year.replace(/"/g,'&quot;')}"
+              data-medium="${material.replace(/"/g,'&quot;')}"
+              data-size="${((aw.size||'').trim()).replace(/"/g,'&quot;')}"
+              data-collection=""
+              data-note="${captionText.replace(/"/g,'&quot;')}">
               <i class="fas fa-expand-alt" aria-hidden="true"></i>
               <span>View</span>
             </button>
@@ -926,30 +907,8 @@ const HERO_SLIDES = [
     attachLightbox();
   }
 
-  /* ── 라이트박스 이벤트 연결 ── */
-  function attachLightbox() {
-    grid.querySelectorAll('.gallery-zoom').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const startIndex = Number(btn.dataset.renderIndex || 0);
-        const payload = currentRenderedArtworks.map(aw => {
-          const cat = (aw.category || '').trim().toLowerCase();
-          const year = (aw.year || extractYear(aw.title || aw.caption || '')).trim();
-          return {
-            img: assetPath((aw.image || '').trim()),
-            title: aw.title || '',
-            year,
-            series: buildSeriesName(aw, cat).trim(),
-            material: (aw.material || '').trim(),
-            meta: (aw.caption || '').trim(),
-            note: ''
-          };
-        });
-        if (window.__wyLightbox && typeof window.__wyLightbox.openLightbox === 'function') {
-          window.__wyLightbox.openLightbox(payload, startIndex);
-        }
-      });
-    });
-  }
+  /* ── 라이트박스 이벤트 연결 (glass viewer event delegation이 처리) ── */
+  function attachLightbox() {}
 
   /* ── 필터 버튼: 한 번만 등록 ── */
   const filterBtns = document.querySelectorAll('.filter-btn');

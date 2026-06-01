@@ -2403,151 +2403,216 @@ input, select, textarea { font-family: inherit; }
 }
 
 /* ── 19. LIGHTBOX ────────────────────────────────────────── */
-.lightbox {
+/* ── 18. GLASS VIEWER (Frosted Glass 작품 뷰어) ─────────── */
+.glass-viewer {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(248, 243, 234, 0.96);
-  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 28px;
-  animation: fadeIn 0.2s ease;
+  padding: 24px;
 }
+.glass-viewer[hidden] { display: none; }
 
-.lightbox[hidden] { display: none; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.lightbox-close {
+.glass-backdrop {
   position: absolute;
-  top: 18px;
-  right: 22px;
-  color: rgba(42, 31, 20, 0.72);
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.9;
-  transition: opacity var(--trans-fast), color var(--trans-fast);
-  z-index: 1;
+  inset: 0;
+  background: rgba(30, 21, 8, 0.72);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  cursor: pointer;
 }
 
-.lightbox-close:hover {
-  opacity: 1;
-  color: var(--color-ink);
-}
-
-.lightbox-content {
-  width: min(1240px, 100%);
-  max-height: 88vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: 34px;
-  align-items: end;
-}
-
-.lightbox-stage {
+.glass-panel {
   position: relative;
-  min-height: 0;
+  z-index: 1;
+  background: rgba(249, 246, 237, 0.10);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(249, 246, 237, 0.16);
+  border-radius: 20px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 32px;
+  align-items: center;
+  width: min(780px, 100%);
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.25s ease;
 }
 
-.lightbox-placeholder {
-  width: 100%;
-  min-height: 320px;
+.glass-viewer:not([hidden]) .glass-panel {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.glass-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(249, 246, 237, 0.10);
+  border: 1px solid rgba(249, 246, 237, 0.15);
+  color: rgba(249, 246, 237, 0.6);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  color: rgba(42, 31, 20, 0.34);
-  background: linear-gradient(180deg, #f3ede2 0%, #ece5d8 100%);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.glass-close:hover {
+  background: rgba(249, 246, 237, 0.2);
+  color: #fff;
 }
 
-.lightbox-placeholder i {
-  font-size: 2.6rem;
+.glass-artwork {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 70vh;
 }
 
-.lightbox-placeholder p {
-  font-size: 0.82rem;
-}
-
-/* 라이트박스 이미지 */
-.lightbox-img {
+.glass-img {
   width: 100%;
-  max-height: 78vh;
+  max-height: 65vh;
   object-fit: contain;
-  object-position: center center;
+  border-radius: 6px;
   display: block;
 }
 
-/* 라이트박스 작품 정보 */
-.lightbox-info {
-  align-self: end;
-  max-width: 260px;
-  padding-bottom: 6px;
-  text-align: left;
+.glass-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.lightbox-kicker {
-  font-family: var(--font-serif-en);
+.glass-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: rgba(196, 162, 101, 0.6);
+  text-transform: uppercase;
+}
+
+.glass-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: rgba(249, 246, 237, 0.95);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.glass-title-kr {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.82rem;
+  color: rgba(249, 246, 237, 0.45);
+}
+
+.glass-divider {
+  width: 28px;
+  height: 1px;
+  background: rgba(196, 162, 101, 0.45);
+}
+
+.glass-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.glass-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.glass-meta-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: rgba(196, 162, 101, 0.55);
+  text-transform: uppercase;
+}
+
+.glass-meta-val {
+  font-size: 0.82rem;
+  color: rgba(249, 246, 237, 0.72);
+  line-height: 1.5;
+}
+
+.glass-note {
+  font-size: 0.75rem;
+  color: rgba(249, 246, 237, 0.35);
+  line-height: 1.8;
+  font-style: italic;
+  border-top: 1px solid rgba(249, 246, 237, 0.08);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.glass-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(249, 246, 237, 0.08);
+}
+
+.glass-nav-btn {
   font-size: 0.68rem;
   letter-spacing: 0.18em;
+  color: rgba(249, 246, 237, 0.4);
   text-transform: uppercase;
-  color: rgba(42, 31, 20, 0.48);
-  margin-bottom: 10px;
-}
-
-.lightbox-title {
-  font-family: var(--font-serif-kr);
-  font-size: 0.96rem;
-  font-weight: 500;
-  color: var(--color-ink);
-  margin-bottom: 8px;
-  line-height: 1.55;
-}
-
-.lightbox-meta {
-  font-family: var(--font-serif-en);
-  font-size: 0.7rem;
-  color: rgba(42, 31, 20, 0.62);
-  line-height: 1.7;
-  letter-spacing: 0.04em;
-}
-
-.lightbox-note {
-  font-size: 0.74rem;
-  color: rgba(42, 31, 20, 0.48);
-  line-height: 1.7;
-  margin-top: 10px;
-}
-
-.lightbox-nav {
   display: flex;
-  gap: 14px;
-  margin-top: 22px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  font-family: 'Cormorant Garamond', serif;
+}
+.glass-nav-btn:hover { color: rgba(196, 162, 101, 0.8); }
+.glass-nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+.glass-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
-.lightbox-nav-link {
-  font-family: var(--font-sans-kr);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(42, 31, 20, 0.58);
-  border-bottom: 1px solid rgba(42, 31, 20, 0.2);
-  padding-bottom: 4px;
-  transition: color var(--trans-fast), border-color var(--trans-fast);
+.glass-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(196, 162, 101, 0.2);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
+}
+.glass-dot.active { background: #c4a265; }
+
+@media (max-width: 768px) {
+  .glass-panel {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+    gap: 20px;
+    align-items: start;
+  }
+  .glass-img { max-height: 45vh; }
 }
 
-.lightbox-nav-link:hover:not(:disabled) {
-  color: var(--color-ink);
-  border-bottom-color: rgba(42, 31, 20, 0.42);
-}
-
-.lightbox-nav-link:disabled {
-  opacity: 0.35;
-  cursor: default;
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel { transition: opacity 0.2s ease; transform: none !important; }
 }
 
 /* ── 19. SCROLL TOP BUTTON ───────────────────────────────── */
@@ -2705,37 +2770,6 @@ input, select, textarea { font-family: inherit; }
   .timeline-more { padding-left: 84px; }
 
   .statement-quote { padding: 28px 24px; }
-
-  .lightbox {
-    padding: 18px 14px;
-    align-items: flex-end;
-  }
-
-  .lightbox-content {
-    width: 100%;
-    max-height: 92vh;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .lightbox-stage {
-    order: 1;
-  }
-
-  .lightbox-info {
-    order: 2;
-    max-width: none;
-    padding: 0 2px 4px;
-  }
-
-  .lightbox-img {
-    max-height: 64vh;
-  }
-
-  .lightbox-nav {
-    margin-top: 16px;
-    gap: 12px;
-  }
 }
 
 @media (max-width: 540px) {
