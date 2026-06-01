@@ -494,7 +494,10 @@ function assetPath(path) {
   const pageId = document.body?.dataset?.page || '';
   if (pageLinks.length && pageId) {
     pageLinks.forEach(link => {
-      link.classList.toggle('active-link', link.dataset.navPage === pageId);
+      const isCurrent = link.dataset.navPage === pageId;
+      link.classList.toggle('active-link', isCurrent);
+      if (isCurrent) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
     return;
   }

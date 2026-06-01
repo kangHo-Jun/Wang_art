@@ -303,12 +303,18 @@ input, select, textarea { font-family: inherit; }
   transition: width var(--trans-smooth);
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active-link {
   color: var(--color-gold);
 }
 
-.nav-menu a:hover::after {
+.nav-menu a:hover::after,
+.nav-menu a.active-link::after {
   width: 100%;
+}
+
+.site-header.scrolled .nav-menu a.active-link {
+  color: var(--color-gold);
 }
 
 .site-header.scrolled .logo-kr {
