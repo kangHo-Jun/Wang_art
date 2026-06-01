@@ -40,14 +40,26 @@
 <section class="hero" id="hero" aria-label="대표작품 히어로">
   <div class="hero-art-frame">
     <div class="hero-media-motion" id="heroMediaMotion">
-      <img
-        class="hero-feature-image"
-        id="heroFeatureImage"
-        src="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg"
-        alt="Utopia Meditation"
-        loading="eager"
-        decoding="async"
-      />
+      <picture>
+        <source
+          type="image/webp"
+          srcset="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-800w.webp 800w,
+                  images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-1200w.webp 1200w,
+                  images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.webp 1920w"
+          sizes="100vw"
+        />
+        <img
+          class="hero-feature-image"
+          id="heroFeatureImage"
+          src="images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg"
+          alt="Utopia Meditation"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          width="1920"
+          height="957"
+        />
+      </picture>
     </div>
   </div>
   <div class="hero-content hero-label fade-up">
