@@ -1122,6 +1122,153 @@ input, select, textarea { font-family: inherit; }
   display: none;
 }
 
+/* ── color-btn (accordion filter) ── */
+.color-btn {
+  padding: 6px 10px;
+  font-family: var(--font-sans-kr);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid transparent;
+  transition: color var(--trans-fast), border-color var(--trans-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.color-btn:hover,
+.color-btn.active,
+.color-btn[aria-pressed="true"] {
+  color: var(--color-ink);
+  border-bottom-color: rgba(42, 31, 20, 0.42);
+}
+
+/* ════════════════════════════════
+   Accordion Strip Gallery
+   ════════════════════════════════ */
+
+.works-accordion {
+  display: flex;
+  height: 80vh;
+  min-height: 500px;
+  gap: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: var(--space-8, 64px);
+  background: #1a1005;
+}
+
+.accordion-strip {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-strip.active {
+  flex: 6;
+}
+
+.accordion-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              filter  0.55s ease;
+  filter: brightness(0.7);
+}
+.accordion-strip.active .accordion-img {
+  transform: scale(1.03);
+  filter: brightness(0.9);
+}
+
+.accordion-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(30, 21, 8, 0.85) 0%,
+    rgba(30, 21, 8, 0.2)  40%,
+    transparent           100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 24px 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.accordion-strip.active .accordion-overlay {
+  opacity: 1;
+}
+
+.accordion-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateY(10px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+.accordion-strip.active .accordion-label {
+  transform: translateY(0);
+}
+
+.accordion-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  color: rgba(249, 246, 237, 0.95);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.accordion-meta {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: rgba(196, 162, 101, 0.85);
+}
+
+.accordion-index {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(249, 246, 237, 0.25);
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+.accordion-strip.active .accordion-index {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-strip,
+  .accordion-img,
+  .accordion-overlay,
+  .accordion-label {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .works-accordion {
+    flex-direction: column;
+    height: auto;
+  }
+  .accordion-strip        { height: 80px; flex: none; }
+  .accordion-strip.active { height: 320px; }
+  .accordion-overlay      { opacity: 1; }
+  .accordion-title        { font-size: 1rem; }
+}
+
 .gallery-more {
   text-align: center;
   margin-top: 48px;

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../css/style.css?v=20260531" />
+  <link rel="stylesheet" href="../css/style.css?v=20260602" />
 </head>
 <body data-page="works" data-asset-base="..">
 <header class="site-header" id="site-header">
@@ -44,7 +44,7 @@
         <span class="heading-en">WORKS</span>
         <span class="heading-kr">작품</span>
       </h1>
-      <p class="section-desc">전체 작품을 탐색하는 아카이브 페이지입니다. 필터는 작게 두고, 감상은 이미지 중심으로 유지합니다.</p>
+      <p class="section-desc">왕열 작가의 주요 작품을 시리즈별로 탐색합니다.</p>
     </div>
   </div>
 </section>
@@ -53,26 +53,20 @@
   <div class="container">
     <div class="section-intro fade-up">
       <h2 class="section-heading" id="gallery-heading">
-        <span class="heading-en">WORKS ARCHIVE</span>
-        <span class="heading-kr">작품 아카이브</span>
+        <span class="heading-en">WORKS</span>
+        <span class="heading-kr">작품</span>
       </h2>
-      <p class="section-desc">전체 작품을 시리즈별로 탐색하는 아카이브입니다.</p>
     </div>
-    <div class="gallery-filter-wrap fade-up">
+    <div class="gallery-filter-wrap fade-up" id="colorFilter">
       <div class="gallery-filter" role="group" aria-label="갤러리 필터">
-        <button class="filter-btn active" data-filter="all" aria-pressed="true">전체</button>
-        <button class="filter-btn has-sub" data-filter="2jung" aria-pressed="false" aria-expanded="false">2중구조 <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
-        <button class="filter-btn" data-filter="2026" aria-pressed="false">2026해체</button>
-        <button class="filter-btn" data-filter="blue" aria-pressed="false">Blue</button>
-        <button class="filter-btn" data-filter="ink" aria-pressed="false">Ink</button>
-        <button class="filter-btn" data-filter="red" aria-pressed="false">Red</button>
+        <button class="color-btn active" data-filter="all" aria-pressed="true">전체</button>
+        <button class="color-btn" data-filter="gold" aria-pressed="false">2026해체</button>
+        <button class="color-btn" data-filter="ink" aria-pressed="false">Ink</button>
+        <button class="color-btn" data-filter="red" aria-pressed="false">Red</button>
+        <button class="color-btn" data-filter="blue" aria-pressed="false">Blue</button>
       </div>
     </div>
-    <div class="gallery-grid" id="galleryGrid" role="list" aria-label="작품 목록">
-      <div id="gallery-loading" style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#888;font-size:0.9rem;">
-        작품 아카이브를 불러오는 중입니다.
-      </div>
-    </div>
+    <div id="worksGrid"></div>
   </div>
 </section>
 
@@ -87,35 +81,62 @@
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
-  <button class="lightbox-close" id="lightboxClose" aria-label="닫기"><i class="fas fa-times" aria-hidden="true"></i></button>
-  <div class="lightbox-content" id="lightboxContent">
-    <div class="lightbox-stage">
-      <div class="lightbox-placeholder" id="lightboxPlaceholder">
-        <i class="fas fa-image" aria-hidden="true"></i>
-        <p>작품 이미지가 표시됩니다</p>
-      </div>
-      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+<div class="glass-viewer" id="glassViewer" role="dialog" aria-modal="true" aria-label="작품 상세 보기" hidden>
+  <div class="glass-backdrop" id="glassBackdrop"></div>
+  <div class="glass-panel" id="glassPanel">
+    <button class="glass-close" id="glassClose" aria-label="닫기">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <div class="glass-artwork">
+      <img class="glass-img" id="glassImg" src="" alt="">
+      <button class="glass-zoom-btn" id="glassZoomBtn" aria-label="전체화면으로 보기">
+        <i class="fas fa-expand" aria-hidden="true"></i>
+      </button>
     </div>
-    <div class="lightbox-info" id="lightboxInfo">
-      <p class="lightbox-kicker">Wall Label</p>
-      <p class="lightbox-title" id="lightboxTitle"></p>
-      <p class="lightbox-meta" id="lightboxMeta"></p>
-      <p class="lightbox-note" id="lightboxNote"></p>
-      <div class="lightbox-nav" aria-label="작품 이동">
-        <button class="lightbox-nav-link" id="lightboxPrev" type="button">Previous</button>
-        <button class="lightbox-nav-link" id="lightboxNext" type="button">Next</button>
+    <div class="glass-info" id="glassInfo">
+      <p class="glass-kicker">Wang Yeul · 王烈</p>
+      <h2 class="glass-title" id="glassTitle"></h2>
+      <p class="glass-title-kr" id="glassTitleKr"></p>
+      <div class="glass-divider"></div>
+      <div class="glass-meta">
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">연도</span>
+          <span class="glass-meta-val" id="glassYear"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">재료</span>
+          <span class="glass-meta-val" id="glassMedium"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">크기</span>
+          <span class="glass-meta-val" id="glassSize"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">소장</span>
+          <span class="glass-meta-val" id="glassCollection"></span>
+        </div>
+      </div>
+      <p class="glass-note" id="glassNote"></p>
+      <div class="glass-nav" aria-label="작품 이동">
+        <button class="glass-nav-btn" id="glassPrev">← Prev</button>
+        <div class="glass-dots" id="glassDots"></div>
+        <button class="glass-nav-btn" id="glassNext">Next →</button>
       </div>
     </div>
   </div>
+</div>
+
+<div class="zoom-overlay" id="zoomOverlay" hidden>
+  <img class="zoom-img" id="zoomImg" src="" alt="">
+  <button class="zoom-close" id="zoomClose" aria-label="닫기">
+    <i class="fas fa-compress" aria-hidden="true"></i>
+  </button>
 </div>
 
 <button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
   <i class="fas fa-chevron-up" aria-hidden="true"></i>
 </button>
 
-<script src="../js/main.js?v=20260531"></script>
-<script src="../js/nav.js?v=20260602"></script>
-<script src="../js/i18n.js?v=20260530"></script>
+<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
