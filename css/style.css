@@ -1144,6 +1144,136 @@ input, select, textarea { font-family: inherit; }
 }
 
 /* ════════════════════════════════
+   D안 — Asymmetric CSS Grid
+   ════════════════════════════════ */
+
+.works-asym-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 22vw;
+  gap: 8px;
+  margin-bottom: var(--space-8, 64px);
+  padding-bottom: var(--space-4, 16px);
+}
+
+@media (max-width: 1024px) {
+  .works-asym-grid {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 36vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .works-asym-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 52vw;
+  }
+  .asym-card {
+    grid-column: auto !important;
+    grid-row:    auto !important;
+  }
+}
+
+.asym-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f0ead8;
+  animation: asymCardIn 0.6s ease both;
+}
+
+@keyframes asymCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.asym-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+.asym-card:hover .asym-img {
+  transform: scale(1.04);
+}
+
+.asym-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(30, 21, 8, 0.82) 0%,
+    rgba(30, 21, 8, 0.15) 45%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+.asym-card:hover .asym-overlay {
+  opacity: 1;
+}
+
+.asym-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transform: translateY(8px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
+}
+.asym-card:hover .asym-info {
+  transform: translateY(0);
+}
+
+.asym-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(196, 162, 101, 0.7);
+}
+.asym-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(249, 246, 237, 0.95);
+  line-height: 1.2;
+}
+.asym-meta {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  color: rgba(196, 162, 101, 0.8);
+}
+
+.asym-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(196, 162, 101, 0);
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+.asym-card:hover::after {
+  border-color: rgba(196, 162, 101, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asym-card,
+  .asym-img,
+  .asym-overlay,
+  .asym-info { transition: none; animation: none; }
+  .asym-card { opacity: 1 !important; }
+}
+
+/* ════════════════════════════════
    Accordion Strip Gallery
    ════════════════════════════════ */
 
