@@ -1,4 +1,5 @@
 import type { Artwork } from '../types'
+import { gsap, Flip } from './animation'
 
 let currentIndex = 0
 let artworkList: Artwork[] = []
@@ -74,15 +75,14 @@ export function initViewer(artworks: Artwork[]): void {
     currentIndex = Math.max(0, Math.min(idx, artworkList.length - 1))
     const art = artworkList[currentIndex]
 
-    img.style.opacity    = '0'
-    img.style.transition = ''
-    img.onload = () => {
-      img.style.transition = 'opacity 0.3s ease'
-      img.style.opacity    = '1'
-    }
-    img.src = `${base}/${art.imageSrc}`
-    img.alt = `${art.titleEn}`
+    const clickedCard = document.querySelector<HTMLElement>(
+      `[data-artwork-id="${art.id}"]`
+    )
+    const clickedImg = clickedCard?.querySelector<HTMLImageElement>('img')
 
+    // 이미지 정보 채우기
+    img.src = `${base}/${art.imageSrc}`
+    img.alt = `${art.titleEn}, ${art.year}`
     if (title)      title.textContent      = art.titleEn
     if (titleKr)    titleKr.textContent    = art.titleKr
     if (year)       year.textContent       = art.year > 0 ? String(art.year) : ''
@@ -97,12 +97,44 @@ export function initViewer(artworks: Artwork[]): void {
 
     viewer!.removeAttribute('hidden')
     document.body.style.overflow = 'hidden'
+
+    // GSAP Flip — 카드 이미지 → 뷰어 확장
+    if (clickedImg) {
+      const state = Flip.getState(clickedImg)
+      Flip.from(state, {
+        targets: img,
+        duration: 0.65,
+        ease: 'power3.inOut',
+        absolute: true,
+      })
+    } else {
+      gsap.fromTo(img,
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' }
+      )
+    }
+
+    // 패널 등장
+    gsap.fromTo('#glassPanel',
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: 0.1 }
+    )
+
     closeBtn?.focus()
   }
 
   function close(): void {
-    viewer!.setAttribute('hidden', '')
-    document.body.style.overflow = ''
+    gsap.to('#glassPanel', {
+      opacity: 0,
+      y: 10,
+      duration: 0.28,
+      ease: 'power3.in',
+      onComplete: () => {
+        viewer!.setAttribute('hidden', '')
+        document.body.style.overflow = ''
+        gsap.set('#glassPanel', { clearProps: 'all' })
+      }
+    })
   }
 
   viewer.addEventListener('keydown', (e: KeyboardEvent) => {

@@ -68,7 +68,26 @@
 
   /* ── 레이아웃 ── */
   --container-max: 1280px;
-  --container-pad: clamp(var(--space-5), 5vw, var(--space-8));
+  --container-pad: clamp(24px, 5vw, 60px);
+  --grid-gap:      clamp(4px, 0.5vw, 8px);
   --nav-height:    72px;
   --float-nav-bottom: clamp(16px, 3vw, 28px);
+
+  /* ── 타이포그래피 — Pierrick 스타일 이식 ── */
+  --font-weight-thin:   200;
+  --font-weight-light:  300;
+  --letter-spacing-nav: 0.18em;
+  --letter-spacing-title: 0.12em;
+  --letter-spacing-wide:  0.22em;
+
+  /* ── GSAP 애니메이션 기준값 ── */
+  --gsap-duration-fast:   0.3;
+  --gsap-duration-base:   0.6;
+  --gsap-duration-slow:   1.0;
+  --gsap-ease-out:        'power3.out';
+  --gsap-ease-spring:     'elastic.out(1, 0.75)';
+
+  /* ── Dimming ── */
+  --opacity-dimmed:  0.15;
+  --opacity-active:  1;
 }

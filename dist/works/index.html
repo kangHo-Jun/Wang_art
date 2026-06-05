@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>왕열 Wang Yeul — 작품</title>
+  <meta name="description" content="왕열 작가의 전체 작품 아카이브." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <script type="module" crossorigin src="/Wang_art/assets/works-Ch3B4Tz9.js"></script>
+  <link rel="stylesheet" crossorigin href="/Wang_art/assets/works-C5M46NRl.css">
+  <link rel="stylesheet" crossorigin href="/Wang_art/assets/style-7isoxh0K.css">
+</head>
+<body data-page="works" data-asset-base="..">
+<header class="site-header" id="site-header">
+  <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
+    <a href="../" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기/닫기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="navMenu" role="list">
+      <li><a href="../" data-nav-page="home">대표작품</a></li>
+      <li><a href="../works/" data-nav-page="works">작품</a></li>
+      <li><a href="../worlds/" data-nav-page="worlds">작품세계</a></li>
+      <li><a href="../artist/" data-nav-page="artist">작가</a></li>
+      <li><a href="../collections/" data-nav-page="collections">소장처</a></li>
+    </ul>
+    <div class="lang-switcher" role="group" aria-label="언어 선택">
+      <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')" aria-label="한국어">KO</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" aria-label="日本語">JP</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-label="中文">ZH</button>
+    </div>
+  </nav>
+</header>
+
+<section class="section gallery-section" id="gallery" aria-labelledby="gallery-heading">
+  <div class="container">
+    <div class="section-intro fade-up visible">
+      <h1 class="section-heading" id="gallery-heading">
+        <span class="heading-en">WORKS</span>
+        <span class="heading-kr">작품</span>
+      </h1>
+    </div>
+    <div class="gallery-filter-wrap fade-up" id="colorFilter">
+      <div class="gallery-filter" role="group" aria-label="갤러리 필터">
+        <button class="color-btn active" data-filter="all" aria-pressed="true">전체</button>
+        <button class="color-btn" data-filter="gold" aria-pressed="false">2026해체</button>
+        <button class="color-btn" data-filter="ink" aria-pressed="false">Ink</button>
+        <button class="color-btn" data-filter="red" aria-pressed="false">Red</button>
+        <button class="color-btn" data-filter="blue" aria-pressed="false">Blue</button>
+      </div>
+    </div>
+    <div id="worksGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <span class="logo-kr">王烈</span>
+      <span class="logo-en">Wang Yeul</span>
+    </div>
+    <p class="footer-copy">© 2026 Wang Yeul. All rights reserved.</p>
+    <p class="footer-note">현대 한국화가 · 단국대학교 예술대학 동양화과 교수 역임</p>
+  </div>
+</footer>
+
+<div class="glass-viewer" id="glassViewer" role="dialog" aria-modal="true" aria-label="작품 상세 보기" hidden>
+  <div class="glass-backdrop" id="glassBackdrop"></div>
+  <div class="glass-panel" id="glassPanel">
+    <button class="glass-close" id="glassClose" aria-label="닫기">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <div class="glass-artwork">
+      <img class="glass-img" id="glassImg" src="" alt="">
+      <button class="glass-zoom-btn" id="glassZoomBtn" aria-label="전체화면으로 보기">
+        <i class="fas fa-expand" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="glass-info" id="glassInfo">
+      <p class="glass-kicker">Wang Yeul · 王烈</p>
+      <h2 class="glass-title" id="glassTitle"></h2>
+      <p class="glass-title-kr" id="glassTitleKr"></p>
+      <div class="glass-divider"></div>
+      <div class="glass-meta">
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">연도</span>
+          <span class="glass-meta-val" id="glassYear"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">재료</span>
+          <span class="glass-meta-val" id="glassMedium"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">크기</span>
+          <span class="glass-meta-val" id="glassSize"></span>
+        </div>
+        <div class="glass-meta-row">
+          <span class="glass-meta-label">소장</span>
+          <span class="glass-meta-val" id="glassCollection"></span>
+        </div>
+      </div>
+      <p class="glass-note" id="glassNote"></p>
+      <div class="glass-nav" aria-label="작품 이동">
+        <button class="glass-nav-btn" id="glassPrev">← Prev</button>
+        <div class="glass-dots" id="glassDots"></div>
+        <button class="glass-nav-btn" id="glassNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="zoom-overlay" id="zoomOverlay" hidden>
+  <img class="zoom-img" id="zoomImg" src="" alt="">
+  <button class="zoom-close" id="zoomClose" aria-label="닫기">
+    <i class="fas fa-compress" aria-hidden="true"></i>
+  </button>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
+  <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</button>
+
+</body>
+</html>

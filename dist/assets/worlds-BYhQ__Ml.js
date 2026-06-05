@@ -1,0 +1,1 @@
+function e(){console.log(`[worlds] init`)}export{e as initWorlds};

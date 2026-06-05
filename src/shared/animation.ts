@@ -1,48 +1,82 @@
-export function initFadeUp(): void {
-  const els = document.querySelectorAll<HTMLElement>('.fade-up')
-  if (!els.length) return
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Flip } from 'gsap/Flip'
+import Lenis from '@studio-freight/lenis'
 
+gsap.registerPlugin(ScrollTrigger, Flip)
+
+export { gsap, Flip }
+
+// ── Lenis ──────────────────────────────────────────
+let lenisInstance: Lenis | null = null
+
+export function initLenis(): void {
+  lenisInstance = new Lenis({
+    duration: 1.4,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  })
+
+  // Lenis + GSAP ScrollTrigger 연동
+  lenisInstance.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenisInstance?.raf(time * 1000)
+  })
+  gsap.ticker.lagSmoothing(0)
+}
+
+export function getLenis(): Lenis | null {
+  return lenisInstance
+}
+
+// ── GSAP ScrollTrigger fade-up (IntersectionObserver 대체) ──
+export function initFadeUp(): void {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
   if (reduced) {
-    els.forEach(el => {
-      el.style.opacity = '1'
+    document.querySelectorAll<HTMLElement>('.fade-up').forEach(el => {
+      el.style.opacity   = '1'
       el.style.transform = 'none'
     })
     return
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-        observer.unobserve(entry.target)
+  gsap.utils.toArray<HTMLElement>('.fade-up').forEach((el) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 28 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
+        }
       }
-    })
-  }, { threshold: 0.15 })
-
-  els.forEach(el => observer.observe(el))
-}
-
-export function kenBurns(el: HTMLElement, duration = 12000): void {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (reduced) return
-
-  el.style.transition = `transform ${duration}ms ease-out`
-  el.style.transform  = 'scale(1)'
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      el.style.transform = 'scale(1.04)'
-    })
+    )
   })
 }
 
-export function countUp(el: HTMLElement, target: number, duration = 1500): void {
-  const start = performance.now()
-  function step(now: number) {
-    const progress = Math.min((now - start) / duration, 1)
-    const ease = 1 - Math.pow(1 - progress, 3)
-    el.textContent = String(Math.round(ease * target))
-    if (progress < 1) requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
+// ── Ken Burns ──────────────────────────────────────
+export function kenBurns(el: HTMLElement, duration = 12): void {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  gsap.fromTo(el,
+    { scale: 1 },
+    { scale: 1.04, duration, ease: 'none' }
+  )
+}
+
+// ── countUp ───────────────────────────────────────
+export function countUp(el: HTMLElement, target: number, duration = 1.5): void {
+  gsap.to({ val: 0 }, {
+    val: target,
+    duration,
+    ease: 'power2.out',
+    onUpdate() {
+      el.textContent = String(Math.round((this as any).targets()[0].val))
+    }
+  })
 }

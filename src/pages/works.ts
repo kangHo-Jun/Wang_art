@@ -1,3 +1,4 @@
+import { gsap } from 'gsap'
 import { ARTWORKS } from '../data/artworks'
 import { initViewer } from '../shared/viewer'
 import { initFadeUp } from '../shared/animation'
@@ -16,35 +17,38 @@ const FILTER_MAP: Record<string, string> = {
   'blue': 'blue',
 }
 
-// 12컬럼 기준 — [col-start, col-end, row-start, row-end]
 const GRID_PATTERNS = [
-  [1,  6,  1, 3],   // 01 — 대형 좌측
-  [6,  9,  1, 2],   // 02 — 중형 우상
-  [9,  13, 1, 2],   // 03 — 중형 우상
-  [6,  10, 2, 4],   // 04 — 중형 우하
-  [10, 13, 2, 3],   // 05 — 소형
-  [1,  4,  3, 4],   // 06 — 소형 좌하
-  [4,  6,  3, 4],   // 07 — 소형
-  [10, 13, 3, 4],   // 08 — 소형 우하
+  [1,  6,  1, 3],
+  [6,  9,  1, 2],
+  [9,  13, 1, 2],
+  [6,  10, 2, 4],
+  [10, 13, 2, 3],
+  [1,  4,  3, 4],
+  [4,  6,  3, 4],
+  [10, 13, 3, 4],
 ] as const
 
 export function initWorks(): void {
   initFadeUp()
-  const base = (document.body.dataset.assetBase ?? '.').replace(/\/$/, '')
   initViewer(ARTWORKS)
-  renderAsymGrid(ARTWORKS, base)
+  renderAsymGrid(ARTWORKS)
   initColorFilter()
+  initDimming()
 }
 
-function renderAsymGrid(artworks: Artwork[], base: string): void {
+function renderAsymGrid(artworks: Artwork[]): void {
   const grid = document.getElementById('worksGrid')
   if (!grid) return
   grid.innerHTML = ''
   grid.className = 'works-asym-grid'
 
+  const base = (document.body.dataset.assetBase ?? '.').replace(/\/$/, '')
+
   artworks.forEach((art, i) => {
-    const pattern = GRID_PATTERNS[i % GRID_PATTERNS.length]
-    const card    = document.createElement('div')
+    const pattern    = GRID_PATTERNS[i % GRID_PATTERNS.length]
+    const rowOffset  = Math.floor(i / GRID_PATTERNS.length) * 3
+    const card       = document.createElement('div')
+
     card.className = 'asym-card'
     card.setAttribute('role', 'listitem')
     card.setAttribute('tabindex', '0')
@@ -53,22 +57,26 @@ function renderAsymGrid(artworks: Artwork[], base: string): void {
     card.dataset.folder    = folderOf(art)
 
     card.style.gridColumn = `${pattern[0]} / ${pattern[1]}`
-    card.style.gridRow    = `${pattern[2]} / ${pattern[3]}`
-    card.style.animationDelay = `${i * 0.07}s`
+    card.style.gridRow    = `${pattern[2] + rowOffset} / ${pattern[3] + rowOffset}`
 
     card.innerHTML = `
-      <img
-        class="asym-img"
-        src="${base}/${art.imageSrc}"
-        alt="${art.titleEn}, ${art.year}, ${art.mediumKr}, ${art.size}"
-        loading="${i < 4 ? 'eager' : 'lazy'}"
-        decoding="async"
-      />
-      <div class="asym-overlay">
-        <div class="asym-info">
-          <p class="asym-num">${String(i + 1).padStart(2, '0')}</p>
+      <div class="asym-img-wrap">
+        <img
+          class="asym-img"
+          src="${base}/${art.imageSrc}"
+          alt="${art.titleEn}, ${art.year}, ${art.mediumKr}, ${art.size}"
+          loading="${i < 4 ? 'eager' : 'lazy'}"
+          decoding="async"
+        />
+      </div>
+      <div class="asym-card-body">
+        <div class="asym-card-left">
           <p class="asym-title">${art.titleEn}</p>
-          <p class="asym-meta">${art.year} · ${art.size}</p>
+          <p class="asym-title-kr">${art.titleKr}</p>
+        </div>
+        <div class="asym-card-right">
+          <span class="asym-tag">${art.year}</span>
+          <span class="asym-tag">${art.series}</span>
         </div>
       </div>
     `
@@ -79,8 +87,58 @@ function renderAsymGrid(artworks: Artwork[], base: string): void {
 
     grid.appendChild(card)
   })
+
+  // GSAP 카드 스태거 등장
+  gsap.fromTo('.asym-card',
+    { opacity: 0, y: 20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+      stagger: 0.06,
+    }
+  )
 }
 
+// ── Dimming 효과 ──────────────────────────────────
+function initDimming(): void {
+  const grid = document.getElementById('worksGrid')
+  if (!grid) return
+
+  grid.addEventListener('mouseenter', () => {
+    // 그리드 진입 시 전체 dimming 준비
+  })
+
+  grid.addEventListener('mouseleave', () => {
+    // 그리드 이탈 시 전체 복원
+    gsap.to('.asym-card', {
+      opacity: 1,
+      duration: 0.35,
+      ease: 'power2.out',
+    })
+  })
+
+  document.addEventListener('mouseover', (e: MouseEvent) => {
+    const card = (e.target as HTMLElement).closest<HTMLElement>('.asym-card')
+    if (!card) return
+
+    // 나머지 카드 dimming
+    gsap.to('.asym-card', {
+      opacity: 0.15,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
+    // 현재 카드만 선명하게
+    gsap.to(card, {
+      opacity: 1,
+      duration: 0.3,
+      ease: 'power2.out',
+    })
+  })
+}
+
+// ── 색채 필터 ─────────────────────────────────────
 function initColorFilter(): void {
   const filterWrap = document.getElementById('colorFilter')
   if (!filterWrap) return
@@ -97,11 +155,13 @@ function initColorFilter(): void {
     const folder = FILTER_MAP[filter] ?? 'all'
 
     document.querySelectorAll<HTMLElement>('.asym-card').forEach(card => {
-      const cardFolder = card.dataset.folder ?? ''
-      const visible    = folder === 'all' || cardFolder === folder
-      card.style.opacity       = visible ? '1' : '0.12'
-      card.style.pointerEvents = visible ? '' : 'none'
-      card.style.transition    = 'opacity 0.35s ease'
+      const visible = folder === 'all' || card.dataset.folder === folder
+      gsap.to(card, {
+        opacity: visible ? 1 : 0.08,
+        duration: 0.4,
+        ease: 'power2.out',
+        pointerEvents: visible ? 'auto' : 'none',
+      })
     })
   })
 }
