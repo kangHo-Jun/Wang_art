@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>소장처 — 왕열 Wang Yeul</title>
+  <title>작품 — 왕열 Wang Yeul</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet" />
@@ -11,7 +11,7 @@
   <script type="module" crossorigin src="/Wang_art/assets/main-DupxqTwj.js"></script>
   <link rel="stylesheet" crossorigin href="/Wang_art/assets/main-BVQjxzAP.css">
 </head>
-<body data-page="collections">
+<body data-page="artwork">
 
   <div class="g-loading" id="gLoading" aria-label="로딩 중" role="status">
     <p class="g-loading-name">王烈 · Wang Yeul</p>
@@ -55,19 +55,24 @@
     </nav>
   </div>
 
-  <main style="padding-top: 52px;">
-    <section style="padding: 64px var(--pad-page) 96px;">
-      <h1 style="font-family:var(--font-serif);font-weight:var(--fw-light);font-size:var(--text-menu);letter-spacing:var(--ls-menu);line-height:1;margin-bottom:48px;">
-        소장처<br><em style="font-size:0.5em;letter-spacing:var(--ls-label);">Collections</em>
-      </h1>
-      <div class="collections-list" id="collectionsList"></div>
-    </section>
-    <footer class="footer" role="contentinfo">
-      <a href="/Wang_art/" class="footer-link footer-name">왕열 Wang Yeul</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a>
-      <a href="mailto:studio@wangyeul.com" class="footer-link">Email</a>
-      <span class="footer-link" style="margin-left:auto;opacity:0.35">© 2026 Wang Yeul</span>
-    </footer>
+  <main class="artwork-page" id="artworkPage">
+    <div class="artwork-stage" id="artworkStage">
+      <img class="artwork-img" id="artworkImg" src="" alt="" />
+    </div>
+    <div class="artwork-caption" id="artworkCaption">
+      <span class="artwork-num"    id="artworkNum"></span>
+      <span class="artwork-title"  id="artworkTitle"></span>
+      <span class="artwork-title-kr" id="artworkTitleKr"></span>
+      <span class="artwork-meta-item" id="artworkYear"></span>
+      <span class="artwork-meta-item" id="artworkMedium"></span>
+      <span class="artwork-meta-item" id="artworkSize"></span>
+      <span class="artwork-meta-item" id="artworkCollection"></span>
+    </div>
+    <div class="artwork-nav" id="artworkNav">
+      <button class="artwork-nav-btn" id="artworkPrev">← Prev</button>
+      <a class="artwork-nav-btn" href="/Wang_art/works/" style="opacity:0.45">All Works</a>
+      <button class="artwork-nav-btn" id="artworkNext">Next →</button>
+    </div>
   </main>
 
   <div class="custom-cursor" id="customCursor" aria-hidden="true">

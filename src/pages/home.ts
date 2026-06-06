@@ -147,7 +147,15 @@ function renderWall(): void {
 
     item.appendChild(img)
     item.addEventListener('click', () => {
-      window.location.href = `/Wang_art/works/`
+      gsap.to(item, {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          window.location.href = `${base}/artwork/?id=${art.id}`
+        }
+      })
     })
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') item.click()

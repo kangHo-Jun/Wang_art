@@ -13,6 +13,7 @@ export default defineConfig({
         worlds:      resolve(__dirname, 'worlds/index.html'),
         artist:      resolve(__dirname, 'artist/index.html'),
         collections: resolve(__dirname, 'collections/index.html'),
+        artwork:     resolve(__dirname, 'artwork/index.html'),
       }
     }
   },

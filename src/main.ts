@@ -51,6 +51,11 @@ async function route(): Promise<void> {
       initCollections()
       break
     }
+    case 'artwork': {
+      const { initArtwork } = await import('./pages/artwork')
+      initArtwork()
+      break
+    }
   }
 }
 

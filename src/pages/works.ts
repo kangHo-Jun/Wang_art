@@ -45,9 +45,7 @@ function renderWall(artworks: Artwork[]): void {
         duration: 0.3,
         ease: 'power2.in',
         onComplete: () => {
-          // 추후 artwork 상세 페이지로 라우팅
-          console.log('artwork:', art.id)
-          gsap.to(item, { opacity: 1, scale: 1, duration: 0 })
+          window.location.href = `${base}/artwork/?id=${art.id}`
         }
       })
     })
