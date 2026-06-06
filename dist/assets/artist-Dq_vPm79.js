@@ -1,0 +1,1 @@
+import{i as e,t}from"./works-DlmClJgI.js";function n(){t(),r()}function r(){e.fromTo(`.about-archival-block > *`,{opacity:0,y:24},{opacity:1,y:0,duration:.8,ease:`power3.out`,stagger:.12,delay:.3})}export{n as initArtist};

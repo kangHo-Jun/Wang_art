@@ -1,1 +1,0 @@
-function e(){console.log(`[artist] init`)}export{e as initArtist};

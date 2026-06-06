@@ -42,7 +42,7 @@ function renderAsymGrid(artworks: Artwork[]): void {
   grid.innerHTML = ''
   grid.className = 'works-asym-grid'
 
-  const base = (document.body.dataset.assetBase ?? '.').replace(/\/$/, '')
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
   artworks.forEach((art, i) => {
     const pattern    = GRID_PATTERNS[i % GRID_PATTERNS.length]

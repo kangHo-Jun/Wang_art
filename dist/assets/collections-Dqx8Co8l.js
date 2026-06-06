@@ -1,1 +1,0 @@
-function e(){console.log(`[collections] init`)}export{e as initCollections};
