@@ -1,81 +1,81 @@
-import { FEATURED }              from '../data/artworks'
-import { initViewer }            from '../shared/viewer'
+import { FEATURED } from '../data/artworks'
 import { initFadeUp, kenBurns } from '../shared/animation'
+
+const SERIES = [
+  { slug: 'utopia',    label: '유토피아' },
+  { slug: 'ink',       label: '먹과 산수' },
+  { slug: 'acrylic',   label: '아크릴 산수' },
+  { slug: 'landscape', label: '풍경' },
+  { slug: 'horse',     label: '말 시리즈' },
+]
 
 export function initHome(): void {
   initFadeUp()
-  renderFeaturedGrid()
-  initViewer(FEATURED)
   initHeroSlideshow()
+  renderSeries()
+  renderWall()
+  initSubscribe()
 }
 
-function renderFeaturedGrid(): void {
-  const grid = document.getElementById('selectedWorksGrid')
-  if (!grid) return
-
-  const base = (document.body.dataset.assetBase ?? '.').replace(/\/$/, '')
-  grid.innerHTML = ''
-  grid.removeAttribute('aria-busy')
-
-  FEATURED.forEach(art => {
-    const card = document.createElement('article')
-    card.className = 'selected-work-card'
-    card.setAttribute('role', 'listitem')
-    card.dataset.artworkId = art.id
-    card.innerHTML = `
-      <div class="selected-work-media">
-        <img
-          src="${base}/${art.imageSrc}"
-          alt="${art.titleEn}"
-          loading="lazy"
-          decoding="async"
-        >
-      </div>
-      <div class="selected-work-label">
-        <p class="selected-work-title">${art.titleKr}</p>
-        <p class="selected-work-meta">${art.year} · ${art.mediumKr}</p>
-      </div>
-    `
-    grid.appendChild(card)
-  })
-}
-
+// ── 히어로 슬라이드쇼 ──
 function initHeroSlideshow(): void {
-  if (!FEATURED.length) return
+  const container = document.getElementById('mainVisualSlides')
+  const titleEl   = document.getElementById('visualTitle')
+  const metaEl    = document.getElementById('visualMeta')
+  const dotsEl    = document.getElementById('visualDots')
+  if (!container || !FEATURED.length) return
 
-  const base     = (document.body.dataset.assetBase ?? '.').replace(/\/$/, '')
-  const imgEl    = document.getElementById('heroFeatureImage') as HTMLImageElement
-  const titleEl  = document.getElementById('heroTitleEn')
-  const yearEl   = document.getElementById('heroYear')
-  const mediumEl = document.getElementById('heroMedium')
-  const sizeEl   = document.getElementById('heroSize')
-  if (!imgEl) return
-
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   let current = 0
   let timer: ReturnType<typeof setTimeout>
 
-  function goTo(idx: number): void {
-    current = (idx + FEATURED.length) % FEATURED.length
-    const art = FEATURED[current]
+  // 슬라이드 DOM 생성
+  FEATURED.forEach((art, i) => {
+    const slide = document.createElement('div')
+    slide.className = 'main-visual-slide' + (i === 0 ? ' active' : '')
+    slide.dataset.index = String(i)
+    const img = document.createElement('img')
+    img.src     = `${base}/${art.imageSrc}`
+    img.alt     = art.titleEn
+    img.loading = i === 0 ? 'eager' : 'lazy'
+    img.decoding = 'async'
+    slide.appendChild(img)
+    container.appendChild(slide)
+  })
 
-    imgEl.style.opacity = '0'
-    setTimeout(() => {
-      imgEl.src = `${base}/${art.imageSrc}`
-      imgEl.alt = `${art.titleEn}, ${art.year}, ${art.mediumKr}, ${art.size}`
-      if (titleEl)  titleEl.textContent  = art.titleEn
-      if (yearEl)   yearEl.textContent   = String(art.year)
-      if (mediumEl) mediumEl.textContent = art.medium
-      if (sizeEl)   sizeEl.textContent   = art.size
-      imgEl.style.opacity = '1'
-      kenBurns(imgEl)
-      updateDots()
-    }, 600)
+  // dot 생성
+  FEATURED.forEach((_, i) => {
+    const dot = document.createElement('button')
+    dot.className = 'visual-dot' + (i === 0 ? ' active' : '')
+    dot.setAttribute('aria-label', `${i + 1}번 슬라이드`)
+    dot.addEventListener('click', () => { goTo(i); startTimer() })
+    dotsEl?.appendChild(dot)
+  })
+
+  function updateLabel(i: number): void {
+    const art = FEATURED[i]
+    if (titleEl) titleEl.textContent = art.titleEn
+    if (metaEl)  metaEl.textContent  =
+      `${art.year} · ${art.medium} · ${art.size}`
   }
 
-  function updateDots(): void {
-    document.querySelectorAll('.hero-slide-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current)
-    })
+  function goTo(idx: number): void {
+    const slides = container!.querySelectorAll<HTMLElement>('.main-visual-slide')
+    const dots   = dotsEl?.querySelectorAll<HTMLElement>('.visual-dot')
+
+    slides[current]?.classList.remove('active')
+    dots?.[current]?.classList.remove('active')
+
+    current = (idx + FEATURED.length) % FEATURED.length
+
+    slides[current]?.classList.add('active')
+    dots?.[current]?.classList.add('active')
+
+    // Ken Burns 새 슬라이드에 적용
+    const newImg = slides[current]?.querySelector<HTMLImageElement>('img')
+    if (newImg) kenBurns(newImg)
+
+    updateLabel(current)
   }
 
   function startTimer(): void {
@@ -86,10 +86,91 @@ function initHeroSlideshow(): void {
     }, 5000)
   }
 
-  goTo(0)
+  // 초기
+  updateLabel(0)
+  const firstImg = container.querySelector<HTMLImageElement>('img')
+  if (firstImg) kenBurns(firstImg)
   startTimer()
 
-  const hero = document.getElementById('hero')
-  hero?.addEventListener('mouseenter', () => clearTimeout(timer))
-  hero?.addEventListener('mouseleave', startTimer)
+  // hover 정지
+  container.addEventListener('mouseenter', () => clearTimeout(timer))
+  container.addEventListener('mouseleave', startTimer)
+}
+
+// ── 시리즈 섹션 ──
+function renderSeries(): void {
+  const list = document.getElementById('seriesList')
+  if (!list) return
+
+  SERIES.forEach((s, i) => {
+    const item = document.createElement('div')
+    item.className = 'series-item'
+
+    const a = document.createElement('a')
+    a.href      = `/Wang_art/works/?series=${s.slug}`
+    a.textContent = s.label
+
+    item.appendChild(a)
+
+    if (i < SERIES.length - 1) {
+      const sep = document.createElement('span')
+      sep.className   = 'series-separator'
+      sep.textContent = '·'
+      item.appendChild(sep)
+    }
+
+    list.appendChild(item)
+  })
+}
+
+// ── 작품 그리드 (Wall) ──
+function renderWall(): void {
+  const grid = document.getElementById('wallGrid')
+  if (!grid) return
+  grid.innerHTML = ''
+
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+  FEATURED.forEach((art) => {
+    const item = document.createElement('div')
+    item.className = 'wall-item'
+    item.setAttribute('role', 'listitem')
+    item.setAttribute('tabindex', '0')
+    item.setAttribute('aria-label', `${art.titleKr}, ${art.year}`)
+    item.dataset.artworkId = art.id
+
+    const img = document.createElement('img')
+    img.src     = `${base}/${art.imageSrc}`
+    img.alt     = art.titleEn
+    img.loading = 'lazy'
+    img.decoding = 'async'
+
+    item.appendChild(img)
+    item.addEventListener('click', () => {
+      window.location.href = `/Wang_art/works/`
+    })
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') item.click()
+    })
+
+    grid.appendChild(item)
+  })
+}
+
+// ── 뉴스레터 ──
+function initSubscribe(): void {
+  const form  = document.getElementById('subscribeForm')
+  const input = document.getElementById('subscribeEmail') as HTMLInputElement
+  const msg   = document.getElementById('subscribeMsg')
+  if (!form || !input || !msg) return
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    if (!input.value || !input.value.includes('@')) {
+      msg.textContent = '올바른 이메일 주소를 입력해주세요.'
+      return
+    }
+    msg.textContent = '구독해 주셔서 감사합니다.'
+    input.value = ''
+  })
 }

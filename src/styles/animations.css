@@ -1,0 +1,149 @@
+/* ── GSAP 초기값 ── */
+.gsap-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* ── 로딩 인트로 ── */
+.g-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.g-loading.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.g-loading-name {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink);
+}
+.g-loading-ring-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.g-loading-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  animation: spinRing 1.4s linear infinite;
+}
+@keyframes spinRing {
+  to { transform: rotate(270deg); }
+}
+.g-ring-track {
+  fill: none;
+  stroke: var(--color-ink-faint);
+  stroke-width: 1.5;
+}
+.g-ring-fill {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 251.2;
+  stroke-dashoffset: 251.2;
+}
+.g-loading-pct {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-label);
+  color: var(--color-ink-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 커스텀 커서 ── */
+body.hide-cursor,
+body.hide-cursor * { cursor: none !important; }
+
+.custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0;
+  scale: 0.4;
+  transition: opacity var(--dur-fast) ease, scale var(--dur-fast) ease;
+  will-change: transform;
+}
+.custom-cursor.visible { opacity: 1; scale: 1; }
+.custom-cursor.pressed { scale: 0.82; }
+.custom-cursor-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: 0.58rem;
+  letter-spacing: var(--ls-label);
+  color: var(--color-bg-dark);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* ── 플로팅 네비 ── */
+.g-float-nav {
+  position: fixed;
+  bottom: clamp(16px, 3vw, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  background: rgba(30, 21, 8, 0.78);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(196,162,101,0.18);
+  border-radius: 999px;
+  padding: 10px 22px;
+  gap: 0;
+  transition: transform 0.35s var(--ease-out),
+              opacity   0.35s var(--ease-out);
+  white-space: nowrap;
+}
+.g-float-nav.hidden {
+  transform: translateX(-50%) translateY(calc(100% + 20px));
+  opacity: 0;
+  pointer-events: none;
+}
+.g-float-link {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-nav);
+  color: rgba(249,246,237,0.5);
+  padding: 4px 10px;
+  transition: color var(--dur-fast) ease;
+}
+.g-float-link:hover,
+.g-float-link.active { color: var(--color-gold); }
+.g-float-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(249,246,237,0.1);
+  flex-shrink: 0;
+}

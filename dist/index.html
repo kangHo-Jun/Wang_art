@@ -2,281 +2,106 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>왕열 Wang Yeul — 대표작품</title>
-  <meta name="description" content="왕열 작가의 대표작품을 중심으로 구성한 온라인 도록형 메인 페이지." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>왕열 Wang Yeul</title>
+  <meta name="description" content="왕열 작가의 공식 웹사이트. 대표작품과 작품세계를 감상합니다." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" crossorigin href="/Wang_art/assets/style-rHN0h5UF.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/Wang_art/assets/main-CNu-v61T.js"></script>
+  <link rel="stylesheet" crossorigin href="/Wang_art/assets/main-BVQjxzAP.css">
 </head>
-<body data-page="home" data-asset-base=".">
-<div class="g-loading" id="gLoading" aria-label="로딩 중" role="status">
-  <p class="g-loading-name">王烈 · Wang Yeul</p>
-  <div class="g-loading-ring-wrap">
-    <svg class="g-loading-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle class="g-ring-track" cx="50" cy="50" r="40"/>
-      <circle class="g-ring-fill" id="gRingFill" cx="50" cy="50" r="40"/>
-    </svg>
-    <span class="g-loading-pct" id="gLoadingPct">0%</span>
+<body data-page="home">
+
+  <!-- 로딩 인트로 -->
+  <div class="g-loading" id="gLoading" aria-label="로딩 중" role="status">
+    <p class="g-loading-name">王烈 · Wang Yeul</p>
+    <div class="g-loading-ring-wrap">
+      <svg class="g-loading-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle class="g-ring-track" cx="50" cy="50" r="40"/>
+        <circle class="g-ring-fill" id="gRingFill" cx="50" cy="50" r="40"/>
+      </svg>
+      <span class="g-loading-pct" id="gLoadingPct">0%</span>
+    </div>
   </div>
-</div>
-<header class="site-header" id="site-header">
-  <nav class="nav-container" role="navigation" aria-label="메인 내비게이션">
-    <a href="./" class="nav-logo" aria-label="왕열 Wang Yeul 홈으로">
-      <span class="logo-kr">王烈</span>
+
+  <!-- 네비바 -->
+  <header class="navbar" id="navbar">
+    <a href="/Wang_art/" class="navbar-logo" aria-label="왕열 Wang Yeul 홈">
+      <span class="logo-cn">王烈</span>
       <span class="logo-en">Wang Yeul</span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기/닫기" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="navbar-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+        <line x1="0" y1="1"  x2="20" y2="1"  stroke="currentColor" stroke-width="1.2"/>
+        <line x1="0" y1="7"  x2="20" y2="7"  stroke="currentColor" stroke-width="1.2"/>
+        <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
     </button>
-    <ul class="nav-menu" id="navMenu" role="list">
-      <li><a href="./" data-nav-page="home">대표작품</a></li>
-      <li><a href="./works/" data-nav-page="works">작품</a></li>
-      <li><a href="./worlds/" data-nav-page="worlds">작품세계</a></li>
-      <li><a href="./artist/" data-nav-page="artist">작가</a></li>
-      <li><a href="./collections/" data-nav-page="collections">소장처</a></li>
-    </ul>
-    <div class="lang-switcher" role="group" aria-label="언어 선택">
-      <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')" aria-label="한국어">KO</button>
-      <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
-      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" aria-label="日本語">JP</button>
-      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-label="中文">ZH</button>
-    </div>
-  </nav>
-</header>
+  </header>
 
-<section class="hero" id="hero" aria-label="대표작품 히어로">
-  <div class="hero-art-frame" id="heroArtFrame">
-    <div class="hero-slides" id="heroSlides">
-      <div class="hero-slide is-active" data-slide="0">
-        <div class="hero-media-motion" id="heroMediaMotion">
-          <picture>
-            <source
-              type="image/webp"
-              srcset="/Wang_art/assets/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-800w-Ca1ckM_e.webp 800w, /Wang_art/assets/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-1200w-CjtdpoKK.webp 1200w, /Wang_art/assets/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-rC1HaHLr.webp 1920w"
-              sizes="100vw"
-            />
-            <img
-              class="hero-feature-image"
-              id="heroFeatureImage"
-              src="/Wang_art/assets/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm-OEY4vjvi.jpg"
-              alt="Utopia Meditation"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-              width="1920"
-              height="957"
-            />
-          </picture>
-        </div>
+  <!-- 메뉴 오버레이 -->
+  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="내비게이션 메뉴">
+    <nav class="menu-main" aria-label="주요 메뉴">
+      <a href="/Wang_art/"             data-nav="home">대표작품</a>
+      <a href="/Wang_art/works/"       data-nav="works">작품</a>
+      <a href="/Wang_art/worlds/"      data-nav="worlds">작품세계</a>
+      <a href="/Wang_art/artist/"      data-nav="artist">작가</a>
+      <a href="/Wang_art/collections/" data-nav="collections">소장처</a>
+    </nav>
+    <div class="menu-spacer"></div>
+    <nav class="menu-sub" aria-label="언어 선택">
+      <button class="lang-btn active" data-lang="ko">한국어</button>
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="ja">日本語</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+    </nav>
+  </div>
+
+  <!-- 메인 비주얼 -->
+  <main>
+    <section class="main-visual-wrapper" id="mainVisual" aria-label="대표 작품">
+      <div class="main-visual-slides" id="mainVisualSlides"></div>
+      <div class="visual-label" id="visualLabel">
+        <p class="visual-label-title" id="visualTitle"></p>
+        <p class="visual-label-meta" id="visualMeta"></p>
       </div>
-    </div>
-  </div>
-  <div class="hero-content hero-label fade-up">
-    <div class="hero-label-inner">
-      <p class="hero-label-kicker" id="heroEyebrow">WANGYEUL</p>
-      <p class="hero-label-name">왕열</p>
-      <h1 class="hero-label-title" id="heroTitleEn">Utopia Meditation</h1>
-      <div class="hero-label-meta">
-        <p class="hero-label-line" id="heroYear">2025</p>
-        <p class="hero-label-line" id="heroMedium">Acrylic on canvas</p>
-        <p class="hero-label-line" id="heroSize">280 × 140 cm</p>
-      </div>
-      <a href="#works" class="hero-link hero-label-link" id="heroLink">Selected Works</a>
-    </div>
-  </div>
-  <nav class="hero-dots" id="heroDots" aria-label="슬라이드 이동" role="group"></nav>
-  <div class="hero-scroll-hint fade-up delay-1" aria-label="스크롤 안내">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
+      <div class="visual-dots" id="visualDots" aria-label="슬라이드 인디케이터"></div>
+    </section>
 
-<section class="section featured-section" id="works" aria-labelledby="works-heading">
-  <div class="container">
-    <div class="section-intro fade-up visible featured-intro">
-      <h2 class="section-heading" id="works-heading">
-        <span class="heading-en">SELECTED WORKS</span>
-        <span class="heading-kr">대표작품</span>
-      </h2>
-      <p class="section-desc">대표작 12점을 통해 왕열의 화면과 리듬을 먼저 감상합니다.</p>
-    </div>
-    <div class="selected-works-grid" id="selectedWorksGrid" role="list" aria-label="대표작품 목록" aria-busy="true">
-      <article class="selected-work-card" aria-hidden="true">
-        <div class="wy-skeleton skeleton-img-area"></div>
-        <div class="selected-work-label">
-          <div class="wy-skeleton skeleton-label-line"></div>
-          <div class="wy-skeleton skeleton-meta-line"></div>
-        </div>
-      </article>
-      <article class="selected-work-card" aria-hidden="true">
-        <div class="wy-skeleton skeleton-img-area"></div>
-        <div class="selected-work-label">
-          <div class="wy-skeleton skeleton-label-line"></div>
-          <div class="wy-skeleton skeleton-meta-line"></div>
-        </div>
-      </article>
-      <article class="selected-work-card" aria-hidden="true">
-        <div class="wy-skeleton skeleton-img-area"></div>
-        <div class="selected-work-label">
-          <div class="wy-skeleton skeleton-label-line"></div>
-          <div class="wy-skeleton skeleton-meta-line"></div>
-        </div>
-      </article>
-      <article class="selected-work-card" aria-hidden="true">
-        <div class="wy-skeleton skeleton-img-area"></div>
-        <div class="selected-work-label">
-          <div class="wy-skeleton skeleton-label-line"></div>
-          <div class="wy-skeleton skeleton-meta-line"></div>
-        </div>
-      </article>
-    </div>
+    <!-- 시리즈 섹션 -->
+    <section class="series" id="seriesSection" aria-label="시리즈">
+      <span class="series-label">Series /</span>
+      <div class="series-list" id="seriesList"></div>
+    </section>
+
+    <!-- 작품 그리드 -->
+    <section class="wall" id="wallGrid" role="list" aria-label="작품 목록"></section>
+
+    <!-- 뉴스레터 -->
+    <section class="subscribe" aria-label="뉴스레터 구독">
+      <p class="subscribe-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</p>
+      <p class="subscribe-sub" data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
+      <form class="subscribe-form" id="subscribeForm" novalidate>
+        <input class="subscribe-input" id="subscribeEmail" type="email" placeholder="이메일 주소" aria-label="이메일 주소" />
+        <button class="subscribe-btn" type="submit" data-i18n="subscribe.btn">구독</button>
+      </form>
+      <p class="subscribe-msg" id="subscribeMsg" aria-live="polite"></p>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer" role="contentinfo">
+      <a href="/Wang_art/" class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+      <a href="mailto:studio@wangyeul.com" class="footer-link">Email</a>
+      <span class="footer-link" style="margin-left:auto;opacity:0.35">© 2026 Wang Yeul</span>
+    </footer>
+  </main>
+
+  <!-- 커스텀 커서 -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true">
+    <span class="custom-cursor-label">VIEW</span>
   </div>
-</section>
 
-<section class="section worlds-section" id="worlds" aria-labelledby="worlds-heading">
-  <div class="container">
-    <div class="section-intro fade-up visible worlds-intro">
-      <h2 class="section-heading" id="worlds-heading">
-        <span class="heading-en">WORK WORLDS</span>
-        <span class="heading-kr">작품세계</span>
-      </h2>
-      <p class="section-desc">세 개의 축으로 압축한 작품세계를 통해 화면의 정서와 구조를 읽습니다.</p>
-    </div>
-    <div class="worlds-list" id="worldsGrid" aria-label="작품세계 미리보기" aria-busy="true">
-      <article class="world-item" aria-hidden="true">
-        <div class="world-art">
-          <figure class="world-primary">
-            <div class="wy-skeleton skeleton-world-img"></div>
-          </figure>
-          <figure class="world-secondary">
-            <div class="wy-skeleton skeleton-world-thumb"></div>
-          </figure>
-        </div>
-        <div class="world-copy">
-          <div class="wy-skeleton skeleton-world-kicker"></div>
-          <div class="wy-skeleton skeleton-world-title"></div>
-          <div class="wy-skeleton skeleton-world-text"></div>
-          <div class="wy-skeleton skeleton-world-text skeleton-world-text-s"></div>
-        </div>
-      </article>
-    </div>
-    <div class="gallery-more fade-up">
-      <a class="hero-link" href="./worlds/">작품세계 전체 보기</a>
-    </div>
-  </div>
-</section>
-
-<section class="section about-section about-section-archival" aria-labelledby="home-artist-heading">
-  <div class="container about-archival-grid">
-    <div class="section-intro section-intro-left fade-up visible">
-      <h2 class="section-heading" id="home-artist-heading">
-        <span class="heading-en">ARTIST</span>
-        <span class="heading-kr">작가</span>
-      </h2>
-      <p class="section-desc">작품 감상 뒤에 읽는 짧은 작가 소개입니다.</p>
-    </div>
-    <div class="about-archival-body">
-      <div class="about-archival-block fade-up visible">
-        <p class="about-archival-name">왕열 <span>王烈</span></p>
-        <p class="about-archival-meta">Wang Yeul · b. 1961</p>
-        <p class="about-archival-text">
-          전통 한국화의 정신성과 현대적 조형 언어를 결합해, 유토피아와 신무릉도원, 먹과 산수의 화면을 지속적으로 구축해 왔다.
-        </p>
-        <a class="hero-link" href="./artist/">작가 페이지 보기</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section collections-section" aria-labelledby="home-collections-heading">
-  <div class="container">
-    <div class="section-intro fade-up">
-      <h2 class="section-heading" id="home-collections-heading">
-        <span class="heading-en">COLLECTIONS</span>
-        <span class="heading-kr">소장처</span>
-      </h2>
-      <p class="section-desc">국내외 주요 기관 소장 기록과 문의 창구를 확인할 수 있습니다.</p>
-    </div>
-    <div class="collections-grid">
-      <div class="collection-item fade-up"><p>국립현대미술관</p></div>
-      <div class="collection-item fade-up delay-1"><p>경기도미술관</p></div>
-      <div class="collection-item fade-up delay-2"><p>대전시립미술관</p></div>
-      <div class="collection-item fade-up delay-3"><p>미술은행</p></div>
-      <div class="collection-item fade-up delay-4"><p>성남아트센터</p></div>
-      <div class="collection-item fade-up delay-5"><p>홍익대학교 현대미술관</p></div>
-    </div>
-    <div class="gallery-more fade-up">
-      <a class="hero-link" href="./collections/">소장처와 문의 보기</a>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-inner">
-    <div class="footer-logo">
-      <span class="logo-kr">王烈</span>
-      <span class="logo-en">Wang Yeul</span>
-    </div>
-    <p class="footer-copy">© 2026 Wang Yeul. All rights reserved.</p>
-    <p class="footer-note">현대 한국화가 · 단국대학교 예술대학 동양화과 교수 역임</p>
-  </div>
-</footer>
-
-<div class="glass-viewer" id="glassViewer" role="dialog" aria-modal="true" aria-label="작품 상세 보기" hidden>
-  <div class="glass-backdrop" id="glassBackdrop"></div>
-  <div class="glass-panel" id="glassPanel">
-    <button class="glass-close" id="glassClose" aria-label="닫기">
-      <i class="fas fa-times" aria-hidden="true"></i>
-    </button>
-    <div class="glass-artwork">
-      <img class="glass-img" id="glassImg" src="" alt="">
-    </div>
-    <div class="glass-info">
-      <p class="glass-kicker">Wang Yeul · 王烈</p>
-      <h2 class="glass-title" id="glassTitle"></h2>
-      <p class="glass-title-kr" id="glassTitleKr"></p>
-      <div class="glass-divider"></div>
-      <div class="glass-meta">
-        <div class="glass-meta-row">
-          <span class="glass-meta-label">연도</span>
-          <span class="glass-meta-val" id="glassYear"></span>
-        </div>
-        <div class="glass-meta-row">
-          <span class="glass-meta-label">재료</span>
-          <span class="glass-meta-val" id="glassMedium"></span>
-        </div>
-        <div class="glass-meta-row">
-          <span class="glass-meta-label">크기</span>
-          <span class="glass-meta-val" id="glassSize"></span>
-        </div>
-        <div class="glass-meta-row">
-          <span class="glass-meta-label">소장</span>
-          <span class="glass-meta-val" id="glassCollection"></span>
-        </div>
-      </div>
-      <p class="glass-note" id="glassNote"></p>
-      <div class="glass-nav">
-        <button class="glass-nav-btn" id="glassPrev">
-          <i class="fas fa-arrow-left" aria-hidden="true"></i> Prev
-        </button>
-        <div class="glass-dots" id="glassDots"></div>
-        <button class="glass-nav-btn" id="glassNext">
-          Next <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<button class="scroll-top" id="scrollTop" aria-label="맨 위로 이동">
-  <i class="fas fa-chevron-up" aria-hidden="true"></i>
-</button>
-
-<script src="js/main.js?v=20260602"></script>
-<script src="js/nav.js?v=20260602"></script>
-<script src="js/i18n.js?v=20260530"></script>
 </body>
 </html>

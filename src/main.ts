@@ -3,13 +3,24 @@ import { initFloatNav } from './shared/nav'
 import { initI18n }     from './shared/i18n-engine'
 import { initLenis }    from './shared/animation'
 import { initCursor }   from './shared/cursor'
+import { initMenuOverlay } from './shared/menuOverlay'
+import { initHeader }      from './shared/header'
+import './styles/reset.css'
 import './styles/design-system.css'
+import './styles/navbar.css'
+import './styles/hero.css'
+import './styles/wall.css'
+import './styles/artwork.css'
+import './styles/footer.css'
+import './styles/animations.css'
 
 const page = document.body.dataset.page
 
 initLoading()
 initFloatNav()
 initI18n()
+initMenuOverlay()
+initHeader()
 initLenis()
 initCursor()
 

@@ -1,0 +1,114 @@
+/* ── 네비바 ── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad-page);
+  transition: transform var(--dur-base) var(--ease-out),
+              opacity   var(--dur-base) var(--ease-out);
+}
+.navbar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: var(--text-base);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink);
+}
+.navbar-logo .logo-cn {
+  font-size: 1.1em;
+}
+
+.navbar-hamburger {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 201;
+}
+.navbar-hamburger img,
+.navbar-hamburger svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── 메뉴 오버레이 ── */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--color-bg-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--pad-page);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+.menu-main a {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-thin);
+  font-size: var(--text-menu);
+  letter-spacing: var(--ls-menu);
+  color: var(--color-cream);
+  line-height: 1.1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.25s ease, color 0.2s ease;
+}
+.menu-overlay.open .menu-main a {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-main a:hover { color: var(--color-gold); }
+
+.menu-spacer {
+  width: 100%;
+  height: 1px;
+  background: rgba(249,246,237,0.1);
+  margin-bottom: 24px;
+}
+
+.menu-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.menu-sub a {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-sm);
+  letter-spacing: var(--ls-label);
+  color: var(--color-cream-muted);
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+.menu-sub a:hover { color: var(--color-cream); }

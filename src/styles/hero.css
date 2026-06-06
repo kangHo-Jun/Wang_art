@@ -1,0 +1,71 @@
+/* ── 메인 비주얼 ── */
+.main-visual-wrapper {
+  position: relative;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-bg-dark);
+}
+
+.main-visual-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-inout);
+}
+.main-visual-slide.active { opacity: 1; }
+
+.main-visual-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+}
+
+/* 하단 라벨 */
+.visual-label {
+  position: absolute;
+  bottom: 32px;
+  left: var(--pad-page);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+.visual-label-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: var(--text-hero);
+  letter-spacing: var(--ls-title);
+  color: var(--color-cream);
+  line-height: 1.1;
+}
+.visual-label-meta {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-label);
+  color: var(--color-cream-muted);
+  text-transform: uppercase;
+}
+
+/* dot 인디케이터 */
+.visual-dots {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+.visual-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(249,246,237,0.3);
+  cursor: pointer;
+  transition: background var(--dur-fast) ease;
+}
+.visual-dot.active { background: var(--color-gold); }

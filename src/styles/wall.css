@@ -1,0 +1,96 @@
+/* ── 시리즈 섹션 ── */
+.series {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 20px var(--pad-page);
+  border-top: 0.5px solid var(--color-ink-faint);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.series::-webkit-scrollbar { display: none; }
+
+.series-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-label);
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-right: 28px;
+}
+
+.series-list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.series-item {
+  display: flex;
+  align-items: center;
+}
+.series-item a {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: var(--text-base);
+  letter-spacing: var(--ls-title);
+  color: var(--color-ink);
+  padding: 0 16px;
+  transition: opacity var(--dur-fast) ease;
+}
+.series-item a:hover { opacity: 0.45; }
+.series-separator {
+  color: var(--color-ink-faint);
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+/* ── 작품 그리드 (Masonry) ── */
+.wall {
+  columns: 3;
+  column-gap: var(--gap-grid);
+  padding: var(--gap-grid) var(--pad-page) 96px;
+}
+
+.wall-item {
+  break-inside: avoid;
+  margin-bottom: var(--gap-grid);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 비대칭 배치 — Pierrick 핵심 */
+.wall-item:nth-child(3n+2) { margin-top: 40px; }
+.wall-item:nth-child(3n+3) { margin-top: 80px; }
+
+.wall-item img {
+  width: 100%;
+  display: block;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+/* hover dimming */
+.wall:hover .wall-item img          { opacity: 0.4; }
+.wall:hover .wall-item:hover img    { opacity: 1; }
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .wall { columns: 2; }
+  .wall-item:nth-child(3n+2),
+  .wall-item:nth-child(3n+3) { margin-top: 0; }
+  .wall-item:nth-child(2n+2) { margin-top: 24px; }
+}
+@media (max-width: 480px) {
+  .wall { columns: 1; }
+  .wall-item:nth-child(n) { margin-top: 0; }
+}
+
+/* 터치 환경 hover dimming 비활성화 */
+@media (pointer: coarse) {
+  .wall:hover .wall-item img       { opacity: 1; }
+  .wall-item:active img            { opacity: 0.85; }
+}

@@ -1,0 +1,81 @@
+/* ── 작품 상세 페이지 ── */
+.artwork-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 52px;
+}
+
+.artwork-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px var(--pad-page);
+}
+
+.artwork-stage img {
+  max-width: 100%;
+  max-height: calc(100svh - 52px - 120px);
+  object-fit: contain;
+  display: block;
+}
+
+.artwork-caption {
+  padding: 24px var(--pad-page) 16px;
+  border-top: 0.5px solid var(--color-ink-faint);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.artwork-num {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-micro);
+  color: var(--color-gold);
+}
+.artwork-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-size: var(--text-lg);
+  letter-spacing: var(--ls-title);
+  color: var(--color-ink);
+}
+.artwork-title-kr {
+  font-family: var(--font-serif-kr);
+  font-weight: var(--fw-light);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+.artwork-meta-item {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-label);
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+}
+
+.artwork-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px var(--pad-page) 32px;
+}
+.artwork-nav-btn {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-label);
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--dur-fast) ease;
+}
+.artwork-nav-btn:hover { color: var(--color-ink); }
+.artwork-nav-btn:disabled { opacity: 0.2; pointer-events: none; }

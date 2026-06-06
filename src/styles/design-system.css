@@ -1,93 +1,69 @@
-/* ════════════════════════════════════════════
-   왕열 Wang Yeul — Design System
+/* ═══════════════════════════════════════════
+   왕열 Wang Yeul — Design System v2.1
+   Pierrick Calvez 구조 이식
    여기만 수정하면 전체 사이트 느낌 즉시 변경
-   ════════════════════════════════════════════ */
+   ═══════════════════════════════════════════ */
 
 :root {
-  /* ── 색상 토큰 ── */
-  --color-ink:        #1e1508;   /* 먹색 — 주 배경/텍스트 */
-  --color-ink-deep:   #120e04;   /* 짙은 먹색 */
-  --color-ink-soft:   #2a1f14;   /* 부드러운 먹색 */
-  --color-gold:       #c4a265;   /* 금빛 — 포인트 */
-  --color-gold-light: #d4b87a;   /* 밝은 금빛 */
-  --color-cream:      #f9f6ed;   /* 크림 — 주 배경 */
-  --color-cream-dark: #f0ead8;   /* 짙은 크림 */
-  --color-red:        #c8523a;   /* 붉은 산수 */
-  --color-blue:       #2e6db5;   /* 코발트 블루 */
+  /* ── 색상 ── */
+  --color-bg:          #f7f4ee;
+  --color-bg-dark:     #1e1508;
+  --color-ink:         #1a1208;
+  --color-ink-muted:   rgba(26,18,8,0.5);
+  --color-ink-faint:   rgba(26,18,8,0.12);
+  --color-cream:       rgba(249,246,237,0.92);
+  --color-cream-muted: rgba(249,246,237,0.45);
+  --color-gold:        #c4a265;
+  --color-gold-faint:  rgba(196,162,101,0.15);
+  --color-red:         #c8523a;
+  --color-blue:        #2e6db5;
 
-  /* ── 타이포그래피 ── */
-  --font-serif-en:  'Cormorant Garamond', Georgia, serif;
-  --font-serif-kr:  'Noto Serif KR', serif;
-  --font-sans-kr:   'Noto Sans KR', sans-serif;
+  /* ── 폰트 패밀리 ── */
+  --font-serif:    'Cormorant Garamond', Georgia, serif;
+  --font-serif-kr: 'Noto Serif KR', serif;
+  --font-sans:     'Noto Sans KR', sans-serif;
 
-  /* ── 폰트 스케일 (fluid) ── */
-  --text-xs:   clamp(0.65rem, 0.8vw, 0.75rem);
-  --text-sm:   clamp(0.75rem, 1vw,   0.875rem);
-  --text-base: clamp(0.875rem, 1.2vw, 1rem);
-  --text-md:   clamp(1rem,    1.5vw,  1.25rem);
-  --text-lg:   clamp(1.25rem, 2vw,    1.75rem);
-  --text-xl:   clamp(1.75rem, 3vw,    2.5rem);
-  --text-2xl:  clamp(2.5rem,  5vw,    4rem);
-  --text-hero: clamp(3rem,    8vw,    7rem);
+  /* ── 폰트 웨이트 (Pierrick: 극도로 얇게) ── */
+  --fw-thin:    200;
+  --fw-light:   300;
+  --fw-regular: 400;
 
-  /* ── 간격 ── */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  24px;
-  --space-6:  32px;
-  --space-7:  48px;
-  --space-8:  64px;
-  --space-9:  96px;
-  --space-10: 128px;
+  /* ── 자간 (영문 기준) ── */
+  --ls-menu:  0.06em;
+  --ls-title: 0.12em;
+  --ls-nav:   0.18em;
+  --ls-label: 0.22em;
+  --ls-micro: 0.28em;
 
-  /* ── 반경 ── */
-  --radius-sm:  4px;
-  --radius-md:  8px;
-  --radius-lg:  16px;
-  --radius-xl:  24px;
-  --radius-pill: 999px;
+  /* ── 폰트 스케일 ── */
+  --text-menu:  clamp(2.2rem, 5vw,  4.5rem);
+  --text-hero:  clamp(1rem,   1.6vw, 1.4rem);
+  --text-lg:    clamp(1rem,   1.4vw, 1.3rem);
+  --text-base:  clamp(0.85rem,1vw,   1rem);
+  --text-sm:    clamp(0.72rem,0.8vw, 0.82rem);
+  --text-xs:    clamp(0.62rem,0.7vw, 0.72rem);
 
-  /* ── 전환 ── */
-  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast:   0.2s;
-  --duration-base:   0.35s;
-  --duration-slow:   0.6s;
-  --duration-loader: 1.4s;
+  /* ── 여백 ── */
+  --pad-page:  clamp(20px, 4vw, 60px);
+  --gap-grid:  4px;
 
-  /* ── Glass ── */
-  --glass-bg:     rgba(249, 246, 237, 0.10);
-  --glass-border: rgba(249, 246, 237, 0.16);
-  --glass-blur:   blur(32px) saturate(140%);
+  /* ── 모션 ── */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   0.25s;
+  --dur-base:   0.45s;
+  --dur-slow:   0.7s;
+}
 
-  --glass-dark-bg:     rgba(30, 21, 8, 0.75);
-  --glass-dark-border: rgba(196, 162, 101, 0.18);
-  --glass-dark-blur:   blur(12px) saturate(140%);
+/* ── 다국어 자간 예외 처리 ── */
+:lang(ko) { letter-spacing: 0.02em; }
+:lang(ja) { letter-spacing: 0.02em; }
+:lang(zh) { letter-spacing: 0; }
 
-  /* ── 레이아웃 ── */
-  --container-max: 1280px;
-  --container-pad: clamp(24px, 5vw, 60px);
-  --grid-gap:      clamp(4px, 0.5vw, 8px);
-  --nav-height:    72px;
-  --float-nav-bottom: clamp(16px, 3vw, 28px);
-
-  /* ── 타이포그래피 — Pierrick 스타일 이식 ── */
-  --font-weight-thin:   200;
-  --font-weight-light:  300;
-  --letter-spacing-nav: 0.18em;
-  --letter-spacing-title: 0.12em;
-  --letter-spacing-wide:  0.22em;
-
-  /* ── GSAP 애니메이션 기준값 ── */
-  --gsap-duration-fast:   0.3;
-  --gsap-duration-base:   0.6;
-  --gsap-duration-slow:   1.0;
-  --gsap-ease-out:        'power3.out';
-  --gsap-ease-spring:     'elastic.out(1, 0.75)';
-
-  /* ── Dimming ── */
-  --opacity-dimmed:  0.15;
-  --opacity-active:  1;
+/* ── 모바일 토큰 ── */
+@media (pointer: coarse) {
+  :root {
+    --pad-page: clamp(16px, 4vw, 24px);
+    --gap-grid: 2px;
+  }
 }

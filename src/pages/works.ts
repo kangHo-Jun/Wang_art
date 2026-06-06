@@ -1,6 +1,5 @@
-import { gsap } from 'gsap'
-import { ARTWORKS } from '../data/artworks'
-import { initViewer } from '../shared/viewer'
+import { gsap }      from 'gsap'
+import { ARTWORKS }  from '../data/artworks'
 import { initFadeUp } from '../shared/animation'
 import type { Artwork } from '../types'
 
@@ -9,159 +8,66 @@ function folderOf(art: Artwork): string {
   return parts[parts.length - 2] ?? ''
 }
 
-const FILTER_MAP: Record<string, string> = {
-  'all':  'all',
-  'ink':  'ink',
-  'gold': '2026',
-  'red':  'red',
-  'blue': 'blue',
-}
-
-const GRID_PATTERNS = [
-  [1,  6,  1, 3],
-  [6,  9,  1, 2],
-  [9,  13, 1, 2],
-  [6,  10, 2, 4],
-  [10, 13, 2, 3],
-  [1,  4,  3, 4],
-  [4,  6,  3, 4],
-  [10, 13, 3, 4],
-] as const
-
 export function initWorks(): void {
   initFadeUp()
-  initViewer(ARTWORKS)
-  renderAsymGrid(ARTWORKS)
-  initColorFilter()
-  initDimming()
+  renderWall(ARTWORKS)
 }
 
-function renderAsymGrid(artworks: Artwork[]): void {
-  const grid = document.getElementById('worksGrid')
+function renderWall(artworks: Artwork[]): void {
+  const grid = document.getElementById('wallGrid')
   if (!grid) return
   grid.innerHTML = ''
-  grid.className = 'works-asym-grid'
 
   const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
-  artworks.forEach((art, i) => {
-    const pattern    = GRID_PATTERNS[i % GRID_PATTERNS.length]
-    const rowOffset  = Math.floor(i / GRID_PATTERNS.length) * 3
-    const card       = document.createElement('div')
+  artworks.forEach((art) => {
+    const item = document.createElement('div')
+    item.className = 'wall-item'
+    item.setAttribute('role', 'listitem')
+    item.setAttribute('tabindex', '0')
+    item.setAttribute('aria-label', `${art.titleKr}, ${art.year}`)
+    item.dataset.artworkId = art.id
+    item.dataset.folder    = folderOf(art)
 
-    card.className = 'asym-card'
-    card.setAttribute('role', 'listitem')
-    card.setAttribute('tabindex', '0')
-    card.setAttribute('aria-label', `${art.titleKr}, ${art.year}`)
-    card.dataset.artworkId = art.id
-    card.dataset.folder    = folderOf(art)
+    const img = document.createElement('img')
+    img.src      = `${base}/${art.imageSrc}`
+    img.alt      = `${art.titleEn}, ${art.year}`
+    img.loading  = 'lazy'
+    img.decoding = 'async'
 
-    card.style.gridColumn = `${pattern[0]} / ${pattern[1]}`
-    card.style.gridRow    = `${pattern[2] + rowOffset} / ${pattern[3] + rowOffset}`
+    item.appendChild(img)
 
-    card.innerHTML = `
-      <div class="asym-img-wrap">
-        <img
-          class="asym-img"
-          src="${base}/${art.imageSrc}"
-          alt="${art.titleEn}, ${art.year}, ${art.mediumKr}, ${art.size}"
-          loading="${i < 4 ? 'eager' : 'lazy'}"
-          decoding="async"
-        />
-      </div>
-      <div class="asym-card-body">
-        <div class="asym-card-left">
-          <p class="asym-title">${art.titleEn}</p>
-          <p class="asym-title-kr">${art.titleKr}</p>
-        </div>
-        <div class="asym-card-right">
-          <span class="asym-tag">${art.year}</span>
-          <span class="asym-tag">${art.series}</span>
-        </div>
-      </div>
-    `
-
-    card.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') card.click()
+    // 클릭 → 작품 상세 (추후 artwork 페이지로 연결)
+    item.addEventListener('click', () => {
+      gsap.to(item, {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          // 추후 artwork 상세 페이지로 라우팅
+          console.log('artwork:', art.id)
+          gsap.to(item, { opacity: 1, scale: 1, duration: 0 })
+        }
+      })
     })
 
-    grid.appendChild(card)
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') item.click()
+    })
+
+    grid.appendChild(item)
   })
 
-  // GSAP 카드 스태거 등장
-  gsap.fromTo('.asym-card',
-    { opacity: 0, y: 20 },
+  // GSAP stagger 등장
+  gsap.fromTo('.wall-item',
+    { opacity: 0, y: 16 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.7,
+      duration: 0.6,
       ease: 'power3.out',
-      stagger: 0.06,
+      stagger: 0.04,
     }
   )
-}
-
-// ── Dimming 효과 ──────────────────────────────────
-function initDimming(): void {
-  const grid = document.getElementById('worksGrid')
-  if (!grid) return
-
-  grid.addEventListener('mouseenter', () => {
-    // 그리드 진입 시 전체 dimming 준비
-  })
-
-  grid.addEventListener('mouseleave', () => {
-    // 그리드 이탈 시 전체 복원
-    gsap.to('.asym-card', {
-      opacity: 1,
-      duration: 0.35,
-      ease: 'power2.out',
-    })
-  })
-
-  document.addEventListener('mouseover', (e: MouseEvent) => {
-    const card = (e.target as HTMLElement).closest<HTMLElement>('.asym-card')
-    if (!card) return
-
-    // 나머지 카드 dimming
-    gsap.to('.asym-card', {
-      opacity: 0.15,
-      duration: 0.3,
-      ease: 'power2.out',
-    })
-    // 현재 카드만 선명하게
-    gsap.to(card, {
-      opacity: 1,
-      duration: 0.3,
-      ease: 'power2.out',
-    })
-  })
-}
-
-// ── 색채 필터 ─────────────────────────────────────
-function initColorFilter(): void {
-  const filterWrap = document.getElementById('colorFilter')
-  if (!filterWrap) return
-
-  filterWrap.addEventListener('click', (e: MouseEvent) => {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.color-btn')
-    if (!btn) return
-
-    filterWrap.querySelectorAll('.color-btn')
-      .forEach(b => b.classList.remove('active'))
-    btn.classList.add('active')
-
-    const filter = btn.dataset.filter ?? 'all'
-    const folder = FILTER_MAP[filter] ?? 'all'
-
-    document.querySelectorAll<HTMLElement>('.asym-card').forEach(card => {
-      const visible = folder === 'all' || card.dataset.folder === folder
-      gsap.to(card, {
-        opacity: visible ? 1 : 0.08,
-        duration: 0.4,
-        ease: 'power2.out',
-        pointerEvents: visible ? 'auto' : 'none',
-      })
-    })
-  })
 }
