@@ -5,8 +5,9 @@ export function initFloatNav(): void {
   if (existing) existing.remove()
 
   const path = location.pathname
-  const isRoot = path.endsWith('/Wang_art/')
-               || path.endsWith('/Wang_art/index.html')
+  const siteBase = import.meta.env.BASE_URL
+  const isRoot = path === siteBase
+               || path === siteBase.replace(/\/$/, '') + '/index.html'
                || path === '/'
 
   const base = isRoot ? './' : '../'

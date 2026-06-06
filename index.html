@@ -7,7 +7,7 @@
   <meta name="description" content="왕열 작가의 공식 웹사이트. 대표작품과 작품세계를 감상합니다." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@200;300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet" />
 </head>
 <body data-page="home">
 
@@ -56,18 +56,21 @@
     </nav>
   </div>
 
-  <!-- 메인 비주얼 -->
   <main>
+    <!-- 메인 비주얼 — 단일 피처 이미지 -->
     <section class="main-visual-wrapper" id="mainVisual" aria-label="대표 작품">
-      <div class="main-visual-slides" id="mainVisualSlides"></div>
-      <div class="visual-label" id="visualLabel">
-        <p class="visual-label-title" id="visualTitle"></p>
-        <p class="visual-label-meta" id="visualMeta"></p>
+      <div class="main-visual-inner">
+        <a class="main-visual-link" id="mainVisualLink" href="#" aria-label="작품 상세 보기">
+          <img class="main-visual-img" id="mainVisualImg" src="" alt="" loading="eager" decoding="async" />
+        </a>
+        <div class="visual-label" id="visualLabel">
+          <p class="visual-label-title" id="visualTitle"></p>
+          <p class="visual-label-meta"  id="visualMeta"></p>
+        </div>
       </div>
-      <div class="visual-dots" id="visualDots" aria-label="슬라이드 인디케이터"></div>
     </section>
 
-    <!-- 시리즈 섹션 -->
+    <!-- 시리즈 — Pierrick 핵심: 126px 모노 타이포 -->
     <section class="series" id="seriesSection" aria-label="시리즈">
       <span class="series-label">Series /</span>
       <div class="series-list" id="seriesList"></div>
@@ -79,7 +82,7 @@
     <!-- 뉴스레터 -->
     <section class="subscribe" aria-label="뉴스레터 구독">
       <p class="subscribe-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</p>
-      <p class="subscribe-sub" data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
+      <p class="subscribe-sub"   data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
       <form class="subscribe-form" id="subscribeForm" novalidate>
         <input class="subscribe-input" id="subscribeEmail" type="email" placeholder="이메일 주소" aria-label="이메일 주소" />
         <button class="subscribe-btn" type="submit" data-i18n="subscribe.btn">구독</button>
@@ -89,17 +92,11 @@
 
     <!-- 푸터 -->
     <footer class="footer" role="contentinfo">
-      <a href="/Wang_art/" class="footer-link footer-name">왕열 Wang Yeul</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a>
-      <a href="mailto:studio@wangyeul.com" class="footer-link">Email</a>
-      <span class="footer-link" style="margin-left:auto;opacity:0.35">© 2026 Wang Yeul</span>
+      <a href="/Wang_art/"                      class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://instagram.com/wangyeul/" target="_blank" rel="noopener" class="footer-link">Instagram @wangyeul</a>
+      <a href="mailto:studio@wangyeul.com"      class="footer-link">Email</a>
     </footer>
   </main>
-
-  <!-- 커스텀 커서 -->
-  <div class="custom-cursor" id="customCursor" aria-hidden="true">
-    <span class="custom-cursor-label">VIEW</span>
-  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

@@ -1,51 +1,54 @@
 /* ═══════════════════════════════════════════
-   왕열 Wang Yeul — Design System v2.1
-   Pierrick Calvez 구조 이식
-   여기만 수정하면 전체 사이트 느낌 즉시 변경
+   왕열 Wang Yeul — Design System v3.0
+   Pierrick Calvez 실측 기반 재설계
    ═══════════════════════════════════════════ */
 
 :root {
-  /* ── 색상 ── */
-  --color-bg:          #f7f4ee;
-  --color-bg-dark:     #1e1508;
-  --color-ink:         #1a1208;
-  --color-ink-muted:   rgba(26,18,8,0.5);
-  --color-ink-faint:   rgba(26,18,8,0.12);
+  /* ── 색상 (Pierrick 실측) ── */
+  --color-bg:          #FDFBFB;           /* rgb(253,251,251) */
+  --color-ink:         #222222;           /* rgb(34,34,34) */
+  --color-ink-muted:   rgba(34,34,34,0.5);
+  --color-ink-faint:   rgba(34,34,34,0.12);
+  --color-accent:      #FF3333;           /* active / hover */
+
+  /* ── 왕열 전용 색상 (동양 작가 정체성 유지) ── */
+  --color-bg-dark:     #1e1508;           /* 메뉴 오버레이 */
   --color-cream:       rgba(249,246,237,0.92);
   --color-cream-muted: rgba(249,246,237,0.45);
-  --color-gold:        #c4a265;
-  --color-gold-faint:  rgba(196,162,101,0.15);
-  --color-red:         #c8523a;
-  --color-blue:        #2e6db5;
+  --color-gold:        #c4a265;           /* 작품번호/포인트 */
 
   /* ── 폰트 패밀리 ── */
-  --font-serif:    'Cormorant Garamond', Georgia, serif;
-  --font-serif-kr: 'Noto Serif KR', serif;
-  --font-sans:     'Noto Sans KR', sans-serif;
+  --font-primary: 'DM Sans', 'Noto Sans KR', sans-serif;
+  --font-mono:    'DM Mono', monospace;   /* 시리즈 타이틀 126px */
+  --font-serif:   'Cormorant Garamond', Georgia, serif; /* 작품 캡션 */
+  --font-kr:      'Noto Sans KR', sans-serif;
 
-  /* ── 폰트 웨이트 (Pierrick: 극도로 얇게) ── */
+  /* ── 폰트 웨이트 ── */
   --fw-thin:    200;
   --fw-light:   300;
   --fw-regular: 400;
 
-  /* ── 자간 (영문 기준) ── */
-  --ls-menu:  0.06em;
-  --ls-title: 0.12em;
-  --ls-nav:   0.18em;
-  --ls-label: 0.22em;
-  --ls-micro: 0.28em;
+  /* ── 레이아웃 (Pierrick 실측) ── */
+  --content-w:  1152px;
+  --pad-side:   clamp(20px, 10vw, 144px);
+  --nav-h:      80px;
 
-  /* ── 폰트 스케일 ── */
-  --text-menu:  clamp(2.2rem, 5vw,  4.5rem);
-  --text-hero:  clamp(1rem,   1.6vw, 1.4rem);
-  --text-lg:    clamp(1rem,   1.4vw, 1.3rem);
-  --text-base:  clamp(0.85rem,1vw,   1rem);
-  --text-sm:    clamp(0.72rem,0.8vw, 0.82rem);
-  --text-xs:    clamp(0.62rem,0.7vw, 0.72rem);
+  /* ── 타이포그래피 (실측값) ── */
+  --text-nav:     22px;
+  --text-series:  clamp(52px, 8.75vw, 126px);  /* 126px @ 1440px */
+  --text-caption: 15px;
+  --text-footer:  18px;
+  --text-label:   14px;
+  --text-xs:      13px;
 
-  /* ── 여백 ── */
-  --pad-page:  clamp(20px, 4vw, 60px);
-  --gap-grid:  4px;
+  /* ── 자간 ── */
+  --ls-nav:     0.4px;
+  --ls-series:  -5px;        /* Pierrick 실측 */
+  --ls-caption: 0.2px;
+  --ls-label:   0.5px;
+
+  /* ── 그리드 ── */
+  --gap-grid:   8px;         /* Pierrick 실측 */
 
   /* ── 모션 ── */
   --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
@@ -55,15 +58,16 @@
   --dur-slow:   0.7s;
 }
 
-/* ── 다국어 자간 예외 처리 ── */
-:lang(ko) { letter-spacing: 0.02em; }
-:lang(ja) { letter-spacing: 0.02em; }
+/* ── 다국어 자간 ── */
+:lang(ko) { letter-spacing: 0.01em; }
+:lang(ja) { letter-spacing: 0.01em; }
 :lang(zh) { letter-spacing: 0; }
 
-/* ── 모바일 토큰 ── */
-@media (pointer: coarse) {
+/* ── 모바일 ── */
+@media (max-width: 768px) {
   :root {
-    --pad-page: clamp(16px, 4vw, 24px);
-    --gap-grid: 2px;
+    --pad-side:  clamp(16px, 5vw, 24px);
+    --gap-grid:  4px;
+    --nav-h:     56px;
   }
 }

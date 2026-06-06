@@ -36,7 +36,7 @@ export function initCursor(): void {
   // 갤러리 영역 진입 시 커서 표시
   document.addEventListener('mouseover', (e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest<HTMLElement>(
-      '.asym-card, .selected-work-card, .work-card'
+      '.wall-item'
     )
     if (target && !isVisible) {
       cursor.classList.add('visible')

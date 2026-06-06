@@ -1,0 +1,3735 @@
+[
+  {
+    "name": "home",
+    "url": "https://www.pierrickcalvez.com/",
+    "fonts": [
+      "sans-serif",
+      "Apercu Pro",
+      "Apercu pro",
+      "Apercu Pro Mono",
+      "Apercu webfont"
+    ],
+    "colors": {
+      "bg": [
+        "rgb(253, 251, 251)"
+      ],
+      "tx": [
+        "rgb(51, 51, 51)",
+        "rgb(34, 34, 34)",
+        "rgb(255, 51, 51)"
+      ]
+    },
+    "nav": {
+      "tag": "DIV",
+      "classes": "navbar w-nav",
+      "html": "<div class=\"menu-button-mobile w-nav-button\" style=\"-webkit-user-select: text;\" aria-label=\"menu\" role=\"button\" tabindex=\"0\" aria-controls=\"w-nav-overlay-0\" aria-haspopup=\"menu\" aria-expanded=\"false\"><img src=\"https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg\" loading=\"lazy\" width=\"16\" alt=\"\" class=\"menu-picto-mobile\"></div><div class=\"navbar-container w-clearfix\"><a href=\"/\" data-w-id=\"6d533401-662a-941f-e454-b44c63a22231\" aria-current=\"page\" class=\"navbar-link logo w-nav-link w--current\">Pierrick Calvez</a><nav role=\"navigation\" class=\"nav-m",
+      "position": "relative",
+      "height": "300px",
+      "bg": "rgba(0, 0, 0, 0)",
+      "font": "\"Apercu Pro\", sans-serif",
+      "fontSize": "14px",
+      "zIndex": "1000"
+    },
+    "structure": [
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "navbar w-nav",
+        "rect": {
+          "w": 1440,
+          "h": 300
+        },
+        "display": "block",
+        "position": "relative",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "menu-button-mobile w-nav-button",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "24px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "18px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "navbar-container w-clearfix",
+            "rect": {
+              "w": 1152,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "w-nav-overlay",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "main-visual-wrapper w-dyn-list",
+        "rect": {
+          "w": 1152,
+          "h": 878
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px 144px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "main-visual w-dyn-items",
+            "rect": {
+              "w": 1152,
+              "h": 878
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "series",
+        "rect": {
+          "w": 1440,
+          "h": 686
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px 144px 0px 136.8px",
+        "margin": "80px 0px 140px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "series-label",
+            "rect": {
+              "w": 1159,
+              "h": 18
+            },
+            "display": "block",
+            "fontSize": "16px",
+            "fontFamily": "Apercu pro",
+            "fontWeight": "300",
+            "letterSpacing": "0.5px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px 0px 0px 5px",
+            "objectFit": "fill",
+            "text": "Series /"
+          },
+          {
+            "tag": "DIV",
+            "classes": "series-wrapper w-dyn-list",
+            "rect": {
+              "w": 1159,
+              "h": 650
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "wall",
+        "rect": {
+          "w": 1289,
+          "h": 2962
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px 75.6094px 100px 75.5938px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "wall-collection-list-wrapper w-dyn-list",
+            "rect": {
+              "w": 1289,
+              "h": 2962
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "subscribe",
+        "rect": {
+          "w": 1440,
+          "h": 260
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px",
+        "margin": "240px 0px 120px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "subscribe-form w-form",
+            "rect": {
+              "w": 1440,
+              "h": 260
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "footer",
+        "rect": {
+          "w": 1440,
+          "h": 320
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "120px 288px 0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "A",
+            "classes": "footer-link footer-name w--current",
+            "rect": {
+              "w": 389,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Pierrick Calvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link igdesktop",
+            "rect": {
+              "w": 204,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram @pierrickcalvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link ig-mobile",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link chinese-font",
+            "rect": {
+              "w": 50,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "17px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "300",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "小红书"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link",
+            "rect": {
+              "w": 41,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Email"
+          }
+        ]
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      }
+    ],
+    "images": [
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a36c53f7c30d8d5353d2_menu%20close.sv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65f28fce1d1951417c8a70c1_Pierrick%20Calv",
+        "alt": "Portrait of a Sheepdog",
+        "dispW": 1152,
+        "dispH": 798,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "main-visual-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 1152
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a17a3896b58402dcaed1_Pierrick%20Calv",
+        "alt": "Attakullakulla",
+        "dispW": 606,
+        "dispH": 484,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1a42d2002181f7ca231_Pierrick%20Calv",
+        "alt": "Model Mother",
+        "dispW": 606,
+        "dispH": 499,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a42d73e42ed89bc82a12_Pierrick%20Calv",
+        "alt": "Undressed Crusade",
+        "dispW": 606,
+        "dispH": 758,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443e7d36a788faa3617459a_Map%20of%20Muti",
+        "alt": "Map of Mutiny",
+        "dispW": 606,
+        "dispH": 479,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1b573e42e908cc803d0_Pierrick%20Calv",
+        "alt": "Flower Men for Dinner",
+        "dispW": 606,
+        "dispH": 479,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1e38452f1215912c01b_Pierrick%20Calv",
+        "alt": "Distant Morale",
+        "dispW": 606,
+        "dispH": 478,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443ca3e73e42ee5f2ca38b1_Pierrick%20Calv",
+        "alt": "Ylin–Ylan II",
+        "dispW": 606,
+        "dispH": 428,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65fd910559eec5a2adc36882_Pierrick%20Calv",
+        "alt": "Shuimu II",
+        "dispW": 606,
+        "dispH": 857,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 606
+      }
+    ],
+    "links": [
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo w-nav-link w--current",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo white w-nav-link w--current",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Selected Works",
+        "href": "/selected-works",
+        "classes": "navbar-link big first w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Resume",
+        "href": "/resume",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "小红书",
+        "href": "https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6",
+        "classes": "navbar-link-small chinese w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Email",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pastorales, 2024Acrylic Paint on Linen Canvas90 x ",
+        "href": "/series/pastorales",
+        "classes": "main-visual-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pastorales",
+        "href": "/series/pastorales",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Maps of",
+        "href": "/series/maps-of",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Dinner",
+        "href": "/series/the-dinner",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Land Below",
+        "href": "/series/the-land-below",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ueno Wharf",
+        "href": "/series/ueno-wharf",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ylin–Ylan",
+        "href": "/series/ylin-ylan",
+        "classes": "type-hero-link",
+        "fontSize": "126px",
+        "fontFamily": "Apercu Pro Mono",
+        "letterSpacing": "-5px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/attakullakulla",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/model-mother",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/undressed-crusade",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-mutiny",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/flower-men-for-dinner",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/distant-morale",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/ylin-ylan-ii",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/shuimu-ii",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "studio@pierrickcalvez.com",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello%20Pierrick",
+        "classes": "subscribe-subtitle-success-link",
+        "fontSize": "16px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "studio@pierrickcalvez.com",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello%20Pierrick",
+        "classes": "link-3",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(255, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "footer-link footer-name w--current",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram @pierrickcalvez",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "footer-link igdesktop",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "footer-link ig-mobile",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "小红书",
+        "href": "https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6",
+        "classes": "footer-link chinese-font",
+        "fontSize": "17px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Email",
+        "href": "mailto:pierrick@pierrickcalvez.com?subject=Hello",
+        "classes": "footer-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      }
+    ],
+    "cssVars": "",
+    "grid": {
+      "tag": "DIV",
+      "classes": "series-list w-dyn-items",
+      "childCount": 6,
+      "rect": {
+        "w": 1159,
+        "h": 650
+      },
+      "display": "block",
+      "columns": "auto",
+      "columnGap": "normal",
+      "gridCols": "none",
+      "gap": "normal",
+      "firstChild": {
+        "tag": "DIV",
+        "classes": "series-item w-dyn-item",
+        "rect": {
+          "w": 804,
+          "h": 14
+        },
+        "display": "inline",
+        "position": "static",
+        "overflow": "visible",
+        "cursor": "auto"
+      }
+    },
+    "footer": {
+      "classes": "footer",
+      "html": "<a href=\"/\" aria-current=\"page\" class=\"footer-link footer-name w--current\">Pierrick Calvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link igdesktop\">Instagram @pierrickcalvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link ig-mobile\">Instagram</a><a href=\"https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6\" target=\"_blank\" class=\"footer-link chinese-font\">小红书</a><a href=\"mailto:pierrick@pierrickcal",
+      "bg": "rgba(0, 0, 0, 0)",
+      "padding": "120px 288px 0px"
+    },
+    "hoverData": "",
+    "transitions": [
+      " w-mod-js w-mod-ix: all",
+      "HEAD: all",
+      "STYLE: all",
+      "META: all",
+      "LINK: all",
+      "TITLE: all",
+      "SCRIPT: all",
+      "le-body: all",
+      "navbar w-nav: all",
+      "menu-button-mobile w-nav-button: all",
+      "menu-picto-mobile: all",
+      "navbar-container w-clearfix: all",
+      "navbar-link logo w-nav-link w--current: all",
+      "nav-menu w-nav-menu: all",
+      "navbar-link logo white w-nav-link w--cur: all",
+      "navbar-link big first w-nav-link: all",
+      "navbar-link big w-nav-link: all",
+      "spacer: all",
+      "navbar-link-small w-nav-link: all",
+      "navbar-link-small chinese w-nav-link: all"
+    ]
+  },
+  {
+    "name": "works",
+    "url": "https://www.pierrickcalvez.com/selected-works",
+    "fonts": [
+      "sans-serif",
+      "Apercu Pro",
+      "Apercu pro",
+      "Apercu Pro Mono"
+    ],
+    "colors": {
+      "bg": [
+        "rgb(253, 251, 251)"
+      ],
+      "tx": [
+        "rgb(34, 34, 34)",
+        "rgb(51, 51, 51)"
+      ]
+    },
+    "nav": {
+      "tag": "DIV",
+      "classes": "navbar w-nav",
+      "html": "<div class=\"menu-button-mobile w-nav-button\" style=\"-webkit-user-select: text;\" aria-label=\"menu\" role=\"button\" tabindex=\"0\" aria-controls=\"w-nav-overlay-0\" aria-haspopup=\"menu\" aria-expanded=\"false\"><img src=\"https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg\" loading=\"lazy\" width=\"16\" alt=\"\" class=\"menu-picto-mobile\"></div><div class=\"navbar-container w-clearfix\"><a href=\"/\" data-w-id=\"6d533401-662a-941f-e454-b44c63a22231\" class=\"navbar-link logo w-nav-link\">Pierrick Calvez</a><nav role=\"navigation\" class=\"nav-menu w-nav-menu\"><div class=\"men",
+      "position": "relative",
+      "height": "300px",
+      "bg": "rgba(0, 0, 0, 0)",
+      "font": "\"Apercu Pro\", sans-serif",
+      "fontSize": "14px",
+      "zIndex": "1000"
+    },
+    "structure": [
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "navbar w-nav",
+        "rect": {
+          "w": 1440,
+          "h": 300
+        },
+        "display": "block",
+        "position": "relative",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "menu-button-mobile w-nav-button",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "24px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "18px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "navbar-container w-clearfix",
+            "rect": {
+              "w": 1152,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "w-nav-overlay",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "directory",
+        "rect": {
+          "w": 1440,
+          "h": 294
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "0px",
+        "margin": "50px 0px 180px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "directory-title",
+            "rect": {
+              "w": 144,
+              "h": 294
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "directory-menu-series w-dyn-list",
+            "rect": {
+              "w": 1080,
+              "h": 294
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "wall",
+        "rect": {
+          "w": 1289,
+          "h": 3410
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px 75.6094px 100px 75.5938px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "wall-collection-list-wrapper w-dyn-list",
+            "rect": {
+              "w": 1289,
+              "h": 1153
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "wall-collection-list-wrapper w-dyn-list",
+            "rect": {
+              "w": 1289,
+              "h": 2279
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "footer",
+        "rect": {
+          "w": 1440,
+          "h": 320
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "120px 288px 0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "A",
+            "classes": "footer-link footer-name",
+            "rect": {
+              "w": 389,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Pierrick Calvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link igdesktop",
+            "rect": {
+              "w": 204,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram @pierrickcalvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link ig-mobile",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link chinese-font",
+            "rect": {
+              "w": 50,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "17px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "300",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "小红书"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link",
+            "rect": {
+              "w": 41,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Email"
+          }
+        ]
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      }
+    ],
+    "images": [
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a36c53f7c30d8d5353d2_menu%20close.sv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a17a3896b58402dcaed1_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 160,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443e7d36a788faa3617459a_Map%20of%20Muti",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 158,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1b573e42e908cc803d0_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 158,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6449050d8d72812cc23cdcf3_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 283,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6603f651c44775bd71a81ec0_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 283,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443ca3e73e42ee5f2ca38b1_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 141,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/644a43c5db298ec32f737704_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 283,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65fd8ffc96a515dd0ba1f0e0_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 283,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/644900e46bd02f4c00cb7141_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 141,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6603f8ac40fd7bd7ee4b76cf_Pierrick%20Calv",
+        "alt": "Artwork Thumbnail",
+        "dispW": 200,
+        "dispH": 283,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "thumb",
+        "parentDisplay": "block",
+        "parentW": 200
+      }
+    ],
+    "links": [
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo white w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Selected Works",
+        "href": "/selected-works",
+        "classes": "navbar-link big first w-nav-link w--current",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Resume",
+        "href": "/resume",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "小红书",
+        "href": "https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6",
+        "classes": "navbar-link-small chinese w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Email",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pastorales4",
+        "href": "/series/pastorales",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Maps of3",
+        "href": "/series/maps-of",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Dinner3",
+        "href": "/series/the-dinner",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Land Below6",
+        "href": "/series/the-land-below",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ueno Wharf2",
+        "href": "/series/ueno-wharf",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ylin–Ylan3",
+        "href": "/series/ylin-ylan",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Citadel3",
+        "href": "/series/citadel",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Shuimu2",
+        "href": "/series/shuimu",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Vermont Peak3",
+        "href": "/series/vermont-peak",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "It Blows Forward3",
+        "href": "/series/it-blows-forward",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Segon3",
+        "href": "/series/segon-ouverture",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Megura3",
+        "href": "/series/megura",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Jaune4",
+        "href": "/series/jaune",
+        "classes": "directory-list-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/portrait-of-a-shepherd",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/portrait-of-a-sheepdog",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/attakullakulla",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/leftovers",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/model-mother",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/undressed-crusade",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-persistence",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-mutiny",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-bravery",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      }
+    ],
+    "cssVars": "",
+    "grid": {
+      "tag": "DIV",
+      "classes": "directory-list w-dyn-items",
+      "childCount": 13,
+      "rect": {
+        "w": 1080,
+        "h": 294
+      },
+      "display": "grid",
+      "columns": "auto",
+      "columnGap": "normal",
+      "gridCols": "504px 504px",
+      "gap": "normal",
+      "firstChild": {
+        "tag": "DIV",
+        "classes": "directory-list-item w-dyn-item",
+        "rect": {
+          "w": 504,
+          "h": 42
+        },
+        "display": "flex",
+        "position": "static",
+        "overflow": "visible",
+        "cursor": "auto"
+      }
+    },
+    "footer": {
+      "classes": "footer",
+      "html": "<a href=\"/\" class=\"footer-link footer-name\">Pierrick Calvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link igdesktop\">Instagram @pierrickcalvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link ig-mobile\">Instagram</a><a href=\"https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6\" target=\"_blank\" class=\"footer-link chinese-font\">小红书</a><a href=\"mailto:pierrick@pierrickcalvez.com?subject=Hello\" class=\"f",
+      "bg": "rgba(0, 0, 0, 0)",
+      "padding": "120px 288px 0px"
+    },
+    "hoverData": "",
+    "transitions": [
+      " w-mod-js w-mod-ix: all",
+      "HEAD: all",
+      "STYLE: all",
+      "META: all",
+      "LINK: all",
+      "TITLE: all",
+      "SCRIPT: all",
+      "le-body: all",
+      "navbar w-nav: all",
+      "menu-button-mobile w-nav-button: all",
+      "menu-picto-mobile: all",
+      "navbar-container w-clearfix: all",
+      "navbar-link logo w-nav-link: all",
+      "nav-menu w-nav-menu: all",
+      "navbar-link logo white w-nav-link: all",
+      "navbar-link big first w-nav-link w--curr: all",
+      "navbar-link big w-nav-link: all",
+      "spacer: all",
+      "navbar-link-small w-nav-link: all",
+      "navbar-link-small chinese w-nav-link: all"
+    ]
+  },
+  {
+    "name": "artwork",
+    "url": "https://www.pierrickcalvez.com/artwork/attakullakulla",
+    "fonts": [
+      "sans-serif",
+      "Apercu Pro"
+    ],
+    "colors": {
+      "bg": [
+        "rgb(253, 251, 251)"
+      ],
+      "tx": [
+        "rgb(34, 34, 34)",
+        "rgb(51, 51, 51)"
+      ]
+    },
+    "nav": {
+      "tag": "DIV",
+      "classes": "navbar w-nav",
+      "html": "<div class=\"menu-button-mobile w-nav-button\" style=\"-webkit-user-select: text;\" aria-label=\"menu\" role=\"button\" tabindex=\"0\" aria-controls=\"w-nav-overlay-0\" aria-haspopup=\"menu\" aria-expanded=\"false\"><img src=\"https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg\" loading=\"lazy\" width=\"16\" alt=\"\" class=\"menu-picto-mobile\"></div><div class=\"navbar-container w-clearfix\"><a href=\"/\" data-w-id=\"6d533401-662a-941f-e454-b44c63a22231\" class=\"navbar-link logo w-nav-link\">Pierrick Calvez</a><nav role=\"navigation\" class=\"nav-menu w-nav-menu\"><div class=\"men",
+      "position": "relative",
+      "height": "300px",
+      "bg": "rgba(0, 0, 0, 0)",
+      "font": "\"Apercu Pro\", sans-serif",
+      "fontSize": "14px",
+      "zIndex": "1000"
+    },
+    "structure": [
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "navbar w-nav",
+        "rect": {
+          "w": 1440,
+          "h": 300
+        },
+        "display": "block",
+        "position": "relative",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "menu-button-mobile w-nav-button",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "24px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "18px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "navbar-container w-clearfix",
+            "rect": {
+              "w": 1152,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "w-nav-overlay",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "hidden-artworks-list w-dyn-list",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "w-dyn-items",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "artwork-nav-container",
+        "rect": {
+          "w": 1440,
+          "h": 904
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "nav-artwork-container c-left",
+            "rect": {
+              "w": 180,
+              "h": 438
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "IMG",
+            "classes": "artwork-image",
+            "rect": {
+              "w": 1080,
+              "h": 864
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "nav-separator",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "nav-artwork-container c-right",
+            "rect": {
+              "w": 180,
+              "h": 438
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "artwork-container",
+        "rect": {
+          "w": 1080,
+          "h": 1144
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px 180px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "IMG",
+            "classes": "artwork-image",
+            "rect": {
+              "w": 1080,
+              "h": 924
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "label artwork",
+            "rect": {
+              "w": 211,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "15px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.2px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "footer",
+        "rect": {
+          "w": 1440,
+          "h": 320
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "120px 288px 0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "A",
+            "classes": "footer-link footer-name",
+            "rect": {
+              "w": 389,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Pierrick Calvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link igdesktop",
+            "rect": {
+              "w": 204,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram @pierrickcalvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link ig-mobile",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link chinese-font",
+            "rect": {
+              "w": 50,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "17px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "300",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "小红书"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link",
+            "rect": {
+              "w": 41,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Email"
+          }
+        ]
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      }
+    ],
+    "images": [
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a36c53f7c30d8d5353d2_menu%20close.sv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65f28fc500d8bf4b9806f893_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65f290c521b4188b17a8980f_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a17a3896b58402dcaed1_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block w--current",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a18c59a743122bf11e42_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1a42d2002181f7ca231_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a42d73e42ed89bc82a12_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1e38452f1215912c01b_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a1b573e42e908cc803d0_Pierrick%20Calv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443e7987e177fc0e33706cd_Map%20of%20Brav",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443e7d36a788faa3617459a_Map%20of%20Muti",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 0
+      }
+    ],
+    "links": [
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo white w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Selected Works",
+        "href": "/selected-works",
+        "classes": "navbar-link big first w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Resume",
+        "href": "/resume",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "小红书",
+        "href": "https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6",
+        "classes": "navbar-link-small chinese w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Email",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/portrait-of-a-sheepdog",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/portrait-of-a-shepherd",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/attakullakulla",
+        "classes": "w-inline-block w--current",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/leftovers",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/model-mother",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/undressed-crusade",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/distant-morale",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/flower-men-for-dinner",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-bravery",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-mutiny",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/map-of-persistence",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/the-eternal-father",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/the-mermaids-wife",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/gliese-shores",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/jugon",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/odor-of-dried-flowers",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/the-sundered-fountains",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/journey-to-cath",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/ueno-wharf-ii",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/ueno-wharf-iii",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/ylin-ylan-i",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "",
+        "href": "/artwork/ylin-ylan-ii",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      }
+    ],
+    "cssVars": "",
+    "grid": {
+      "tag": "DIV",
+      "classes": "artwork-nav-container",
+      "childCount": 4,
+      "rect": {
+        "w": 1440,
+        "h": 904
+      },
+      "display": "flex",
+      "columns": "auto",
+      "columnGap": "normal",
+      "gridCols": "none",
+      "gap": "normal",
+      "firstChild": {
+        "tag": "DIV",
+        "classes": "nav-artwork-container c-left",
+        "rect": {
+          "w": 180,
+          "h": 438
+        },
+        "display": "block",
+        "position": "fixed",
+        "overflow": "visible",
+        "cursor": "auto"
+      }
+    },
+    "footer": {
+      "classes": "footer",
+      "html": "<a href=\"/\" class=\"footer-link footer-name\">Pierrick Calvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link igdesktop\">Instagram @pierrickcalvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link ig-mobile\">Instagram</a><a href=\"https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6\" target=\"_blank\" class=\"footer-link chinese-font\">小红书</a><a href=\"mailto:pierrick@pierrickcalvez.com?subject=Hello\" class=\"f",
+      "bg": "rgba(0, 0, 0, 0)",
+      "padding": "120px 288px 0px"
+    },
+    "hoverData": "",
+    "transitions": [
+      " w-mod-js w-mod-ix: all",
+      "HEAD: all",
+      "STYLE: all",
+      "META: all",
+      "LINK: all",
+      "TITLE: all",
+      "SCRIPT: all",
+      "le-body: all",
+      "navbar w-nav: all",
+      "menu-button-mobile w-nav-button: all",
+      "menu-picto-mobile: all",
+      "navbar-container w-clearfix: all",
+      "navbar-link logo w-nav-link: all",
+      "nav-menu w-nav-menu: all",
+      "navbar-link logo white w-nav-link: all",
+      "navbar-link big first w-nav-link: all",
+      "navbar-link big w-nav-link: all",
+      "spacer: all",
+      "navbar-link-small w-nav-link: all",
+      "navbar-link-small chinese w-nav-link: all"
+    ]
+  },
+  {
+    "name": "series",
+    "url": "https://www.pierrickcalvez.com/series/pastorales",
+    "fonts": [
+      "sans-serif",
+      "Apercu Pro",
+      "Apercu Pro Mono"
+    ],
+    "colors": {
+      "bg": [
+        "rgb(253, 251, 251)"
+      ],
+      "tx": [
+        "rgb(34, 34, 34)",
+        "rgb(51, 51, 51)"
+      ]
+    },
+    "nav": {
+      "tag": "DIV",
+      "classes": "navbar w-nav",
+      "html": "<div class=\"menu-button-mobile w-nav-button\" style=\"-webkit-user-select: text;\" aria-label=\"menu\" role=\"button\" tabindex=\"0\" aria-controls=\"w-nav-overlay-0\" aria-haspopup=\"menu\" aria-expanded=\"false\"><img src=\"https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg\" loading=\"lazy\" width=\"16\" alt=\"\" class=\"menu-picto-mobile\"></div><div class=\"navbar-container w-clearfix\"><a href=\"/\" data-w-id=\"6d533401-662a-941f-e454-b44c63a22231\" class=\"navbar-link logo w-nav-link\">Pierrick Calvez</a><nav role=\"navigation\" class=\"nav-menu w-nav-menu\"><div class=\"men",
+      "position": "relative",
+      "height": "300px",
+      "bg": "rgba(0, 0, 0, 0)",
+      "font": "\"Apercu Pro\", sans-serif",
+      "fontSize": "14px",
+      "zIndex": "1000"
+    },
+    "structure": [
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "navbar w-nav",
+        "rect": {
+          "w": 1440,
+          "h": 300
+        },
+        "display": "block",
+        "position": "relative",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "menu-button-mobile w-nav-button",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "24px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "18px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "navbar-container w-clearfix",
+            "rect": {
+              "w": 1152,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "w-nav-overlay",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "hidden-series-list w-dyn-list",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "w-dyn-items",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "titlebar-container",
+        "rect": {
+          "w": 1440,
+          "h": 120
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "0px 0px 0px 50px",
+        "margin": "-20px 0px 100px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "nav-series-container prev",
+            "rect": {
+              "w": 1296,
+              "h": 120
+            },
+            "display": "flex",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "title-series-container",
+            "rect": {
+              "w": 518,
+              "h": 120
+            },
+            "display": "flex",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          },
+          {
+            "tag": "DIV",
+            "classes": "nav-series-container next",
+            "rect": {
+              "w": 1296,
+              "h": 120
+            },
+            "display": "flex",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "wall the-series",
+        "rect": {
+          "w": 1238,
+          "h": 2409
+        },
+        "display": "block",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px 100.812px 100px 100.797px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "DIV",
+            "classes": "wall-collection-list-wrapper w-dyn-list",
+            "rect": {
+              "w": 1238,
+              "h": 2409
+            },
+            "display": "block",
+            "fontSize": "14px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "400",
+            "letterSpacing": "normal",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "0px",
+            "objectFit": "fill",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": null,
+        "classes": "footer",
+        "rect": {
+          "w": 1440,
+          "h": 320
+        },
+        "display": "flex",
+        "position": "static",
+        "padding": "120px 288px 0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": [
+          {
+            "tag": "A",
+            "classes": "footer-link footer-name",
+            "rect": {
+              "w": 389,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Pierrick Calvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link igdesktop",
+            "rect": {
+              "w": 204,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram @pierrickcalvez"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link ig-mobile",
+            "rect": {
+              "w": 0,
+              "h": 0
+            },
+            "display": "none",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Instagram"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link chinese-font",
+            "rect": {
+              "w": 50,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "17px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "300",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "小红书"
+          },
+          {
+            "tag": "A",
+            "classes": "footer-link",
+            "rect": {
+              "w": 41,
+              "h": 80
+            },
+            "display": "block",
+            "fontSize": "18px",
+            "fontFamily": "Apercu Pro",
+            "fontWeight": "200",
+            "letterSpacing": "0.4px",
+            "color": "rgb(51, 51, 51)",
+            "bg": "rgba(0, 0, 0, 0)",
+            "padding": "25px 0px 0px",
+            "objectFit": "fill",
+            "text": "Email"
+          }
+        ]
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      },
+      {
+        "tag": "SCRIPT",
+        "id": null,
+        "classes": "",
+        "rect": {
+          "w": 0,
+          "h": 0
+        },
+        "display": "none",
+        "position": "static",
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "gridCols": "none",
+        "columns": "auto",
+        "columnGap": "normal",
+        "bg": "rgba(0, 0, 0, 0)",
+        "children": []
+      }
+    ],
+    "images": [
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a3721b05369ff0cb7c15_menu%20open.svg",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/56e7dd1a0b15f5eb36389d7f/65f2a36c53f7c30d8d5353d2_menu%20close.sv",
+        "alt": "",
+        "dispW": 0,
+        "dispH": 0,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "menu-button-mobile w-nav-button",
+        "parentDisplay": "none",
+        "parentW": 0
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a17a3896b58402dcaed1_Pierrick%20Calv",
+        "alt": "Attakullakulla",
+        "dispW": 570,
+        "dispH": 456,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 570
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65f28fc500d8bf4b9806f893_Pierrick%20Calv",
+        "alt": "Portrait of a Sheepdog",
+        "dispW": 570,
+        "dispH": 760,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 570
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/65f290c521b4188b17a8980f_Pierrick%20Calv",
+        "alt": "Portrait of a Shepherd",
+        "dispW": 570,
+        "dispH": 760,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 570
+      },
+      {
+        "src": "https://cdn.prod.website-files.com/571514452b490af542a3138e/6443a42d73e42ed89bc82a12_Pierrick%20Calv",
+        "alt": "Undressed Crusade",
+        "dispW": 570,
+        "dispH": 712,
+        "objectFit": "fill",
+        "display": "inline-block",
+        "parentClass": "wall-collection-link w-inline-block",
+        "parentDisplay": "inline-block",
+        "parentW": 570
+      }
+    ],
+    "links": [
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "navbar-link logo white w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Selected Works",
+        "href": "/selected-works",
+        "classes": "navbar-link big first w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Resume",
+        "href": "/resume",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "classes": "navbar-link big w-nav-link",
+        "fontSize": "22px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "小红书",
+        "href": "https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6",
+        "classes": "navbar-link-small chinese w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Email",
+        "href": "mailto:studio@pierrickcalvez.com?subject=Hello",
+        "classes": "navbar-link-small w-nav-link",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(34, 34, 34)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pastorales",
+        "href": "/series/pastorales",
+        "classes": "w-inline-block w--current",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Maps of",
+        "href": "/series/maps-of",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Dinner",
+        "href": "/series/the-dinner",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "The Land Below",
+        "href": "/series/the-land-below",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ueno Wharf",
+        "href": "/series/ueno-wharf",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Ylin–Ylan",
+        "href": "/series/ylin-ylan",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Citadel",
+        "href": "/series/citadel",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Shuimu",
+        "href": "/series/shuimu",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Vermont Peak",
+        "href": "/series/vermont-peak",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "It Blows Forward",
+        "href": "/series/it-blows-forward",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Segon",
+        "href": "/series/segon-ouverture",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Megura",
+        "href": "/series/megura",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Jaune",
+        "href": "/series/jaune",
+        "classes": "w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Jaune",
+        "href": "/series/jaune",
+        "classes": "nav-series w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Maps of",
+        "href": "/series/maps-of",
+        "classes": "nav-series w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Attakullakulla, 2023Acrylic Paint on Linen Canvas1",
+        "href": "/artwork/attakullakulla",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Portrait of a Sheepdog, 2024Acrylic Paint on Linen",
+        "href": "/artwork/portrait-of-a-sheepdog",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Portrait of a Shepherd, 2024Acrylic Paint on Linen",
+        "href": "/artwork/portrait-of-a-shepherd",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Undressed Crusade, 2022Acrylic Paint on Linen Canv",
+        "href": "/artwork/undressed-crusade",
+        "classes": "wall-collection-link w-inline-block",
+        "fontSize": "14px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "normal",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Pierrick Calvez",
+        "href": "/",
+        "classes": "footer-link footer-name",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram @pierrickcalvez",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "footer-link igdesktop",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      },
+      {
+        "text": "Instagram",
+        "href": "https://www.instagram.com/pierrickcalvez/",
+        "classes": "footer-link ig-mobile",
+        "fontSize": "18px",
+        "fontFamily": "Apercu Pro",
+        "letterSpacing": "0.4px",
+        "color": "rgb(51, 51, 51)",
+        "textTransform": "none"
+      }
+    ],
+    "cssVars": "",
+    "grid": {
+      "tag": "DIV",
+      "classes": "wall-collection-list the-series w-dyn-items",
+      "childCount": 4,
+      "rect": {
+        "w": 1238,
+        "h": 2409
+      },
+      "display": "block",
+      "columns": "2",
+      "columnGap": "8%",
+      "gridCols": "none",
+      "gap": "normal 8%",
+      "firstChild": {
+        "tag": "DIV",
+        "classes": "wall-collection-item the-series w-dyn-item",
+        "rect": {
+          "w": 570,
+          "h": 536
+        },
+        "display": "block",
+        "position": "static",
+        "overflow": "visible",
+        "cursor": "auto"
+      }
+    },
+    "footer": {
+      "classes": "footer",
+      "html": "<a href=\"/\" class=\"footer-link footer-name\">Pierrick Calvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link igdesktop\">Instagram @pierrickcalvez</a><a href=\"https://www.instagram.com/pierrickcalvez/\" target=\"_blank\" class=\"footer-link ig-mobile\">Instagram</a><a href=\"https://www.xiaohongshu.com/user/profile/60a0b60000000000010040a6\" target=\"_blank\" class=\"footer-link chinese-font\">小红书</a><a href=\"mailto:pierrick@pierrickcalvez.com?subject=Hello\" class=\"f",
+      "bg": "rgba(0, 0, 0, 0)",
+      "padding": "120px 288px 0px"
+    },
+    "hoverData": "",
+    "transitions": [
+      " w-mod-js w-mod-ix: all",
+      "HEAD: all",
+      "STYLE: all",
+      "META: all",
+      "LINK: all",
+      "TITLE: all",
+      "SCRIPT: all",
+      "le-body: all",
+      "navbar w-nav: all",
+      "menu-button-mobile w-nav-button: all",
+      "menu-picto-mobile: all",
+      "navbar-container w-clearfix: all",
+      "navbar-link logo w-nav-link: all",
+      "nav-menu w-nav-menu: all",
+      "navbar-link logo white w-nav-link: all",
+      "navbar-link big first w-nav-link: all",
+      "navbar-link big w-nav-link: all",
+      "spacer: all",
+      "navbar-link-small w-nav-link: all",
+      "navbar-link-small chinese w-nav-link: all"
+    ]
+  }
+]
