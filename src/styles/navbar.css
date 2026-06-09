@@ -1,4 +1,3 @@
-/* ── 네비바 (Pierrick 실측 기반) ── */
 .navbar {
   position: fixed;
   top: 0;
@@ -6,7 +5,8 @@
   width: 100%;
   height: var(--navbar-height);
   z-index: 100;
-  background: var(--color-bg);
+  background: var(--color-bg);  /* #fafafa — 페이지와 동일색 */
+  border-bottom: none;          /* 구분선 없음 */
   display: flex;
   align-items: center;
 }
@@ -15,7 +15,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 25px 0 20px 5px;
+  padding: 0;
 }
 
 /* 로고 */
@@ -27,6 +27,9 @@
   color: var(--color-ink);
   white-space: nowrap;
   transition: opacity var(--dur-fast) ease;
+  display: inline-block;
+  padding: 25px 0 20px 5px;
+  height: var(--navbar-height);
 }
 .navbar-logo:hover { opacity: 0.5; }
 
@@ -47,6 +50,9 @@
   margin-left: 50px;
   transition: opacity var(--dur-fast) ease;
   white-space: nowrap;
+  display: inline-block;
+  padding: 25px 0 20px;
+  height: var(--navbar-height);
 }
 .navbar-link:hover { opacity: 0.5; }
 
@@ -65,6 +71,9 @@
   color: var(--color-ink-muted);
   margin-left: 24px;
   transition: opacity var(--dur-fast) ease;
+  display: inline-block;
+  padding: 25px 0 20px;
+  height: var(--navbar-height);
 }
 .navbar-link-small:hover { opacity: 0.8; }
 
