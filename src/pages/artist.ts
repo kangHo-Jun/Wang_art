@@ -37,15 +37,13 @@ function renderResume(): void {
 
   // 4. Solo Exhibitions
   createCategory(container, 'Selected Solo Exhibitions')
-  createEntry(container, '2025 <span class="text-span-bold">Utopia Meditation</span>, Sun Gallery, Seoul, Korea')
-  createEntry(container, '2023 <span class="text-span-bold">Utopia Garden</span>, Insa Art Center, Seoul, Korea')
-  createEntry(container, '2021 <span class="text-span-bold">Utopia — Companion</span>, Gallery Lamer, Seoul, Korea')
+  createEntry(container, '2025 <span class="text-span-bold">[Solo Exhibition 1 - TBD]</span>, Gallery, Seoul, Korea')
+  createEntry(container, '2023 <span class="text-span-bold">[Solo Exhibition 2 - TBD]</span>, Gallery, Seoul, Korea')
 
   // 5. Group Exhibitions
   createCategory(container, 'Selected Group Exhibitions')
-  createEntry(container, '2024 <span class="text-span-bold">Asian Contemporary Art Exhibition</span>, National Museum of Modern and Contemporary Art, Gwacheon, Korea')
-  createEntry(container, '2022 <span class="text-span-bold">Contemporary Art of Korea</span>, Gyeonggi Museum of Modern Art, Ansan, Korea')
-  createEntry(container, '2020 <span class="text-span-bold">The Spirit of Ink</span>, Daejeon Museum of Art, Daejeon, Korea')
+  createEntry(container, '2024 <span class="text-span-bold">[Group Exhibition 1 - TBD]</span>, Museum, Gwacheon, Korea')
+  createEntry(container, '2022 <span class="text-span-bold">[Group Exhibition 2 - TBD]</span>, Museum, Ansan, Korea')
 }
 
 function createCategory(parent: HTMLElement, name: string): void {
