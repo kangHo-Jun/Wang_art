@@ -1,73 +1,64 @@
 /* ═══════════════════════════════════════════
    왕열 Wang Yeul — Design System v3.0
-   Pierrick Calvez 실측 기반 재설계
+   Pierrick Calvez 실측값 기반
    ═══════════════════════════════════════════ */
 
 :root {
   /* ── 색상 (Pierrick 실측) ── */
-  --color-bg:          #FDFBFB;           /* rgb(253,251,251) */
-  --color-ink:         #222222;           /* rgb(34,34,34) */
-  --color-ink-muted:   rgba(34,34,34,0.5);
-  --color-ink-faint:   rgba(34,34,34,0.12);
-  --color-accent:      #FF3333;           /* active / hover */
+  --color-bg:          #fafafa;
+  --color-ink:         #333333;
+  --color-ink-dark:    #222222;
+  --color-ink-muted:   rgba(51, 51, 51, 0.5);
+  --color-ink-faint:   rgba(51, 51, 51, 0.12);
 
-  /* ── 왕열 전용 색상 (동양 작가 정체성 유지) ── */
-  --color-bg-dark:     #1e1508;           /* 메뉴 오버레이 */
-  --color-cream:       rgba(249,246,237,0.92);
-  --color-cream-muted: rgba(249,246,237,0.45);
-  --color-gold:        #c4a265;           /* 작품번호/포인트 */
+  /* ── 왕열 고유 포인트 ── */
+  --color-gold:        #c4a265;
+  --color-gold-faint:  rgba(196, 162, 101, 0.12);
 
   /* ── 폰트 패밀리 ── */
-  --font-primary: 'DM Sans', 'Noto Sans KR', sans-serif;
-  --font-mono:    'DM Mono', monospace;   /* 시리즈 타이틀 126px */
-  --font-serif:   'Cormorant Garamond', Georgia, serif; /* 작품 캡션 */
-  --font-kr:      'Noto Sans KR', sans-serif;
+  --font-serif:    'Cormorant Garamond', Georgia, serif;
+  --font-serif-kr: 'Noto Serif KR', serif;
+  --font-sans:     'Noto Sans KR', sans-serif;
 
-  /* ── 폰트 웨이트 ── */
-  --fw-thin:    200;
-  --fw-light:   300;
-  --fw-regular: 400;
+  /* ── 폰트 웨이트 (Pierrick 실측) ── */
+  --fw-extralight: 200;
+  --fw-light:      300;
+  --fw-regular:    400;
 
-  /* ── 레이아웃 (Pierrick 실측) ── */
-  --content-w:  1152px;
-  --pad-side:   clamp(20px, 10vw, 144px);
-  --nav-h:      80px;
-
-  /* ── 타이포그래피 (실측값) ── */
-  --text-nav:     22px;
-  --text-series:  clamp(52px, 8.75vw, 126px);  /* 126px @ 1440px */
-  --text-caption: 15px;
-  --text-footer:  18px;
-  --text-label:   14px;
-  --text-xs:      13px;
-
-  /* ── 자간 ── */
+  /* ── 자간 (Pierrick 실측) ── */
+  --ls-logo:    0.4px;
   --ls-nav:     0.4px;
-  --ls-series:  -5px;        /* Pierrick 실측 */
-  --ls-caption: 0.2px;
-  --ls-label:   0.5px;
+  --ls-hero:   -5px;
+  --ls-caption: normal;
+  --ls-body:    normal;
 
-  /* ── 그리드 ── */
-  --gap-grid:   8px;         /* Pierrick 실측 */
+  /* ── 폰트 크기 (Pierrick 실측) ── */
+  --text-hero:    126px;
+  --text-logo:    22px;
+  --text-nav:     22px;
+  --text-caption: 15px;
+  --text-meta:    14px;
+  --text-small:   12px;
+
+  /* ── 여백 (Pierrick 실측) ── */
+  --navbar-height:    80px;
+  --pad-page:         75.6px;
+  --pad-series-left:  136.8px;
+  --pad-series-right: 144px;
+  --series-mt:        80px;
+  --series-mb:        140px;
+  --wall-mb:          100px;
+  --artwork-margin:   180px;
 
   /* ── 모션 ── */
   --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast:   0.25s;
-  --dur-base:   0.45s;
-  --dur-slow:   0.7s;
+  --ease-in:    cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast:   0.2s;
+  --dur-base:   0.4s;
+  --dur-slow:   0.6s;
 }
 
-/* ── 다국어 자간 ── */
-:lang(ko) { letter-spacing: 0.01em; }
-:lang(ja) { letter-spacing: 0.01em; }
+/* ── 다국어 자간 예외 ── */
+:lang(ko) { letter-spacing: 0.02em; }
+:lang(ja) { letter-spacing: 0.02em; }
 :lang(zh) { letter-spacing: 0; }
-
-/* ── 모바일 ── */
-@media (max-width: 768px) {
-  :root {
-    --pad-side:  clamp(16px, 5vw, 24px);
-    --gap-grid:  4px;
-    --nav-h:     56px;
-  }
-}

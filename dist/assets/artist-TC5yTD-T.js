@@ -1,0 +1,1 @@
+import{t as e}from"./main-DsOHw1C_.js";import{t}from"./gsap-D_956-p2.js";function n(){e(),r()}function r(){t.fromTo(`.about-archival-block > *`,{opacity:0,y:24},{opacity:1,y:0,duration:.8,ease:`power3.out`,stagger:.12,delay:.3})}export{n as initArtist};

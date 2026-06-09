@@ -1,51 +1,28 @@
-/* ── 메인 비주얼 (단일 피처 이미지 — Pierrick 방식) ── */
-.main-visual-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: var(--nav-h);
-  background: var(--color-bg);
+/* ── 히어로 타이포 (Pierrick 방식) ── */
+.hero-type {
+  padding-top: var(--navbar-height);
+  padding-left: var(--pad-series-left);
+  padding-right: var(--pad-series-right);
+  margin-top: var(--series-mt);
 }
 
-.main-visual-inner {
-  max-width: var(--content-w);
-  margin: 0 auto;
-  padding: 0 var(--pad-side);
-}
-
-.main-visual-link {
-  display: block;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.main-visual-img {
-  width: 100%;
-  aspect-ratio: 1152 / 798;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  will-change: transform;
-}
-
-/* 하단 캡션 — 15px fw200 ls0.2px (Pierrick 실측) */
-.visual-label {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 14px 0 0;
-}
-.visual-label-title {
+.type-hero-link {
   font-family: var(--font-serif);
-  font-weight: var(--fw-thin);
-  font-size: var(--text-caption);
-  letter-spacing: var(--ls-caption);
+  font-size: var(--text-hero);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-hero);
   color: var(--color-ink);
+  line-height: 0.9;
+  display: block;
+  transition: opacity var(--dur-fast) ease;
 }
-.visual-label-meta {
-  font-family: var(--font-primary);
-  font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-caption);
-  color: var(--color-ink-muted);
+.type-hero-link:hover { opacity: 0.5; }
+
+/* 모바일 */
+@media (max-width: 768px) {
+  :root { --text-hero: clamp(48px, 12vw, 126px); }
+  .hero-type {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

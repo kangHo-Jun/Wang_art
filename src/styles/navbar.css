@@ -1,120 +1,96 @@
-/* ── 네비바 ── */
+/* ── 네비바 (Pierrick 실측 기반) ── */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: var(--navbar-height);
   z-index: 100;
-  height: var(--nav-h);
+  background: var(--color-bg);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--pad-side);
-  background: var(--color-bg);
-  transition: transform var(--dur-base) var(--ease-out),
-              opacity   var(--dur-base) var(--ease-out);
 }
+
+.navbar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 25px 0 20px 5px;
+}
+
+/* 로고 */
+.navbar-logo {
+  font-family: var(--font-serif);
+  font-size: var(--text-logo);
+  font-weight: var(--fw-extralight);
+  letter-spacing: var(--ls-logo);
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition: opacity var(--dur-fast) ease;
+}
+.navbar-logo:hover { opacity: 0.5; }
+
+/* 메인 메뉴 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0;
+}
+
+.navbar-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-nav);
+  font-weight: var(--fw-extralight);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink-dark);
+  margin-left: 50px;
+  transition: opacity var(--dur-fast) ease;
+  white-space: nowrap;
+}
+.navbar-link:hover { opacity: 0.5; }
+
+/* 소셜 링크 */
+.nav-social {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.navbar-link-small {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: var(--fw-light);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink-muted);
+  margin-left: 24px;
+  transition: opacity var(--dur-fast) ease;
+}
+.navbar-link-small:hover { opacity: 0.8; }
+
+/* 스크롤 숨김 */
 .navbar.hidden {
   transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
+  transition: transform 0.35s var(--ease-out);
 }
 
-.navbar-logo {
-  font-family: var(--font-primary);
-  font-weight: var(--fw-thin);
-  font-size: var(--text-nav);
-  letter-spacing: var(--ls-nav);
-  color: var(--color-ink);
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.navbar-logo .logo-cn {
-  font-size: 1em;
-}
-.navbar-logo:hover { color: var(--color-accent); }
+/* 메뉴 오버레이 제거 — Pierrick은 오버레이 없음 */
+.menu-overlay { display: none !important; }
+.navbar-hamburger { display: none !important; }
 
-.navbar-hamburger {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 201;
-  color: var(--color-ink);
-  transition: color var(--dur-fast) ease;
+/* 모바일 */
+@media (max-width: 768px) {
+  .navbar-hamburger {
+    display: flex !important;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+  }
+  .nav-menu,
+  .nav-social { display: none; }
+  .nav-menu.open,
+  .nav-social.open { display: flex; }
+  .navbar-link { font-size: 16px; margin-left: 0; }
 }
-.navbar-hamburger:hover { color: var(--color-accent); }
-.navbar-hamburger svg {
-  width: 20px;
-  height: 14px;
-}
-
-/* ── 메뉴 오버레이 ── */
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: var(--color-bg-dark);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--pad-side);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-base) var(--ease-out);
-}
-.menu-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.menu-main {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 40px;
-}
-.menu-main a {
-  font-family: var(--font-serif);
-  font-weight: var(--fw-thin);
-  font-size: clamp(2.2rem, 5vw, 4.5rem);
-  letter-spacing: 0.04em;
-  color: var(--color-cream);
-  line-height: 1.1;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.25s ease, color 0.2s ease;
-}
-.menu-overlay.open .menu-main a {
-  opacity: 1;
-  transform: translateY(0);
-}
-.menu-main a:hover,
-.menu-main a.active { color: var(--color-gold); }
-
-.menu-spacer {
-  width: 100%;
-  height: 1px;
-  background: rgba(249,246,237,0.1);
-  margin-bottom: 24px;
-}
-
-.menu-sub {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-.lang-btn {
-  font-family: var(--font-primary);
-  font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-label);
-  color: var(--color-cream-muted);
-  text-transform: uppercase;
-  transition: color 0.2s ease;
-}
-.lang-btn:hover,
-.lang-btn.active { color: var(--color-cream); }
