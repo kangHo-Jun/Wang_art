@@ -8,7 +8,7 @@
 
 | 왕열 Wang_art 페이지 경로 | Pierrick Calvez 원본 페이지 경로 | 페이지 역할 및 마크업 구조 |
 | :--- | :--- | :--- |
-| `/` (홈) | `/` (Home) | 메인 비주얼 이미지, 시리즈 목록(Space Mono), 3열 작품 그리드 |
+| `/` (홈) | `/` (Home) | 메인 비주얼 이미지, 시리즈 목록(Apercu Pro Mono 원형 / Wang_art에서는 Space Mono 대체), 3열 작품 그리드 |
 | `/works/` | `/selected-works` | 작품 카테고리 필터링 디렉토리 메뉴, 3열 작품 그리드 |
 | `/artist/` | `/resume` | 1열 작가 이력 레이아웃 (좌측 여백 256px, Download 우측 플로팅) |
 | `/collections/` | (원본 `/contact` 스타일 차용) | 소장처 목록 (원본 `/contact` 의 2열 정보 레이아웃, 여백, 타이포 문법을 차용하여 구성) |
