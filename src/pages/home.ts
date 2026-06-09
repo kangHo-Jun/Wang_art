@@ -1,68 +1,39 @@
 import { FEATURED } from '../data/artworks'
-import { gsap, initFadeUp, kenBurns } from '../shared/animation'
+import { navigateTo }    from '../shared/animation'
 
 const SERIES = [
-  { slug: 'utopia',    labelEn: 'Utopia',      labelKr: '유토피아'   },
-  { slug: 'ink',       labelEn: 'Ink',          labelKr: '먹과 산수'  },
-  { slug: 'acrylic',   labelEn: 'Acrylic',      labelKr: '아크릴'    },
-  { slug: 'landscape', labelEn: 'Landscape',    labelKr: '풍경'      },
-  { slug: 'horse',     labelEn: 'Horse',        labelKr: '말 시리즈'  },
+  { slug: 'utopia',    label: '유토피아' },
+  { slug: 'ink',       label: '먹과 산수' },
+  { slug: 'acrylic',   label: '아크릴 산수' },
+  { slug: 'landscape', label: '풍경' },
+  { slug: 'horse',     label: '말' },
 ]
 
 export function initHome(): void {
-  initFadeUp()
-  initHero()
   renderSeries()
   renderWall()
   initSubscribe()
+  initNavActive()
 }
 
-// ── 히어로 — 단일 피처 이미지 (Pierrick 방식) ──
-function initHero(): void {
-  const art  = FEATURED[0]
-  if (!art) return
-
-  const base    = import.meta.env.BASE_URL.replace(/\/$/, '')
-  const link    = document.getElementById('mainVisualLink')    as HTMLAnchorElement | null
-  const img     = document.getElementById('mainVisualImg')     as HTMLImageElement  | null
-  const titleEl = document.getElementById('visualTitle')
-  const metaEl  = document.getElementById('visualMeta')
-
-  if (!link || !img) return
-
-  img.src  = `${base}/${art.imageSrc}`
-  img.alt  = art.titleEn
-  link.href = `${base}/artwork/?id=${art.id}`
-
-  if (titleEl) titleEl.textContent = art.titleEn
-  if (metaEl)  metaEl.textContent  = `${art.year} · ${art.medium} · ${art.size}`
-
-  img.addEventListener('load', () => kenBurns(img), { once: true })
-  if (img.complete) kenBurns(img)
-}
-
-// ── 시리즈 — DM Mono 126px (Pierrick 핵심) ──
+// ── 시리즈 섹션 ──
 function renderSeries(): void {
   const list = document.getElementById('seriesList')
   if (!list) return
-
-  const base = import.meta.env.BASE_URL
 
   SERIES.forEach((s, i) => {
     const item = document.createElement('div')
     item.className = 'series-item'
 
     const a = document.createElement('a')
-    a.href      = `${base}works/?series=${s.slug}`
-    a.textContent = s.labelEn
-    a.title       = s.labelKr
+    a.href      = `${import.meta.env.BASE_URL}works/?series=${s.slug}`
+    a.textContent = s.label
     item.appendChild(a)
 
     if (i < SERIES.length - 1) {
       const sep = document.createElement('span')
       sep.className   = 'series-separator'
       sep.textContent = '·'
-      sep.setAttribute('aria-hidden', 'true')
       item.appendChild(sep)
     }
 
@@ -70,7 +41,7 @@ function renderSeries(): void {
   })
 }
 
-// ── 작품 그리드 ──
+// ── Wall 그리드 ──
 function renderWall(): void {
   const grid = document.getElementById('wallGrid')
   if (!grid) return
@@ -87,23 +58,15 @@ function renderWall(): void {
     item.dataset.artworkId = art.id
 
     const img = document.createElement('img')
-    img.src      = `${base}/${art.imageSrc}`
-    img.alt      = art.titleEn
-    img.loading  = 'lazy'
+    img.src     = `${base}/${art.imageSrc}`
+    img.alt     = art.titleEn
+    img.loading = 'lazy'
     img.decoding = 'async'
 
     item.appendChild(img)
 
     item.addEventListener('click', () => {
-      gsap.to(item, {
-        opacity: 0,
-        scale: 0.98,
-        duration: 0.3,
-        ease: 'power2.in',
-        onComplete: () => {
-          window.location.href = `${base}/artwork/?id=${art.id}`
-        }
-      })
+      navigateTo(`${base}/artwork/?id=${art.id}`)
     })
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') item.click()
@@ -118,15 +81,25 @@ function initSubscribe(): void {
   const form  = document.getElementById('subscribeForm')
   const input = document.getElementById('subscribeEmail') as HTMLInputElement
   const msg   = document.getElementById('subscribeMsg')
-  if (!form || !input || !msg) return
+  if (!form) return
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (!input.value || !input.value.includes('@')) {
-      msg.textContent = '올바른 이메일 주소를 입력해주세요.'
+    if (!input?.value?.includes('@')) {
+      if (msg) msg.textContent = '올바른 이메일 주소를 입력해주세요.'
       return
     }
-    msg.textContent = '구독해 주셔서 감사합니다.'
-    input.value = ''
+    if (msg) msg.textContent = '구독해 주셔서 감사합니다.'
+    if (input) input.value = ''
+  })
+}
+
+// ── 네비 active ──
+function initNavActive(): void {
+  const page = document.body.dataset.page
+  document.querySelectorAll<HTMLAnchorElement>('.navbar-link').forEach(a => {
+    if (a.dataset.nav === page) {
+      a.style.opacity = '0.5'
+    }
   })
 }

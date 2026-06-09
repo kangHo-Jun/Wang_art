@@ -80,3 +80,21 @@ export function countUp(el: HTMLElement, target: number, duration = 1.5): void {
     }
   })
 }
+
+// 페이지 진입 fade-in
+export function initPageTransition(): void {
+  gsap.fromTo(document.body,
+    { opacity: 0 },
+    { opacity: 1, duration: 0.4, ease: 'power2.out' }
+  )
+}
+
+// 페이지 이탈 fade-out
+export function navigateTo(url: string): void {
+  gsap.to(document.body, {
+    opacity: 0,
+    duration: 0.3,
+    ease: 'power2.in',
+    onComplete: () => { window.location.href = url }
+  })
+}

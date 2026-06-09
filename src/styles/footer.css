@@ -1,25 +1,53 @@
-/* ── 뉴스레터 ── */
+/* ── 푸터 (Pierrick 실측) ── */
+.footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 32px;
+  padding: 20px var(--pad-page);
+  /* Pierrick: border 없음 */
+}
+
+.footer-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
+  font-weight: var(--fw-extralight);
+  letter-spacing: var(--ls-nav);
+  color: var(--color-ink-muted);
+  transition: opacity var(--dur-fast) ease;
+}
+.footer-link:hover { opacity: 1; color: var(--color-ink); }
+
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: var(--text-caption);
+  font-weight: var(--fw-extralight);
+  letter-spacing: var(--ls-logo);
+  color: var(--color-ink);
+  text-transform: none;
+  margin-right: 8px;
+}
+
+/* 뉴스레터 */
 .subscribe {
-  padding: 80px var(--pad-side);
-  text-align: center;
+  padding: 80px var(--pad-page);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  border-top: 0.5px solid var(--color-ink-faint);
+  border-top: 1px solid var(--color-ink-faint);
 }
 .subscribe-title {
   font-family: var(--font-serif);
+  font-size: var(--text-caption);
   font-weight: var(--fw-light);
-  font-size: 20px;
-  letter-spacing: 0.1px;
+  letter-spacing: var(--ls-logo);
   color: var(--color-ink);
 }
 .subscribe-sub {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
   font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-label);
   color: var(--color-ink-muted);
 }
 .subscribe-form {
@@ -28,26 +56,25 @@
   margin-top: 8px;
 }
 .subscribe-input {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
   font-weight: var(--fw-light);
-  font-size: var(--text-label);
-  letter-spacing: var(--ls-caption);
   color: var(--color-ink);
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--color-ink-faint);
   padding: 8px 0;
-  width: 260px;
+  width: 240px;
   outline: none;
   transition: border-color var(--dur-fast) ease;
 }
 .subscribe-input:focus { border-color: var(--color-ink); }
 .subscribe-input::placeholder { color: var(--color-ink-muted); }
 .subscribe-btn {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
   font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-label);
+  letter-spacing: 0.1em;
   color: var(--color-ink);
   text-transform: uppercase;
   padding: 8px 16px;
@@ -56,38 +83,12 @@
 }
 .subscribe-btn:hover { opacity: 0.5; }
 .subscribe-msg {
-  font-size: var(--text-xs);
+  font-size: var(--text-small);
   color: var(--color-ink-muted);
   min-height: 1.2em;
 }
 
-/* ── 푸터 (Pierrick 실측: padding 120px 288px 0) ── */
-.footer {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0 40px;
-  padding: 120px clamp(20px, 20vw, 288px) 60px;
-}
-.footer-link {
-  font-family: var(--font-primary);
-  font-weight: var(--fw-thin);
-  font-size: var(--text-footer);   /* 18px */
-  letter-spacing: var(--ls-nav);   /* 0.4px */
-  color: var(--color-ink);
-  transition: color var(--dur-fast) ease;
-}
-.footer-link:hover { color: var(--color-accent); }
-.footer-name {
-  font-weight: var(--fw-thin);
-  font-size: var(--text-footer);
-}
-
-/* 모바일 */
 @media (max-width: 768px) {
-  .footer {
-    padding: 60px var(--pad-side) 40px;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .footer { padding: 20px 20px; }
+  .subscribe { padding: 48px 20px; }
 }

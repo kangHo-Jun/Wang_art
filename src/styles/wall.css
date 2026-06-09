@@ -1,104 +1,101 @@
-/* ── 시리즈 섹션 — Pierrick 핵심: 126px 모노 타이포 ── */
+/* ── 시리즈 섹션 (Pierrick 실측) ── */
 .series {
-  padding: 48px var(--pad-side) 40px;
+  padding: 0 var(--pad-series-right) 0 var(--pad-series-left);
+  margin: var(--series-mt) 0 var(--series-mb);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
   overflow-x: auto;
-  white-space: nowrap;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 .series::-webkit-scrollbar { display: none; }
 
 .series-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
   font-weight: var(--fw-light);
-  font-size: var(--text-label);
-  letter-spacing: var(--ls-label);
+  letter-spacing: 0.1em;
   color: var(--color-ink-muted);
   text-transform: uppercase;
-  display: block;
-  margin-bottom: 12px;
+  margin-right: 32px;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .series-list {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
   gap: 0;
 }
 
 .series-item {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
 }
 
-/* Pierrick 핵심: DM Mono 126px ls=-5px */
 .series-item a {
-  font-family: var(--font-mono);
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
   font-weight: var(--fw-regular);
-  font-size: var(--text-series);
-  letter-spacing: var(--ls-series);
-  line-height: 0.9;
+  letter-spacing: var(--ls-hero);
   color: var(--color-ink);
-  padding: 0 12px;
-  transition: color var(--dur-fast) ease;
-  display: inline-block;
+  line-height: 0.9;
+  white-space: nowrap;
+  transition: opacity var(--dur-fast) ease;
 }
-.series-item a:hover { color: var(--color-accent); }
-.series-item a.active { color: var(--color-accent); }
+.series-item a:hover { opacity: 0.5; }
 
 .series-separator {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
   color: var(--color-ink-faint);
-  font-size: var(--text-series);
-  font-family: var(--font-mono);
-  line-height: 0.9;
-  letter-spacing: var(--ls-series);
-  user-select: none;
+  margin: 0 16px;
+  align-self: center;
 }
 
-/* ── 작품 그리드 (Masonry — Pierrick 방식) ── */
+/* ── Wall 그리드 (Pierrick 실측) ── */
 .wall {
+  margin: 0 var(--pad-page) var(--wall-mb);
   columns: 3;
-  column-gap: var(--gap-grid);
-  padding: var(--gap-grid) var(--pad-side) 96px;
-  max-width: calc(var(--content-w) + var(--pad-side) * 2);
-  margin: 0 auto;
+  column-gap: 8px;
 }
 
 .wall-item {
   break-inside: avoid;
-  margin-bottom: var(--gap-grid);
+  margin-bottom: 8px;
   cursor: pointer;
   overflow: hidden;
-  position: relative;
+  display: block;
 }
-
-/* 비대칭 배치 */
-.wall-item:nth-child(3n+2) { margin-top: 40px; }
-.wall-item:nth-child(3n+3) { margin-top: 80px; }
 
 .wall-item img {
   width: 100%;
   display: block;
-  transition: opacity var(--dur-base) var(--ease-out);
+  transition: opacity var(--dur-fast) ease;
 }
 
-/* hover dimming — Pierrick 실측 */
-.wall:hover .wall-item img       { opacity: 0.35; }
-.wall:hover .wall-item:hover img { opacity: 1; }
+/* Pierrick hover — 나머지 dim */
+.wall:hover .wall-item img        { opacity: 0.5; }
+.wall:hover .wall-item:hover img  { opacity: 1; }
+
+/* 터치 환경 */
+@media (pointer: coarse) {
+  .wall:hover .wall-item img { opacity: 1; }
+}
 
 /* 모바일 */
 @media (max-width: 768px) {
-  .wall { columns: 2; }
-  .wall-item:nth-child(3n+2),
-  .wall-item:nth-child(3n+3) { margin-top: 0; }
-  .wall-item:nth-child(2n+2) { margin-top: 20px; }
+  .wall { columns: 2; margin: 0 20px var(--wall-mb); }
+  .series {
+    padding: 0 20px;
+    margin: 40px 0 60px;
+  }
+  .series-item a {
+    font-size: clamp(40px, 10vw, 80px);
+  }
 }
 @media (max-width: 480px) {
   .wall { columns: 1; }
-  .wall-item:nth-child(n) { margin-top: 0; }
-}
-
-/* 터치 환경 hover 비활성화 */
-@media (pointer: coarse) {
-  .wall:hover .wall-item img { opacity: 1; }
-  .wall-item:active img      { opacity: 0.85; }
 }
