@@ -31,16 +31,23 @@ function initDirectoryMenu(): void {
     currentSeries = 'all'
   }
 
-  // Render directory links
+  // If the selected series has 0 artworks, fall back to 'all'
+  if (currentSeries !== 'all') {
+    const hasArtworks = ARTWORKS.some(art => art.series === currentSeries)
+    if (!hasArtworks) currentSeries = 'all'
+  }
+
+  // Render directory links — skip 0-count categories (except 'all')
   SERIES.forEach((s) => {
-    const a = document.createElement('a')
-    a.href = '#'
-    a.className = 'directory-link' + (s.slug === currentSeries ? ' active' : '')
-    
-    // Calculate artwork count for this series
     const count = s.slug === 'all'
       ? ARTWORKS.length
       : ARTWORKS.filter(art => art.series === s.slug).length
+
+    if (s.slug !== 'all' && count === 0) return
+
+    const a = document.createElement('a')
+    a.href = '#'
+    a.className = 'directory-link' + (s.slug === currentSeries ? ' active' : '')
 
     a.innerHTML = `${s.label}<span class="directory-count">${count}</span>`
     a.dataset.series = s.slug

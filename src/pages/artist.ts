@@ -35,15 +35,9 @@ function renderResume(): void {
   createEntry(container, 'M.F.A. in Fine Arts, Graduate School of Hongik University, Seoul, Korea')
   createEntry(container, 'B.F.A. in Fine Arts, Hongik University, Seoul, Korea')
 
-  // 4. Solo Exhibitions
-  createCategory(container, 'Selected Solo Exhibitions')
-  createEntry(container, '2025 <span class="text-span-bold">[Solo Exhibition 1 - TBD]</span>, Gallery, Seoul, Korea')
-  createEntry(container, '2023 <span class="text-span-bold">[Solo Exhibition 2 - TBD]</span>, Gallery, Seoul, Korea')
-
-  // 5. Group Exhibitions
-  createCategory(container, 'Selected Group Exhibitions')
-  createEntry(container, '2024 <span class="text-span-bold">[Group Exhibition 1 - TBD]</span>, Museum, Gwacheon, Korea')
-  createEntry(container, '2022 <span class="text-span-bold">[Group Exhibition 2 - TBD]</span>, Museum, Ansan, Korea')
+  // 4. Exhibitions — placeholder until verified data is provided
+  createCategory(container, 'Selected Exhibitions')
+  createEntry(container, 'Exhibition history will be updated.')
 }
 
 function createCategory(parent: HTMLElement, name: string): void {
