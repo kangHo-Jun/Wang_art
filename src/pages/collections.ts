@@ -5,52 +5,85 @@ import { gsap }        from 'gsap'
 export function initCollections(): void {
   initFadeUp()
   renderCollections()
+  animateCollections()
 }
 
 function renderCollections(): void {
-  const list = document.getElementById('collectionsList')
-  if (!list) return
-  list.innerHTML = ''
+  const container = document.getElementById('collectionsContainer')
+  if (!container) return
+  container.innerHTML = ''
 
-  const typeLabel: Record<string, string> = {
-    museum: '미술관', gallery: '갤러리',
-    university: '대학교', government: '정부기관',
-  }
+  // Split collections into Column 1 (Museums) and Column 2 (Others)
+  const col1Data = COLLECTIONS.filter(c => c.type === 'museum')
+  const col2Data = COLLECTIONS.filter(c => c.type !== 'museum')
 
-  COLLECTIONS.forEach((col, i) => {
-    const item = document.createElement('div')
-    item.style.cssText = `
-      padding: 24px 0;
-      border-bottom: 0.5px solid var(--color-ink-faint);
-      display: grid;
-      grid-template-columns: 120px 1fr 1fr;
-      gap: 24px;
-      align-items: baseline;
-      opacity: 0;
-      transform: translateY(16px);
-    `
+  // Create Column 1
+  const block1 = document.createElement('div')
+  block1.className = 'contact-block'
 
-    item.innerHTML = `
-      <span style="font-family:var(--font-sans);font-size:var(--text-xs);
-        letter-spacing:var(--ls-label);color:var(--color-gold);
-        text-transform:uppercase;">${typeLabel[col.type]}</span>
-      <span style="font-family:var(--font-serif);font-weight:var(--fw-light);
-        font-size:var(--text-lg);letter-spacing:var(--ls-title);
-        color:var(--color-ink);">${col.nameKr}</span>
-      <span style="font-family:var(--font-sans);font-weight:var(--fw-light);
-        font-size:var(--text-xs);letter-spacing:var(--ls-label);
-        color:var(--color-ink-muted);text-transform:uppercase;">
-        ${col.city} · ${col.country}</span>
-    `
+  const cat1 = document.createElement('div')
+  cat1.className = 'contact-category'
+  cat1.textContent = 'Public Museums'
+  block1.appendChild(cat1)
 
-    list.appendChild(item)
+  col1Data.forEach(col => {
+    const link = document.createElement('div')
+    link.className = 'location-link'
+    
+    const title = document.createElement('div')
+    title.className = 'location-title'
+    title.textContent = col.nameEn
+    
+    const meta = document.createElement('div')
+    meta.className = 'location-meta'
+    meta.textContent = `${col.nameKr} · ${col.city}, ${col.country}`
+    
+    link.appendChild(title)
+    link.appendChild(meta)
+    block1.appendChild(link)
+  })
 
-    gsap.to(item, {
+  // Create Column 2
+  const block2 = document.createElement('div')
+  block2.className = 'contact-block'
+
+  const cat2 = document.createElement('div')
+  cat2.className = 'contact-category'
+  cat2.textContent = 'Public & Institutional Collections'
+  block2.appendChild(cat2)
+
+  col2Data.forEach(col => {
+    const link = document.createElement('div')
+    link.className = 'location-link'
+    
+    const title = document.createElement('div')
+    title.className = 'location-title'
+    title.textContent = col.nameEn
+    
+    const meta = document.createElement('div')
+    meta.className = 'location-meta'
+    meta.textContent = `${col.nameKr} · ${col.city}, ${col.country}`
+    
+    link.appendChild(title)
+    link.appendChild(meta)
+    block2.appendChild(link)
+  })
+
+  container.appendChild(block1)
+  container.appendChild(block2)
+}
+
+function animateCollections(): void {
+  gsap.fromTo(
+    '.contact-block',
+    { opacity: 0, y: 16 },
+    {
       opacity: 1,
       y: 0,
       duration: 0.6,
       ease: 'power3.out',
-      delay: i * 0.08,
-    })
-  })
+      stagger: 0.12,
+      delay: 0.2
+    }
+  )
 }

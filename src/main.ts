@@ -12,6 +12,7 @@ import './styles/hero.css'
 import './styles/wall.css'
 import './styles/artwork.css'
 import './styles/resume.css'
+import './styles/contact.css'
 import './styles/footer.css'
 import './styles/animations.css'
 
