@@ -1,6 +1,6 @@
 # Pierrick Calvez — 왕열 Wang Yeul 완전 이식 정밀 설계서 (v3.0 Complete)
 
-이 문서는 `https://www.pierrickcalvez.com/` 사이트를 실측 분석한 데이터를 기반으로 작성된 완전 이식 명세서입니다. 본 설계서는 왕열 작가의 포트폴리오 사이트가 원본의 정보구조, 여백, 타이포그래피, 네비게이션, 작품 그리드(Wall Grid), 그리고 소개(Resume) 및 연락(Contact) 페이지까지 완벽하게 동일한 시각적/구조적 규칙을 따르도록 강제합니다.
+이 문서는 `https://www.pierrickcalvez.com/` 사이트를 실측 분석한 데이터를 기반으로 작성된 완전 이식 명세서입니다. 본 설계서는 왕열 작가의 포트폴리오 사이트가 원본의 정보구조, 여백, 타이포그래피, 네비게이션, 작품 그리드(Wall Grid), 그리고 소개(Resume) 및 소장처(Collections) 페이지까지 완벽하게 동일한 시각적/구조적 규칙을 따르도록 강제합니다.
 
 ---
 
@@ -8,23 +8,23 @@
 
 | 왕열 Wang_art 페이지 경로 | Pierrick Calvez 원본 페이지 경로 | 페이지 역할 및 마크업 구조 |
 | :--- | :--- | :--- |
-| `/` (홈) | `/` (Home) | 메인 비주얼 hero, 시리즈 목록(Space Mono), 3열 작품 그리드 |
+| `/` (홈) | `/` (Home) | 메인 비주얼 이미지, 시리즈 목록(Space Mono), 3열 작품 그리드 |
 | `/works/` | `/selected-works` | 작품 카테고리 필터링 디렉토리 메뉴, 3열 작품 그리드 |
 | `/artist/` | `/resume` | 1열 작가 이력 레이아웃 (좌측 여백 256px, Download 우측 플로팅) |
-| `/collections/` | `/contact` | 2열 연락처 및 작업실 위치 레이아웃 (Location, Contact) |
+| `/collections/` | (원본 `/contact` 스타일 차용) | 소장처 목록 (원본 `/contact` 의 2열 정보 레이아웃, 여백, 타이포 문법을 차용하여 구성) |
 | `/artwork/` | `/artwork/:slug` | 작품 상세 뷰어 (이전/다음 투명 클릭 영역, 키보드 탐색) |
 | `/worlds/` | (자체 구현 v3.0) | Pierrick 스타일의 여백과 폰트를 적용한 작품세계 소개 |
 
 ---
 
-## 2. 홈 구조에서 "히어로 이미지" 표현 기준
+## 2. 홈 구조에서 대표작 메인 비주얼 표현 기준
 
 *   **원본 분석**:
-    - `https://www.pierrickcalvez.com/` 홈 화면 최상단에는 거대 이미지(`.main-visual-image`)가 위치하며, 그 하단 우측에 캡션(`.label.home`)이 놓입니다.
+    - `https://www.pierrickcalvez.com/` 홈 화면 최상단에는 대표작 단일 이미지(`.main-visual-image`)가 위치하며, 그 하단 우측에 캡션(`.label.home`)이 놓입니다.
     - 그 아래에 `Series /` 라벨과 monospaced 폰트로 된 시리즈 링크 목록(`.series`)이 배치되고, 마지막으로 3열 작품 그리드(`.wall`)가 나타납니다.
 *   **결정 사항**:
-    - **히어로 이미지를 원본과 동일하게 유지 및 표현합니다.**
-    - 단, 기존의 단순 텍스트 타이포 전용 히어로인 `.hero-type` 및 `.type-hero-link`는 제거하고, 원본과 동일하게 대표작 이미지(`.main-visual-image`) 및 우측 정렬 캡션(`.label.home`) 구조로 완전 대체합니다.
+    - **일반적인 브랜드 배너 형식의 히어로 영역 표현을 배제하고, 원본과 동일하게 단일 대표작 메인 비주얼 및 우측 정렬 캡션 구조로 통일합니다.**
+    - 기존의 텍스트 타이포 전용 섹션인 `.hero-type` 및 `.type-hero-link`를 전면 제거하고, `.main-visual-image` 및 `.label.home` 구조로 교체하여 시리즈 섹션으로 부드럽게 흐르는 구조를 만듭니다.
 
 ---
 
@@ -61,21 +61,16 @@
 
 ---
 
-## 5. Contact (Collections) 페이지 정밀 스펙
+## 5. Contact 스타일을 적용한 소장처(Collections) 페이지 정밀 스펙
 
-*   **레이아웃 및 구조**:
+*   **레이아웃 및 구조 (원본 `/contact` 스타일 차용)**:
     - 컨테이너 너비: **`1024px`** (`margin: 0px 128px 40px`, `display: flex;`)
     - 좌우 2열 비대칭 배치:
-      - **좌측 열 (`.contact-block` 1)**: `Location` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
-      - **우측 열 (`.contact-block` 2)**: `Contact` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
-*   **Location 섹션**:
+      - **좌측 열 (`.contact-block` 1)**: `Domestic Collections` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
+      - **우측 열 (`.contact-block` 2)**: `International & Public Collections` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
+*   **소장처 데이터 구성**:
     - 카테고리 제목: `.contact-category` (`font-size: 18px; font-weight: 500; margin-bottom: 20px;`)
-    - 주소 링크: `.location-link` (`display: inline-block; font-size: 14px; margin-bottom: 60px; text-decoration: none;`)
-      - 영문 주소 및 국문 주소를 한 줄씩 병렬 배치합니다.
-*   **Contact 섹션**:
-    - 이메일 주소: `.contact-email` (`studio@wangyeul.com`) 및 우측에 인라인 배치된 클립보드 복사 링크 `.email-copy` (텍스트 `copy`).
-    - 소셜 및 뉴스레터 링크: `.contact-link` 형태로 Instagram 링크 및 `Newsletter` 링크 제공.
-    - **주의**: Contact 페이지 내에는 이미지 배열이나 폼 형태의 뉴스레터 영역이 존재하지 않으며, 단일 `Newsletter` 텍스트 링크가 홈 화면의 뉴스레터 앵커(`#mailing`)로 연결되는 구조입니다.
+    - 소장처 주소/기관 목록: `.location-link` 및 `.contact-link` 형태의 2열 정보 레이아웃, 여백, 타이포 문법을 빌려서 표현합니다.
 
 ---
 
@@ -104,7 +99,7 @@
 - [ ] **시리즈 목록**: 가로 스크롤 방식이 아닌 줄바꿈을 허용하는 `display: inline` 흐름에 monospaced 폰트 및 골드 period(`.`) 장식이 들어갔는지 확인합니다.
 - [ ] **Wall 그리드**: 데스크톱 3열, 모바일 2열/1열 구조에 개별 아이템 세로 마진 `75px`가 빈틈없이 적용되었는지 체크합니다.
 - [ ] **이미지 호버 감쇠**: 그리드 전체 호버 시 나머지 작품들이 `opacity: 0.5`로 흐려지고, 호버 대상만 `100%` 선명해지는 모션이 작동하는지 검사합니다.
-- [ ] **Resume 비대칭 정렬**: Artist 페이지 레이아웃이 너비 `896px` 및 좌측 마진 `256px` 비대칭 구조를 정확히 따르는지 대조합니다.
-- [ ] **Contact 2열 배치**: Collections 페이지의 주소 및 메일 정보가 2열 비대칭 블록으로 오차 없이 분할 배치되는지 검증합니다.
+- [ ] **Resume/Artist 비대칭 정렬**: Artist 페이지 레이아웃이 너비 `896px` 및 좌측 마진 `256px` 비대칭 구조를 정확히 따르는지 대조합니다.
+- [ ] **Collections/소장처 2열 배치**: Collections 페이지의 소장처 정보가 원본 `/contact` 레이아웃을 차용한 2열 비대칭 블록으로 분할 배치되는지 검증합니다.
 - [ ] **모바일 오버레이 드로어**: 햄버거 메뉴 및 X 닫기 전환 and stagger 트랜지션 모션이 부드럽게 돌아가는지 확인합니다.
 - [ ] **경로 설계**: 모든 파일 및 앵커의 베이스 경로가 `/Wang_art/` 구조에 맞추어 유기적으로 연동되는지 체크합니다.
