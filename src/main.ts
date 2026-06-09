@@ -1,4 +1,4 @@
-import { initLoading }  from './shared/loading'
+
 import { initFloatNav } from './shared/nav'
 import { initI18n }     from './shared/i18n-engine'
 import { initLenis }    from './shared/animation'
@@ -16,7 +16,7 @@ import './styles/animations.css'
 
 const page = document.body.dataset.page
 
-initLoading()
+
 initFloatNav()
 initI18n()
 initMenuOverlay()
