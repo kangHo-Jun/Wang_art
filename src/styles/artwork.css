@@ -1,81 +1,101 @@
-/* ── 작품 상세 페이지 ── */
+/* ── 작품 상세 페이지 (Pierrick 실측) ── */
 .artwork-page {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 52px;
+  padding-top: var(--navbar-height);
+  min-height: 100vh;
 }
 
-.artwork-stage {
+/* 이전/다음 네비 — 화면 양쪽 투명 클릭 영역 */
+.artwork-nav-container {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  width: 100%;
+  height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: stretch;
+  pointer-events: none;
+  z-index: 10;
+}
+.nav-artwork-container {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 24px var(--pad-page);
+  pointer-events: auto;
+  cursor: pointer;
+  padding: 0 24px;
+  opacity: 0;
+  transition: opacity var(--dur-fast) ease;
+}
+.nav-artwork-container:hover { opacity: 1; }
+.nav-artwork-container.c-left  { justify-content: flex-start; }
+.nav-artwork-container.c-right { justify-content: flex-end; }
+.nav-artwork-arrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: var(--fw-light);
+  letter-spacing: 0.1em;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+}
+.nav-separator {
+  flex: 3;
+  pointer-events: none;
 }
 
-.artwork-stage img {
-  max-width: 100%;
-  max-height: calc(100svh - 52px - 120px);
-  object-fit: contain;
-  display: block;
-}
-
-.artwork-caption {
-  padding: 24px var(--pad-page) 16px;
-  border-top: 0.5px solid var(--color-ink-faint);
+/* 메인 작품 컨테이너 */
+.artwork-container {
+  margin: 40px var(--artwork-margin);
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px 24px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.artwork-num {
-  font-family: var(--font-serif);
-  font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-micro);
-  color: var(--color-gold);
+.artwork-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 40px;
 }
-.artwork-title {
+
+/* 캡션 — Pierrick 방식 (inline 나열) */
+.label.artwork {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 4px;
+  margin-top: 60px;
+  padding-bottom: 80px;
+}
+.label-name {
   font-family: var(--font-serif);
+  font-size: var(--text-caption);
   font-weight: var(--fw-light);
-  font-size: var(--text-lg);
-  letter-spacing: var(--ls-title);
   color: var(--color-ink);
 }
-.artwork-title-kr {
-  font-family: var(--font-serif-kr);
-  font-weight: var(--fw-light);
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-}
-.artwork-meta-item {
+.comma {
   font-family: var(--font-sans);
-  font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-label);
+  font-size: var(--text-meta);
   color: var(--color-ink-muted);
-  text-transform: uppercase;
 }
+.label-year,
+.label-medium,
+.label-size,
+.label-number {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
+  font-weight: var(--fw-light);
+  color: var(--color-ink-muted);
+}
+.label-medium::before,
+.label-size::before { content: ', '; }
 
-.artwork-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px var(--pad-page) 32px;
+/* 모바일 */
+@media (max-width: 768px) {
+  .artwork-container {
+    margin: 24px 20px;
+  }
+  .artwork-nav-container {
+    padding: 0 12px;
+  }
+  :root { --artwork-margin: 20px; }
 }
-.artwork-nav-btn {
-  font-family: var(--font-sans);
-  font-weight: var(--fw-light);
-  font-size: var(--text-xs);
-  letter-spacing: var(--ls-label);
-  color: var(--color-ink-muted);
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color var(--dur-fast) ease;
-}
-.artwork-nav-btn:hover { color: var(--color-ink); }
-.artwork-nav-btn:disabled { opacity: 0.2; pointer-events: none; }

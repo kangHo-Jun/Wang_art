@@ -2,68 +2,58 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>작품 — 왕열 Wang Yeul</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@200;300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet" />
 </head>
 <body data-page="artwork">
 
   <header class="navbar" id="navbar">
-    <a href="/Wang_art/" class="navbar-logo">
-      <span class="logo-cn">王烈</span>
-      <span class="logo-en">Wang Yeul</span>
-    </a>
-    <button class="navbar-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false">
-      <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-        <line x1="0" y1="1"  x2="20" y2="1"  stroke="currentColor" stroke-width="1.2"/>
-        <line x1="0" y1="7"  x2="20" y2="7"  stroke="currentColor" stroke-width="1.2"/>
-        <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.2"/>
-      </svg>
-    </button>
+    <div class="navbar-container">
+      <a href="/Wang_art/" class="navbar-logo">왕열 Wang Yeul</a>
+      <nav class="nav-menu">
+        <a href="/Wang_art/works/"       class="navbar-link" data-nav="works">Selected Works</a>
+        <a href="/Wang_art/worlds/"      class="navbar-link" data-nav="worlds">작품세계</a>
+        <a href="/Wang_art/artist/"      class="navbar-link" data-nav="artist">작가</a>
+        <a href="/Wang_art/collections/" class="navbar-link" data-nav="collections">소장처</a>
+      </nav>
+      <div class="nav-social">
+        <a href="https://www.instagram.com/wangyeul" target="_blank" rel="noopener" class="navbar-link-small">Instagram</a>
+        <a href="mailto:studio@wangyeul.com" class="navbar-link-small">Email</a>
+      </div>
+    </div>
   </header>
 
-  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true">
-    <nav class="menu-main">
-      <a href="/Wang_art/"             data-nav="home">대표작품</a>
-      <a href="/Wang_art/works/"       data-nav="works">작품</a>
-      <a href="/Wang_art/worlds/"      data-nav="worlds">작품세계</a>
-      <a href="/Wang_art/artist/"      data-nav="artist">작가</a>
-      <a href="/Wang_art/collections/" data-nav="collections">소장처</a>
-    </nav>
-    <div class="menu-spacer"></div>
-    <nav class="menu-sub">
-      <button class="lang-btn active" data-lang="ko">한국어</button>
-      <button class="lang-btn" data-lang="en">English</button>
-      <button class="lang-btn" data-lang="ja">日本語</button>
-      <button class="lang-btn" data-lang="zh">中文</button>
-    </nav>
+  <!-- 이전/다음 투명 클릭 영역 -->
+  <div class="artwork-nav-container" id="artworkNavContainer">
+    <div class="nav-artwork-container c-left" id="artworkPrev">
+      <span class="nav-artwork-arrow">← Prev</span>
+    </div>
+    <div class="nav-separator"></div>
+    <div class="nav-artwork-container c-right" id="artworkNext">
+      <span class="nav-artwork-arrow">Next →</span>
+    </div>
   </div>
 
-  <main class="artwork-page" id="artworkPage">
-    <div class="artwork-stage" id="artworkStage">
-      <img class="artwork-img" id="artworkImg" src="" alt="" />
+  <main class="artwork-page">
+    <div class="artwork-container" id="artworkContainer">
+      <img class="artwork-image" id="artworkImg" src="" alt="" />
+      <div class="label artwork" id="artworkLabel">
+        <span class="label-name"  id="labelName"></span>
+        <span class="comma">,</span>
+        <span class="label-year"  id="labelYear"></span>
+        <span class="label-medium" id="labelMedium"></span>
+        <span class="label-size"  id="labelSize"></span>
+      </div>
     </div>
-    <div class="artwork-caption" id="artworkCaption">
-      <span class="artwork-num"    id="artworkNum"></span>
-      <span class="artwork-title"  id="artworkTitle"></span>
-      <span class="artwork-title-kr" id="artworkTitleKr"></span>
-      <span class="artwork-meta-item" id="artworkYear"></span>
-      <span class="artwork-meta-item" id="artworkMedium"></span>
-      <span class="artwork-meta-item" id="artworkSize"></span>
-      <span class="artwork-meta-item" id="artworkCollection"></span>
-    </div>
-    <div class="artwork-nav" id="artworkNav">
-      <button class="artwork-nav-btn" id="artworkPrev">← Prev</button>
-      <a class="artwork-nav-btn" href="/Wang_art/works/" style="opacity:0.45">All Works</a>
-      <button class="artwork-nav-btn" id="artworkNext">Next →</button>
-    </div>
+    <footer class="footer" role="contentinfo">
+      <a href="/Wang_art/" class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://www.instagram.com/wangyeul" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+      <a href="mailto:studio@wangyeul.com" class="footer-link">Email</a>
+    </footer>
   </main>
-
-  <div class="custom-cursor" id="customCursor" aria-hidden="true">
-    <span class="custom-cursor-label">VIEW</span>
-  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
