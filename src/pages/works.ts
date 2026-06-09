@@ -1,16 +1,81 @@
 import { gsap }      from 'gsap'
 import { ARTWORKS }  from '../data/artworks'
 import { initFadeUp } from '../shared/animation'
+import { navigateTo } from '../shared/animation'
 import type { Artwork } from '../types'
 
-function folderOf(art: Artwork): string {
-  const parts = art.imageSrc.split('/')
-  return parts[parts.length - 2] ?? ''
-}
+const SERIES = [
+  { slug: 'all',       label: 'All' },
+  { slug: 'utopia',    label: 'Utopia' },
+  { slug: 'ink',       label: 'Ink & Landscape' },
+  { slug: 'acrylic',   label: 'Acrylic Landscape' },
+  { slug: 'landscape', label: 'Landscape' },
+  { slug: 'horse',     label: 'Horse' },
+]
 
 export function initWorks(): void {
   initFadeUp()
-  renderWall(ARTWORKS)
+  initDirectoryMenu()
+}
+
+function initDirectoryMenu(): void {
+  const container = document.getElementById('directoryMenu')
+  if (!container) return
+  container.innerHTML = ''
+
+  const params = new URLSearchParams(location.search)
+  let currentSeries = params.get('series') || 'all'
+
+  // If the query parameter is not valid, default to 'all'
+  if (!SERIES.some(s => s.slug === currentSeries)) {
+    currentSeries = 'all'
+  }
+
+  // Render directory links
+  SERIES.forEach((s) => {
+    const a = document.createElement('a')
+    a.href = '#'
+    a.className = 'directory-link' + (s.slug === currentSeries ? ' active' : '')
+    
+    // Calculate artwork count for this series
+    const count = s.slug === 'all'
+      ? ARTWORKS.length
+      : ARTWORKS.filter(art => art.series === s.slug).length
+
+    a.innerHTML = `${s.label}<span class="directory-count">${count}</span>`
+    a.dataset.series = s.slug
+
+    a.addEventListener('click', (e) => {
+      e.preventDefault()
+      // Update active state in UI
+      container.querySelectorAll('.directory-link').forEach(link => {
+        link.classList.remove('active')
+      })
+      a.classList.add('active')
+
+      // Update URL query parameter without reloading page
+      const newUrl = s.slug === 'all' 
+        ? `${location.pathname}` 
+        : `${location.pathname}?series=${s.slug}`
+      history.pushState(null, '', newUrl)
+
+      // Filter and render wall
+      filterAndRender(s.slug)
+    })
+
+    container.appendChild(a)
+  })
+
+  // Initial render
+  filterAndRender(currentSeries)
+}
+
+function filterAndRender(slug: string): void {
+  const filtered = slug === 'all' 
+    ? ARTWORKS 
+    : ARTWORKS.filter(art => art.series === slug)
+  
+  renderWall(filtered)
 }
 
 function renderWall(artworks: Artwork[]): void {
@@ -27,7 +92,6 @@ function renderWall(artworks: Artwork[]): void {
     item.setAttribute('tabindex', '0')
     item.setAttribute('aria-label', `${art.titleKr}, ${art.year}`)
     item.dataset.artworkId = art.id
-    item.dataset.folder    = folderOf(art)
 
     const img = document.createElement('img')
     img.src      = `${base}/${art.imageSrc}`
@@ -37,17 +101,8 @@ function renderWall(artworks: Artwork[]): void {
 
     item.appendChild(img)
 
-    // 클릭 → 작품 상세 (추후 artwork 페이지로 연결)
     item.addEventListener('click', () => {
-      gsap.to(item, {
-        opacity: 0,
-        scale: 0.98,
-        duration: 0.3,
-        ease: 'power2.in',
-        onComplete: () => {
-          window.location.href = `${base}/artwork/?id=${art.id}`
-        }
-      })
+      navigateTo(`${base}/artwork/?id=${art.id}`)
     })
 
     item.addEventListener('keydown', (e) => {
@@ -57,7 +112,7 @@ function renderWall(artworks: Artwork[]): void {
     grid.appendChild(item)
   })
 
-  // GSAP stagger 등장
+  // GSAP stagger 등장 애니메이션
   gsap.fromTo('.wall-item',
     { opacity: 0, y: 16 },
     {

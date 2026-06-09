@@ -66,8 +66,8 @@
 *   **레이아웃 및 구조 (원본 `/contact` 스타일 차용)**:
     - 컨테이너 너비: **`1024px`** (`margin: 0px 128px 40px`, `display: flex;`)
     - 좌우 2열 비대칭 배치:
-      - **좌측 열 (`.contact-block` 1)**: `Domestic Collections` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
-      - **우측 열 (`.contact-block` 2)**: `International & Public Collections` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
+      - **좌측 열 (`.contact-block` 1)**: `Public Museums` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
+      - **우측 열 (`.contact-block` 2)**: `Public & Institutional Collections` 정보 (너비 `384px`, 마진 `0px 0px 0px 128px`)
 *   **소장처 데이터 구성**:
     - 카테고리 제목: `.contact-category` (`font-size: 18px; font-weight: 500; margin-bottom: 20px;`)
     - 소장처 주소/기관 목록: `.location-link` 및 `.contact-link` 형태의 2열 정보 레이아웃, 여백, 타이포 문법을 빌려서 표현합니다.

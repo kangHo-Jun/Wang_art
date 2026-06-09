@@ -1,100 +1,133 @@
-/* ── 시리즈 섹션 (Pierrick 실측) ── */
+/* ── 시리즈 ── */
 .series {
+  display: block;
   padding: 0 var(--pad-series-right) 0 var(--pad-series-left);
-  margin: var(--series-mt) 0 var(--series-mb);
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
+  margin: var(--series-mt) 0 var(--series-mb);  /* 80px 0 140px */
 }
-.series::-webkit-scrollbar { display: none; }
 
 .series-label {
+  display: block;
+  padding: 0 0 0 5px;
+  margin: 14px 0 18px;
   font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--fw-light);
-  letter-spacing: 0.1em;
-  color: var(--color-ink-muted);
-  text-transform: uppercase;
-  margin-right: 32px;
-  flex-shrink: 0;
-  align-self: center;
+  font-size: 16px;
+  font-weight: var(--fw-300);
+  letter-spacing: 0.5px;
+  color: var(--color-ink);
 }
 
 .series-list {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0;
+  display: block;
+  width: 100%;
 }
 
 .series-item {
+  display: inline;
+}
+
+.series-item .type-hero-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-hero);      /* 126px */
+  font-weight: var(--fw-400);
+  letter-spacing: var(--ls-hero);   /* -5px */
+  line-height: 1.05;
+  color: var(--color-ink);
+  display: inline;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+
+.series-item .type-hero-link:hover {
+  opacity: var(--opacity-hover);
+}
+
+.type-menu-separator {
+  display: inline;
+  font-family: var(--font-mono);
+  font-size: var(--text-hero);
+  letter-spacing: var(--ls-hero);
+  color: var(--color-gold);
+  margin: 0 10px;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .series { padding: 0 var(--pad-mob); margin: 40px 0 60px; }
+  .series-item .type-hero-link { font-size: var(--text-hero-mobile); letter-spacing: var(--ls-hero-mobile); }
+  .type-menu-separator { font-size: var(--text-hero-mobile); letter-spacing: var(--ls-hero-mobile); margin: 0 4px; }
+}
+
+/* ── Selected Works 디렉토리 메뉴 ── */
+.directory-menu {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 40px var(--pad-wall-lr) 64px;
+  padding-left: 5px;
+}
+
+.directory-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
+  font-weight: var(--fw-300);
+  color: var(--color-ink);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+  display: inline-flex;
   align-items: baseline;
 }
 
-.series-item a {
-  font-family: var(--font-serif);
-  font-size: var(--text-hero);
-  font-weight: var(--fw-regular);
-  letter-spacing: var(--ls-hero);
-  color: var(--color-ink);
-  line-height: 0.9;
-  white-space: nowrap;
-  transition: opacity var(--dur-fast) ease;
-}
-.series-item a:hover { opacity: 0.5; }
-
-.series-separator {
-  font-family: var(--font-sans);
-  font-size: var(--text-meta);
-  color: var(--color-ink-faint);
-  margin: 0 16px;
-  align-self: center;
+.directory-link:hover,
+.directory-link.active {
+  opacity: 1;
 }
 
-/* ── Wall 그리드 (Pierrick 실측) ── */
+.directory-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--fw-400);
+  margin-left: 3px;
+  align-self: flex-start;
+  position: relative;
+  top: -2px;
+}
+
+@media (max-width: 768px) {
+  .directory-menu {
+    margin: 30px var(--pad-mob) 40px;
+    gap: 10px 20px;
+  }
+}
+
+/* ── Wall 그리드 CSS ── */
 .wall {
-  margin: 0 var(--pad-page) var(--wall-mb);
   columns: 3;
   column-gap: 8px;
+  margin: 0 var(--pad-wall-lr) var(--wall-mb);  /* 0 75.6px 100px */
 }
-
 .wall-item {
   break-inside: avoid;
-  margin-bottom: 8px;
+  margin-bottom: var(--wall-item-mb);  /* 75px 실측 */
   cursor: pointer;
   overflow: hidden;
   display: block;
 }
-
 .wall-item img {
   width: 100%;
   display: block;
-  transition: opacity var(--dur-fast) ease;
+  transition: opacity var(--dur-hover) var(--ease-hover);
 }
 
-/* Pierrick hover — 나머지 dim */
-.wall:hover .wall-item img        { opacity: 0.5; }
-.wall:hover .wall-item:hover img  { opacity: 1; }
+/* Pierrick hover 방식 */
+.wall:hover .wall-item img       { opacity: var(--opacity-hover); }
+.wall:hover .wall-item:hover img { opacity: 1; }
 
-/* 터치 환경 */
 @media (pointer: coarse) {
   .wall:hover .wall-item img { opacity: 1; }
 }
-
-/* 모바일 */
 @media (max-width: 768px) {
-  .wall { columns: 2; margin: 0 20px var(--wall-mb); }
-  .series {
-    padding: 0 20px;
-    margin: 40px 0 60px;
-  }
-  .series-item a {
-    font-size: clamp(40px, 10vw, 80px);
-  }
+  .wall { columns: 2; margin: 0 var(--pad-mob) var(--wall-mb); }
+  .wall-item { margin-bottom: 20px; }
 }
 @media (max-width: 480px) {
   .wall { columns: 1; }
