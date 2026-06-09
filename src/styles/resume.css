@@ -1,0 +1,72 @@
+/* ── Artist Resume 스타일 (Pierrick /resume 이식) ── */
+.resume {
+  display: block;
+  width: 896px;
+  margin: 40px 0px 40px 256px;
+  padding-top: 40px;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
+
+.download {
+  display: block;
+  width: 120px;
+  margin: 0px 128px 0px 0px;
+  padding: 2px 0px 16px;
+  font-size: 15px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  color: var(--color-ink);
+  float: right;
+  text-decoration: underline;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+.download:hover {
+  opacity: var(--opacity-hover);
+}
+
+.resume-category {
+  display: block;
+  width: 100%;
+  margin: 70px 0px 20px;
+  font-size: 18px;
+  font-weight: var(--fw-500);
+  letter-spacing: 0.3px;
+  line-height: 20px;
+}
+
+.resume-text {
+  display: block;
+  width: 100%;
+  margin: 0px 0px 16px;
+  font-size: 15px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.3px;
+  line-height: 21px;
+}
+
+.text-span-bold {
+  font-weight: var(--fw-500);
+}
+
+.text-span-italic-bold {
+  font-weight: var(--fw-500);
+  font-style: italic;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .resume {
+    width: auto;
+    margin: 40px var(--pad-mob);
+    padding-top: 20px;
+  }
+  .download {
+    float: none;
+    margin: 0 0 24px;
+  }
+  .resume-category {
+    margin: 40px 0 16px;
+  }
+}

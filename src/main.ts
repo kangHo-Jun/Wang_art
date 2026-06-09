@@ -11,6 +11,7 @@ import './styles/navbar.css'
 import './styles/hero.css'
 import './styles/wall.css'
 import './styles/artwork.css'
+import './styles/resume.css'
 import './styles/footer.css'
 import './styles/animations.css'
 
