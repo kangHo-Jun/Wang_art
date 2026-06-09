@@ -2,60 +2,46 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>작품세계 — 왕열 Wang Yeul</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@200;300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/Wang_art/assets/main-D_3_mul2.js"></script>
-  <link rel="stylesheet" crossorigin href="/Wang_art/assets/main-CN3aORgb.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/Wang_art/assets/main-DAWeabrH.js"></script>
+  <link rel="stylesheet" crossorigin href="/Wang_art/assets/main-DAc2PCXH.css">
 </head>
 <body data-page="worlds">
 
   <header class="navbar" id="navbar">
-    <a href="/Wang_art/" class="navbar-logo">
-      <span class="logo-cn">王烈</span>
-      <span class="logo-en">Wang Yeul</span>
-    </a>
-    <button class="navbar-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false">
-      <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
-        <line x1="0" y1="1"  x2="20" y2="1"  stroke="currentColor" stroke-width="1.2"/>
-        <line x1="0" y1="7"  x2="20" y2="7"  stroke="currentColor" stroke-width="1.2"/>
-        <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.2"/>
-      </svg>
-    </button>
+    <div class="navbar-container">
+      <a href="/Wang_art/" class="navbar-link logo">왕열 Wang Yeul</a>
+      <nav class="nav-menu" role="navigation">
+        <a href="/Wang_art/works/"       class="navbar-link big" data-nav="works">Selected Works</a>
+        <a href="/Wang_art/worlds/"      class="navbar-link big" data-nav="worlds">작품세계</a>
+        <a href="/Wang_art/artist/"      class="navbar-link big" data-nav="artist">작가</a>
+        <a href="/Wang_art/collections/" class="navbar-link big" data-nav="collections">소장처</a>
+        <div class="nav-spacer"></div>
+        <a href="https://instagram.com/wangyeul" target="_blank" class="navbar-link-small">Instagram</a>
+        <a href="mailto:studio@wangyeul.com"     class="navbar-link-small">Email</a>
+      </nav>
+      <!-- 모바일 전용 햄버거 -->
+      <button class="menu-btn-mobile" id="menuBtnMobile" aria-label="메뉴">
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true">
-    <nav class="menu-main">
-      <a href="/Wang_art/"             data-nav="home">대표작품</a>
-      <a href="/Wang_art/works/"       data-nav="works">작품</a>
-      <a href="/Wang_art/worlds/"      data-nav="worlds">작품세계</a>
-      <a href="/Wang_art/artist/"      data-nav="artist">작가</a>
-      <a href="/Wang_art/collections/" data-nav="collections">소장처</a>
-    </nav>
-    <div class="menu-spacer"></div>
-    <nav class="menu-sub">
-      <button class="lang-btn active" data-lang="ko">한국어</button>
-      <button class="lang-btn" data-lang="en">English</button>
-      <button class="lang-btn" data-lang="ja">日本語</button>
-      <button class="lang-btn" data-lang="zh">中文</button>
-    </nav>
-  </div>
-
-  <main style="padding-top: 52px;">
-    <div class="worlds-list" id="worldsGrid" style="padding: 48px var(--pad-page) 96px;"></div>
-    <footer class="footer" role="contentinfo">
-      <a href="/Wang_art/" class="footer-link footer-name">왕열 Wang Yeul</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a>
-      <a href="mailto:studio@wangyeul.com" class="footer-link">Email</a>
-      <span class="footer-link" style="margin-left:auto;opacity:0.35">© 2026 Wang Yeul</span>
+  <main style="padding-top: var(--navbar-height);">
+    <section style="padding: 80px var(--pad-wall-lr);">
+      <div class="worlds-list" id="worldsGrid"></div>
+    </section>
+    <footer class="footer">
+      <a href="/Wang_art/"                               class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link igdesktop">Instagram @wangyeul</a>
+      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link ig-mobile">Instagram</a>
+      <a href="mailto:studio@wangyeul.com"              class="footer-link">Email</a>
     </footer>
   </main>
-
-  <div class="custom-cursor" id="customCursor" aria-hidden="true">
-    <span class="custom-cursor-label">VIEW</span>
-  </div>
 
 </body>
 </html>

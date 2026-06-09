@@ -16,19 +16,22 @@
   --color-gold-faint:  rgba(196, 162, 101, 0.12);
 
   /* ── 폰트 패밀리 ── */
+  --font-sans:     'Noto Sans KR', sans-serif;
   --font-serif:    'Cormorant Garamond', Georgia, serif;
   --font-serif-kr: 'Noto Serif KR', serif;
-  --font-sans:     'Noto Sans KR', sans-serif;
+  --font-mono:     'Space Mono', monospace;
 
   /* ── 폰트 웨이트 (Pierrick 실측) ── */
-  --fw-extralight: 200;
-  --fw-light:      300;
-  --fw-regular:    400;
+  --fw-200: 200;
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-500: 500;
 
   /* ── 자간 (Pierrick 실측) ── */
   --ls-logo:    0.4px;
   --ls-nav:     0.4px;
   --ls-hero:   -5px;
+  --ls-hero-mobile: -1.5px;
   --ls-caption: normal;
   --ls-body:    normal;
 
@@ -36,26 +39,46 @@
   --text-hero:    126px;
   --text-logo:    22px;
   --text-nav:     22px;
+  --text-nav-sm:  18px;
   --text-caption: 15px;
   --text-meta:    14px;
   --text-small:   12px;
 
+  /* 모바일 히어로 실측 */
+  --text-hero-mobile: 38px;
+
   /* ── 여백 (Pierrick 실측) ── */
-  --navbar-height:    80px;
-  --pad-page:         75.6px;
-  --pad-series-left:  136.8px;
-  --pad-series-right: 144px;
-  --series-mt:        80px;
-  --series-mb:        140px;
-  --wall-mb:          100px;
-  --artwork-margin:   180px;
+  --navbar-height:      80px;
+  --navbar-height-mob:  120px;
+  --pad-wall-lr:        75.6px;
+  --pad-series-left:    136.8px;
+  --pad-series-right:   144px;
+  --series-mt:          80px;
+  --series-mb:          140px;
+  --wall-item-mb:       75px;
+  --wall-mb:            100px;
+  --artwork-lr:         180px;
+  --artwork-img-mb:     40px;
+  --label-mt:           60px;
+  --label-mb:           40px;
+  --footer-pt:          120px;
+  --footer-lr:          288px;
+
+  /* ── 모바일 여백 ── */
+  --pad-mob:            20px;
 
   /* ── 모션 ── */
-  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in:    cubic-bezier(0.4, 0, 1, 1);
-  --dur-fast:   0.2s;
-  --dur-base:   0.4s;
-  --dur-slow:   0.6s;
+  --opacity-hover:  0.5;
+  --dur-hover:      0.2s;
+  --ease-hover:     ease;
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-page-in:    0.4s;
+  --dur-page-out:   0.3s;
+  --ease-page-in:   power2.out;  /* GSAP */
+  --ease-page-out:  power2.in;   /* GSAP */
+
+  /* ── 레거시 호환 ── */
+  --color-bg-dark: #1e1508;
 }
 
 /* ── 다국어 자간 예외 ── */

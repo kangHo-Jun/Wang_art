@@ -11,6 +11,8 @@ function renderWorlds(): void {
   if (!grid) return
   grid.innerHTML = ''
 
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
   WORLDS.forEach((world, i) => {
     const item = document.createElement('div')
     item.className = 'world-item fade-up'
@@ -19,7 +21,7 @@ function renderWorlds(): void {
     item.innerHTML = `
       <div class="world-img-wrap">
         <img
-          src="${world.imageSrc}"
+          src="${base}/${world.imageSrc}"
           alt="${world.titleKr}"
           loading="${i === 0 ? 'eager' : 'lazy'}"
           decoding="async"
