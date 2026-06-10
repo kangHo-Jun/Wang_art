@@ -1,94 +1,28 @@
-/* ── 푸터 (Pierrick 실측) ── */
 .footer {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0 32px;
-  padding: 20px var(--pad-page);
-  /* Pierrick: border 없음 */
+  padding: var(--footer-pt) var(--footer-lr) 40px;  /* 120px 288px */
+  border: none;
 }
-
 .footer-link {
   font-family: var(--font-sans);
-  font-size: var(--text-meta);
-  font-weight: var(--fw-extralight);
-  letter-spacing: var(--ls-nav);
-  color: var(--color-ink-muted);
-  transition: opacity var(--dur-fast) ease;
+  font-size: var(--text-meta);   /* 14px */
+  font-weight: var(--fw-400);
+  color: var(--color-ink);
+  transition: opacity var(--dur-hover) var(--ease-hover);
 }
-.footer-link:hover { opacity: 1; color: var(--color-ink); }
-
+.footer-link:hover { opacity: var(--opacity-hover); }
 .footer-name {
   font-family: var(--font-serif);
-  font-size: var(--text-caption);
-  font-weight: var(--fw-extralight);
-  letter-spacing: var(--ls-logo);
-  color: var(--color-ink);
-  text-transform: none;
-  margin-right: 8px;
+  font-size: var(--text-caption);  /* 15px */
+  font-weight: var(--fw-200);
 }
-
-/* 뉴스레터 */
-.subscribe {
-  padding: 80px var(--pad-page);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  border-top: 1px solid var(--color-ink-faint);
-}
-.subscribe-title {
-  font-family: var(--font-serif);
-  font-size: var(--text-caption);
-  font-weight: var(--fw-light);
-  letter-spacing: var(--ls-logo);
-  color: var(--color-ink);
-}
-.subscribe-sub {
-  font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--fw-light);
-  color: var(--color-ink-muted);
-}
-.subscribe-form {
-  display: flex;
-  gap: 0;
-  margin-top: 8px;
-}
-.subscribe-input {
-  font-family: var(--font-sans);
-  font-size: var(--text-meta);
-  font-weight: var(--fw-light);
-  color: var(--color-ink);
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--color-ink-faint);
-  padding: 8px 0;
-  width: 240px;
-  outline: none;
-  transition: border-color var(--dur-fast) ease;
-}
-.subscribe-input:focus { border-color: var(--color-ink); }
-.subscribe-input::placeholder { color: var(--color-ink-muted); }
-.subscribe-btn {
-  font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--fw-light);
-  letter-spacing: 0.1em;
-  color: var(--color-ink);
-  text-transform: uppercase;
-  padding: 8px 16px;
-  border-bottom: 1px solid var(--color-ink-faint);
-  transition: opacity var(--dur-fast) ease;
-}
-.subscribe-btn:hover { opacity: 0.5; }
-.subscribe-msg {
-  font-size: var(--text-small);
-  color: var(--color-ink-muted);
-  min-height: 1.2em;
-}
+.ig-mobile { display: none; }
 
 @media (max-width: 768px) {
-  .footer { padding: 20px 20px; }
-  .subscribe { padding: 48px 20px; }
+  .footer { padding: 60px var(--pad-mob) 32px; }
+  .igdesktop { display: none; }
+  .ig-mobile { display: inline; }
 }

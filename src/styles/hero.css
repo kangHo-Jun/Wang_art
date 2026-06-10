@@ -1,28 +1,79 @@
-/* ── 히어로 타이포 (Pierrick 방식) ── */
-.hero-type {
-  padding-top: var(--navbar-height);
-  padding-left: var(--pad-series-left);
-  padding-right: var(--pad-series-right);
-  margin-top: var(--series-mt);
-}
+/* ═══════════════════════════════════════════
+   홈페이지 메인 비주얼 (Hero) 스타일
+   ═══════════════════════════════════════════ */
 
-.type-hero-link {
-  font-family: var(--font-serif);
-  font-size: var(--text-hero);
-  font-weight: var(--fw-regular);
-  letter-spacing: var(--ls-hero);
-  color: var(--color-ink);
-  line-height: 0.9;
+.main-visual-wrapper {
   display: block;
-  transition: opacity var(--dur-fast) ease;
+  position: relative;
+  margin: 0 var(--pad-wall-lr); /* 좌우 75.6px 실측 */
 }
-.type-hero-link:hover { opacity: 0.5; }
 
-/* 모바일 */
+.main-visual {
+  width: 100%;
+}
+
+.main-visual-item {
+  width: 100%;
+  display: block;
+}
+
+.main-visual-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-visual-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+
+.main-visual-link:hover .main-visual-image {
+  opacity: var(--opacity-hover);
+}
+
+/* 홈 히어로 캡션 (우측 하단 정렬) */
+.label.home {
+  display: block;
+  width: 384px;
+  margin: 30px 0 0 auto; /* 우측 정렬 */
+  font-size: 13px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  color: var(--color-ink);
+}
+
+.label.home .label-name-wrapper {
+  margin-bottom: 2px;
+}
+
+.label.home .label-name {
+  font-weight: var(--fw-500);
+}
+
+.label.home .label-year {
+  font-weight: var(--fw-500);
+}
+
+.label.home .label-medium,
+.label.home .label-size {
+  display: block;
+  font-weight: var(--fw-200);
+}
+
+/* ── 모바일 반응형 ── */
 @media (max-width: 768px) {
-  :root { --text-hero: clamp(48px, 12vw, 126px); }
-  .hero-type {
-    padding-left: 20px;
-    padding-right: 20px;
+  .main-visual-wrapper {
+    margin: 0 var(--pad-mob);
+    padding-top: var(--navbar-height-mob); /* 120px */
+  }
+  
+  .label.home {
+    width: 100%;
+    margin: 20px 0 0 0;
   }
 }
