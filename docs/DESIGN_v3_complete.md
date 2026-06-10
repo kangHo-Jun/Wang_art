@@ -103,3 +103,100 @@
 - [ ] **Collections/소장처 2열 배치**: Collections 페이지의 소장처 정보가 원본 `/contact` 레이아웃을 차용한 2열 비대칭 블록으로 분할 배치되는지 검증합니다.
 - [ ] **모바일 오버레이 드로어**: 햄버거 메뉴 및 X 닫기 전환 and stagger 트랜지션 모션이 부드럽게 돌아가는지 확인합니다.
 - [ ] **경로 설계**: 모든 파일 및 앵커의 베이스 경로가 `/Wang_art/` 구조에 맞추어 유기적으로 연동되는지 체크합니다.
+
+---
+
+## 8. Navigation States (네비게이션 상태 설계)
+
+### 8-1. Pierrick 원본 실측 (1440px 기준)
+
+**컨테이너**
+- 요소: `div.navbar.w-nav`
+- `position: relative` — **스크롤 시 뷰포트 위로 사라짐 (NOT fixed)**
+- 전체 div 높이: 300px (내부 모바일 메뉴 숨김 포함)
+- 가시 nav 영역: y=120~200 (80px 높이 stripe)
+- 배경: `transparent`
+- border-bottom: 없음
+- z-index: 1000
+
+**로고**
+- 위치: 가시 영역 좌측, x=144px (1440 뷰포트 기준)
+- 타이포: `22px / fw:200 / ls:0.4px / Apercu Pro / color:#333`
+- 링크: `/` (홈)
+
+**페이지 링크 (우측 정렬)**
+- 링크 목록: Selected Works → Resume → Contact (3개)
+- 타이포: 로고와 동일 `22px / fw:200 / ls:0.4px`
+- 링크 간 간격: `margin-left: 50px`
+- 우측 끝 x ≈ 1291px (우측 여백 ≈ 149px)
+- 클릭 영역 높이: 80px (padding으로 확장)
+
+**소셜 링크 (페이지 링크 우측)**
+- Instagram, 小红书, Email
+- 더 작은 폰트·낮은 opacity로 시각적 분리
+
+---
+
+### 8-2. Home vs Subpage navigation
+
+원본 결론: 홈과 모든 서브페이지(works, resume, contact)의 nav 구조·링크·스타일이 완전히 동일.
+변화 없음 — **단일 공통 nav 규칙 적용.**
+
+---
+
+### 8-3. Scroll navigation 동작
+
+원본 동작: nav가 `position: relative`이므로 스크롤 시 상단으로 사라짐.
+별도 fixed 스티키 헤더 없음. scroll-up 시 float nav나 별도 장치 없음 —
+사용자가 맨 위로 직접 스크롤해야 nav에 접근 가능.
+
+---
+
+### 8-4. Wang_art 적용 규칙
+
+#### 4-1. Nav position: `relative` (원본 동일)
+- Wang_art nav도 Pierrick 원본과 동일하게 `position: relative` 적용
+- 스크롤 시 nav가 뷰포트 위로 사라짐 — fixed 고정 헤더 없음
+- 원본과의 1:1 이식 원칙에 따른 결정
+
+#### 4-2. Nav 블록 높이 구조 (원본 동일)
+- 전체 nav block: `height: ~300px` (내부 모바일 메뉴 포함)
+- 실제 링크 stripe: `y = 120~200`, 높이 80px
+- 링크 stripe 위 120px은 Webflow nav 컨테이너 구조에서 비롯된 상단 여백
+- Wang_art 구현 시 동일한 상단 여백 확보 (nav-container padding-top 또는 wrapper height)
+
+#### 4-3. 메뉴 항목
+
+| 위치 | 링크 텍스트 | 경로 |
+|------|------------|------|
+| 로고 (좌측) | 왕열 Wang Yeul | `/` |
+| 페이지 링크 (우측) | Selected Works | `/works/` |
+| | 작품세계 | `/worlds/` |
+| | 작가 | `/artist/` |
+| | 소장처 | `/collections/` |
+
+- 로고 포함 총 5개 링크 (원본 4개에서 1개 증가 — 페이지 수 차이)
+- 모든 링크 동일 타이포: `22px / fw:200 / ls:0.4px`
+
+#### 4-4. Instagram / Email 처리
+- 원본처럼 소셜 링크를 별도 스타일로 분리 배치하는 것이 1차 기준
+- 단, **우측 잘림(overflow clipping)이 발생하거나 Pierrick 특유의 여백감을 해치는 경우 상단 nav에서 제거**하고 footer 또는 float nav로 이동
+- 분리 시 스타일: 페이지 링크보다 작은 폰트(`18px / fw:300`), 우측 여백 확보 필수
+
+#### 4-5. 홈 / 서브페이지 nav
+- 홈과 모든 서브페이지 동일한 nav 구조 적용 (원본 동일)
+- 예외 없음
+
+#### 4-6. Float nav (Wang_art 의도적 확장)
+- **원본 Pierrick에는 없는 기능** — Wang_art 고유 보조 요소
+- `position: fixed` bottom pill 형태로 유지
+- 역할: 상단 nav가 스크롤로 사라진 뒤 페이지 이동 보조
+- 설계서상 "Wang_art 확장" 항목으로 명시, Pierrick 이식 범위에 포함하지 않음
+
+#### 4-7. 모바일 nav (768px 이하)
+- 높이: `120px`
+- **원본 Pierrick 데스크톱 nav의 300px/80px stripe 구조와 다른 Wang_art 반응형 최적화 예외**
+  - 모바일 화면에서 300px 여백 구조는 콘텐츠 가시 영역을 과도하게 침범하므로 단축
+  - 로고 가독성 및 터치 타깃 확보 목적
+- hamburger → `nav-menu.open` 전체화면 드로어 (원본 모바일 패턴 이식)
+- Float nav는 모바일에서도 유지 (Wang_art 확장)
