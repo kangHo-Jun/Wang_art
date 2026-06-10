@@ -23,3 +23,4 @@ css/css-guide.css
 
 # CDN 캐시
 cdn-cgi/
+dist/
