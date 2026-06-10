@@ -113,8 +113,8 @@
 **컨테이너**
 - 요소: `div.navbar.w-nav`
 - `position: relative` — **스크롤 시 뷰포트 위로 사라짐 (NOT fixed)**
-- 전체 div 높이: 300px (내부 모바일 메뉴 숨김 포함)
-- 가시 nav 영역: y=120~200 (80px 높이 stripe)
+- DOM 측정 전체 높이: **300px** — Webflow가 숨겨진 모바일 오버레이 메뉴를 같은 컨테이너 안에 보유하므로 DOM 높이가 300px으로 측정됨
+- **데스크톱에서 시각적으로 유효한 구조는 y=120~200 (80px stripe)** — 그 외 영역은 transparent 빈 공간 또는 숨겨진 요소
 - 배경: `transparent`
 - border-bottom: 없음
 - z-index: 1000
@@ -159,11 +159,19 @@
 - 스크롤 시 nav가 뷰포트 위로 사라짐 — fixed 고정 헤더 없음
 - 원본과의 1:1 이식 원칙에 따른 결정
 
-#### 4-2. Nav 블록 높이 구조 (원본 동일)
-- 전체 nav block: `height: ~300px` (내부 모바일 메뉴 포함)
-- 실제 링크 stripe: `y = 120~200`, 높이 80px
-- 링크 stripe 위 120px은 Webflow nav 컨테이너 구조에서 비롯된 상단 여백
-- Wang_art 구현 시 동일한 상단 여백 확보 (nav-container padding-top 또는 wrapper height)
+#### 4-2. Nav 블록 높이 구조
+
+**Pierrick 원본 DOM 측정값:** `~300px`
+- Webflow 구조상 숨겨진 모바일 메뉴 요소가 같은 컨테이너에 포함되어 DOM 전체 높이가 300px으로 측정됨
+- 데스크톱에서 실제 의미 있는 영역: `y=120~200` (80px visible stripe)
+
+**Wang_art 구현값:** `200px` (시각 재현 우선)
+- `padding-top: 120px` — 로고/링크 stripe 전 투명 여백
+- navbar-container height: `80px` — 실제 링크 표시 영역
+- **합계: 120 + 80 = 200px**
+- 300px의 나머지 100px은 Webflow 모바일 메뉴 오버헤드로, 데스크톱 시각 재현에 불필요하여 포함하지 않음
+- 메인 비주얼은 이 200px nav block 이후 시작 (nav와 겹치지 않음)
+- Pierrick의 보이는 nav 위치(y=120~200)를 정확히 재현하기 위한 구현 결정
 
 #### 4-3. 메뉴 항목
 
