@@ -1,7 +1,8 @@
 .navbar {
   position: relative;             /* Pierrick 원본 동일: 스크롤 시 위로 사라짐 */
   width: 100%;
-  padding-top: 120px;             /* 실측: 로고 stripe가 y=120에서 시작 */
+  padding-top: 120px;             /* stripe를 y=120에 배치 */
+  padding-bottom: 100px;          /* 합계: 120+80+100 = 300px */
   z-index: 100;
   background: transparent;
   border-bottom: none;
@@ -16,9 +17,10 @@
 }
 .navbar-link.logo {
   font-family: var(--font-sans);
-  font-size: var(--text-logo);     /* 22px */
+  font-size: 22px;
   font-weight: var(--fw-200);
   letter-spacing: var(--ls-logo);  /* 0.4px */
+  line-height: 20px;
   color: var(--color-ink);
   padding: 25px 0 20px 5px;
   height: var(--navbar-height);
@@ -37,9 +39,10 @@
 }
 .navbar-link.big {
   font-family: var(--font-sans);
-  font-size: var(--text-nav);      /* 22px */
+  font-size: 22px;
   font-weight: var(--fw-200);
   letter-spacing: var(--ls-nav);   /* 0.4px */
+  line-height: 20px;
   color: var(--color-ink-dark);    /* #222 */
   padding: 25px 0 20px;
   margin-left: 50px;
@@ -97,6 +100,7 @@
 @media (max-width: 768px) {
   .navbar {
     padding-top: 0;               /* 모바일은 상단 여백 없음 */
+    padding-bottom: 0;
   }
   .navbar-container {
     height: var(--navbar-height-mob);  /* 120px */

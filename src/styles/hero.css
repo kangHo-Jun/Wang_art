@@ -5,7 +5,7 @@
 .main-visual-wrapper {
   display: block;
   position: relative;
-  margin: 0 var(--pad-wall-lr); /* 좌우 75.6px 실측 */
+  margin: 0 144px; /* nav padding과 동일 기준선 (Pierrick 원본 동일) */
 }
 
 .main-visual {
