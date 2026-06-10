@@ -1,105 +1,135 @@
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;             /* Pierrick 원본 동일: 스크롤 시 위로 사라짐 */
   width: 100%;
-  height: var(--navbar-height);
+  padding-top: 120px;             /* 실측: 로고 stripe가 y=120에서 시작 */
   z-index: 100;
-  background: var(--color-bg);  /* #fafafa — 페이지와 동일색 */
-  border-bottom: none;          /* 구분선 없음 */
-  display: flex;
-  align-items: center;
+  background: transparent;
+  border-bottom: none;
 }
-
 .navbar-container {
-  width: 100%;
   display: flex;
   align-items: center;
-  padding: 0;
+  height: var(--navbar-height);   /* 80px visible stripe */
+  padding: 0 144px;               /* 실측: 로고 좌측 x=144, 우측 여백 ≈149px */
+  width: 100%;
+  box-sizing: border-box;
 }
-
-/* 로고 */
-.navbar-logo {
-  font-family: var(--font-serif);
-  font-size: var(--text-logo);
-  font-weight: var(--fw-extralight);
-  letter-spacing: var(--ls-logo);
+.navbar-link.logo {
+  font-family: var(--font-sans);
+  font-size: var(--text-logo);     /* 22px */
+  font-weight: var(--fw-200);
+  letter-spacing: var(--ls-logo);  /* 0.4px */
   color: var(--color-ink);
-  white-space: nowrap;
-  transition: opacity var(--dur-fast) ease;
-  display: inline-block;
   padding: 25px 0 20px 5px;
   height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+  white-space: nowrap;
 }
-.navbar-logo:hover { opacity: 0.5; }
+.navbar-link.logo:hover { opacity: var(--opacity-hover); }
 
-/* 메인 메뉴 */
 .nav-menu {
   display: flex;
   align-items: center;
+  height: 100%;
   margin-left: auto;
-  gap: 0;
 }
-
-.navbar-link {
+.navbar-link.big {
   font-family: var(--font-sans);
-  font-size: var(--text-nav);
-  font-weight: var(--fw-extralight);
-  letter-spacing: var(--ls-nav);
-  color: var(--color-ink-dark);
-  margin-left: 50px;
-  transition: opacity var(--dur-fast) ease;
-  white-space: nowrap;
-  display: inline-block;
+  font-size: var(--text-nav);      /* 22px */
+  font-weight: var(--fw-200);
+  letter-spacing: var(--ls-nav);   /* 0.4px */
+  color: var(--color-ink-dark);    /* #222 */
   padding: 25px 0 20px;
+  margin-left: 50px;
   height: var(--navbar-height);
-}
-.navbar-link:hover { opacity: 0.5; }
-
-/* 소셜 링크 */
-.nav-social {
   display: flex;
   align-items: center;
-  margin-left: 50px;
+  white-space: nowrap;
+  transition: opacity var(--dur-hover) var(--ease-hover);
 }
+.navbar-link.big:hover { opacity: var(--opacity-hover); }
 
 .navbar-link-small {
   font-family: var(--font-sans);
-  font-size: var(--text-small);
-  font-weight: var(--fw-light);
-  letter-spacing: var(--ls-nav);
-  color: var(--color-ink-muted);
-  margin-left: 24px;
-  transition: opacity var(--dur-fast) ease;
-  display: inline-block;
+  font-size: var(--text-nav-sm);   /* 18px */
+  font-weight: var(--fw-300);
+  color: var(--color-ink);
   padding: 25px 0 20px;
+  margin-left: 50px;
   height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+  white-space: nowrap;
 }
-.navbar-link-small:hover { opacity: 0.8; }
+.navbar-link-small:hover { opacity: var(--opacity-hover); }
 
-/* 스크롤 숨김 */
-.navbar.hidden {
-  transform: translateY(-100%);
-  transition: transform 0.35s var(--ease-out);
+/* 모바일 햄버거 */
+.menu-btn-mobile {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+.menu-btn-mobile span {
+  display: block;
+  width: 20px; height: 1px;
+  background: var(--color-ink);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+/* 햄버거 애니메이션 효과 */
+.menu-btn-mobile.active span:nth-child(1) {
+  transform: translateY(3px) rotate(45deg);
+}
+.menu-btn-mobile.active span:nth-child(2) {
+  transform: translateY(-3px) rotate(-45deg);
 }
 
-/* 메뉴 오버레이 제거 — Pierrick은 오버레이 없음 */
-.menu-overlay { display: none !important; }
-.navbar-hamburger { display: none !important; }
-
-/* 모바일 */
+/* 모바일 — Wang_art 반응형 최적화 예외 (Pierrick 300px/80px 구조 미적용) */
 @media (max-width: 768px) {
-  .navbar-hamburger {
-    display: flex !important;
-    width: 32px;
-    height: 32px;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
+  .navbar {
+    padding-top: 0;               /* 모바일은 상단 여백 없음 */
   }
-  .nav-menu,
-  .nav-social { display: none; }
-  .nav-menu.open,
-  .nav-social.open { display: flex; }
-  .navbar-link { font-size: 16px; margin-left: 0; }
+  .navbar-container {
+    height: var(--navbar-height-mob);  /* 120px */
+    padding: 0 var(--pad-mob);
+  }
+  .navbar-link.logo {
+    height: var(--navbar-height-mob);
+    padding: 25px 0 20px;
+  }
+  .menu-btn-mobile {
+    display: flex;
+  }
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: var(--navbar-height-mob);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height-mob));
+    background: var(--color-bg);
+    padding: 40px var(--pad-mob);
+    gap: 24px;
+    z-index: 99;
+    align-items: flex-start;
+  }
+  .nav-menu.open {
+    display: flex;
+  }
+  .navbar-link.big {
+    margin-left: 0;
+    font-size: 18px;
+    padding: 10px 0;
+    height: auto;
+  }
 }

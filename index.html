@@ -7,36 +7,34 @@
   <meta name="description" content="왕열 작가의 공식 웹사이트. 대표작품과 작품세계를 감상합니다." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@200;300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body data-page="home">
 
   <!-- 네비바 -->
   <header class="navbar" id="navbar">
     <div class="navbar-container">
-      <a href="/Wang_art/" class="navbar-logo">왕열 Wang Yeul</a>
-      <nav class="nav-menu" id="navMenu">
-        <a href="/Wang_art/works/"       class="navbar-link" data-nav="works">Selected Works</a>
-        <a href="/Wang_art/worlds/"      class="navbar-link" data-nav="worlds">작품세계</a>
-        <a href="/Wang_art/artist/"      class="navbar-link" data-nav="artist">작가</a>
-        <a href="/Wang_art/collections/" class="navbar-link" data-nav="collections">소장처</a>
+      <a href="/Wang_art/" class="navbar-link logo">왕열 Wang Yeul</a>
+      <nav class="nav-menu" role="navigation">
+        <a href="/Wang_art/works/"       class="navbar-link big" data-nav="works">Selected Works</a>
+        <a href="/Wang_art/worlds/"      class="navbar-link big" data-nav="worlds">작품세계</a>
+        <a href="/Wang_art/artist/"      class="navbar-link big" data-nav="artist">작가</a>
+        <a href="/Wang_art/collections/" class="navbar-link big" data-nav="collections">소장처</a>
       </nav>
-      <div class="nav-social">
-        <a href="https://www.instagram.com/wangyeul" target="_blank" rel="noopener" class="navbar-link-small">Instagram</a>
-        <a href="mailto:studio@wangyeul.com" class="navbar-link-small">Email</a>
-      </div>
+      <!-- 모바일 전용 햄버거 -->
+      <button class="menu-btn-mobile" id="menuBtnMobile" aria-label="메뉴">
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
   <main>
-    <!-- 히어로 타이포 -->
-    <section class="hero-type">
-      <a href="/Wang_art/works/" class="type-hero-link" id="heroTypeLink">유토피아</a>
-    </section>
+    <!-- 메인 비주얼 (Hero) -->
+    <div class="main-visual-wrapper" id="mainVisual"></div>
 
     <!-- 시리즈 — Pierrick 핵심: 126px 모노 타이포 -->
     <section class="series" id="seriesSection" aria-label="시리즈">
-      <span class="series-label">Series /</span>
+      <div class="series-label">Series /</div>
       <div class="series-list" id="seriesList"></div>
     </section>
 
@@ -54,11 +52,11 @@
       <p class="subscribe-msg" id="subscribeMsg" aria-live="polite"></p>
     </section>
 
-    <!-- 푸터 -->
-    <footer class="footer" role="contentinfo">
-      <a href="/Wang_art/"                      class="footer-link footer-name">왕열 Wang Yeul</a>
-      <a href="https://instagram.com/wangyeul/" target="_blank" rel="noopener" class="footer-link">Instagram @wangyeul</a>
-      <a href="mailto:studio@wangyeul.com"      class="footer-link">Email</a>
+    <footer class="footer">
+      <a href="/Wang_art/"                               class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link igdesktop">Instagram @wangyeul</a>
+      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link ig-mobile">Instagram</a>
+      <a href="mailto:studio@wangyeul.com"              class="footer-link">Email</a>
     </footer>
   </main>
 
