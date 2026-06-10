@@ -15,7 +15,7 @@ function renderResume(): void {
   // 1. Download Link
   const downloadLink = document.createElement('a')
   downloadLink.href = '#'
-  downloadLink.className = 'download w-inline-block'
+  downloadLink.className = 'download'
   
   const downloadText = document.createElement('div')
   downloadText.className = 'download-text'

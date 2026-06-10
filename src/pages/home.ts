@@ -2,40 +2,109 @@ import { FEATURED } from '../data/artworks'
 import { navigateTo }    from '../shared/animation'
 
 const SERIES = [
-  { slug: 'utopia',    label: '유토피아' },
-  { slug: 'ink',       label: '먹과 산수' },
-  { slug: 'acrylic',   label: '아크릴 산수' },
-  { slug: 'landscape', label: '풍경' },
-  { slug: 'horse',     label: '말' },
+  { slug: 'utopia',    label: 'Utopia' },
+  { slug: 'ink',       label: 'Ink & Landscape' },
+  { slug: 'acrylic',   label: 'Acrylic Landscape' },
+  { slug: 'landscape', label: 'Landscape' },
+  { slug: 'horse',     label: 'Horse' },
 ]
 
 export function initHome(): void {
+  renderMainVisual()
   renderSeries()
   renderWall()
   initSubscribe()
   initNavActive()
 }
 
+// ── 메인 비주얼 (Hero) ──
+function renderMainVisual(): void {
+  const container = document.getElementById('mainVisual')
+  if (!container) return
+  container.innerHTML = ''
+
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  const firstFeatured = FEATURED[0]
+  if (!firstFeatured) return
+
+  const visualList = document.createElement('div')
+  visualList.className = 'main-visual'
+  visualList.setAttribute('role', 'list')
+
+  const item = document.createElement('div')
+  item.className = 'main-visual-item w-dyn-item'
+  item.setAttribute('role', 'listitem')
+
+  const link = document.createElement('a')
+  link.href = `${base}/works/?series=${firstFeatured.series}`
+  link.className = 'main-visual-link'
+
+  const img = document.createElement('img')
+  img.src = `${base}/${firstFeatured.imageSrc}`
+  img.alt = firstFeatured.titleEn
+  img.className = 'main-visual-image'
+  img.setAttribute('loading', 'eager')
+
+  const label = document.createElement('div')
+  label.className = 'label home'
+
+  const nameWrapper = document.createElement('div')
+  nameWrapper.className = 'label-name-wrapper'
+  
+  const name = document.createElement('span')
+  name.className = 'label-name'
+  name.textContent = firstFeatured.titleEn
+
+  const comma = document.createTextNode(', ')
+
+  const year = document.createElement('span')
+  year.className = 'label-year'
+  year.textContent = String(firstFeatured.year)
+
+  nameWrapper.appendChild(name)
+  nameWrapper.appendChild(comma)
+  nameWrapper.appendChild(year)
+
+  const medium = document.createElement('div')
+  medium.className = 'label-medium'
+  medium.textContent = firstFeatured.medium
+
+  const size = document.createElement('div')
+  size.className = 'label-size'
+  size.textContent = firstFeatured.size
+
+  label.appendChild(nameWrapper)
+  label.appendChild(medium)
+  label.appendChild(size)
+
+  link.appendChild(img)
+  link.appendChild(label)
+  item.appendChild(link)
+  visualList.appendChild(item)
+  container.appendChild(visualList)
+}
+
 // ── 시리즈 섹션 ──
 function renderSeries(): void {
   const list = document.getElementById('seriesList')
   if (!list) return
+  list.innerHTML = ''
 
-  SERIES.forEach((s, i) => {
+  SERIES.forEach((s) => {
     const item = document.createElement('div')
-    item.className = 'series-item'
+    item.className = 'series-item w-dyn-item'
+    item.setAttribute('role', 'listitem')
 
     const a = document.createElement('a')
-    a.href      = `${import.meta.env.BASE_URL}works/?series=${s.slug}`
+    a.href = `${import.meta.env.BASE_URL}works/?series=${s.slug}`
+    a.className = 'type-hero-link'
     a.textContent = s.label
     item.appendChild(a)
 
-    if (i < SERIES.length - 1) {
-      const sep = document.createElement('span')
-      sep.className   = 'series-separator'
-      sep.textContent = '·'
-      item.appendChild(sep)
-    }
+    const sep = document.createElement('div')
+    sep.className = 'type-menu-separator'
+    sep.textContent = '.'
+    item.appendChild(sep)
 
     list.appendChild(item)
   })
