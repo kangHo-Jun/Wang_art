@@ -1,6 +1,14 @@
-import { gsap }      from 'gsap'
-import { ARTWORKS }  from '../data/artworks'
-import { navigateTo } from '../shared/animation'
+import { gsap }        from 'gsap'
+import { ARTWORKS }    from '../data/artworks'
+import { navigateTo }  from '../shared/animation'
+
+// 돋보기 상수
+const LENS_SIZE   = 320
+const LENS_RADIUS = LENS_SIZE / 2  // 160
+const ZOOM        = 2
+
+// 작품 변경 시 이전 이벤트 정리용 AbortController
+let zoomController: AbortController | null = null
 
 export function initArtwork(): void {
   const params = new URLSearchParams(location.search)
@@ -29,13 +37,14 @@ function renderArtwork(idx: number, base: string): void {
   if (img) {
     img.src = `${base}/${art.imageSrc}`
     img.alt = art.titleEn
+    // 이미지 로드 완료 후 magnifier 초기화 (broken image 시 스킵)
+    initZoomWhenReady(img)
     gsap.fromTo(img,
       { opacity: 0 },
       { opacity: 1, duration: 0.5, ease: 'power2.out' }
     )
   }
 
-  // 캡션 — Pierrick inline 방식
   const name   = document.getElementById('labelName')
   const year   = document.getElementById('labelYear')
   const medium = document.getElementById('labelMedium')
@@ -46,13 +55,11 @@ function renderArtwork(idx: number, base: string): void {
   if (medium) medium.textContent = art.medium ?? ''
   if (size)   size.textContent   = art.size   ?? ''
 
-  // 캡션 fade in
   gsap.fromTo('#artworkLabel',
     { opacity: 0, y: 8 },
     { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.2 }
   )
 
-  // Prev/Next 버튼 상태
   const prev = document.getElementById('artworkPrev')
   const next = document.getElementById('artworkNext')
   if (prev) prev.style.pointerEvents = idx === 0                   ? 'none' : 'auto'
@@ -60,6 +67,158 @@ function renderArtwork(idx: number, base: string): void {
   if (prev) prev.style.opacity       = idx === 0                   ? '0'    : ''
   if (next) next.style.opacity       = idx === ARTWORKS.length - 1 ? '0'    : ''
 }
+
+// ── 이미지 로드 확인 후 zoom 초기화 ──────────────────────────────
+function initZoomWhenReady(img: HTMLImageElement): void {
+  // 이전 작품의 이벤트 정리 + 렌즈 숨김
+  zoomController?.abort()
+  zoomController = null
+  hideLens(img)
+
+  const attach = () => {
+    if (img.naturalWidth > 0) initArtworkZoom(img)
+  }
+
+  if (img.complete) {
+    attach()
+  } else {
+    img.addEventListener('load',  attach,                      { once: true })
+    img.addEventListener('error', () => { /* broken: 스킵 */ }, { once: true })
+  }
+}
+
+function hideLens(img: HTMLImageElement): void {
+  const lens = img.parentElement?.querySelector<HTMLElement>('.artwork-magnifier')
+  if (lens) lens.style.display = 'none'
+}
+
+// ── 공통 zoom 초기화 (전체 386개 작품에 적용) ────────────────────
+function initArtworkZoom(img: HTMLImageElement): void {
+  zoomController = new AbortController()
+  const { signal } = zoomController
+
+  const isTouch = window.matchMedia('(pointer: coarse)').matches
+  if (!isTouch) {
+    setupMagnifier(img, signal)
+  }
+  // 모바일 오버레이는 touchend가 touch 기기에서만 발화하므로 항상 등록
+  setupMobileOverlay(img, signal)
+}
+
+// ── 데스크톱 원형 돋보기 ─────────────────────────────────────────
+function setupMagnifier(img: HTMLImageElement, signal: AbortSignal): void {
+  const wrap      = img.parentElement as HTMLElement
+  const maybeLens = wrap.querySelector<HTMLElement>('.artwork-magnifier')
+  if (!maybeLens) return
+  const lens = maybeLens  // 클로저 안에서도 HTMLElement로 추론
+
+  function updateLens(e: MouseEvent): void {
+    const rect = img.getBoundingClientRect()
+    const imgW  = rect.width
+    const imgH  = rect.height
+
+    // 이미지가 렌즈보다 작으면 스킵
+    if (imgW < LENS_SIZE || imgH < LENS_SIZE) return
+
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+
+    // 렌즈 중심 clamp: 렌즈가 이미지 경계 밖으로 나가지 않도록
+    const cx = Math.max(LENS_RADIUS, Math.min(mouseX, imgW - LENS_RADIUS))
+    const cy = Math.max(LENS_RADIUS, Math.min(mouseY, imgH - LENS_RADIUS))
+
+    // 렌즈 위치 (.artwork-zoom-wrap 기준 absolute)
+    lens.style.left = `${cx - LENS_RADIUS}px`
+    lens.style.top  = `${cy - LENS_RADIUS}px`
+
+    /*
+     * background-position 계산
+     * background-size = imgW*2 x imgH*2 (2× 확대)
+     * 렌즈 중심(cx, cy)이 background의 cx*2, cy*2 위치를 가리켜야 함
+     * → background-position = lensRadius - cx*zoom, lensRadius - cy*zoom
+     */
+    lens.style.backgroundSize     = `${imgW * ZOOM}px ${imgH * ZOOM}px`
+    lens.style.backgroundPosition = `${LENS_RADIUS - cx * ZOOM}px ${LENS_RADIUS - cy * ZOOM}px`
+  }
+
+  img.addEventListener('mouseenter', (e: MouseEvent) => {
+    lens.style.backgroundImage = `url('${img.src}')`
+    lens.style.display         = 'block'
+    updateLens(e)
+  }, { signal })
+
+  img.addEventListener('mousemove', updateLens, { signal })
+
+  img.addEventListener('mouseleave', () => {
+    lens.style.display = 'none'
+  }, { signal })
+}
+
+// ── 모바일: tap → fullscreen overlay ─────────────────────────────
+function setupMobileOverlay(img: HTMLImageElement, signal: AbortSignal): void {
+  const overlay  = document.getElementById('artworkZoomOverlay') as HTMLElement
+  const zoomImg  = document.getElementById('artworkZoomImg')     as HTMLImageElement
+  const closeBtn = document.getElementById('artworkZoomClose')   as HTMLButtonElement
+  const pan      = document.getElementById('artworkZoomPan')     as HTMLElement
+  if (!overlay || !zoomImg || !closeBtn || !pan) return
+
+  let touchStartX  = 0
+  let touchStartY  = 0
+  let savedScrollY = 0
+
+  function openOverlay(): void {
+    zoomImg.src = img.src
+    zoomImg.alt = img.alt
+    // iOS Safari body scroll lock
+    savedScrollY = window.scrollY
+    document.body.style.position  = 'fixed'
+    document.body.style.top       = `-${savedScrollY}px`
+    document.body.style.width     = '100%'
+    document.body.style.overflowY = 'scroll'
+    overlay.removeAttribute('hidden')
+    // 2× 이미지 중앙 위치로 pan 초기화
+    requestAnimationFrame(() => {
+      pan.scrollLeft = (pan.scrollWidth  - pan.clientWidth)  / 2
+      pan.scrollTop  = (pan.scrollHeight - pan.clientHeight) / 2
+      closeBtn.focus()
+    })
+  }
+
+  function closeOverlay(): void {
+    overlay.setAttribute('hidden', '')
+    document.body.style.position  = ''
+    document.body.style.top       = ''
+    document.body.style.width     = ''
+    document.body.style.overflowY = ''
+    window.scrollTo(0, savedScrollY)
+    zoomImg.src = ''
+    img.focus()
+  }
+
+  // tap 판별: touchstart ~ touchend 이동 10px 미만이면 overlay 열기
+  img.addEventListener('touchstart', (e: TouchEvent) => {
+    touchStartX = e.touches[0].clientX
+    touchStartY = e.touches[0].clientY
+  }, { signal, passive: true })
+
+  img.addEventListener('touchend', (e: TouchEvent) => {
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX)
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY)
+    if (dx < 10 && dy < 10) openOverlay()
+  }, { signal })
+
+  closeBtn.addEventListener('click', closeOverlay, { signal })
+
+  // overlay 열림 시 ESC (initKeyboard의 ESC와 분리)
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (!overlay.hasAttribute('hidden') && e.key === 'Escape') {
+      e.stopPropagation()
+      closeOverlay()
+    }
+  }, { signal })
+}
+
+// ─────────────────────────────────────────────────────────────────
 
 function goTo(idx: number, base: string): void {
   if (idx < 0 || idx >= ARTWORKS.length) return
@@ -88,6 +247,8 @@ function initNav(base: string): void {
 
 function initKeyboard(base: string): void {
   document.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('artworkZoomOverlay')
+    if (overlay && !overlay.hasAttribute('hidden')) return
     if (e.key === 'ArrowLeft')  goTo(getCurrentIdx() - 1, base)
     if (e.key === 'ArrowRight') goTo(getCurrentIdx() + 1, base)
     if (e.key === 'Escape')     navigateTo(`${base}/works/`)
@@ -100,6 +261,8 @@ function initSwipe(base: string): void {
     startX = e.touches[0].clientX
   }, { passive: true })
   document.addEventListener('touchend', (e) => {
+    const overlay = document.getElementById('artworkZoomOverlay')
+    if (overlay && !overlay.hasAttribute('hidden')) return
     const diff = startX - e.changedTouches[0].clientX
     if (diff >  50) goTo(getCurrentIdx() + 1, base)
     if (diff < -50) goTo(getCurrentIdx() - 1, base)

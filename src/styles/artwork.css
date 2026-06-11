@@ -1,3 +1,4 @@
+/* ── 이전/다음 투명 클릭존 ── */
 .artwork-nav-container {
   position: fixed;
   top: var(--navbar-height);
@@ -8,28 +9,68 @@
   pointer-events: none;
   z-index: 10;
 }
+/*
+ * 클릭존 너비 = --artwork-lr (180px)
+ * 이미지 margin과 동일하게 맞춰 이미지 영역에서 nav가 mousemove를 차단하지 않음
+ */
 .nav-artwork-container {
-  flex: 1;
+  flex: none;
+  width: var(--artwork-lr);   /* 180px */
   pointer-events: auto;
   cursor: pointer;
 }
-.nav-separator { flex: 3; pointer-events: none; }
+.nav-separator {
+  flex: 1;
+  pointer-events: none;
+}
 
+/* ── 작품 레이아웃 ── */
 .artwork-container {
   display: flex;
   flex-direction: column;
-  margin: 0 var(--artwork-lr);      /* 0 180px */
+  margin: 0 var(--artwork-lr);
   padding-top: var(--navbar-height);
 }
+
+/* ── Zoom wrapper ── */
+.artwork-zoom-wrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: var(--artwork-img-mb);  /* 40px */
+}
+
 .artwork-image {
   width: 100%;
   height: auto;
-  margin: 0 0 var(--artwork-img-mb);  /* 0 0 40px */
+  display: block;
 }
+
+/* 데스크톱 magnifier 커서 */
+@media (hover: hover) and (pointer: fine) {
+  .artwork-zoom-wrap { cursor: crosshair; }
+}
+
+/* ── 원형 돋보기 렌즈 ── */
+.artwork-magnifier {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  display: none;
+  background-repeat: no-repeat;
+  z-index: 5;
+  /* top/left/backgroundSize/backgroundPosition은 JS에서 실시간 설정 */
+}
+
+/* ── 캡션 ── */
 .label.artwork {
   display: block;
   margin: var(--label-mt) 0 var(--label-mb);  /* 60px 0 40px */
-  font-size: var(--text-caption);  /* 15px */
+  font-size: var(--text-caption);             /* 15px */
   font-weight: var(--fw-200);
 }
 .label-name {
@@ -49,6 +90,68 @@
   color: var(--color-ink);
 }
 
+/* ── 모바일 fullscreen overlay ── */
+#artworkZoomOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(14, 14, 14, 0.97);
+  display: flex;
+  flex-direction: column;
+}
+#artworkZoomOverlay[hidden] {
+  display: none;
+}
+
+#artworkZoomClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 9001;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#artworkZoomClose:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+#artworkZoomClose:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.artwork-zoom-pan {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#artworkZoomImg {
+  display: block;
+  width: 200vw;
+  max-width: none;
+  height: auto;
+  touch-action: pan-x pan-y;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* ── 반응형 ── */
 @media (max-width: 768px) {
-  .artwork-container { margin: 0 var(--pad-mob); }
+  .artwork-container     { margin: 0 var(--pad-mob); }
+  .nav-artwork-container { width: var(--pad-mob); }  /* 20px */
 }

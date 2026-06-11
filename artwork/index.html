@@ -39,7 +39,10 @@
 
   <main class="artwork-page">
     <div class="artwork-container" id="artworkContainer">
-      <img class="artwork-image" id="artworkImg" src="" alt="" />
+      <div class="artwork-zoom-wrap" id="artworkZoomWrap">
+        <img class="artwork-image" id="artworkImg" src="" alt="" tabindex="-1" />
+        <div class="artwork-magnifier" id="artworkMagnifier"></div>
+      </div>
       <div class="label artwork" id="artworkLabel">
         <div class="label-name"   id="labelName"></div>
         <div class="comma">, </div>
@@ -55,6 +58,14 @@
       <a href="mailto:studio@wangyeul.com"              class="footer-link">Email</a>
     </footer>
   </main>
+
+  <!-- 모바일 전체화면 확대 오버레이 -->
+  <div id="artworkZoomOverlay" role="dialog" aria-modal="true" aria-label="작품 확대 보기" hidden>
+    <button id="artworkZoomClose" aria-label="닫기">&#x2715;</button>
+    <div class="artwork-zoom-pan" id="artworkZoomPan">
+      <img id="artworkZoomImg" alt="" />
+    </div>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
