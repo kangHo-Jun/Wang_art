@@ -1,17 +1,24 @@
-import { gsap }      from 'gsap'
-import { ARTWORKS }  from '../data/artworks'
+import { gsap }       from 'gsap'
+import { ARTWORKS }   from '../data/artworks'
 import { initFadeUp } from '../shared/animation'
 import { navigateTo } from '../shared/animation'
-import type { Artwork } from '../types'
+import type { ArtworkCategory, Artwork } from '../types'
 
-const SERIES = [
-  { slug: 'all',       label: 'All' },
-  { slug: 'utopia',    label: 'Utopia' },
-  { slug: 'ink',       label: 'Ink & Landscape' },
-  { slug: 'acrylic',   label: 'Acrylic Landscape' },
-  { slug: 'landscape', label: 'Landscape' },
-  { slug: 'horse',     label: 'Horse' },
+const PAGE_SIZE = 30
+
+const CATEGORIES: { slug: ArtworkCategory; label: string }[] = [
+  { slug: '2jung', label: '2중구조' },
+  { slug: '2026',  label: '2026 해체' },
+  { slug: 'blue',  label: 'Blue' },
+  { slug: 'ink',   label: 'Ink' },
+  { slug: 'red',   label: 'Red' },
 ]
+
+const VALID_CATS = new Set<string>(CATEGORIES.map(c => c.slug))
+
+// 모듈 레벨 상태
+let currentFiltered: Artwork[] = []
+let rendered = 0
 
 export function initWorks(): void {
   initFadeUp()
@@ -24,110 +31,155 @@ function initDirectoryMenu(): void {
   container.innerHTML = ''
 
   const params = new URLSearchParams(location.search)
-  let currentSeries = params.get('series') || 'all'
+  const currentCat = params.get('series') || 'all'
 
-  // If the query parameter is not valid, default to 'all'
-  if (!SERIES.some(s => s.slug === currentSeries)) {
-    currentSeries = 'all'
-  }
+  // ── inner: label col + series grid ──
+  const inner = document.createElement('div')
+  inner.className = 'series-directory-inner'
 
-  // If the selected series has 0 artworks, fall back to 'all'
-  if (currentSeries !== 'all') {
-    const hasArtworks = ARTWORKS.some(art => art.series === currentSeries)
-    if (!hasArtworks) currentSeries = 'all'
-  }
+  // label col
+  const labelCol = document.createElement('div')
+  labelCol.className = 'series-dir-label-col'
 
-  // Render directory links — skip 0-count categories (except 'all')
-  SERIES.forEach((s) => {
-    const count = s.slug === 'all'
-      ? ARTWORKS.length
-      : ARTWORKS.filter(art => art.series === s.slug).length
+  const label = document.createElement('a')
+  label.href = '#'
+  label.className = 'series-dir-label' + (currentCat === 'all' ? ' active' : '')
+  label.dataset.series = 'all'
+  label.textContent = 'Series /'
+  labelCol.appendChild(label)
+  inner.appendChild(labelCol)
 
-    if (s.slug !== 'all' && count === 0) return
+  // series grid
+  const grid = document.createElement('div')
+  grid.className = 'series-dir-grid'
 
-    const a = document.createElement('a')
-    a.href = '#'
-    a.className = 'directory-link' + (s.slug === currentSeries ? ' active' : '')
+  CATEGORIES.forEach(cat => {
+    const count = ARTWORKS.filter(a => a.category === cat.slug).length
+    if (count === 0) return
 
-    a.innerHTML = `${s.label}<span class="directory-count">${count}</span>`
-    a.dataset.series = s.slug
+    const link = document.createElement('a')
+    link.href = '#'
+    link.className = 'series-dir-link' + (cat.slug === currentCat ? ' active' : '')
+    link.dataset.series = cat.slug
+    link.appendChild(document.createTextNode(cat.label))
 
-    a.addEventListener('click', (e) => {
-      e.preventDefault()
-      // Update active state in UI
-      container.querySelectorAll('.directory-link').forEach(link => {
-        link.classList.remove('active')
-      })
-      a.classList.add('active')
-
-      // Update URL query parameter without reloading page
-      const newUrl = s.slug === 'all' 
-        ? `${location.pathname}` 
-        : `${location.pathname}?series=${s.slug}`
-      history.pushState(null, '', newUrl)
-
-      // Filter and render wall
-      filterAndRender(s.slug)
-    })
-
-    container.appendChild(a)
+    const countSpan = document.createElement('span')
+    countSpan.className = 'series-dir-count'
+    countSpan.textContent = String(count)
+    link.appendChild(countSpan)
+    grid.appendChild(link)
   })
 
-  // Initial render
-  filterAndRender(currentSeries)
+  inner.appendChild(grid)
+  container.appendChild(inner)
+
+  // ── All Works 보조 링크 ──
+  const allRow = document.createElement('div')
+  allRow.className = 'series-dir-all-row'
+
+  const allLink = document.createElement('a')
+  allLink.href = '#'
+  allLink.className = 'series-dir-all-link' + (currentCat === 'all' ? ' active' : '')
+  allLink.dataset.series = 'all'
+  allLink.textContent = `All Works ${ARTWORKS.length}`
+  allRow.appendChild(allLink)
+  container.appendChild(allRow)
+
+  // ── click handlers ──
+  container.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault()
+      const slug = el.dataset.series || 'all'
+      container.querySelectorAll('[data-series]').forEach(l => l.classList.remove('active'))
+      container.querySelectorAll<HTMLElement>(`[data-series="${slug}"]`)
+        .forEach(l => l.classList.add('active'))
+      const newUrl = slug === 'all' ? location.pathname : `${location.pathname}?series=${slug}`
+      history.pushState(null, '', newUrl)
+      filterAndRender(slug)
+    })
+  })
+
+  filterAndRender(currentCat)
 }
 
 function filterAndRender(slug: string): void {
-  const filtered = slug === 'all' 
-    ? ARTWORKS 
-    : ARTWORKS.filter(art => art.series === slug)
-  
-  renderWall(filtered)
+  currentFiltered = (slug === 'all' || !VALID_CATS.has(slug))
+    ? [...ARTWORKS]
+    : ARTWORKS.filter(a => a.category === (slug as ArtworkCategory))
+
+  rendered = 0
+  const grid = document.getElementById('wallGrid')
+  if (grid) grid.innerHTML = ''
+  removeLoadMore()
+  renderNextBatch()
 }
 
-function renderWall(artworks: Artwork[]): void {
+function renderNextBatch(): void {
+  const batch = currentFiltered.slice(rendered, rendered + PAGE_SIZE)
+  if (batch.length === 0) return
+  appendToWall(batch)
+  rendered += batch.length
+  updateLoadMore()
+}
+
+function appendToWall(artworks: Artwork[]): void {
   const grid = document.getElementById('wallGrid')
   if (!grid) return
-  grid.innerHTML = ''
 
   const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  const frag = document.createDocumentFragment()
 
-  artworks.forEach((art) => {
+  artworks.forEach(art => {
     const item = document.createElement('div')
     item.className = 'wall-item'
     item.setAttribute('role', 'listitem')
     item.setAttribute('tabindex', '0')
-    item.setAttribute('aria-label', `${art.titleKr}, ${art.year}`)
+    item.setAttribute('aria-label', art.titleEn)
     item.dataset.artworkId = art.id
 
     const img = document.createElement('img')
-    img.src      = `${base}/${art.imageSrc}`
-    img.alt      = `${art.titleEn}, ${art.year}`
+    img.src     = `${base}/${art.imageSrc}`
+    img.alt     = art.titleEn
     img.loading  = 'lazy'
     img.decoding = 'async'
 
     item.appendChild(img)
-
-    item.addEventListener('click', () => {
-      navigateTo(`${base}/artwork/?id=${art.id}`)
-    })
-
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') item.click()
-    })
-
-    grid.appendChild(item)
+    item.addEventListener('click', () => navigateTo(`${base}/artwork/?id=${art.id}`))
+    item.addEventListener('keydown', e => { if (e.key === 'Enter') item.click() })
+    frag.appendChild(item)
   })
 
-  // GSAP stagger 등장 애니메이션
-  gsap.fromTo('.wall-item',
+  grid.appendChild(frag)
+
+  // 새로 추가된 항목만 animate
+  const newItems = [...grid.querySelectorAll<HTMLElement>('.wall-item:not(.appeared)')]
+  if (newItems.length === 0) return
+  newItems.forEach(el => el.classList.add('appeared'))
+  gsap.fromTo(newItems,
     { opacity: 0, y: 16 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out',
-      stagger: 0.04,
-    }
+    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.02 }
   )
+}
+
+function updateLoadMore(): void {
+  removeLoadMore()
+  const remaining = currentFiltered.length - rendered
+  if (remaining <= 0) return
+
+  const wrap = document.createElement('div')
+  wrap.id = 'wallLoadMore'
+  wrap.className = 'wall-load-more'
+
+  const link = document.createElement('a')
+  link.href = '#'
+  link.className = 'wall-load-more-link'
+  link.textContent = `Load More — ${remaining}`
+  link.addEventListener('click', e => { e.preventDefault(); renderNextBatch() })
+
+  wrap.appendChild(link)
+  document.getElementById('wallGrid')?.insertAdjacentElement('afterend', wrap)
+}
+
+function removeLoadMore(): void {
+  document.getElementById('wallLoadMore')?.remove()
 }

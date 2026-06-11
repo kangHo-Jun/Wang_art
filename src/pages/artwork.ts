@@ -42,9 +42,9 @@ function renderArtwork(idx: number, base: string): void {
   const size   = document.getElementById('labelSize')
 
   if (name)   name.textContent   = art.titleEn
-  if (year)   year.textContent   = String(art.year)
-  if (medium) medium.textContent = art.medium
-  if (size)   size.textContent   = art.size
+  if (year)   year.textContent   = art.year   != null ? String(art.year) : ''
+  if (medium) medium.textContent = art.medium ?? ''
+  if (size)   size.textContent   = art.size   ?? ''
 
   // 캡션 fade in
   gsap.fromTo('#artworkLabel',

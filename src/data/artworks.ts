@@ -1,144 +1,106 @@
-import type { Artwork } from '../types'
+import rawData from './artworks.json'
+import featuredData from './featured-works.json'
+import type { Artwork, ArtworkCategory } from '../types'
 
+// ── 제외 규칙 ──────────────────────────────────────────────────
+// gallery-front.jpg: 갤러리 커버 이미지 (작품 아님)
+// .tif/.tiff: 브라우저 미지원 포맷 (jpg 대체본 없음)
+const EXCLUDE_IMAGES = new Set([
+  'images/2026/gallery-front.jpg',
+])
+
+function isExcluded(imgPath: string): boolean {
+  return EXCLUDE_IMAGES.has(imgPath) || /\.tiff?$/i.test(imgPath)
+}
+
+// ── 카테고리별 colorTags ──────────────────────────────────────
+const CAT_COLORS: Record<string, string[]> = {
+  '2026':  ['ink', 'gold'],
+  '2jung': ['ink'],
+  'blue':  ['blue', 'ink'],
+  'ink':   ['ink'],
+  'red':   ['red'],
+}
+
+// ── 메타데이터 파싱 (보수적) ─────────────────────────────────
+function parseYear(text: string): number | undefined {
+  const m = text.match(/(?:19|20)\d{2}/)
+  const y = m ? parseInt(m[0]) : 0
+  return y >= 1980 && y <= 2030 ? y : undefined
+}
+
+function parseMedium(text: string): string | undefined {
+  const m = text.match(
+    /Ink[\s-]+stick\s+and\s+Acrylic\s+on\s+(?:Canvas|Korean\s+paper|canvas|paper)|Acrylic\s+on\s+canvas|Oil\s+and\s+Acrylic\s+on\s+[^,._\d]+/i
+  )
+  return m ? m[0].trim() : undefined
+}
+
+function parseSize(text: string): string | undefined {
+  const m = text.match(/(\d+(?:\.\d+)?)\s*[xX×]\s*(\d+(?:\.\d+)?)\s*cm/i)
+  return m ? `${m[1]} × ${m[2]} cm` : undefined
+}
+
+function toId(imgPath: string): string {
+  return imgPath
+    .replace(/^images\//, '')
+    .replace(/\.[^.]+$/, '')
+    .replace(/[/\s]+/g, '-')
+}
+
+// ── featured-works.json 매핑 ─────────────────────────────────
+interface FeaturedItem {
+  id: string; title_ko: string; title_en: string
+  year: string; medium: string; size: string; image: string
+}
+interface FeaturedData {
+  hero: FeaturedItem
+  selected_works: FeaturedItem[]
+}
+
+const fd = featuredData as FeaturedData
+const featuredMap = new Map<string, FeaturedItem>()
+featuredMap.set(fd.hero.image, fd.hero)
+fd.selected_works.forEach(sw => featuredMap.set(sw.image, sw))
+
+// ── 정규화 ───────────────────────────────────────────────────
+interface RawItem { title: string; image: string; category: string }
+
+const normalized: Artwork[] = (rawData as RawItem[])
+  .filter(item => !isExcluded(item.image))
+  .map(item => {
+    const feat = featuredMap.get(item.image)
+    const cat  = item.category as ArtworkCategory
+    const rawYear = feat?.year ? parseInt(feat.year, 10) : parseYear(item.title)
+    const year = rawYear && !Number.isNaN(rawYear) ? rawYear : undefined
+    return {
+      id:          toId(item.image),
+      titleEn:     feat?.title_en ?? item.title,
+      titleKr:     feat?.title_ko ?? item.title,
+      year,
+      medium:      feat?.medium   || parseMedium(item.title),
+      size:        feat?.size     || parseSize(item.title),
+      imageSrc:    item.image,
+      category:    cat,
+      featured:    featuredMap.has(item.image),
+      colorTags:   CAT_COLORS[cat] ?? [],
+      series:      cat,   // deprecated compat
+      sourceTitle: item.title,
+    }
+  })
+
+// hero 이미지를 ARTWORKS / FEATURED 최앞으로 정렬
+const heroImg = fd.hero.image
 export const ARTWORKS: Artwork[] = [
-
-  // ── FEATURED — 히어로 슬라이드쇼 + 대표작품 섹션 ──
-
-  {
-    id: 'utopia-meditation-2025-acrylic-280x140',
-    titleEn: 'Utopia Meditation',
-    titleKr: '유토피아 명상',
-    year: 2025,
-    medium: 'Acrylic on canvas',
-    mediumKr: '아크릴 on 캔버스',
-    size: '280 × 140 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A representative work combining traditional Korean ink spirit with contemporary form.',
-    noteKr: '전통 한국화의 정신성과 현대적 조형 언어를 결합한 유토피아 연작의 대표작.',
-    imageSrc: 'images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg',
-    featured: true,
-    series: 'utopia',
-    colorTags: ['gold', 'ink']
-  },
-
-  {
-    id: 'utopia-meditation-2025-ink-400x300',
-    titleEn: 'Utopia — A Meditation',
-    titleKr: '유토피아 — 명상',
-    year: 2025,
-    medium: 'Ink stick and acrylic on canvas',
-    mediumKr: '먹, 아크릴 on 캔버스',
-    size: '400 × 300 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A monumental ink work representing the spiritual landscape of Utopia.',
-    noteKr: '유토피아의 정신적 산수를 담은 대형 먹 작품.',
-    imageSrc: 'images/2026/33-utopia-a-meditation-ink-stick-and-acrylic-on-canvas-400x300cm-2025-1eok-5000man-won.jpg',
-    featured: true,
-    series: 'ink',
-    colorTags: ['ink']
-  },
-
-  {
-    id: 'utopia-companion-2006-ink-411x200',
-    titleEn: 'Utopia — A Companion',
-    titleKr: '유토피아 — 동행',
-    year: 2006,
-    medium: 'Ink stick and acrylic on canvas',
-    mediumKr: '먹, 아크릴 on 캔버스',
-    size: '411 × 200 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A vast ink landscape exploring the journey toward an ideal world.',
-    noteKr: '이상향을 향한 여정을 담은 광활한 먹 산수.',
-    imageSrc: 'images/ink/16-utopia-a-companion-ink-stick-and-acrylic-on-canvas411x200cm2006-3eok-won-bi-mae-pum.jpg',
-    featured: true,
-    series: 'ink',
-    colorTags: ['ink']
-  },
-
-  {
-    id: 'utopia-companion-2015-blue-333x248',
-    titleEn: 'Utopia — A Companion',
-    titleKr: '유토피아 — 동행',
-    year: 2015,
-    medium: 'Ink stick and acrylic on canvas',
-    mediumKr: '먹, 아크릴 on 캔버스',
-    size: '333 × 248.5 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A large-scale blue acrylic work from the Utopia companion series.',
-    noteKr: '코발트 블루로 펼쳐낸 유토피아 동행 연작의 대표작.',
-    imageSrc: 'images/blue/3-utopia-a-companion-333x248-5cm-ink-stick-and-acrylic-on-canvas-2015-1eok-5000man-won.jpg',
-    featured: true,
-    series: 'utopia',
-    colorTags: ['blue', 'ink']
-  },
-
-  {
-    id: 'utopia-companion-2008-red-394x333',
-    titleEn: 'Utopia — A Companion',
-    titleKr: '유토피아 — 동행',
-    year: 2008,
-    medium: 'Ink stick and acrylic on canvas',
-    mediumKr: '먹, 아크릴 on 캔버스',
-    size: '394 × 333 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A monumental red acrylic work evoking the passion of the utopian vision.',
-    noteKr: '붉은 열망으로 가득 찬 유토피아 연작의 대형 역작.',
-    imageSrc: 'images/red/2-utopia-a-companion-ink-stick-and-acrylic-on-canvas-394x333cm-2008-8800man-won.jpg',
-    featured: true,
-    series: 'utopia',
-    colorTags: ['red', 'ink']
-  },
-
-  {
-    id: 'utopia-meditation-2023-red-280x280',
-    titleEn: 'Utopia Meditation',
-    titleKr: '유토피아 명상',
-    year: 2023,
-    medium: 'Acrylic on canvas',
-    mediumKr: '아크릴 on 캔버스',
-    size: '280 × 280 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A square-format meditation on utopia rendered in deep red.',
-    noteKr: '정방형 화면에 붉은 명상을 담은 유토피아 연작.',
-    imageSrc: 'images/red/1-utopia-meditation-acrylic-on-canvas-280x280cm-2023.jpg',
-    featured: true,
-    series: 'utopia',
-    colorTags: ['red']
-  },
-
-  {
-    id: 'utopia-meditation-2025-blue-280x140',
-    titleEn: 'Utopia Meditation',
-    titleKr: '유토피아 명상',
-    year: 2025,
-    medium: 'Acrylic on canvas',
-    mediumKr: '아크릴 on 캔버스',
-    size: '280 × 140 cm',
-    collection: '',
-    collectionKr: '작가 보유',
-    note: 'A blue variant of the Utopia Meditation series, 2025.',
-    noteKr: '2025년 유토피아 명상 연작의 블루 변주.',
-    imageSrc: 'images/blue/1171-utopia-meditation-acrylic-on-canvas-280cmx140cm-2025.jpg',
-    featured: true,
-    series: 'utopia',
-    colorTags: ['blue', 'gold']
-  },
-
+  ...normalized.filter(a => a.imageSrc === heroImg),
+  ...normalized.filter(a => a.imageSrc !== heroImg),
 ]
 
-// 히어로 슬라이드쇼 + 대표작품 섹션
 export const FEATURED = ARTWORKS.filter(a => a.featured)
 
-// 시리즈별 필터
-export const BY_SERIES = (series: Artwork['series']) =>
-  ARTWORKS.filter(a => a.series === series)
+export const BY_CATEGORY = (cat: ArtworkCategory): Artwork[] =>
+  ARTWORKS.filter(a => a.category === cat)
 
-// 색상별 필터
-export const BY_COLOR = (tag: Artwork['colorTags'][number]) =>
-  ARTWORKS.filter(a => a.colorTags.includes(tag))
+// deprecated — use BY_CATEGORY
+export const BY_SERIES = (series: string): Artwork[] =>
+  ARTWORKS.filter(a => a.series === series)

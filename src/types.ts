@@ -1,24 +1,30 @@
+// ─── 작품 카테고리 ────────────────────────────────
+export type ArtworkCategory = '2jung' | '2026' | 'blue' | 'ink' | 'red'
+
+// deprecated aliases
+export type ArtworkSeries = ArtworkCategory
+export type ColorTag = 'ink' | 'gold' | 'red' | 'blue' | 'cream'
+
 // ─── 작품 ───────────────────────────────────────
 export interface Artwork {
-  id: string
-  titleEn: string
-  titleKr: string
-  year: number
-  medium: string
-  mediumKr: string
-  size: string
-  collection: string
-  collectionKr: string
-  note: string
-  noteKr: string
-  imageSrc: string
-  featured: boolean
-  series: ArtworkSeries
-  colorTags: ColorTag[]
+  id:            string
+  titleEn:       string
+  titleKr:       string
+  year?:         number
+  medium?:       string
+  mediumKr?:     string
+  size?:         string
+  collection?:   string
+  collectionKr?: string
+  note?:         string
+  noteKr?:       string
+  imageSrc:      string
+  category:      ArtworkCategory
+  featured:      boolean
+  colorTags:     string[]
+  series?:       string   // deprecated compat: equals category
+  sourceTitle:   string
 }
-
-export type ArtworkSeries = 'utopia' | 'ink' | 'acrylic' | 'horse' | 'landscape'
-export type ColorTag = 'ink' | 'gold' | 'red' | 'blue' | 'cream'
 
 // ─── 작품세계 ─────────────────────────────────────
 export interface WorldItem {

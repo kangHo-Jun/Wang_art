@@ -56,46 +56,123 @@
   .type-menu-separator { font-size: var(--text-hero-mobile); letter-spacing: var(--ls-hero-mobile); margin: 0 4px; }
 }
 
-/* ── Selected Works 디렉토리 메뉴 ── */
-.directory-menu {
+/* ── Selected Works 디렉토리 (Pierrick 원본 구조) ── */
+.series-directory {
+  padding: 50px 144px 80px;
+}
+.series-directory-inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
-  margin: 40px var(--pad-wall-lr) 64px;
-  padding-left: 5px;
+  align-items: flex-start;
+}
+.series-dir-label-col {
+  width: 216px;
+  flex-shrink: 0;
+  padding-top: 10px;
+}
+.series-dir-label {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: var(--fw-300);
+  letter-spacing: 0.4px;
+  line-height: 20px;
+  color: var(--color-ink);
+  text-decoration: none;
+  opacity: 0.45;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+.series-dir-label.active,
+.series-dir-label:hover { opacity: 1; }
+
+.series-dir-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.series-dir-link {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: var(--fw-400);
+  line-height: 42px;
+  letter-spacing: 0.2px;
+  color: #454545;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: flex-start;
+  opacity: 0.45;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+.series-dir-link.active,
+.series-dir-link:hover { opacity: 1; }
+
+.series-dir-count {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: var(--fw-300);
+  color: #ff3333;
+  line-height: 20px;
+  margin-left: 4px;
 }
 
-.directory-link {
+/* All Works 보조 링크 */
+.series-dir-all-row {
+  margin-top: 20px;
+  padding-left: 216px;
+}
+.series-dir-all-link {
   font-family: var(--font-sans);
-  font-size: var(--text-meta);
+  font-size: 14px;
   font-weight: var(--fw-300);
   color: var(--color-ink);
   text-decoration: none;
+  letter-spacing: 0.3px;
+  opacity: 0.45;
+  transition: opacity var(--dur-hover) var(--ease-hover);
+}
+.series-dir-all-link.active,
+.series-dir-all-link:hover { opacity: 1; }
+
+/* Load More */
+.wall-load-more {
+  text-align: center;
+  padding: 40px 0 20px;
+}
+.wall-load-more-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: var(--fw-300);
+  color: var(--color-ink);
+  text-decoration: none;
+  letter-spacing: 0.3px;
   opacity: 0.5;
   transition: opacity var(--dur-hover) var(--ease-hover);
-  display: inline-flex;
-  align-items: baseline;
 }
-
-.directory-link:hover,
-.directory-link.active {
-  opacity: 1;
-}
-
-.directory-count {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: var(--fw-400);
-  margin-left: 3px;
-  align-self: flex-start;
-  position: relative;
-  top: -2px;
-}
+.wall-load-more-link:hover { opacity: 1; }
 
 @media (max-width: 768px) {
-  .directory-menu {
-    margin: 30px var(--pad-mob) 40px;
-    gap: 10px 20px;
+  .series-directory {
+    padding: 30px var(--pad-mob) 50px;
+  }
+  .series-directory-inner {
+    flex-direction: column;
+  }
+  .series-dir-label-col {
+    width: auto;
+    padding-top: 0;
+    margin-bottom: 16px;
+  }
+  .series-dir-grid {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  .series-dir-link {
+    font-size: 22px;
+    line-height: 32px;
+  }
+  .series-dir-count {
+    font-size: 14px;
+  }
+  .series-dir-all-row {
+    padding-left: 0;
   }
 }
 

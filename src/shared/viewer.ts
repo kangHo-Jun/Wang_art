@@ -82,14 +82,14 @@ export function initViewer(artworks: Artwork[]): void {
 
     // 이미지 정보 채우기
     img.src = `${base}/${art.imageSrc}`
-    img.alt = `${art.titleEn}, ${art.year}`
+    img.alt = art.year != null ? `${art.titleEn}, ${art.year}` : art.titleEn
     if (title)      title.textContent      = art.titleEn
     if (titleKr)    titleKr.textContent    = art.titleKr
-    if (year)       year.textContent       = art.year > 0 ? String(art.year) : ''
-    if (medium)     medium.textContent     = art.mediumKr
-    if (size)       size.textContent       = art.size
-    if (collection) collection.textContent = art.collectionKr || '작가 보유'
-    if (note)       note.textContent       = art.noteKr
+    if (year)       year.textContent       = art.year != null && art.year > 0 ? String(art.year) : ''
+    if (medium)     medium.textContent     = art.mediumKr ?? ''
+    if (size)       size.textContent       = art.size    ?? ''
+    if (collection) collection.textContent = art.collectionKr ?? '작가 보유'
+    if (note)       note.textContent       = art.noteKr  ?? ''
 
     prevBtn.disabled = currentIndex === 0
     nextBtn.disabled = currentIndex === artworkList.length - 1

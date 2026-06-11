@@ -59,7 +59,7 @@ function renderMainVisual(): void {
 
   const year = document.createElement('span')
   year.className = 'label-year'
-  year.textContent = String(firstFeatured.year)
+  year.textContent = firstFeatured.year != null ? String(firstFeatured.year) : ''
 
   nameWrapper.appendChild(name)
   nameWrapper.appendChild(comma)
@@ -67,11 +67,11 @@ function renderMainVisual(): void {
 
   const medium = document.createElement('div')
   medium.className = 'label-medium'
-  medium.textContent = firstFeatured.medium
+  medium.textContent = firstFeatured.medium ?? ''
 
   const size = document.createElement('div')
   size.className = 'label-size'
-  size.textContent = firstFeatured.size
+  size.textContent = firstFeatured.size ?? ''
 
   label.appendChild(nameWrapper)
   label.appendChild(medium)
