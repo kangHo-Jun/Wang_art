@@ -1,4 +1,4 @@
-import { WORLDS_PAGE, type WorldArtworkRef, type WorldChapter } from '../data/worlds'
+import { WORLDS_PAGE, type WorldArtworkRef, type WorldAxisSection } from '../data/worlds'
 
 export function initWorlds(): void {
   const root = document.getElementById('worldsRoot')
@@ -22,17 +22,16 @@ function renderWorldsPage(root: HTMLElement): void {
               <feDisplacementMap in="SourceGraphic" in2="noise" scale="64" />
             </filter>
             <g filter="url(#worldsInkNoise)">
-              <circle cx="300" cy="300" r="150" fill="#1b1b1d" opacity=".06" />
-              <circle cx="296" cy="304" r="118" fill="#1b1b1d" opacity=".14" />
-              <circle cx="302" cy="298" r="86" fill="#1b1b1d" opacity=".82" />
-              <circle cx="290" cy="306" r="58" fill="#111113" />
+              <circle cx="300" cy="300" r="150" fill="currentColor" opacity=".06" />
+              <circle cx="296" cy="304" r="118" fill="currentColor" opacity=".14" />
+              <circle cx="302" cy="298" r="86" fill="currentColor" opacity=".82" />
+              <circle cx="290" cy="306" r="58" fill="currentColor" />
             </g>
           </svg>
         </div>
         <div class="worlds-origin-artwork-shell" id="worldsOriginArtworkShell" aria-hidden="true">
           <img
             class="worlds-origin-artwork"
-            id="worldsOriginArtwork"
             src="${assetSrc(base, WORLDS_PAGE.originArtwork.imageSrc)}"
             alt=""
             loading="eager"
@@ -42,7 +41,7 @@ function renderWorldsPage(root: HTMLElement): void {
           />
         </div>
         <div class="worlds-origin-summary" id="worldsOriginSummary">
-          <h1>${WORLDS_PAGE.originQuote}</h1>
+          <h1>${WORLDS_PAGE.originQuoteHtml}</h1>
         </div>
         <div class="worlds-origin-cue" id="worldsOriginCue">
           <span class="worlds-origin-cue-text">Scroll</span>
@@ -50,12 +49,11 @@ function renderWorldsPage(root: HTMLElement): void {
         </div>
       </div>
     </section>
-    <div class="worlds-origin-spacer" id="worldsOriginSpacer" aria-hidden="true"></div>
+    <div class="worlds-origin-spacer" aria-hidden="true"></div>
     <section class="worlds-summary worlds-reveal" id="${WORLDS_PAGE.summary.id}">
       <div class="worlds-copy-block">
         <p class="worlds-eyebrow">${WORLDS_PAGE.summary.eyebrow}</p>
         <h2 class="worlds-section-title">${WORLDS_PAGE.summary.title}</h2>
-        ${WORLDS_PAGE.summary.subtitle ? `<p class="worlds-subtitle">${WORLDS_PAGE.summary.subtitle}</p>` : ''}
         ${paragraphsHtml(WORLDS_PAGE.summary.paragraphs)}
       </div>
     </section>
@@ -63,60 +61,13 @@ function renderWorldsPage(root: HTMLElement): void {
       <span class="worlds-axes-label-text">${WORLDS_PAGE.axesEyebrow}</span>
       <span class="worlds-axes-label-line" aria-hidden="true"></span>
     </div>
-    ${chapterHtml(WORLDS_PAGE.world, base)}
-    <section class="worlds-signs worlds-reveal" id="${WORLDS_PAGE.signs.id}">
-      <div class="worlds-signs-copy">
-        <p class="worlds-eyebrow">${WORLDS_PAGE.signs.eyebrow}</p>
-        <h2 class="worlds-section-title">${WORLDS_PAGE.signs.title}</h2>
-        ${WORLDS_PAGE.signs.subtitle ? `<p class="worlds-subtitle">${WORLDS_PAGE.signs.subtitle}</p>` : ''}
-        ${paragraphsHtml(WORLDS_PAGE.signs.paragraphs)}
-        <div class="worlds-signs-statements">
-          <p class="worlds-signs-statement">${WORLDS_PAGE.signs.statement.horse}</p>
-          <p class="worlds-signs-statement">${WORLDS_PAGE.signs.statement.bird}</p>
-        </div>
-      </div>
-      <div class="worlds-signs-grid">
-        ${signFigureHtml(WORLDS_PAGE.signs.artworks[0], base, 'horse')}
-        ${signFigureHtml(WORLDS_PAGE.signs.artworks[1], base, 'bird')}
-      </div>
-    </section>
-    <section class="worlds-language worlds-reveal" id="${WORLDS_PAGE.language.id}">
-      <div class="worlds-language-copy">
-        <p class="worlds-eyebrow">${WORLDS_PAGE.language.eyebrow}</p>
-        <h2 class="worlds-section-title">${WORLDS_PAGE.language.title}</h2>
-        ${WORLDS_PAGE.language.subtitle ? `<p class="worlds-subtitle">${WORLDS_PAGE.language.subtitle}</p>` : ''}
-        ${paragraphsHtml(WORLDS_PAGE.language.paragraphs)}
-      </div>
-      <figure class="worlds-language-figure">
-        <img
-          class="worlds-language-image"
-          src="${assetSrc(base, WORLDS_PAGE.language.artwork.imageSrc)}"
-          alt="${WORLDS_PAGE.language.artwork.alt}"
-          loading="lazy"
-          decoding="async"
-          style="object-position:${WORLDS_PAGE.language.artwork.objectPosition ?? '50% 50%'}"
-        />
-        <figcaption class="worlds-figure-caption">
-          <span class="worlds-figure-title">${WORLDS_PAGE.language.artwork.titleKr}</span>
-          <span class="worlds-spec-line">${formatSpec(WORLDS_PAGE.language.artwork)}</span>
-          <a class="worlds-link worlds-figure-link" href="${artworkHref(base, WORLDS_PAGE.language.artwork.artworkId)}">작품 보기 →</a>
-        </figcaption>
-      </figure>
-      <div class="worlds-language-blocks">
-        ${WORLDS_PAGE.language.blocks.map(block => `
-          <article class="worlds-language-block">
-            <p class="worlds-language-index">${block.eyebrow}</p>
-            <h3 class="worlds-language-title">${block.title}</h3>
-            <p class="worlds-language-desc">${block.body}</p>
-          </article>
-        `).join('')}
-      </div>
-    </section>
+    ${axisSectionHtml(WORLDS_PAGE.world, base)}
+    ${axisSectionHtml(WORLDS_PAGE.signs, base)}
+    ${axisSectionHtml(WORLDS_PAGE.language, base)}
     <section class="worlds-conclusion worlds-reveal" id="${WORLDS_PAGE.conclusion.id}">
       <div class="worlds-copy-block">
         <p class="worlds-eyebrow">${WORLDS_PAGE.conclusion.eyebrow}</p>
         <h2 class="worlds-section-title">${WORLDS_PAGE.conclusion.title}</h2>
-        ${WORLDS_PAGE.conclusion.subtitle ? `<p class="worlds-subtitle">${WORLDS_PAGE.conclusion.subtitle}</p>` : ''}
         ${paragraphsHtml(WORLDS_PAGE.conclusion.paragraphs)}
       </div>
     </section>
@@ -124,49 +75,44 @@ function renderWorldsPage(root: HTMLElement): void {
       <div class="worlds-return-mark" aria-hidden="true"></div>
       <p class="worlds-eyebrow">${WORLDS_PAGE.returnEyebrow}</p>
       <h2 class="worlds-return-title">${WORLDS_PAGE.returnTitle}</h2>
-      <p class="worlds-return-body">${WORLDS_PAGE.returnBody}</p>
+      ${WORLDS_PAGE.returnBody ? `<p class="worlds-return-body">${WORLDS_PAGE.returnBody}</p>` : ''}
       <a class="worlds-link worlds-return-link" href="${base}/${WORLDS_PAGE.worksHref}">관련 작품 보기 →</a>
     </section>
   `
 }
 
-function chapterHtml(chapter: WorldChapter, base: string): string {
-  const reverseClass = chapter.layout === 'figure-first' ? ' worlds-chapter--reverse' : ''
+function axisSectionHtml(section: WorldAxisSection, base: string): string {
+  const reverseClass = section.layout === 'figure-first' ? ' worlds-axis--reverse' : ''
 
   return `
-    <section class="worlds-chapter worlds-reveal${reverseClass}" id="${chapter.id}">
+    <section class="worlds-axis worlds-reveal${reverseClass}" id="${section.id}">
       <div class="worlds-copy-block">
-        <p class="worlds-eyebrow">${chapter.eyebrow}</p>
-        <h2 class="worlds-section-title">${chapter.title}</h2>
-        ${chapter.subtitle ? `<p class="worlds-subtitle">${chapter.subtitle}</p>` : ''}
-        ${paragraphsHtml(chapter.paragraphs)}
-        ${chapter.note ? `<p class="worlds-note">${chapter.note}</p>` : ''}
+        <p class="worlds-eyebrow">${section.eyebrow}</p>
+        <h2 class="worlds-section-title">${section.title}</h2>
+        ${section.subtitle ? `<p class="worlds-subtitle">${section.subtitle}</p>` : ''}
+        ${paragraphsHtml(section.paragraphs)}
+        <div class="worlds-axis-items">
+          <p class="worlds-axis-items-title">이 축을 이루는 것들</p>
+          ${section.items.map(item => `
+            <article class="worlds-axis-item">
+              <h3 class="worlds-axis-item-title">${item.title}</h3>
+              <p class="worlds-axis-item-body">${item.body}</p>
+            </article>
+          `).join('')}
+        </div>
       </div>
-      <figure class="worlds-chapter-figure">
-        <img
-          class="worlds-chapter-image"
-          src="${assetSrc(base, chapter.artwork.imageSrc)}"
-          alt="${chapter.artwork.alt}"
-          loading="lazy"
-          decoding="async"
-          style="object-position:${chapter.artwork.objectPosition ?? '50% 50%'}"
-        />
-        <figcaption class="worlds-figure-caption">
-          <span class="worlds-figure-title">${chapter.artwork.titleKr}</span>
-          <span class="worlds-spec-line">${formatSpec(chapter.artwork)}</span>
-          <a class="worlds-link worlds-figure-link" href="${artworkHref(base, chapter.artwork.artworkId)}">${chapter.ctaLabel}</a>
-        </figcaption>
-      </figure>
+      <div class="worlds-axis-media${section.artworks.length > 1 ? ' worlds-axis-media--stack' : ''}">
+        ${section.artworks.map(artwork => artworkFigureHtml(artwork, base, section.ctaLabel)).join('')}
+      </div>
     </section>
   `
 }
 
-function signFigureHtml(artwork: WorldArtworkRef, base: string, kind: 'horse' | 'bird'): string {
-  const motionClass = kind === 'bird' ? ' worlds-sign-card--bird' : ''
+function artworkFigureHtml(artwork: WorldArtworkRef, base: string, ctaLabel: string): string {
   return `
-    <figure class="worlds-sign-card${motionClass}">
+    <figure class="worlds-axis-figure">
       <img
-        class="worlds-sign-image"
+        class="worlds-axis-image"
         src="${assetSrc(base, artwork.imageSrc)}"
         alt="${artwork.alt}"
         loading="lazy"
@@ -175,8 +121,9 @@ function signFigureHtml(artwork: WorldArtworkRef, base: string, kind: 'horse' | 
       />
       <figcaption class="worlds-figure-caption">
         <span class="worlds-figure-title">${artwork.titleKr}</span>
+        <span class="worlds-figure-separator" aria-hidden="true">/</span>
         <span class="worlds-spec-line">${formatSpec(artwork)}</span>
-        <a class="worlds-link worlds-figure-link" href="${artworkHref(base, artwork.artworkId)}">작품 보기 →</a>
+        <a class="worlds-link worlds-figure-link" href="${artworkHref(base, artwork.artworkId)}">${ctaLabel}</a>
       </figcaption>
     </figure>
   `
@@ -204,13 +151,13 @@ function initOriginSequence(root: HTMLElement): void {
   const artworkShell = root.querySelector<HTMLElement>('#worldsOriginArtworkShell')
   const summary = root.querySelector<HTMLElement>('#worldsOriginSummary')
   const cue = root.querySelector<HTMLElement>('#worldsOriginCue')
-  const summarySection = root.querySelector<HTMLElement>('#summary')
+  const worldSection = root.querySelector<HTMLElement>('#world')
   if (!origin || !dot || !artworkShell || !summary || !cue) return
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduced) {
-    origin.classList.add('is-reduced')
     artworkShell.classList.add('is-visible')
+    artworkShell.classList.add('is-muted')
     summary.classList.add('is-visible')
     cue.classList.add('is-visible')
     return
@@ -242,15 +189,10 @@ function initOriginSequence(root: HTMLElement): void {
     released = true
   }, 4000)
 
-  const dismiss = (): void => {
-    if (origin.classList.contains('is-gone')) return
-    origin.classList.add('is-gone')
-  }
-
   const onScroll = (): void => {
     if (!released) return
     if (window.scrollY > 40) {
-      dismiss()
+      origin.classList.add('is-gone')
       window.removeEventListener('scroll', onScroll)
     }
   }
@@ -258,9 +200,8 @@ function initOriginSequence(root: HTMLElement): void {
   window.addEventListener('scroll', onScroll, { passive: true })
 
   origin.addEventListener('click', () => {
-    if (!released) return
-    if (!summarySection) return
-    summarySection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!released || !worldSection) return
+    worldSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
   })
 }
 

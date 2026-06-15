@@ -1,22 +1,6 @@
 body[data-page="worlds"] {
-  --worlds-surface-base: #fafafa;
-  --worlds-surface-panel: #f2f1ed;
-  --worlds-text-primary: #1a1a1a;
-  --worlds-text-secondary: #6b6b6b;
-  --worlds-text-faint: #9a9a96;
-  --worlds-border-hairline: #e4e2dd;
-  --worlds-accent-hover: #c8442e;
-  --worlds-focus-ring: var(--color-interactive-red);
-  --worlds-wash-soft: rgba(242, 241, 237, 0.88);
-  --worlds-wash-deep: rgba(247, 246, 242, 1);
-  --worlds-duration-instant: 300ms;
-  --worlds-duration-fast: 500ms;
-  --worlds-ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body[data-page="worlds"] {
-  background: var(--worlds-surface-base);
-  color: var(--worlds-text-primary);
+  background: var(--color-bg);
+  color: var(--color-ink-dark);
 }
 
 html.worlds-lock,
@@ -26,83 +10,68 @@ body.worlds-lock {
 }
 
 #worldsRoot {
-  padding: var(--navbar-height) 144px 140px;
-  background:
-    radial-gradient(circle at top left, var(--worlds-wash-soft), transparent 34%),
-    linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, var(--worlds-wash-deep) 100%);
+  padding: var(--navbar-height) var(--pad-series-right) 140px;
+  background: var(--color-bg);
 }
 
 .worlds-eyebrow,
 .worlds-spec-line,
-.worlds-language-index {
+.worlds-origin-cue-text,
+.worlds-axis-items-title {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-small);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--worlds-text-faint);
+  color: var(--color-ink-muted);
 }
 
-.worlds-title,
 .worlds-section-title,
-.worlds-language-title,
+.worlds-subtitle,
 .worlds-figure-title,
+.worlds-axis-item-title,
 .worlds-return-title {
   font-family: var(--font-serif-kr);
   font-weight: var(--fw-400);
-  color: var(--worlds-text-primary);
+  color: var(--color-ink-dark);
 }
 
-.worlds-title {
-  font-size: clamp(34px, 4.6vw, 66px);
-  line-height: 1.04;
-  max-width: 11ch;
-}
-
-.worlds-section-title,
-.worlds-return-title {
-  font-size: clamp(30px, 3.4vw, 50px);
-  line-height: 1.08;
-}
-
-.worlds-origin-body,
 .worlds-paragraph,
-.worlds-subtitle,
+.worlds-axis-item-body,
 .worlds-note,
-.worlds-language-desc,
-.worlds-return-body {
+.worlds-return-body,
+.worlds-link {
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: var(--text-caption);
   line-height: 1.78;
-  color: var(--worlds-text-primary);
+  color: var(--color-ink);
 }
 
 .worlds-link {
-  color: var(--worlds-text-primary);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition:
-    color var(--worlds-duration-instant) var(--worlds-ease),
-    border-color var(--worlds-duration-instant) var(--worlds-ease);
+    color var(--dur-hover) var(--ease-hover),
+    border-color var(--dur-hover) var(--ease-hover);
 }
 
 .worlds-link:hover {
-  color: var(--worlds-accent-hover);
-  border-color: var(--worlds-accent-hover);
+  color: var(--color-interactive-red);
+  border-color: var(--color-interactive-red);
 }
 
 .worlds-link:focus-visible {
-  outline: 1px solid var(--worlds-focus-ring);
+  outline: 1px solid var(--color-interactive-red);
   outline-offset: 4px;
-  color: var(--worlds-accent-hover);
-  border-color: var(--worlds-accent-hover);
+  color: var(--color-interactive-red);
+  border-color: var(--color-interactive-red);
 }
 
 .worlds-origin {
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: var(--worlds-surface-base);
-  transition: opacity 1s ease;
+  background: var(--color-bg);
+  transition: opacity 1s var(--ease-hover);
 }
 
 .worlds-origin.is-gone {
@@ -122,11 +91,12 @@ body.worlds-lock {
 
 .worlds-origin-dot {
   position: absolute;
-  left: 50%;
   top: 46%;
-  width: 46vmin;
-  height: 46vmin;
-  transform: translate(-50%, -50%) scale(.06);
+  left: 50%;
+  width: min(46vmin, 360px);
+  height: min(46vmin, 360px);
+  color: var(--color-ink-dark);
+  transform: translate(-50%, -50%) scale(0.06);
   transform-origin: center;
   transition:
     transform 2s cubic-bezier(.2, .7, .25, 1),
@@ -140,10 +110,10 @@ body.worlds-lock {
 
 .worlds-origin-artwork-shell {
   position: absolute;
-  left: 50%;
   top: 46%;
+  left: 50%;
+  width: min(76vw, 1080px);
   transform: translate(-50%, -50%);
-  width: min(72vw, 1000px);
   opacity: 0;
   transition:
     opacity 1.2s ease,
@@ -155,24 +125,24 @@ body.worlds-lock {
 }
 
 .worlds-origin-artwork-shell.is-muted {
-  transform: translate(-50%, -50%) scale(.96);
-  opacity: .18;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0.16;
 }
 
 .worlds-origin-artwork {
   display: block;
   width: 100%;
   height: auto;
+  background: rgba(51, 51, 51, 0.06);
 }
 
 .worlds-origin-summary {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
+  inset: 0;
+  display: grid;
+  place-items: center;
   padding: 0 8vw;
+  text-align: center;
   opacity: 0;
   transition: opacity 1.4s ease;
   pointer-events: none;
@@ -184,10 +154,14 @@ body.worlds-lock {
 
 .worlds-origin-summary h1 {
   font-family: var(--font-serif-kr);
-  font-weight: var(--fw-300);
   font-size: clamp(34px, 5vw, 72px);
-  line-height: 1.35;
-  letter-spacing: .005em;
+  font-weight: var(--fw-300);
+  line-height: 1.34;
+  color: var(--color-ink-dark);
+}
+
+.worlds-origin-summary h1 span {
+  color: var(--color-interactive-red);
 }
 
 .worlds-origin-cue {
@@ -203,40 +177,29 @@ body.worlds-lock {
   opacity: 1;
 }
 
-.worlds-origin-cue-text {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .22em;
-  color: var(--worlds-text-secondary);
-  text-transform: uppercase;
-}
-
 .worlds-origin-cue-arrow {
   display: block;
   width: 11px;
   height: 11px;
-  border-right: 1px solid var(--worlds-text-secondary);
-  border-bottom: 1px solid var(--worlds-text-secondary);
-  transform: rotate(45deg);
   margin: 10px auto 0;
+  border-right: 1px solid var(--color-ink-muted);
+  border-bottom: 1px solid var(--color-ink-muted);
+  transform: rotate(45deg);
   animation: worldsCueBob 2s ease-in-out infinite;
 }
 
 .worlds-summary,
-.worlds-chapter,
-.worlds-signs,
-.worlds-language,
+.worlds-axis,
 .worlds-conclusion,
 .worlds-return {
   padding-top: 72px;
-  border-top: 1px solid var(--worlds-border-hairline);
+  border-top: 1px solid var(--color-ink-faint);
 }
 
-.worlds-summary {
+.worlds-summary,
+.worlds-conclusion {
   display: grid;
   grid-template-columns: minmax(0, 760px);
-  padding-bottom: 8px;
 }
 
 .worlds-axes-label {
@@ -248,70 +211,99 @@ body.worlds-lock {
 
 .worlds-axes-label-text {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-small);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--worlds-text-primary);
+  color: var(--color-ink-dark);
 }
 
 .worlds-axes-label-line {
   flex: 1;
   height: 1px;
-  background: var(--worlds-text-primary);
+  background: var(--color-ink);
 }
 
 .worlds-copy-block {
   max-width: 60ch;
 }
 
+.worlds-section-title,
+.worlds-return-title {
+  font-size: clamp(30px, 3.4vw, 50px);
+  line-height: 1.08;
+}
+
 .worlds-subtitle {
   margin-top: 16px;
-  color: var(--worlds-text-secondary);
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.34;
 }
 
 .worlds-paragraph {
   margin-top: 18px;
 }
 
-.worlds-note {
-  margin-top: 24px;
-  color: var(--worlds-text-secondary);
-}
-
-.worlds-chapter {
+.worlds-axis {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.14fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   gap: clamp(36px, 6vw, 96px);
   align-items: start;
 }
 
-.worlds-chapter--reverse .worlds-copy-block {
+.worlds-axis--reverse .worlds-copy-block {
   order: 2;
 }
 
-.worlds-chapter--reverse .worlds-chapter-figure {
+.worlds-axis--reverse .worlds-axis-media {
   order: 1;
 }
 
-.worlds-chapter-figure,
-.worlds-language-figure,
-.worlds-sign-card {
+.worlds-axis-items {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.worlds-axis-item {
+  padding-top: 14px;
+}
+
+.worlds-axis-item-title {
+  font-size: 22px;
+  line-height: 1.28;
+}
+
+.worlds-axis-item-body {
+  margin-top: 8px;
+  color: var(--color-ink-muted);
+}
+
+.worlds-axis-media {
+  position: sticky;
+  top: calc(var(--navbar-height) + 28px);
+  display: grid;
+  gap: 28px;
+}
+
+.worlds-axis-media--stack {
+  grid-template-columns: 1fr;
+}
+
+.worlds-axis-figure {
   margin: 0;
 }
 
-.worlds-chapter-image,
-.worlds-language-image,
-.worlds-sign-image {
+.worlds-axis-image {
   display: block;
   width: 100%;
   height: auto;
-  background: var(--worlds-surface-panel);
+  background: rgba(51, 51, 51, 0.06);
 }
 
 .worlds-figure-caption {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-top: 14px;
 }
@@ -321,82 +313,12 @@ body.worlds-lock {
   line-height: 1.2;
 }
 
+.worlds-figure-separator {
+  color: var(--color-ink-muted);
+}
+
 .worlds-figure-link {
   margin-left: auto;
-}
-
-.worlds-signs {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(36px, 6vw, 96px);
-}
-
-.worlds-signs-copy {
-  max-width: 58ch;
-}
-
-.worlds-signs-statements {
-  display: grid;
-  gap: 8px;
-  margin-top: 28px;
-  padding-top: 16px;
-  border-top: 1px solid var(--worlds-border-hairline);
-}
-
-.worlds-signs-statement {
-  font-family: var(--font-serif-kr);
-  font-size: clamp(20px, 2.1vw, 28px);
-  line-height: 1.35;
-}
-
-.worlds-signs-grid {
-  display: grid;
-  gap: 34px;
-}
-
-.worlds-sign-card--bird {
-  animation: worldsBirdEnter 0.7s var(--worlds-ease) 1 both;
-}
-
-.worlds-language {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(36px, 6vw, 96px);
-  align-items: start;
-}
-
-.worlds-language-copy {
-  max-width: 58ch;
-}
-
-.worlds-language-blocks {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 18px;
-  padding-top: 20px;
-  border-top: 1px solid var(--worlds-border-hairline);
-}
-
-.worlds-language-block {
-  min-width: 0;
-}
-
-.worlds-language-title {
-  margin-top: 10px;
-  font-size: 22px;
-  line-height: 1.25;
-}
-
-.worlds-language-desc {
-  margin-top: 10px;
-  color: var(--worlds-text-secondary);
-}
-
-.worlds-conclusion {
-  display: grid;
-  grid-template-columns: minmax(0, 760px);
 }
 
 .worlds-return {
@@ -410,41 +332,21 @@ body.worlds-lock {
   width: 14px;
   height: 14px;
   border-radius: 999px;
-  background: var(--worlds-text-primary);
+  background: var(--color-ink-dark);
   filter: url('#worldsInkNoise');
-}
-
-.worlds-return-body {
-  max-width: 48ch;
-  color: var(--worlds-text-secondary);
-}
-
-.worlds-return-link {
-  margin-top: 8px;
 }
 
 .worlds-reveal {
   opacity: 0;
   transform: translateY(22px);
   transition:
-    opacity var(--worlds-duration-fast) var(--worlds-ease),
-    transform var(--worlds-duration-fast) var(--worlds-ease);
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
 }
 
 .worlds-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-@keyframes worldsBirdEnter {
-  from {
-    opacity: 0;
-    transform: translateX(-36px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 @keyframes worldsCueBob {
@@ -464,31 +366,22 @@ body.worlds-lock {
   .worlds-origin,
   .worlds-origin-summary,
   .worlds-origin-cue,
-  .worlds-origin-artwork-shell {
+  .worlds-origin-artwork-shell,
+  .worlds-reveal {
     transition: none;
+    animation: none;
   }
 
   .worlds-origin-artwork-shell {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.96);
   }
 
-  .worlds-origin-summary {
-    opacity: 1;
-  }
-
-  .worlds-origin-cue {
-    opacity: 1;
-  }
-
+  .worlds-origin-summary,
+  .worlds-origin-cue,
   .worlds-reveal {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-
-  .worlds-sign-card--bird {
-    animation: none;
   }
 }
 
@@ -500,25 +393,11 @@ body.worlds-lock {
 
 @media (max-width: 768px) {
   #worldsRoot {
-    padding: var(--navbar-height) 20px 120px;
-    background:
-      radial-gradient(circle at top left, var(--worlds-wash-soft), transparent 42%),
-      linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, var(--worlds-wash-deep) 100%);
-  }
-
-  .worlds-origin-body,
-  .worlds-paragraph,
-  .worlds-subtitle,
-  .worlds-note,
-  .worlds-language-desc,
-  .worlds-return-body {
-    font-size: 14.5px;
+    padding: var(--navbar-height) var(--pad-mob) 120px;
   }
 
   .worlds-summary,
-  .worlds-chapter,
-  .worlds-signs,
-  .worlds-language,
+  .worlds-axis,
   .worlds-conclusion,
   .worlds-return {
     padding-top: 56px;
@@ -538,19 +417,22 @@ body.worlds-lock {
   }
 
   .worlds-origin-summary {
-    padding: 0 20px;
+    padding: 0 var(--pad-mob);
   }
 
-  .worlds-chapter,
-  .worlds-signs,
-  .worlds-language {
+  .worlds-axis {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
-  .worlds-chapter--reverse .worlds-copy-block,
-  .worlds-chapter--reverse .worlds-chapter-figure {
+  .worlds-axis--reverse .worlds-copy-block,
+  .worlds-axis--reverse .worlds-axis-media {
     order: initial;
+  }
+
+  .worlds-axis-media {
+    position: static;
+    top: auto;
   }
 
   .worlds-figure-caption {
@@ -559,13 +441,5 @@ body.worlds-lock {
 
   .worlds-figure-link {
     margin-left: 0;
-  }
-
-  .worlds-language-blocks {
-    grid-template-columns: 1fr;
-  }
-
-  .worlds-signs-grid {
-    gap: 24px;
   }
 }
