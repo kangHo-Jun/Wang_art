@@ -1,99 +1,571 @@
-/* ── 작품세계 레이아웃 ── */
-.worlds-list {
-  margin: 0 var(--pad-wall-lr) var(--wall-mb);
-  padding-top: var(--navbar-height);
+body[data-page="worlds"] {
+  --worlds-surface-base: #fafafa;
+  --worlds-surface-panel: #f2f1ed;
+  --worlds-text-primary: #1a1a1a;
+  --worlds-text-secondary: #6b6b6b;
+  --worlds-text-faint: #9a9a96;
+  --worlds-border-hairline: #e4e2dd;
+  --worlds-accent-hover: #c8442e;
+  --worlds-focus-ring: var(--color-interactive-red);
+  --worlds-wash-soft: rgba(242, 241, 237, 0.88);
+  --worlds-wash-deep: rgba(247, 246, 242, 1);
+  --worlds-duration-instant: 300ms;
+  --worlds-duration-fast: 500ms;
+  --worlds-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.world-item {
-  display: flex;
-  gap: 64px;
-  padding: 80px 0;
-  border-bottom: 0.5px solid var(--color-ink-faint);
+body[data-page="worlds"] {
+  background: var(--worlds-surface-base);
+  color: var(--worlds-text-primary);
 }
-.world-item:first-child { padding-top: 40px; }
-.world-item:last-child  { border-bottom: none; }
 
-.world-img-wrap {
-  flex: 0 0 58%;
+html.worlds-lock,
+body.worlds-lock {
+  overflow: hidden;
+  height: 100%;
 }
-.world-img-wrap img {
+
+#worldsRoot {
+  padding: var(--navbar-height) 144px 140px;
+  background:
+    radial-gradient(circle at top left, var(--worlds-wash-soft), transparent 34%),
+    linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, var(--worlds-wash-deep) 100%);
+}
+
+.worlds-eyebrow,
+.worlds-spec-line,
+.worlds-language-index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--worlds-text-faint);
+}
+
+.worlds-title,
+.worlds-section-title,
+.worlds-language-title,
+.worlds-figure-title,
+.worlds-return-title {
+  font-family: var(--font-serif-kr);
+  font-weight: var(--fw-400);
+  color: var(--worlds-text-primary);
+}
+
+.worlds-title {
+  font-size: clamp(34px, 4.6vw, 66px);
+  line-height: 1.04;
+  max-width: 11ch;
+}
+
+.worlds-section-title,
+.worlds-return-title {
+  font-size: clamp(30px, 3.4vw, 50px);
+  line-height: 1.08;
+}
+
+.worlds-origin-body,
+.worlds-paragraph,
+.worlds-subtitle,
+.worlds-note,
+.worlds-language-desc,
+.worlds-return-body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--worlds-text-primary);
+}
+
+.worlds-link {
+  color: var(--worlds-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--worlds-duration-instant) var(--worlds-ease),
+    border-color var(--worlds-duration-instant) var(--worlds-ease);
+}
+
+.worlds-link:hover {
+  color: var(--worlds-accent-hover);
+  border-color: var(--worlds-accent-hover);
+}
+
+.worlds-link:focus-visible {
+  outline: 1px solid var(--worlds-focus-ring);
+  outline-offset: 4px;
+  color: var(--worlds-accent-hover);
+  border-color: var(--worlds-accent-hover);
+}
+
+.worlds-origin {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--worlds-surface-base);
+  transition: opacity 1s ease;
+}
+
+.worlds-origin.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.worlds-origin-spacer {
+  height: 100vh;
+}
+
+.worlds-origin-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.worlds-origin-dot {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 46vmin;
+  height: 46vmin;
+  transform: translate(-50%, -50%) scale(.06);
+  transform-origin: center;
+  transition:
+    transform 2s cubic-bezier(.2, .7, .25, 1),
+    opacity 1.2s ease;
+  z-index: 2;
+}
+
+.worlds-origin-dot.is-fading {
+  opacity: 0;
+}
+
+.worlds-origin-artwork-shell {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(72vw, 1000px);
+  opacity: 0;
+  transition:
+    opacity 1.2s ease,
+    transform 1.6s ease;
+}
+
+.worlds-origin-artwork-shell.is-visible {
+  opacity: 1;
+}
+
+.worlds-origin-artwork-shell.is-muted {
+  transform: translate(-50%, -50%) scale(.96);
+  opacity: .18;
+}
+
+.worlds-origin-artwork {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
 
-.world-info {
-  flex: 1;
-  padding-top: 4px;
+.worlds-origin-summary {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  padding: 0 8vw;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  pointer-events: none;
 }
 
-.world-kicker {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  font-weight: var(--fw-400);
-  color: var(--color-ink-muted);
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
+.worlds-origin-summary.is-visible {
+  opacity: 1;
 }
 
-.world-title-en {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: var(--fw-200);
-  letter-spacing: 0.2px;
-  line-height: 1.2;
-  color: var(--color-ink);
-  margin-bottom: 8px;
-}
-
-.world-title-kr {
-  font-family: var(--font-sans);
-  font-size: var(--text-caption);
+.worlds-origin-summary h1 {
+  font-family: var(--font-serif-kr);
   font-weight: var(--fw-300);
-  color: var(--color-ink-muted);
-  margin-bottom: 28px;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 1.35;
+  letter-spacing: .005em;
 }
 
-.world-divider {
-  width: 32px;
-  height: 0.5px;
-  background: var(--color-ink-faint);
-  margin-bottom: 28px;
+.worlds-origin-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
-.world-desc {
-  font-family: var(--font-sans);
-  font-size: var(--text-caption);
-  font-weight: var(--fw-200);
-  line-height: 1.75;
-  color: var(--color-ink);
-  margin-bottom: 32px;
+.worlds-origin-cue.is-visible {
+  opacity: 1;
 }
 
-.world-keywords {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
-}
-
-.world-keyword {
+.worlds-origin-cue-text {
+  display: block;
   font-family: var(--font-mono);
-  font-size: var(--text-small);
-  font-weight: var(--fw-400);
-  color: var(--color-ink-muted);
-  letter-spacing: 0.3px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--worlds-text-secondary);
+  text-transform: uppercase;
+}
+
+.worlds-origin-cue-arrow {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-right: 1px solid var(--worlds-text-secondary);
+  border-bottom: 1px solid var(--worlds-text-secondary);
+  transform: rotate(45deg);
+  margin: 10px auto 0;
+  animation: worldsCueBob 2s ease-in-out infinite;
+}
+
+.worlds-summary,
+.worlds-chapter,
+.worlds-signs,
+.worlds-language,
+.worlds-conclusion,
+.worlds-return {
+  padding-top: 72px;
+  border-top: 1px solid var(--worlds-border-hairline);
+}
+
+.worlds-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 760px);
+  padding-bottom: 8px;
+}
+
+.worlds-axes-label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 90px;
+}
+
+.worlds-axes-label-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--worlds-text-primary);
+}
+
+.worlds-axes-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--worlds-text-primary);
+}
+
+.worlds-copy-block {
+  max-width: 60ch;
+}
+
+.worlds-subtitle {
+  margin-top: 16px;
+  color: var(--worlds-text-secondary);
+}
+
+.worlds-paragraph {
+  margin-top: 18px;
+}
+
+.worlds-note {
+  margin-top: 24px;
+  color: var(--worlds-text-secondary);
+}
+
+.worlds-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.14fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: start;
+}
+
+.worlds-chapter--reverse .worlds-copy-block {
+  order: 2;
+}
+
+.worlds-chapter--reverse .worlds-chapter-figure {
+  order: 1;
+}
+
+.worlds-chapter-figure,
+.worlds-language-figure,
+.worlds-sign-card {
+  margin: 0;
+}
+
+.worlds-chapter-image,
+.worlds-language-image,
+.worlds-sign-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--worlds-surface-panel);
+}
+
+.worlds-figure-caption {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.worlds-figure-title {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.worlds-figure-link {
+  margin-left: auto;
+}
+
+.worlds-signs {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 6vw, 96px);
+}
+
+.worlds-signs-copy {
+  max-width: 58ch;
+}
+
+.worlds-signs-statements {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--worlds-border-hairline);
+}
+
+.worlds-signs-statement {
+  font-family: var(--font-serif-kr);
+  font-size: clamp(20px, 2.1vw, 28px);
+  line-height: 1.35;
+}
+
+.worlds-signs-grid {
+  display: grid;
+  gap: 34px;
+}
+
+.worlds-sign-card--bird {
+  animation: worldsBirdEnter 0.7s var(--worlds-ease) 1 both;
+}
+
+.worlds-language {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: start;
+}
+
+.worlds-language-copy {
+  max-width: 58ch;
+}
+
+.worlds-language-blocks {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 18px;
+  padding-top: 20px;
+  border-top: 1px solid var(--worlds-border-hairline);
+}
+
+.worlds-language-block {
+  min-width: 0;
+}
+
+.worlds-language-title {
+  margin-top: 10px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.worlds-language-desc {
+  margin-top: 10px;
+  color: var(--worlds-text-secondary);
+}
+
+.worlds-conclusion {
+  display: grid;
+  grid-template-columns: minmax(0, 760px);
+}
+
+.worlds-return {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  padding-bottom: 20px;
+}
+
+.worlds-return-mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--worlds-text-primary);
+  filter: url('#worldsInkNoise');
+}
+
+.worlds-return-body {
+  max-width: 48ch;
+  color: var(--worlds-text-secondary);
+}
+
+.worlds-return-link {
+  margin-top: 8px;
+}
+
+.worlds-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--worlds-duration-fast) var(--worlds-ease),
+    transform var(--worlds-duration-fast) var(--worlds-ease);
+}
+
+.worlds-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes worldsBirdEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes worldsCueBob {
+  0%, 100% {
+    transform: rotate(45deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .worlds-origin-dot {
+    display: none;
+  }
+
+  .worlds-origin,
+  .worlds-origin-summary,
+  .worlds-origin-cue,
+  .worlds-origin-artwork-shell {
+    transition: none;
+  }
+
+  .worlds-origin-artwork-shell {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .worlds-origin-summary {
+    opacity: 1;
+  }
+
+  .worlds-origin-cue {
+    opacity: 1;
+  }
+
+  .worlds-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .worlds-sign-card--bird {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  #worldsRoot {
+    padding-inline: clamp(28px, 4vw, 64px);
+  }
 }
 
 @media (max-width: 768px) {
-  .worlds-list {
-    margin: 0 var(--pad-mob) var(--wall-mb);
-    padding-top: var(--navbar-height-mob);
+  #worldsRoot {
+    padding: var(--navbar-height) 20px 120px;
+    background:
+      radial-gradient(circle at top left, var(--worlds-wash-soft), transparent 42%),
+      linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, var(--worlds-wash-deep) 100%);
   }
-  .world-item {
-    flex-direction: column;
+
+  .worlds-origin-body,
+  .worlds-paragraph,
+  .worlds-subtitle,
+  .worlds-note,
+  .worlds-language-desc,
+  .worlds-return-body {
+    font-size: 14.5px;
+  }
+
+  .worlds-summary,
+  .worlds-chapter,
+  .worlds-signs,
+  .worlds-language,
+  .worlds-conclusion,
+  .worlds-return {
+    padding-top: 56px;
+  }
+
+  .worlds-axes-label {
+    padding-top: 56px;
+  }
+
+  .worlds-origin-dot {
+    width: 54vmin;
+    height: 54vmin;
+  }
+
+  .worlds-origin-artwork-shell {
+    width: 86vw;
+  }
+
+  .worlds-origin-summary {
+    padding: 0 20px;
+  }
+
+  .worlds-chapter,
+  .worlds-signs,
+  .worlds-language {
+    grid-template-columns: 1fr;
     gap: 24px;
-    padding: 48px 0;
   }
-  .world-img-wrap { flex: none; width: 100%; }
-  .world-title-en { font-size: 24px; }
+
+  .worlds-chapter--reverse .worlds-copy-block,
+  .worlds-chapter--reverse .worlds-chapter-figure {
+    order: initial;
+  }
+
+  .worlds-figure-caption {
+    align-items: flex-start;
+  }
+
+  .worlds-figure-link {
+    margin-left: 0;
+  }
+
+  .worlds-language-blocks {
+    grid-template-columns: 1fr;
+  }
+
+  .worlds-signs-grid {
+    gap: 24px;
+  }
 }
