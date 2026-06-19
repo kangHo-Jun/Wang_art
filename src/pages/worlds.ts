@@ -62,7 +62,7 @@ function renderWorldsPage(root: HTMLElement): void {
     </div>
     ${axisSectionHtml(WORLDS_PAGE.world, base)}
     ${axisSectionHtml(WORLDS_PAGE.signs, base)}
-    ${axisSectionHtml(WORLDS_PAGE.language, base)}
+    ${languageSectionHtml(WORLDS_PAGE.language, base)}
     <section class="worlds-conclusion worlds-reveal r-quiet" id="${WORLDS_PAGE.conclusion.id}">
       <div class="worlds-copy-block">
         ${WORLDS_PAGE.conclusion.title ? `<h2 class="worlds-section-title">${WORLDS_PAGE.conclusion.title}</h2>` : ''}
@@ -109,6 +109,26 @@ function axisSectionHtml(section: WorldAxisSection, base: string): string {
   `
 }
 
+function languageSectionHtml(section: WorldAxisSection, base: string): string {
+  return `
+    <section class="worlds-language" id="${section.id}">
+      <div class="worlds-language-head">
+        <div class="worlds-language-lead">
+          <p class="worlds-eyebrow worlds-reveal r-quiet">${section.eyebrow}</p>
+          <h2 class="worlds-section-title worlds-reveal r-strong"${revealStyle(0.04)}>${section.title}</h2>
+          ${section.subtitle ? `<p class="worlds-subtitle worlds-reveal r-quiet"${revealStyle(0.08)}>${section.subtitle}</p>` : ''}
+        </div>
+        <div class="worlds-language-copy">
+          ${paragraphsHtml(section.paragraphs, 0.14, 0.08)}
+        </div>
+      </div>
+      <div class="worlds-language-grid">
+        ${section.artworks.map((artwork, index) => languageCellHtml(artwork, section.items[index], base, section.ctaLabel, index)).join('')}
+      </div>
+    </section>
+  `
+}
+
 function artworkFigureHtml(
   artwork: WorldArtworkRef,
   base: string,
@@ -136,6 +156,40 @@ function artworkFigureHtml(
         <a class="worlds-link worlds-figure-link" href="${artworkHref(base, artwork.artworkId)}">${ctaLabel}</a>
       </figcaption>
     </figure>
+  `
+}
+
+function languageCellHtml(
+  artwork: WorldArtworkRef,
+  item: WorldAxisSection['items'][number] | undefined,
+  base: string,
+  ctaLabel: string,
+  index: number,
+): string {
+  return `
+    <article class="worlds-language-cell worlds-reveal r-strong"${revealStyle(index * 0.1)}>
+      ${artwork.axisLabel ? `<p class="worlds-axis-image-label">${artwork.axisLabel}</p>` : ''}
+      <img
+        class="worlds-language-image"
+        src="${assetSrc(base, artwork.imageSrc)}"
+        alt="${artwork.alt}"
+        loading="lazy"
+        decoding="async"
+        style="object-position:${artwork.objectPosition ?? '50% 50%'}"
+      />
+      <div class="worlds-language-caption">
+        <span class="worlds-figure-title">${artwork.titleKr}</span>
+        <span class="worlds-figure-separator" aria-hidden="true">/</span>
+        <span class="worlds-spec-line">${formatSpec(artwork)}</span>
+      </div>
+      ${item ? `
+        <div class="worlds-language-note">
+          <h3 class="worlds-axis-item-title">${item.title}</h3>
+          <p class="worlds-axis-item-body">${item.body}</p>
+        </div>
+      ` : ''}
+      <a class="worlds-link worlds-language-link" href="${artworkHref(base, artwork.artworkId)}">${ctaLabel}</a>
+    </article>
   `
 }
 

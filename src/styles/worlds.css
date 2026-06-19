@@ -120,7 +120,7 @@ body.worlds-lock {
 
 .worlds-origin-artwork-shell {
   position: absolute;
-  top: 46%;
+  top: calc(50% + 64px);
   left: 50%;
   width: min(76vw, 1080px);
   transform: translate(-50%, -50%);
@@ -209,7 +209,8 @@ body.worlds-lock {
 .worlds-summary,
 .worlds-conclusion {
   display: grid;
-  grid-template-columns: minmax(0, 760px);
+  grid-template-columns: minmax(0, 720px);
+  justify-content: center;
 }
 
 .worlds-axes-label {
@@ -283,6 +284,66 @@ body.worlds-lock {
   align-items: start;
 }
 
+.worlds-language {
+  padding-top: 72px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.worlds-language-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 6vw, 96px);
+  padding-bottom: 44px;
+  border-bottom: 1px solid var(--color-ink-faint);
+}
+
+.worlds-language-copy .worlds-paragraph:first-child {
+  margin-top: 0;
+}
+
+.worlds-language-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding-top: 44px;
+}
+
+.worlds-language-cell {
+  display: grid;
+  align-content: start;
+}
+
+.worlds-language-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: rgba(51, 51, 51, 0.06);
+}
+
+.worlds-language-caption {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.worlds-language-note {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.worlds-language-note .worlds-axis-item-body {
+  margin-top: 8px;
+}
+
+.worlds-language-link {
+  margin-top: 18px;
+  justify-self: start;
+}
+
 .worlds-axis--reverse .worlds-copy-block {
   order: 2;
 }
@@ -325,11 +386,6 @@ body.worlds-lock {
 
 .worlds-axis-figure {
   margin: 0;
-}
-
-.worlds-axis-figure--language .worlds-figure-caption {
-  padding-top: 12px;
-  border-top: 1px solid var(--color-ink-faint);
 }
 
 .worlds-axis-image-label {
@@ -503,6 +559,24 @@ body.worlds-lock {
   .worlds-axis {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .worlds-language {
+    padding-top: 56px;
+  }
+
+  .worlds-language-head,
+  .worlds-language-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .worlds-language-head {
+    padding-bottom: 32px;
+  }
+
+  .worlds-language-grid {
+    padding-top: 32px;
   }
 
   .worlds-axis--reverse .worlds-copy-block,
