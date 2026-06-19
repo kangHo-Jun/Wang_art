@@ -73,7 +73,7 @@ function initZoomWhenReady(img: HTMLImageElement): void {
   // 이전 작품의 이벤트 정리 + 렌즈 숨김
   zoomController?.abort()
   zoomController = null
-  hideLens(img)
+  hideLens()
 
   const attach = () => {
     if (img.naturalWidth > 0) initArtworkZoom(img)
@@ -82,13 +82,13 @@ function initZoomWhenReady(img: HTMLImageElement): void {
   if (img.complete) {
     attach()
   } else {
-    img.addEventListener('load',  attach,                      { once: true })
+    img.addEventListener('load',  attach,                       { once: true })
     img.addEventListener('error', () => { /* broken: 스킵 */ }, { once: true })
   }
 }
 
-function hideLens(img: HTMLImageElement): void {
-  const lens = img.parentElement?.querySelector<HTMLElement>('.artwork-magnifier')
+function hideLens(): void {
+  const lens = document.getElementById('artworkMagnifier')
   if (lens) lens.style.display = 'none'
 }
 
@@ -107,38 +107,35 @@ function initArtworkZoom(img: HTMLImageElement): void {
 
 // ── 데스크톱 원형 돋보기 ─────────────────────────────────────────
 function setupMagnifier(img: HTMLImageElement, signal: AbortSignal): void {
-  const wrap      = img.parentElement as HTMLElement
-  const maybeLens = wrap.querySelector<HTMLElement>('.artwork-magnifier')
+  // magnifier는 body-level fixed overlay (overflow:hidden 영향 없음)
+  const maybeLens = document.getElementById('artworkMagnifier')
   if (!maybeLens) return
-  const lens = maybeLens  // 클로저 안에서도 HTMLElement로 추론
+  const lens = maybeLens
 
   function updateLens(e: MouseEvent): void {
     const rect = img.getBoundingClientRect()
-    const imgW  = rect.width
-    const imgH  = rect.height
+    const imgW = rect.width
+    const imgH = rect.height
 
-    // 이미지가 렌즈보다 작으면 스킵
-    if (imgW < LENS_SIZE || imgH < LENS_SIZE) return
+    /*
+     * [렌즈 화면 위치] — viewport 기준 (position:fixed)
+     * 마우스 좌표를 그대로 중심으로 사용. clamp 없음.
+     * 이미지 모서리에서 렌즈 절반이 이미지 밖으로 자연스럽게 돌출됨.
+     */
+    lens.style.left = `${e.clientX - LENS_RADIUS}px`
+    lens.style.top  = `${e.clientY - LENS_RADIUS}px`
 
+    /*
+     * [확대 이미지 위치] — 이미지 내부 마우스 좌표 기준. clamp 없음.
+     * mouseX=0, mouseY=0 (이미지 왼쪽 위 모서리) →
+     *   bg-position = (160, 160) → 이미지 최상단-좌 픽셀이 렌즈 중앙에 표시.
+     * formula: bg-position = lensRadius - mouseInImage * zoom
+     */
     const mouseX = e.clientX - rect.left
     const mouseY = e.clientY - rect.top
 
-    // 렌즈 중심 clamp: 렌즈가 이미지 경계 밖으로 나가지 않도록
-    const cx = Math.max(LENS_RADIUS, Math.min(mouseX, imgW - LENS_RADIUS))
-    const cy = Math.max(LENS_RADIUS, Math.min(mouseY, imgH - LENS_RADIUS))
-
-    // 렌즈 위치 (.artwork-zoom-wrap 기준 absolute)
-    lens.style.left = `${cx - LENS_RADIUS}px`
-    lens.style.top  = `${cy - LENS_RADIUS}px`
-
-    /*
-     * background-position 계산
-     * background-size = imgW*2 x imgH*2 (2× 확대)
-     * 렌즈 중심(cx, cy)이 background의 cx*2, cy*2 위치를 가리켜야 함
-     * → background-position = lensRadius - cx*zoom, lensRadius - cy*zoom
-     */
     lens.style.backgroundSize     = `${imgW * ZOOM}px ${imgH * ZOOM}px`
-    lens.style.backgroundPosition = `${LENS_RADIUS - cx * ZOOM}px ${LENS_RADIUS - cy * ZOOM}px`
+    lens.style.backgroundPosition = `${LENS_RADIUS - mouseX * ZOOM}px ${LENS_RADIUS - mouseY * ZOOM}px`
   }
 
   img.addEventListener('mouseenter', (e: MouseEvent) => {

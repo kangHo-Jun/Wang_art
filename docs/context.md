@@ -1,5 +1,5 @@
 # 왕열 Wang Yeul — 프로젝트 컨텍스트
-> 최종 업데이트: 2026-06-09
+> 최종 업데이트: 2026-06-19
 > 작업 브랜치: ui/pierrick-v3
 > 로컬 경로: /Users/zart/Library/Mobile Documents/com~apple~CloudDocs/프로젝트/Wang_art
 
@@ -209,3 +209,20 @@ npm run deploy
 - **왕열 라이브**: https://kangho-jun.github.io/Wang_art/
 - **폰트**: Noto Sans KR (Apercu Pro 대체), Space Mono (모노 서체)
 - **이미지**: public/images/ 폴더 (blue/, red/, ink/, 2026/ 등)
+
+---
+
+## 11. 최근 결정 사항
+
+1. **공통 nav active 표시는 레드 고정**
+   - 현재 페이지 nav 링크는 Wang_art 기준 레드 `#c8442e`로 상시 표시한다.
+   - hover도 동일 레드 계열을 사용하되, active는 마우스를 떼어도 유지한다.
+   - 로고는 active 대상이 아니며 기본색을 유지한다.
+
+2. **공통 nav 타이포 복구**
+   - 로고와 페이지 링크는 전 페이지 공통으로 `22px / fw200 / ls0.4px`를 유지한다.
+   - 모바일 햄버거 드로어 안의 메뉴 링크도 동일 수치를 유지한다.
+
+3. **범위 제한**
+   - 이번 수정은 공통 nav에 한정한다.
+   - 전역 인터랙션 레드는 `#c8442e`로 통일하고, nav active/hover도 같은 값을 사용한다.

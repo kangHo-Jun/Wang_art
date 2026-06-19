@@ -8,6 +8,7 @@ export interface WorldArtworkRef {
   heightCm: string
   yearText: string
   objectPosition?: string
+  axisLabel?: string
 }
 
 export interface WorldParagraphSection {
@@ -79,6 +80,20 @@ const LANGUAGE_PRIMARY_ARTWORK: WorldArtworkRef = {
   heightCm: '200',
   yearText: '2006',
   objectPosition: '50% 54%',
+  axisLabel: '먹 INK',
+}
+
+const LANGUAGE_BLUE_ARTWORK: WorldArtworkRef = {
+  titleKr: '유토피아 명상',
+  artworkId: 'sw-08-blue-utopia-meditation-2025-wide',
+  imageSrc: 'images/blue/8-utopia-meditation-acrylic-on-canvas-280cmx140cm-2025-2000man-won.jpg',
+  alt: '유토피아 명상, 2025, acrylic on canvas, 280x140cm 작품 이미지',
+  medium: 'Acrylic on canvas',
+  widthCm: '280',
+  heightCm: '140',
+  yearText: '2025',
+  objectPosition: '50% 50%',
+  axisLabel: '파랑 BLUE',
 }
 
 const LANGUAGE_SECONDARY_ARTWORK: WorldArtworkRef = {
@@ -91,6 +106,7 @@ const LANGUAGE_SECONDARY_ARTWORK: WorldArtworkRef = {
   heightCm: '222',
   yearText: '2023',
   objectPosition: '50% 50%',
+  axisLabel: '빨강 RED',
 }
 
 export const WORLDS_PAGE: WorldsPageData = {
@@ -98,21 +114,21 @@ export const WORLDS_PAGE: WorldsPageData = {
   originArtwork: HERO_ARTWORK,
   summary: {
     id: 'summary',
-    eyebrow: '작품세계 · 총론',
-    title: '총론',
+    eyebrow: '',
+    title: '',
     paragraphs: [
-      '유토피아(Utopia)라는 말은 본래 \'없다(ou)\'와 \'장소(topos)\'가 합쳐진 단어다. 처음부터 존재하지 않는 곳이라는 뜻이다. 왕열은 평생 무릉도원을 그려왔지만, 그가 그린 것은 도달할 수 있는 낙원이 아니었다. 그는 이상향이 실재하지 않음을 알면서도, 바로 그 \'없음\' 위에서 우리 삶을 응시한다.',
-      '그래서 그의 산수는 보는 그림이 아니라, 머무는 공간이다. 화면 속 산과 물, 운무와 새는 자연의 외형을 설명하지 않는다. 그것들은 거친 현대를 살아가는 우리 자신의 자리이며, 관람자는 그 앞에서 풍경을 바라보는 대신 그 안으로 천천히 걸어 들어간다. 이 글은 그 세계를 세 개의 축을 따라 걷는다. 어디에 서 있는가, 누가 함께 있는가, 무엇으로 그 자리가 만들어졌는가.',
+      '유토피아(Utopia)라는 말은 본래 \'없다(ou)\'와 \'장소(topos)\'가 합쳐진 단어다. 처음부터 존재하지 않는 곳이라는 뜻이다. 왕열은 평생 무릉도원을 그려왔지만, 그가 그린 것은 도달할 수 있는 낙원이 아니었다. <strong>그는 이상향이 실재하지 않음을 알면서도, 바로 그 \'없음\' 위에서 우리 삶을 응시한다.</strong>',
+      '<strong>그래서 그의 산수는 보는 그림이 아니라, 머무는 공간이다.</strong> 화면 속 산과 물, 운무와 새는 자연의 외형을 설명하지 않는다. 그것들은 거친 현대를 살아가는 우리 자신의 자리이며, 관람자는 그 앞에서 풍경을 바라보는 대신 그 안으로 천천히 걸어 들어간다. 이 글은 그 세계를 세 개의 축을 따라 걷는다. 어디에 서 있는가, 누가 함께 있는가, 무엇으로 그 자리가 만들어졌는가.',
     ],
   },
   axesEyebrow: 'Three Axes',
   world: {
     id: 'world',
-    eyebrow: '작품세계 · 1번째 축',
+    eyebrow: '01 / 03',
     title: 'WORLD',
     subtitle: '존재하지 않는 장소 — 무릉도원이라는 역설',
     paragraphs: [
-      '도연명이 「도화원기」에 적은 무릉도원은, 한 어부가 우연히 닿았다가 다시는 찾지 못한 마을이었다. 길을 표시해두고 떠났지만 누구도 그곳으로 돌아가지 못했다. 이 오래된 이야기의 핵심은 낙원이 아름답다는 것이 아니라, 끝내 닿을 수 없다는 것에 있다.',
+      '도연명이 「도화원기」에 적은 무릉도원은, 한 어부가 우연히 닿았다가 다시는 찾지 못한 마을이었다. 길을 표시해두고 떠났지만 누구도 그곳으로 돌아가지 못했다. 이 오래된 이야기의 핵심은 낙원이 아름답다는 것이 아니라, <strong>끝내 닿을 수 없다는 것</strong>에 있다.',
       '왕열은 이 역설을 정면으로 받아들인다. 그는 환상적인 이상향을 짓는 대신, 이상향이 없다는 사실과 마주한다. 미술사가 김웅기의 말처럼, 산수화가는 자연을 그리는 것이 아니라 그 자연을 바라보는 자기 자신을 그린다. 왕열의 화면 앞에서 우리가 보는 것은 결국 산이 아니라, 그 산을 응시하는 우리 마음이다.',
     ],
     artworks: [HERO_ARTWORK],
@@ -135,11 +151,11 @@ export const WORLDS_PAGE: WorldsPageData = {
   },
   signs: {
     id: 'signs',
-    eyebrow: '작품세계 · 2번째 축',
+    eyebrow: '02 / 03',
     title: 'SIGNS',
     subtitle: '날아가지 못하는 새 — 갇힌 자유로서의 인간',
     paragraphs: [
-      '새의 가장 큰 특징은 난다는 것이다. 땅에 발을 붙이고 사는 인간에게, 하늘로 솟아오르는 새는 곧 자유의 형상이다. 그런데 왕열의 새는, 날지 않는다. 평론가 전애완이 짚었듯, 날개를 펴고도 솟아오르지 못하고 목을 길게 빼 하늘을 향하지만 끝내 그 자리에 머문다. 그래서 그의 새는 자유로운 존재가 아니라, 새가 되지 못한 인간이다.',
+      '새의 가장 큰 특징은 난다는 것이다. 땅에 발을 붙이고 사는 인간에게, 하늘로 솟아오르는 새는 곧 자유의 형상이다. 그런데 왕열의 새는, <strong>날지 않는다</strong>. 평론가 전애완이 짚었듯, 날개를 펴고도 솟아오르지 못하고 목을 길게 빼 하늘을 향하지만 끝내 그 자리에 머문다. 그래서 그의 새는 자유로운 존재가 아니라, 새가 되지 못한 인간이다.',
       '작가 스스로도 새를 인간의 상징이라 말한다. 홀로 나는 새는 외롭고, 무리 지은 새는 현대 도시의 군중을 닮았다. 여기에 산수 속에 가만히 선 말이 더해진다. 새가 갈망 속의 좌절이라면, 말은 멈춤 속의 응시다.',
     ],
     artworks: [HORSE_ARTWORK],
@@ -162,14 +178,14 @@ export const WORLDS_PAGE: WorldsPageData = {
   },
   language: {
     id: 'language',
-    eyebrow: '작품세계 · 3번째 축',
+    eyebrow: '03 / 03',
     title: 'LANGUAGE',
     subtitle: '갇힘의 빨강, 닿을 수 없는 파랑 — 색이 곧 역설이다',
     paragraphs: [
-      '왕열의 산수에서 먹은 출발점이다. 먹은 산과 구름, 안개와 물길을 만들고 화면의 깊이와 호흡을 연다. 전통 수묵의 정신을 바탕으로 하되 과거의 형식에 가두지 않고 아크릴·캔버스와 충돌시킨다. 이때 먹은 옛것의 표지가 아니라, 작가가 세계를 사유하는 가장 근원적인 언어다.',
-      '색은 그 위에서 역설을 완성한다. 빨강은 앞으로 튀어나와 깊이를 지워버린다. 그래서 붉은 화면 속 새는 날개를 펴고도 갇힌 듯 보인다. 작가에게 이 붉은 공간은 동시에 명상을 위한 정신의 자리다. 반대로 파랑은 뒤로 물러나며 깊이를 알 수 없게 만든다. 닿을 수 없는 무한의 거리이자, 결코 도달하지 못할 이상향의 색이다.',
+      '왕열의 산수에서 먹은 출발점이다. 먹은 산과 구름, 안개와 물길을 만들고 화면의 깊이와 호흡을 연다. 전통 수묵의 정신을 바탕으로 하되 과거의 형식에 가두지 않고 아크릴·캔버스와 충돌시킨다. 이때 먹은 옛것의 표지가 아니라, <strong>작가가 세계를 사유하는 가장 근원적인 언어</strong>다.',
+      '<strong>빨강은 앞으로 튀어나와 깊이를 지워버린다.</strong> 그래서 붉은 화면 속 새는 날개를 펴고도 갇힌 듯 보인다. 작가에게 이 붉은 공간은 동시에 명상을 위한 정신의 자리다. 반대로 파랑은 뒤로 물러나며 깊이를 알 수 없게 만든다. 닿을 수 없는 무한의 거리이자, 결코 도달하지 못할 이상향의 색이다.',
     ],
-    artworks: [LANGUAGE_PRIMARY_ARTWORK, LANGUAGE_SECONDARY_ARTWORK],
+    artworks: [LANGUAGE_PRIMARY_ARTWORK, LANGUAGE_BLUE_ARTWORK, LANGUAGE_SECONDARY_ARTWORK],
     items: [
       {
         title: '먹 — 근원의 언어',
@@ -189,10 +205,10 @@ export const WORLDS_PAGE: WorldsPageData = {
   },
   conclusion: {
     id: 'conclusion',
-    eyebrow: '작품세계 · 결론',
-    title: '결론',
+    eyebrow: '',
+    title: '',
     paragraphs: [
-      '인간은 어디에 머물 수 있는가. 왕열의 산수는 답하지 않는다. 다만 마음이 머물 수 있는 한 장소를 펼쳐 보이고, 그 안을 걷게 할 뿐이다.',
+      '인간은 어디에 머물 수 있는가. 왕열의 산수는 답하지 않는다. 다만 마음이 머물 수 있는 한 장소를 펼쳐 보이고, <strong>그 안을 걷게 할 뿐이다.</strong>',
     ],
   },
   returnEyebrow: '작품세계 · 회귀',

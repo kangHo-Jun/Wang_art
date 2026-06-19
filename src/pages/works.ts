@@ -1,18 +1,12 @@
-import { gsap }       from 'gsap'
-import { ARTWORKS }   from '../data/artworks'
-import { initFadeUp } from '../shared/animation'
-import { navigateTo } from '../shared/animation'
+import { gsap }              from 'gsap'
+import { ARTWORKS }          from '../data/artworks'
+import { initFadeUp }        from '../shared/animation'
+import { navigateTo }        from '../shared/animation'
+import { CATEGORIES }        from '../shared/categories'
+import { applySeriesActive } from '../shared/seriesActive'
 import type { ArtworkCategory, Artwork } from '../types'
 
 const PAGE_SIZE = 30
-
-const CATEGORIES: { slug: ArtworkCategory; label: string }[] = [
-  { slug: '2jung', label: '2중구조' },
-  { slug: '2026',  label: '2026 해체' },
-  { slug: 'blue',  label: 'Blue' },
-  { slug: 'ink',   label: 'Ink' },
-  { slug: 'red',   label: 'Red' },
-]
 
 const VALID_CATS = new Set<string>(CATEGORIES.map(c => c.slug))
 
@@ -31,7 +25,8 @@ function initDirectoryMenu(): void {
   container.innerHTML = ''
 
   const params = new URLSearchParams(location.search)
-  const currentCat = params.get('series') || 'all'
+  const rawCat = params.get('series') || 'all'
+  const currentCat = VALID_CATS.has(rawCat) ? rawCat : 'all'
 
   // ── inner: label col + series grid ──
   const inner = document.createElement('div')
@@ -43,7 +38,7 @@ function initDirectoryMenu(): void {
 
   const label = document.createElement('a')
   label.href = '#'
-  label.className = 'series-dir-label' + (currentCat === 'all' ? ' active' : '')
+  label.className = 'series-dir-label'
   label.dataset.series = 'all'
   label.textContent = 'Series /'
   labelCol.appendChild(label)
@@ -59,7 +54,7 @@ function initDirectoryMenu(): void {
 
     const link = document.createElement('a')
     link.href = '#'
-    link.className = 'series-dir-link' + (cat.slug === currentCat ? ' active' : '')
+    link.className = 'series-dir-link'
     link.dataset.series = cat.slug
     link.appendChild(document.createTextNode(cat.label))
 
@@ -79,20 +74,21 @@ function initDirectoryMenu(): void {
 
   const allLink = document.createElement('a')
   allLink.href = '#'
-  allLink.className = 'series-dir-all-link' + (currentCat === 'all' ? ' active' : '')
+  allLink.className = 'series-dir-all-link'
   allLink.dataset.series = 'all'
   allLink.textContent = `All Works ${ARTWORKS.length}`
   allRow.appendChild(allLink)
   container.appendChild(allRow)
+
+  // 초기 active 적용 (aria-current 포함)
+  applySeriesActive(container, currentCat)
 
   // ── click handlers ──
   container.querySelectorAll<HTMLElement>('[data-series]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault()
       const slug = el.dataset.series || 'all'
-      container.querySelectorAll('[data-series]').forEach(l => l.classList.remove('active'))
-      container.querySelectorAll<HTMLElement>(`[data-series="${slug}"]`)
-        .forEach(l => l.classList.add('active'))
+      applySeriesActive(container, slug)
       const newUrl = slug === 'all' ? location.pathname : `${location.pathname}?series=${slug}`
       history.pushState(null, '', newUrl)
       filterAndRender(slug)

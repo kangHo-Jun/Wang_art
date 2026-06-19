@@ -33,11 +33,17 @@
   line-height: 1.05;
   color: var(--color-ink);
   display: inline;
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color 160ms ease;
 }
 
-.series-item .type-hero-link:hover {
-  opacity: var(--opacity-hover);
+.series-item .type-hero-link:hover,
+.series-item .type-hero-link:focus-visible {
+  color: var(--color-interactive-red);
+  opacity: 1;
+}
+.series-item .type-hero-link.active,
+.series-item .type-hero-link[aria-current] {
+  color: inherit;
 }
 
 .type-menu-separator {
@@ -78,10 +84,18 @@
   color: var(--color-ink);
   text-decoration: none;
   opacity: 0.45;
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.series-dir-label:hover,
+.series-dir-label:focus-visible {
+  color: var(--color-interactive-red);
+  opacity: 1;
 }
 .series-dir-label.active,
-.series-dir-label:hover { opacity: 1; }
+.series-dir-label[aria-current] {
+  color: inherit;
+  opacity: 1;
+}
 
 .series-dir-grid {
   flex: 1;
@@ -99,16 +113,24 @@
   display: inline-flex;
   align-items: flex-start;
   opacity: 0.45;
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.series-dir-link:hover,
+.series-dir-link:focus-visible {
+  color: var(--color-interactive-red);
+  opacity: 1;
 }
 .series-dir-link.active,
-.series-dir-link:hover { opacity: 1; }
+.series-dir-link[aria-current] {
+  color: inherit;
+  opacity: 1;
+}
 
 .series-dir-count {
   font-family: var(--font-sans);
   font-size: 18px;
   font-weight: var(--fw-300);
-  color: #ff3333;
+  color: var(--color-interactive-red);
   line-height: 20px;
   margin-left: 4px;
 }
@@ -126,10 +148,18 @@
   text-decoration: none;
   letter-spacing: 0.3px;
   opacity: 0.45;
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.series-dir-all-link:hover,
+.series-dir-all-link:focus-visible {
+  color: var(--color-interactive-red);
+  opacity: 1;
 }
 .series-dir-all-link.active,
-.series-dir-all-link:hover { opacity: 1; }
+.series-dir-all-link[aria-current] {
+  color: inherit;
+  opacity: 1;
+}
 
 /* Load More */
 .wall-load-more {

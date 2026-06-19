@@ -52,8 +52,7 @@ function renderWorldsPage(root: HTMLElement): void {
     <div class="worlds-origin-spacer" aria-hidden="true"></div>
     <section class="worlds-summary worlds-reveal" id="${WORLDS_PAGE.summary.id}">
       <div class="worlds-copy-block">
-        <p class="worlds-eyebrow">${WORLDS_PAGE.summary.eyebrow}</p>
-        <h2 class="worlds-section-title">${WORLDS_PAGE.summary.title}</h2>
+        ${WORLDS_PAGE.summary.title ? `<h2 class="worlds-section-title">${WORLDS_PAGE.summary.title}</h2>` : ''}
         ${paragraphsHtml(WORLDS_PAGE.summary.paragraphs)}
       </div>
     </section>
@@ -66,8 +65,7 @@ function renderWorldsPage(root: HTMLElement): void {
     ${axisSectionHtml(WORLDS_PAGE.language, base)}
     <section class="worlds-conclusion worlds-reveal" id="${WORLDS_PAGE.conclusion.id}">
       <div class="worlds-copy-block">
-        <p class="worlds-eyebrow">${WORLDS_PAGE.conclusion.eyebrow}</p>
-        <h2 class="worlds-section-title">${WORLDS_PAGE.conclusion.title}</h2>
+        ${WORLDS_PAGE.conclusion.title ? `<h2 class="worlds-section-title">${WORLDS_PAGE.conclusion.title}</h2>` : ''}
         ${paragraphsHtml(WORLDS_PAGE.conclusion.paragraphs)}
       </div>
     </section>
@@ -111,6 +109,7 @@ function axisSectionHtml(section: WorldAxisSection, base: string): string {
 function artworkFigureHtml(artwork: WorldArtworkRef, base: string, ctaLabel: string): string {
   return `
     <figure class="worlds-axis-figure">
+      ${artwork.axisLabel ? `<p class="worlds-axis-image-label">${artwork.axisLabel}</p>` : ''}
       <img
         class="worlds-axis-image"
         src="${assetSrc(base, artwork.imageSrc)}"

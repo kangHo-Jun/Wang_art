@@ -52,8 +52,13 @@
 }
 
 /* ── 원형 돋보기 렌즈 ── */
+/*
+ * position:fixed — viewport 기준, 어떤 부모의 overflow:hidden도 적용받지 않음.
+ * z-index 999 — nav(10), 캡션보다 위, 모바일 overlay(9000)보다 아래.
+ * pointer-events:none — 클릭/hover 이벤트를 아래 요소로 통과시킴.
+ */
 .artwork-magnifier {
-  position: absolute;
+  position: fixed;
   width: 320px;
   height: 320px;
   border-radius: 50%;
@@ -62,8 +67,8 @@
   pointer-events: none;
   display: none;
   background-repeat: no-repeat;
-  z-index: 5;
-  /* top/left/backgroundSize/backgroundPosition은 JS에서 실시간 설정 */
+  z-index: 999;
+  /* left/top/backgroundSize/backgroundPosition은 JS에서 실시간 설정 */
 }
 
 /* ── 캡션 ── */

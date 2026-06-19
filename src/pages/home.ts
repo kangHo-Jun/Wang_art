@@ -1,20 +1,12 @@
-import { FEATURED } from '../data/artworks'
-import { navigateTo }    from '../shared/animation'
-
-const SERIES = [
-  { slug: 'utopia',    label: 'Utopia' },
-  { slug: 'ink',       label: 'Ink & Landscape' },
-  { slug: 'acrylic',   label: 'Acrylic Landscape' },
-  { slug: 'landscape', label: 'Landscape' },
-  { slug: 'horse',     label: 'Horse' },
-]
+import { FEATURED }    from '../data/artworks'
+import { navigateTo } from '../shared/animation'
+import { CATEGORIES } from '../shared/categories'
 
 export function initHome(): void {
   renderMainVisual()
   renderSeries()
   renderWall()
   initSubscribe()
-  initNavActive()
 }
 
 // ── 메인 비주얼 (Hero) ──
@@ -90,15 +82,22 @@ function renderSeries(): void {
   if (!list) return
   list.innerHTML = ''
 
-  SERIES.forEach((s) => {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+  CATEGORIES.forEach((cat) => {
     const item = document.createElement('div')
     item.className = 'series-item w-dyn-item'
     item.setAttribute('role', 'listitem')
 
     const a = document.createElement('a')
-    a.href = `${import.meta.env.BASE_URL}works/?series=${s.slug}`
+    a.href = `${base}/works/?series=${cat.slug}`
     a.className = 'type-hero-link'
-    a.textContent = s.label
+    a.dataset.series = cat.slug
+    a.textContent = cat.label
+    a.addEventListener('click', (e) => {
+      e.preventDefault()
+      navigateTo(`${base}/works/?series=${cat.slug}`)
+    })
     item.appendChild(a)
 
     const sep = document.createElement('div')
@@ -163,12 +162,3 @@ function initSubscribe(): void {
   })
 }
 
-// ── 네비 active ──
-function initNavActive(): void {
-  const page = document.body.dataset.page
-  document.querySelectorAll<HTMLAnchorElement>('.navbar-link').forEach(a => {
-    if (a.dataset.nav === page) {
-      a.style.opacity = '0.5'
-    }
-  })
-}

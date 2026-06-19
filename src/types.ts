@@ -26,7 +26,7 @@ export interface Artwork {
   sourceTitle:   string
 }
 
-// ─── 작품세계 ─────────────────────────────────────
+// ─── 작품세계 (레거시) ────────────────────────────────
 export interface WorldItem {
   id: string
   titleEn: string
@@ -35,6 +35,43 @@ export interface WorldItem {
   descEn: string
   imageSrc: string
   keywords: string[]
+}
+
+// ─── 작품세계 8-Scene ──────────────────────────────
+export type WorldLayout =
+  | 'full'
+  | 'side-img-text'
+  | 'side-text-img'
+  | 'centered'
+  | 'pair'
+  | 'video'
+
+export interface WorldPanelItem {
+  imageSrc:  string
+  artworkId: string
+  titleKr:   string
+  size:      string
+  year:      number
+}
+
+export interface WorldScene {
+  id:          string
+  scene:       number
+  layout:      WorldLayout
+  themeKr:     string
+  titleKr?:    string
+  imageSrc?:   string
+  artworkId?:  string
+  medium?:     string
+  size?:       string
+  year?:       number
+  body?:       string
+  cta:         boolean
+  textRight?:  boolean
+  imgMaxWidth?: number
+  pair?:       { left: WorldPanelItem; right: WorldPanelItem }
+  youtubeId?:  string
+  anchorId?:   string
 }
 
 // ─── 소장처 ───────────────────────────────────────

@@ -1,4 +1,5 @@
 body[data-page="worlds"] {
+  --worlds-display: 'Gowun Batang', 'Noto Serif KR', serif;
   background: var(--color-bg);
   color: var(--color-ink-dark);
 }
@@ -153,9 +154,9 @@ body.worlds-lock {
 }
 
 .worlds-origin-summary h1 {
-  font-family: var(--font-serif-kr);
+  font-family: var(--worlds-display);
   font-size: clamp(34px, 5vw, 72px);
-  font-weight: var(--fw-300);
+  font-weight: 700;
   line-height: 1.34;
   color: var(--color-ink-dark);
 }
@@ -233,6 +234,10 @@ body.worlds-lock {
   line-height: 1.08;
 }
 
+.worlds-axis .worlds-section-title {
+  line-height: 1.08;
+}
+
 .worlds-subtitle {
   margin-top: 16px;
   font-size: clamp(22px, 2.2vw, 32px);
@@ -243,9 +248,14 @@ body.worlds-lock {
   margin-top: 18px;
 }
 
+.worlds-paragraph strong {
+  font-weight: 500;
+  color: var(--color-ink-dark);
+}
+
 .worlds-axis {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
   gap: clamp(36px, 6vw, 96px);
   align-items: start;
 }
@@ -283,6 +293,7 @@ body.worlds-lock {
   top: calc(var(--navbar-height) + 28px);
   display: grid;
   gap: 28px;
+  align-self: start;
 }
 
 .worlds-axis-media--stack {
@@ -293,16 +304,31 @@ body.worlds-lock {
   margin: 0;
 }
 
+.worlds-axis-image-label {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
 .worlds-axis-image {
   display: block;
   width: 100%;
+  max-height: 72vh;
   height: auto;
+  object-fit: contain;
   background: rgba(51, 51, 51, 0.06);
+}
+
+.worlds-axis-media--stack .worlds-axis-image {
+  max-height: 34vh;
 }
 
 .worlds-figure-caption {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 14px;
@@ -433,6 +459,11 @@ body.worlds-lock {
   .worlds-axis-media {
     position: static;
     top: auto;
+  }
+
+  .worlds-axis-image,
+  .worlds-axis-media--stack .worlds-axis-image {
+    max-height: none;
   }
 
   .worlds-figure-caption {
