@@ -105,8 +105,17 @@ body.worlds-lock {
   z-index: 2;
 }
 
+.worlds-origin-dot.is-animating,
+.worlds-origin-artwork-shell.is-animating {
+  will-change: transform, opacity;
+}
+
 .worlds-origin-dot.is-fading {
   opacity: 0;
+}
+
+.worlds-origin-dot.is-complete {
+  display: none;
 }
 
 .worlds-origin-artwork-shell {
@@ -228,6 +237,20 @@ body.worlds-lock {
   max-width: 60ch;
 }
 
+.worlds-summary-lede {
+  margin-top: 0;
+}
+
+.worlds-summary-body {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.worlds-summary-body .worlds-paragraph:first-child {
+  margin-top: 0;
+}
+
 .worlds-section-title,
 .worlds-return-title {
   font-size: clamp(30px, 3.4vw, 50px);
@@ -304,6 +327,11 @@ body.worlds-lock {
   margin: 0;
 }
 
+.worlds-axis-figure--language .worlds-figure-caption {
+  padding-top: 12px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
 .worlds-axis-image-label {
   margin-bottom: 10px;
   font-family: var(--font-mono);
@@ -351,7 +379,18 @@ body.worlds-lock {
   display: grid;
   justify-items: start;
   gap: 14px;
+  padding-top: 90px;
   padding-bottom: 20px;
+}
+
+.worlds-conclusion {
+  padding-bottom: 90px;
+}
+
+.worlds-return-line {
+  width: 1px;
+  height: 56px;
+  background: var(--color-ink-faint);
 }
 
 .worlds-return-mark {
@@ -368,11 +407,21 @@ body.worlds-lock {
   transition:
     opacity 0.5s var(--ease-out),
     transform 0.5s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .worlds-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.worlds-reveal.r-quiet {
+  transform: translateY(16px);
+}
+
+.worlds-reveal.r-strong {
+  transform: translateY(40px);
+  transition-duration: 0.56s;
 }
 
 @keyframes worldsCueBob {
@@ -400,7 +449,7 @@ body.worlds-lock {
 
   .worlds-origin-artwork-shell {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: translate(-50%, -50%);
   }
 
   .worlds-origin-summary,
@@ -431,6 +480,11 @@ body.worlds-lock {
 
   .worlds-axes-label {
     padding-top: 56px;
+  }
+
+  .worlds-summary-body {
+    margin-top: 32px;
+    padding-top: 24px;
   }
 
   .worlds-origin-dot {
@@ -472,5 +526,13 @@ body.worlds-lock {
 
   .worlds-figure-link {
     margin-left: 0;
+  }
+
+  .worlds-conclusion {
+    padding-bottom: 72px;
+  }
+
+  .worlds-return {
+    padding-top: 72px;
   }
 }

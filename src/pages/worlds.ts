@@ -21,7 +21,7 @@ function renderWorldsPage(root: HTMLElement): void {
               <feTurbulence type="fractalNoise" baseFrequency="0.014 0.018" numOctaves="3" seed="7" result="noise" />
               <feDisplacementMap in="SourceGraphic" in2="noise" scale="64" />
             </filter>
-            <g filter="url(#worldsInkNoise)">
+            <g id="worldsOriginInkGroup" filter="url(#worldsInkNoise)">
               <circle cx="300" cy="300" r="150" fill="currentColor" opacity=".06" />
               <circle cx="296" cy="304" r="118" fill="currentColor" opacity=".14" />
               <circle cx="302" cy="298" r="86" fill="currentColor" opacity=".82" />
@@ -50,26 +50,27 @@ function renderWorldsPage(root: HTMLElement): void {
       </div>
     </section>
     <div class="worlds-origin-spacer" aria-hidden="true"></div>
-    <section class="worlds-summary worlds-reveal" id="${WORLDS_PAGE.summary.id}">
+    <section class="worlds-summary worlds-reveal r-quiet" id="${WORLDS_PAGE.summary.id}">
       <div class="worlds-copy-block">
         ${WORLDS_PAGE.summary.title ? `<h2 class="worlds-section-title">${WORLDS_PAGE.summary.title}</h2>` : ''}
-        ${paragraphsHtml(WORLDS_PAGE.summary.paragraphs)}
+        ${summaryHtml(WORLDS_PAGE.summary.paragraphs)}
       </div>
     </section>
-    <div class="worlds-axes-label worlds-reveal">
+    <div class="worlds-axes-label worlds-reveal r-quiet">
       <span class="worlds-axes-label-text">${WORLDS_PAGE.axesEyebrow}</span>
       <span class="worlds-axes-label-line" aria-hidden="true"></span>
     </div>
     ${axisSectionHtml(WORLDS_PAGE.world, base)}
     ${axisSectionHtml(WORLDS_PAGE.signs, base)}
     ${axisSectionHtml(WORLDS_PAGE.language, base)}
-    <section class="worlds-conclusion worlds-reveal" id="${WORLDS_PAGE.conclusion.id}">
+    <section class="worlds-conclusion worlds-reveal r-quiet" id="${WORLDS_PAGE.conclusion.id}">
       <div class="worlds-copy-block">
         ${WORLDS_PAGE.conclusion.title ? `<h2 class="worlds-section-title">${WORLDS_PAGE.conclusion.title}</h2>` : ''}
         ${paragraphsHtml(WORLDS_PAGE.conclusion.paragraphs)}
       </div>
     </section>
-    <section class="worlds-return worlds-reveal">
+    <section class="worlds-return worlds-reveal r-quiet">
+      <div class="worlds-return-line" aria-hidden="true"></div>
       <div class="worlds-return-mark" aria-hidden="true"></div>
       <p class="worlds-eyebrow">${WORLDS_PAGE.returnEyebrow}</p>
       <h2 class="worlds-return-title">${WORLDS_PAGE.returnTitle}</h2>
@@ -81,15 +82,17 @@ function renderWorldsPage(root: HTMLElement): void {
 
 function axisSectionHtml(section: WorldAxisSection, base: string): string {
   const reverseClass = section.layout === 'figure-first' ? ' worlds-axis--reverse' : ''
+  const sectionClass = `worlds-axis worlds-axis--${section.id}${reverseClass}`
+  const config = axisRevealConfig(section.id)
 
   return `
-    <section class="worlds-axis worlds-reveal${reverseClass}" id="${section.id}">
+    <section class="${sectionClass}" id="${section.id}">
       <div class="worlds-copy-block">
-        <p class="worlds-eyebrow">${section.eyebrow}</p>
-        <h2 class="worlds-section-title">${section.title}</h2>
-        ${section.subtitle ? `<p class="worlds-subtitle">${section.subtitle}</p>` : ''}
-        ${paragraphsHtml(section.paragraphs)}
-        <div class="worlds-axis-items">
+        <p class="worlds-eyebrow worlds-reveal r-quiet"${revealStyle(config.eyebrowDelay)}>${section.eyebrow}</p>
+        <h2 class="worlds-section-title worlds-reveal r-strong"${revealStyle(config.titleDelay)}>${section.title}</h2>
+        ${section.subtitle ? `<p class="worlds-subtitle worlds-reveal r-quiet"${revealStyle(config.subtitleDelay)}>${section.subtitle}</p>` : ''}
+        ${paragraphsHtml(section.paragraphs, config.paragraphDelay, config.paragraphStep)}
+        <div class="worlds-axis-items worlds-reveal r-quiet"${revealStyle(config.itemsDelay)}>
           <p class="worlds-axis-items-title">이 축을 이루는 것들</p>
           ${section.items.map(item => `
             <article class="worlds-axis-item">
@@ -100,15 +103,23 @@ function axisSectionHtml(section: WorldAxisSection, base: string): string {
         </div>
       </div>
       <div class="worlds-axis-media${section.artworks.length > 1 ? ' worlds-axis-media--stack' : ''}">
-        ${section.artworks.map(artwork => artworkFigureHtml(artwork, base, section.ctaLabel)).join('')}
+        ${section.artworks.map((artwork, index) => artworkFigureHtml(artwork, base, section.ctaLabel, section.id, config.mediaDelay + (config.mediaStep * index))).join('')}
       </div>
     </section>
   `
 }
 
-function artworkFigureHtml(artwork: WorldArtworkRef, base: string, ctaLabel: string): string {
+function artworkFigureHtml(
+  artwork: WorldArtworkRef,
+  base: string,
+  ctaLabel: string,
+  sectionId: string,
+  delay: number,
+): string {
+  const languageClass = sectionId === 'language' ? ' worlds-axis-figure--language' : ''
+
   return `
-    <figure class="worlds-axis-figure">
+    <figure class="worlds-axis-figure worlds-reveal r-strong${languageClass}"${revealStyle(delay)}>
       ${artwork.axisLabel ? `<p class="worlds-axis-image-label">${artwork.axisLabel}</p>` : ''}
       <img
         class="worlds-axis-image"
@@ -128,8 +139,87 @@ function artworkFigureHtml(artwork: WorldArtworkRef, base: string, ctaLabel: str
   `
 }
 
-function paragraphsHtml(paragraphs: string[]): string {
-  return paragraphs.map(paragraph => `<p class="worlds-paragraph">${paragraph}</p>`).join('')
+function summaryHtml(paragraphs: string[]): string {
+  if (paragraphs.length === 0) return ''
+
+  const [lede, ...body] = paragraphs
+
+  return `
+    <p class="worlds-paragraph worlds-summary-lede">${lede}</p>
+    ${body.length > 0 ? `
+      <div class="worlds-summary-body">
+        ${body.map(paragraph => `<p class="worlds-paragraph">${paragraph}</p>`).join('')}
+      </div>
+    ` : ''}
+  `
+}
+
+function paragraphsHtml(paragraphs: string[], baseDelay = 0, step = 0): string {
+  return paragraphs.map((paragraph, index) => `
+    <p class="worlds-paragraph worlds-reveal r-quiet"${revealStyle(baseDelay + (step * index))}>${paragraph}</p>
+  `).join('')
+}
+
+function revealStyle(delay: number): string {
+  return delay > 0 ? ` style="--reveal-delay:${delay.toFixed(2)}s"` : ''
+}
+
+function axisRevealConfig(sectionId: string): {
+  eyebrowDelay: number
+  titleDelay: number
+  subtitleDelay: number
+  paragraphDelay: number
+  paragraphStep: number
+  itemsDelay: number
+  mediaDelay: number
+  mediaStep: number
+} {
+  switch (sectionId) {
+    case 'world':
+      return {
+        eyebrowDelay: 0,
+        titleDelay: 0.04,
+        subtitleDelay: 0.08,
+        paragraphDelay: 0.12,
+        paragraphStep: 0.1,
+        itemsDelay: 0.22,
+        mediaDelay: 0.34,
+        mediaStep: 0,
+      }
+    case 'signs':
+      return {
+        eyebrowDelay: 0.15,
+        titleDelay: 0.19,
+        subtitleDelay: 0.23,
+        paragraphDelay: 0.27,
+        paragraphStep: 0.1,
+        itemsDelay: 0.41,
+        mediaDelay: 0,
+        mediaStep: 0,
+      }
+    case 'language':
+      return {
+        eyebrowDelay: 0,
+        titleDelay: 0.04,
+        subtitleDelay: 0.08,
+        paragraphDelay: 0.14,
+        paragraphStep: 0.08,
+        itemsDelay: 0.3,
+        mediaDelay: 0,
+        mediaStep: 0.1,
+      }
+    default:
+      return {
+        eyebrowDelay: 0,
+        titleDelay: 0.04,
+        subtitleDelay: 0.08,
+        paragraphDelay: 0.12,
+        paragraphStep: 0.08,
+        itemsDelay: 0.22,
+        mediaDelay: 0.12,
+        mediaStep: 0,
+      }
+  }
 }
 
 function formatSpec(artwork: WorldArtworkRef): string {
@@ -147,6 +237,7 @@ function artworkHref(base: string, artworkId: string): string {
 function initOriginSequence(root: HTMLElement): void {
   const origin = root.querySelector<HTMLElement>('#worldsOrigin')
   const dot = root.querySelector<SVGElement>('#worldsOriginDot')
+  const inkGroup = root.querySelector<SVGGElement>('#worldsOriginInkGroup')
   const artworkShell = root.querySelector<HTMLElement>('#worldsOriginArtworkShell')
   const summary = root.querySelector<HTMLElement>('#worldsOriginSummary')
   const cue = root.querySelector<HTMLElement>('#worldsOriginCue')
@@ -156,7 +247,6 @@ function initOriginSequence(root: HTMLElement): void {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduced) {
     artworkShell.classList.add('is-visible')
-    artworkShell.classList.add('is-muted')
     summary.classList.add('is-visible')
     cue.classList.add('is-visible')
     return
@@ -164,29 +254,54 @@ function initOriginSequence(root: HTMLElement): void {
 
   document.documentElement.classList.add('worlds-lock')
   document.body.classList.add('worlds-lock')
+  dot.classList.add('is-animating')
+  artworkShell.classList.add('is-animating')
 
   let released = false
+  let cleaned = false
 
+  const unlock = (): void => {
+    document.documentElement.classList.remove('worlds-lock')
+    document.body.classList.remove('worlds-lock')
+  }
+
+  const cleanup = (): void => {
+    if (cleaned) return
+    dot.classList.remove('is-animating')
+    artworkShell.classList.remove('is-animating')
+    dot.classList.add('is-complete')
+    cleaned = true
+  }
+
+  const removeInkFilter = (): void => {
+    inkGroup?.removeAttribute('filter')
+  }
+
+  // Step 1: ink expands.
   window.setTimeout(() => {
     dot.style.transform = 'translate(-50%, -50%) scale(2.2)'
   }, 200)
 
+  // Step 2: crossfade to artwork and drop the heavy SVG filter.
   window.setTimeout(() => {
+    removeInkFilter()
     artworkShell.classList.add('is-visible')
     dot.classList.add('is-fading')
-  }, 1800)
+  }, 1700)
 
+  // Step 3: surface the lede while the artwork recedes.
   window.setTimeout(() => {
     artworkShell.classList.add('is-muted')
     summary.classList.add('is-visible')
-  }, 2900)
+  }, 2700)
 
+  // Step 4: release scroll and remove transient rendering hints.
   window.setTimeout(() => {
     cue.classList.add('is-visible')
-    document.documentElement.classList.remove('worlds-lock')
-    document.body.classList.remove('worlds-lock')
+    unlock()
+    cleanup()
     released = true
-  }, 4000)
+  }, 3800)
 
   const onScroll = (): void => {
     if (!released) return
