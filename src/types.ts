@@ -79,4 +79,4 @@ export type Lang = 'ko' | 'en' | 'ja' | 'zh'
 export type I18nMap = Record<string, Record<Lang, string>>
 
 // ─── 페이지 ───────────────────────────────────────
-export type PageId = 'home' | 'works' | 'worlds' | 'artist' | 'collections'
+export type PageId = 'home' | 'works' | 'worlds' | 'artist' | 'collections' | 'contact'
