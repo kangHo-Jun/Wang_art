@@ -1,6 +1,13 @@
 import { FEATURED }    from '../data/artworks'
 import { navigateTo } from '../shared/animation'
-import { CATEGORIES } from '../shared/categories'
+
+const HERO_CATEGORIES = [
+  { slug: '2jung', label: 'Double Structure' },
+  { slug: '2026', label: 'Deconstruction' },
+  { slug: 'blue', label: 'Blue' },
+  { slug: 'ink', label: 'Ink' },
+  { slug: 'red', label: 'Red' },
+] as const
 
 export function initHome(): void {
   renderMainVisual()
@@ -82,28 +89,26 @@ function renderSeries(): void {
   if (!list) return
   list.innerHTML = ''
 
-  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  list.className = 'series-list hero-category-titlebar'
 
-  CATEGORIES.forEach((cat) => {
-    const item = document.createElement('div')
-    item.className = 'series-item w-dyn-item'
-    item.setAttribute('role', 'listitem')
+  HERO_CATEGORIES.forEach((cat, index) => {
+    const item = document.createElement('span')
+    item.className = 'hero-category-item'
 
-    const a = document.createElement('a')
-    a.href = `${base}/works/?series=${cat.slug}`
-    a.className = 'type-hero-link'
-    a.dataset.series = cat.slug
-    a.textContent = cat.label
-    a.addEventListener('click', (e) => {
-      e.preventDefault()
-      navigateTo(`${base}/works/?series=${cat.slug}`)
-    })
-    item.appendChild(a)
+    const label = document.createElement('span')
+    label.className = 'hero-category-token'
+    label.dataset.series = cat.slug
+    label.textContent = cat.label
+    item.appendChild(label)
 
-    const sep = document.createElement('div')
-    sep.className = 'type-menu-separator'
-    sep.textContent = '.'
-    item.appendChild(sep)
+    const isLast = index === HERO_CATEGORIES.length - 1
+
+    if (!isLast) {
+      const sep = document.createElement('span')
+      sep.className = 'type-menu-separator hero-category-dot'
+      sep.textContent = '·'
+      item.appendChild(sep)
+    }
 
     list.appendChild(item)
   })
@@ -157,8 +162,6 @@ function initSubscribe(): void {
       if (msg) msg.textContent = '올바른 이메일 주소를 입력해주세요.'
       return
     }
-    if (msg) msg.textContent = '구독해 주셔서 감사합니다.'
-    if (input) input.value = ''
+    if (msg) msg.textContent = '준비 중입니다.'
   })
 }
-

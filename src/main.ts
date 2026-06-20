@@ -5,7 +5,6 @@ import { initLenis, initPageTransition } from './shared/animation'
 import { initCursor }   from './shared/cursor'
 import { initMenuOverlay } from './shared/menuOverlay'
 import { initHeader }      from './shared/header'
-import { initFloatNav }    from './shared/floatNav'
 import './styles/reset.css'
 import './styles/design-system.css'
 import './styles/navbar.css'
@@ -27,7 +26,6 @@ initMenuOverlay()
 initHeader()
 initLenis()
 initCursor()
-initFloatNav()
 
 async function route(): Promise<void> {
   switch (page) {

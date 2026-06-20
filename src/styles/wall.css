@@ -17,49 +17,66 @@
 }
 
 .series-list {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   width: 100%;
+  column-gap: 0.22em;
+  row-gap: 0;
+  text-align: center;
 }
 
-.series-item {
-  display: inline;
+.hero-category-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.22em;
+  white-space: nowrap;
 }
 
-.series-item .type-hero-link {
+.hero-category-titlebar .hero-category-token {
   font-family: var(--font-mono);
-  font-size: var(--text-hero);      /* 126px */
+  font-size: 72px;
   font-weight: var(--fw-400);
-  letter-spacing: var(--ls-hero);   /* -5px */
-  line-height: 1.05;
+  letter-spacing: -2.5px;
+  line-height: 108px;
   color: var(--color-ink);
-  display: inline;
-  transition: color 160ms ease;
-}
-
-.series-item .type-hero-link:hover,
-.series-item .type-hero-link:focus-visible {
-  color: var(--color-interactive-red);
-  opacity: 1;
-}
-.series-item .type-hero-link.active,
-.series-item .type-hero-link[aria-current] {
-  color: inherit;
+  display: inline-flex;
+  white-space: nowrap;
+  cursor: default;
 }
 
 .type-menu-separator {
-  display: inline;
+  display: inline-flex;
   font-family: var(--font-mono);
-  font-size: var(--text-hero);
-  letter-spacing: var(--ls-hero);
+  font-size: 72px;
+  line-height: 108px;
+  letter-spacing: -2.5px;
   color: var(--color-gold);
-  margin: 0 10px;
   user-select: none;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .series { padding: 0 var(--pad-mob); margin: 40px 0 60px; }
-  .series-item .type-hero-link { font-size: var(--text-hero-mobile); letter-spacing: var(--ls-hero-mobile); }
-  .type-menu-separator { font-size: var(--text-hero-mobile); letter-spacing: var(--ls-hero-mobile); margin: 0 4px; }
+  .series-list {
+    justify-content: flex-start;
+    column-gap: 0.18em;
+    text-align: left;
+  }
+  .hero-category-item {
+    gap: 0.18em;
+  }
+  .hero-category-titlebar .hero-category-token {
+    font-size: var(--text-hero-mobile);
+    letter-spacing: var(--ls-hero-mobile);
+    line-height: 1.32;
+  }
+  .type-menu-separator {
+    font-size: var(--text-hero-mobile);
+    letter-spacing: var(--ls-hero-mobile);
+    line-height: 1.32;
+  }
 }
 
 /* ── Selected Works 디렉토리 (Pierrick 원본 구조) ── */
@@ -235,6 +252,162 @@
 @media (max-width: 768px) {
   .wall { columns: 2; margin: 0 var(--pad-mob) var(--wall-mb); }
   .wall-item { margin-bottom: 20px; }
+}
+
+/* ── Newsletter ── */
+.newsletter {
+  width: 100vw;
+  margin: 240px 0 120px;
+}
+
+.newsletter-form {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.newsletter-title {
+  max-width: 980px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  font-size: clamp(32px, 4vw, 64px);
+  font-weight: var(--fw-200);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: #444;
+  text-align: center;
+}
+
+.newsletter-subtitle {
+  margin: 32px 0 0;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: var(--fw-300);
+  line-height: 24px;
+  letter-spacing: 0.3px;
+  color: #444;
+  text-align: center;
+}
+
+.newsletter-input-row {
+  width: 100vw;
+  margin-top: 88px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.newsletter-input {
+  width: 360px;
+  height: 60px;
+  padding: 8px 0;
+  margin: 0 20px 0 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-interactive-red);
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: var(--fw-300);
+  line-height: 37px;
+  letter-spacing: normal;
+  color: var(--color-interactive-red);
+  text-align: center;
+  outline: none;
+}
+
+.newsletter-input::placeholder {
+  color: var(--color-interactive-red);
+  opacity: 1;
+}
+
+.newsletter-input:focus-visible {
+  outline-color: var(--color-interactive-red);
+  outline-offset: 6px;
+}
+
+.newsletter-submit {
+  width: 120px;
+  height: 60px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid #333;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: var(--fw-300);
+  line-height: 20px;
+  letter-spacing: normal;
+  color: #333;
+  text-align: center;
+  cursor: pointer;
+  appearance: none;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.newsletter-submit:hover,
+.newsletter-submit:focus-visible {
+  color: var(--color-interactive-red);
+  border-bottom-color: var(--color-interactive-red);
+}
+
+.newsletter-msg {
+  min-height: 20px;
+  margin-top: 18px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: var(--fw-300);
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  color: #666666;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .newsletter {
+    width: calc(100% - 40px);
+    margin: 120px auto 80px;
+  }
+
+  .newsletter-form {
+    width: 100%;
+  }
+
+  .newsletter-title {
+    font-size: 30px;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  .newsletter-subtitle {
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .newsletter-input-row {
+    margin-top: 56px;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter-input {
+    width: 100%;
+    margin-right: 0;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .newsletter-submit {
+    width: 100%;
+    margin-top: 24px;
+    font-size: 22px;
+    line-height: 32px;
+  }
 }
 @media (max-width: 480px) {
   .wall { columns: 1; }

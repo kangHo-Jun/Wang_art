@@ -14,12 +14,12 @@
   <!-- 네비바 -->
   <header class="navbar" id="navbar">
     <div class="navbar-container">
-      <a href="./" class="navbar-link logo">왕열 Wang Yeul</a>
+      <a href="./" class="navbar-link logo">王烈 Wang Yeul</a>
       <nav class="nav-menu" role="navigation">
         <a href="./works/"       class="navbar-link big" data-nav="works">Selected Works</a>
-        <a href="./worlds/"      class="navbar-link big" data-nav="worlds">작품세계</a>
-        <a href="./artist/"      class="navbar-link big" data-nav="artist">작가</a>
-        <a href="./contact/"     class="navbar-link big" data-nav="contact">연락처</a>
+        <a href="./worlds/"      class="navbar-link big" data-nav="worlds">Worlds</a>
+        <a href="./artist/"      class="navbar-link big" data-nav="artist">Artist</a>
+        <a href="./contact/"     class="navbar-link big" data-nav="contact">Contact</a>
       </nav>
       <!-- 모바일 전용 햄버거 -->
       <button class="menu-btn-mobile" id="menuBtnMobile" aria-label="메뉴">
@@ -42,14 +42,16 @@
     <section class="wall" id="wallGrid" role="list" aria-label="작품 목록"></section>
 
     <!-- 뉴스레터 -->
-    <section class="subscribe" aria-label="뉴스레터 구독">
-      <p class="subscribe-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</p>
-      <p class="subscribe-sub"   data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
-      <form class="subscribe-form" id="subscribeForm" novalidate>
-        <input class="subscribe-input" id="subscribeEmail" type="email" placeholder="이메일 주소" aria-label="이메일 주소" />
-        <button class="subscribe-btn" type="submit" data-i18n="subscribe.btn">구독</button>
+    <section class="newsletter" aria-label="뉴스레터 구독">
+      <form class="newsletter-form" id="subscribeForm" novalidate>
+        <h2 class="newsletter-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</h2>
+        <p class="newsletter-subtitle" data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
+        <div class="newsletter-input-row">
+          <input class="newsletter-input" id="subscribeEmail" type="email" placeholder="이메일 주소" aria-label="이메일 주소" />
+          <button class="newsletter-submit" type="submit" data-i18n="subscribe.btn">구독</button>
+        </div>
       </form>
-      <p class="subscribe-msg" id="subscribeMsg" aria-live="polite"></p>
+      <p class="newsletter-msg" id="subscribeMsg" aria-live="polite"></p>
     </section>
 
     <footer class="footer">

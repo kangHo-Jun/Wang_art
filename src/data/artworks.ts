@@ -13,6 +13,59 @@ function isExcluded(imgPath: string): boolean {
   return EXCLUDE_IMAGES.has(imgPath) || /\.tiff?$/i.test(imgPath)
 }
 
+const PRICE_PATTERNS = [
+  /(?:₩\s*)?\d[\d,]*(?:\.\d+)?\s*(?:만원|원|KRW)\b/gi,
+  /\b(?:price|판매가|가격문의)\b/gi,
+]
+
+const MEDIUM_PATTERNS = [
+  /Ink[\s-]*stick\s+and\s+Acrylic\s+on\s+(?:Canvas|Korean\s+paper|canvas|paper)/i,
+  /Acrylic\s+on\s+canvas/i,
+  /Oil\s+and\s+Acrylic\s+on\s+[^,._\d]+/i,
+  /천에\s*먹,?\s*아크릴/i,
+  /천에먹,?\s*아크릴/i,
+  /캔버스에\s*아크릴/i,
+  /종이에\s*먹(?:,?\s*아크릴)?/i,
+  /한지에\s*먹(?:,?\s*아크릴)?/i,
+  /화선지에\s*먹(?:,?\s*아크릴)?/i,
+  /장지에\s*먹(?:,?\s*아크릴)?/i,
+]
+
+function stripPriceInfo(text: string): string {
+  return PRICE_PATTERNS.reduce((acc, pattern) => acc.replace(pattern, ''), text)
+}
+
+function stripLeadingSequence(text: string): string {
+  return text.replace(/^\s*\d+(?:[._-]+|\s)*/u, '')
+}
+
+function stripDuplicatedMetaTail(text: string): string {
+  const duplicateTail = text.match(/\s*,\s*((?:19|20)\d{2}\b[\s\S]*)$/u)
+  if (!duplicateTail) return text
+
+  const beforeTail = text.slice(0, duplicateTail.index)
+  const hasEarlierYear = /(?:19|20)\d{2}/u.test(beforeTail)
+  return hasEarlierYear ? beforeTail : text
+}
+
+function collapseWhitespace(text: string): string {
+  return text
+    .replace(/\s+/gu, ' ')
+    .replace(/\s+,/gu, ',')
+    .replace(/\s+\./gu, '.')
+    .trim()
+}
+
+function cleanupRawTitle(text: string): string {
+  return collapseWhitespace(
+    stripDuplicatedMetaTail(
+      stripLeadingSequence(
+        stripPriceInfo(text),
+      ),
+    ),
+  )
+}
+
 // ── 카테고리별 colorTags ──────────────────────────────────────
 const CAT_COLORS: Record<string, string[]> = {
   '2026':  ['ink', 'gold'],
@@ -30,14 +83,15 @@ function parseYear(text: string): number | undefined {
 }
 
 function parseMedium(text: string): string | undefined {
-  const m = text.match(
-    /Ink[\s-]+stick\s+and\s+Acrylic\s+on\s+(?:Canvas|Korean\s+paper|canvas|paper)|Acrylic\s+on\s+canvas|Oil\s+and\s+Acrylic\s+on\s+[^,._\d]+/i
-  )
-  return m ? m[0].trim() : undefined
+  for (const pattern of MEDIUM_PATTERNS) {
+    const match = text.match(pattern)
+    if (match) return match[0].trim()
+  }
+  return undefined
 }
 
 function parseSize(text: string): string | undefined {
-  const m = text.match(/(\d+(?:\.\d+)?)\s*[xX×]\s*(\d+(?:\.\d+)?)\s*cm/i)
+  const m = text.match(/(\d+(?:\.\d+)?)\s*(?:cm)?\s*[xX×]\s*(\d+(?:\.\d+)?)\s*(?:cm)?/i)
   return m ? `${m[1]} × ${m[2]} cm` : undefined
 }
 
@@ -46,6 +100,46 @@ function toId(imgPath: string): string {
     .replace(/^images\//, '')
     .replace(/\.[^.]+$/, '')
     .replace(/[/\s]+/g, '-')
+}
+
+function findSegmentStart(text: string, segment?: string): number {
+  if (!segment) return -1
+  return text.toLowerCase().indexOf(segment.toLowerCase())
+}
+
+function extractDisplayTitle(rawTitle: string, medium?: string, size?: string, year?: number): string {
+  const cleaned = cleanupRawTitle(rawTitle)
+  let cutIndex = cleaned.length
+
+  const mediumIndex = findSegmentStart(cleaned, medium)
+  if (mediumIndex >= 0) cutIndex = Math.min(cutIndex, mediumIndex)
+
+  if (size) {
+    const sizeParts = size.match(/[\d.]+/gu)
+    if (sizeParts && sizeParts.length >= 2) {
+      const sizeRegex = new RegExp(
+        `${sizeParts[0]}\\s*(?:cm)?\\s*[xX×]\\s*${sizeParts[1]}\\s*(?:cm)?`,
+        'i',
+      )
+      const sizeMatch = cleaned.match(sizeRegex)
+      if (sizeMatch?.index != null) cutIndex = Math.min(cutIndex, sizeMatch.index)
+    }
+  }
+
+  if (year) {
+    const yearRegex = new RegExp(String(year))
+    const yearMatch = cleaned.match(yearRegex)
+    if (yearMatch?.index != null) cutIndex = Math.min(cutIndex, yearMatch.index)
+  }
+
+  let title = cleaned.slice(0, cutIndex)
+  title = title
+    .replace(/(?:,?\s*(?:천에\s*먹|천에먹|아크릴|캔버스에\s*아크릴|종이에\s*먹|한지에\s*먹|화선지에\s*먹|장지에\s*먹))+$/iu, '')
+    .replace(/[\s,._-]+$/u, '')
+    .replace(/\.+$/u, '')
+    .trim()
+
+  return title || cleaned
 }
 
 // ── featured-works.json 매핑 ─────────────────────────────────
@@ -71,15 +165,20 @@ const normalized: Artwork[] = (rawData as RawItem[])
   .map(item => {
     const feat = featuredMap.get(item.image)
     const cat  = item.category as ArtworkCategory
-    const rawYear = feat?.year ? parseInt(feat.year, 10) : parseYear(item.title)
+    const cleanedRaw = cleanupRawTitle(item.title)
+    const rawYear = feat?.year ? parseInt(feat.year, 10) : parseYear(cleanedRaw)
     const year = rawYear && !Number.isNaN(rawYear) ? rawYear : undefined
+    const medium = feat?.medium || parseMedium(cleanedRaw)
+    const size = feat?.size || parseSize(cleanedRaw)
+    const displayTitle = feat?.title_en || extractDisplayTitle(item.title, medium, size, year)
+
     return {
       id:          toId(item.image),
-      titleEn:     feat?.title_en ?? item.title,
-      titleKr:     feat?.title_ko ?? item.title,
+      titleEn:     displayTitle,
+      titleKr:     feat?.title_ko ?? displayTitle,
       year,
-      medium:      feat?.medium   || parseMedium(item.title),
-      size:        feat?.size     || parseSize(item.title),
+      medium,
+      size,
       imageSrc:    item.image,
       category:    cat,
       featured:    featuredMap.has(item.image),

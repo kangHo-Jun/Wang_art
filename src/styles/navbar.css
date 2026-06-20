@@ -27,11 +27,14 @@
   height: var(--navbar-height);
   display: flex;
   align-items: center;
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color 160ms ease;
   white-space: nowrap;
 }
 .navbar-link.logo:hover,
-.navbar-link.logo:focus-visible { opacity: var(--opacity-hover); }
+.navbar-link.logo:focus-visible {
+  color: var(--nav-highlight-color) !important;
+  opacity: 1;
+}
 .navbar-link.logo.is-active,
 .navbar-link.logo[aria-current] {
   color: inherit;
