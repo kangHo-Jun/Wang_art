@@ -1,4 +1,6 @@
 body[data-page="worlds"] {
+  --font-serif: 'Noto Serif KR', serif;
+  --color-ink-sub: #5a5a58;
   background: var(--color-bg);
   color: var(--color-ink-dark);
 }
@@ -276,6 +278,7 @@ body.worlds-lock {
 }
 
 .worlds-section-title {
+  margin-bottom: 28px;
   letter-spacing: 0.04em;
 }
 
@@ -284,11 +287,12 @@ body.worlds-lock {
 }
 
 .worlds-subtitle {
-  margin-top: 16px;
-  font-size: clamp(22px, 2.2vw, 32px);
+  margin-top: 0;
+  font-size: clamp(15px, 1.5vw, 18px);
   font-weight: 300;
   letter-spacing: 0.01em;
   line-height: 1.5;
+  color: var(--color-ink-sub);
 }
 
 .worlds-paragraph {
