@@ -168,7 +168,7 @@ function languageCellHtml(
 ): string {
   return `
     <article class="worlds-language-cell worlds-reveal r-strong"${revealStyle(index * 0.1)}>
-      ${artwork.axisLabel ? `<p class="worlds-axis-image-label">${artwork.axisLabel}</p>` : ''}
+      ${artwork.axisLabel ? `<p class="worlds-axis-image-label">${formatAxisLabel(artwork.axisLabel)}</p>` : ''}
       <img
         class="worlds-language-image"
         src="${assetSrc(base, artwork.imageSrc)}"
@@ -191,6 +191,12 @@ function languageCellHtml(
       <a class="worlds-link worlds-language-link" href="${artworkHref(base, artwork.artworkId)}">${ctaLabel}</a>
     </article>
   `
+}
+
+function formatAxisLabel(label: string): string {
+  const match = label.match(/^(.*)\s+([A-Z]+)$/)
+  if (!match) return label
+  return `${match[1]} <em>${match[2]}</em>`
 }
 
 function summaryHtml(paragraphs: string[]): string {

@@ -1,5 +1,4 @@
 body[data-page="worlds"] {
-  --worlds-display: 'Gowun Batang', 'Noto Serif KR', serif;
   background: var(--color-bg);
   color: var(--color-ink-dark);
 }
@@ -27,12 +26,21 @@ body.worlds-lock {
 }
 
 .worlds-section-title,
-.worlds-subtitle,
+.worlds-subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  color: var(--color-ink-dark);
+}
+
 .worlds-figure-title,
-.worlds-axis-item-title,
+.worlds-axis-item-title {
+  font-family: var(--font-sans);
+  color: var(--color-ink-dark);
+}
+
 .worlds-return-title {
   font-family: var(--font-serif-kr);
-  font-weight: var(--fw-400);
+  font-weight: 400;
   color: var(--color-ink-dark);
 }
 
@@ -163,7 +171,7 @@ body.worlds-lock {
 }
 
 .worlds-origin-summary h1 {
-  font-family: var(--worlds-display);
+  font-family: var(--font-serif-kr);
   font-size: clamp(34px, 5vw, 72px);
   font-weight: 700;
   line-height: 1.34;
@@ -213,6 +221,14 @@ body.worlds-lock {
   justify-content: center;
 }
 
+.worlds-summary .worlds-copy-block,
+.worlds-conclusion .worlds-copy-block {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+}
+
 .worlds-axes-label {
   display: flex;
   align-items: center;
@@ -255,21 +271,29 @@ body.worlds-lock {
 .worlds-section-title,
 .worlds-return-title {
   font-size: clamp(30px, 3.4vw, 50px);
-  line-height: 1.08;
+  line-height: 1.1;
+}
+
+.worlds-section-title {
+  letter-spacing: 0.04em;
 }
 
 .worlds-axis .worlds-section-title {
-  line-height: 1.08;
+  line-height: 1.1;
 }
 
 .worlds-subtitle {
   margin-top: 16px;
   font-size: clamp(22px, 2.2vw, 32px);
-  line-height: 1.34;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
 }
 
 .worlds-paragraph {
   margin-top: 18px;
+  font-weight: 300;
+  color: var(--color-ink-muted);
 }
 
 .worlds-paragraph strong {
@@ -363,12 +387,14 @@ body.worlds-lock {
 }
 
 .worlds-axis-item-title {
-  font-size: 22px;
-  line-height: 1.28;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .worlds-axis-item-body {
   margin-top: 8px;
+  font-size: 13px;
   color: var(--color-ink-muted);
 }
 
@@ -397,6 +423,13 @@ body.worlds-lock {
   color: var(--color-ink-muted);
 }
 
+.worlds-axis-image-label em {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  font-style: normal;
+  vertical-align: 1px;
+}
+
 .worlds-axis-image {
   display: block;
   width: 100%;
@@ -419,11 +452,17 @@ body.worlds-lock {
 }
 
 .worlds-figure-title {
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .worlds-figure-separator {
+  color: var(--color-ink-muted);
+}
+
+.worlds-spec-line {
+  font-size: 12px;
   color: var(--color-ink-muted);
 }
 
