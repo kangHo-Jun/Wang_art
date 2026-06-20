@@ -2,28 +2,47 @@
 .resume {
   display: block;
   width: 896px;
-  margin: 40px 0px 40px 256px;
+  margin: 40px 0 80px 256px;
   padding-top: 40px;
   font-family: var(--font-sans);
   color: var(--color-ink);
 }
 
+.resume-shell {
+  position: relative;
+}
+
+.resume-top {
+  display: grid;
+  grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.resume-top-copy {
+  min-width: 0;
+  max-width: 540px;
+}
+
 .download {
   display: block;
-  width: 120px;
-  margin: 0px 128px 0px 0px;
+  width: fit-content;
+  margin: 0 0 0 auto;
   padding: 2px 0px 16px;
   font-size: 15px;
   font-weight: var(--fw-200);
   letter-spacing: 0.3px;
   line-height: 20px;
   color: var(--color-ink);
-  float: right;
   text-decoration: underline;
   transition: opacity var(--dur-hover) var(--ease-hover);
 }
 .download:hover {
   opacity: var(--opacity-hover);
+}
+
+.download[aria-disabled="true"] {
+  cursor: default;
 }
 
 .resume-category {
@@ -46,6 +65,50 @@
   line-height: 21px;
 }
 
+.resume-text--name {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: var(--fw-500);
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+  color: var(--color-ink-dark);
+}
+
+.resume-text--meta {
+  margin-bottom: 32px;
+  color: var(--color-ink-muted);
+}
+
+.resume-text--intro {
+  margin-top: 40px;
+}
+
+.resume-text--lead {
+  max-width: 100%;
+}
+
+.resume-text--lead-secondary {
+  margin-top: 28px;
+}
+
+.resume-category--intro {
+  margin: 32px 0 20px;
+}
+
+.resume-photo {
+  margin: 96px 0 0;
+}
+
+.resume-photo-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 52% 42%;
+  filter: grayscale(100%);
+}
+
 .text-span-bold {
   font-weight: var(--fw-500);
 }
@@ -55,6 +118,54 @@
   font-style: italic;
 }
 
+.resume-stack--timeline .resume-text {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  column-gap: 18px;
+}
+
+.resume-year {
+  display: inline-block;
+  width: 116px;
+}
+
+.resume-detail {
+  display: inline-block;
+}
+
+.collections-section {
+  margin-top: 70px;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px;
+}
+
+.collection-category {
+  margin: 0 0 20px;
+  font-size: 18px;
+  font-weight: var(--fw-500);
+  letter-spacing: 0.3px;
+  line-height: 20px;
+  color: var(--color-ink-dark);
+}
+
+.collection-list {
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.collection-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-ink-faint);
+  font-size: 15px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
 /* 모바일 반응형 */
 @media (max-width: 768px) {
   .resume {
@@ -62,11 +173,38 @@
     margin: 40px var(--pad-mob);
     padding-top: 20px;
   }
+  .resume-top {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .resume-top-copy {
+    max-width: none;
+  }
   .download {
-    float: none;
     margin: 0 0 24px;
+  }
+  .resume-text--name {
+    margin-top: 0;
+  }
+  .resume-text--meta {
+    margin-bottom: 24px;
+  }
+  .resume-photo {
+    margin-top: 12px;
   }
   .resume-category {
     margin: 40px 0 16px;
+  }
+  .resume-stack--timeline .resume-text {
+    grid-template-columns: 1fr;
+    row-gap: 2px;
+  }
+  .resume-year,
+  .resume-detail {
+    width: auto;
+  }
+  .collections-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }

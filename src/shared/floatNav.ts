@@ -12,7 +12,6 @@ export function initFloatNav(): void {
     { id: 'works',       label: '작품',     href: `${base}works/`         },
     { id: 'worlds',      label: '작품세계', href: `${base}worlds/`        },
     { id: 'artist',      label: '작가',     href: `${base}artist/`        },
-    { id: 'collections', label: '소장처',   href: `${base}collections/`   },
   ]
 
   const nav = document.createElement('nav')

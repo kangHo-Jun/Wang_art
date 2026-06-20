@@ -74,16 +74,6 @@ export interface WorldScene {
   anchorId?:   string
 }
 
-// ─── 소장처 ───────────────────────────────────────
-export interface Collection {
-  id: string
-  nameKr: string
-  nameEn: string
-  city: string
-  country: string
-  type: 'museum' | 'gallery' | 'university' | 'government'
-}
-
 // ─── 다국어 ───────────────────────────────────────
 export type Lang = 'ko' | 'en' | 'ja' | 'zh'
 export type I18nMap = Record<string, Record<Lang, string>>

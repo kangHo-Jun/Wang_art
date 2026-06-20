@@ -1,5 +1,5 @@
 # 왕열 Wang Yeul — 프로젝트 컨텍스트
-> 최종 업데이트: 2026-06-19
+> 최종 업데이트: 2026-06-20
 > 작업 브랜치: ui/pierrick-v3
 > 로컬 경로: /Users/zart/Library/Mobile Documents/com~apple~CloudDocs/프로젝트/Wang_art
 
@@ -226,3 +226,28 @@ npm run deploy
 3. **범위 제한**
    - 이번 수정은 공통 nav에 한정한다.
    - 전역 인터랙션 레드는 `#c8442e`로 통일하고, nav active/hover도 같은 값을 사용한다.
+
+4. **`/worlds/` 구조는 그룹 A 기준으로 고정**
+   - LANGUAGE는 좌우 2단이 아니라 상단 헤더 띠 + 하단 3색 가로 그리드 구조로 분리했다.
+   - 총론은 `720px` 중앙 블록 + 좌측 정렬로 고정했다.
+   - WORLD/SIGNS는 기존 2단 교차 구조를 유지하고, 공통 nav/footer 및 타 페이지는 건드리지 않았다.
+
+5. **`/worlds/` 도입 시퀀스는 성능 정리 완료**
+   - SVG 먹점 필터는 초반 인상만 남기고 시퀀스 중 제거한다.
+   - `unlock()`/`cleanup()`으로 scroll lock 해제와 `will-change` 정리를 단순화했다.
+   - reduced-motion에서는 자동재생 없이 작품/요약문만 즉시 표시한다.
+
+6. **`/worlds/` 타이포 시스템은 Noto + Space Mono로 정리**
+   - `worlds/index.html`에서 `Gowun Batang`, `Cormorant Garamond` 로드를 제거했다.
+   - `/worlds/` 내부에서는 `--font-serif`를 `'Noto Serif KR', serif`로 재정의해 라틴 serif 잔재를 차단한다.
+   - 축 제목과 한글 부제는 `Noto Sans KR` 계열로 통일하고, 제목-부제 위계는 간격/크기/보조색으로 분리했다.
+   - 도입 문구는 `Noto Serif KR`, `font-weight: 300`, `clamp(30px, 4.6vw, 54px)`로 조정했다.
+
+7. **`/worlds/` 현재 검수 상태**
+   - `npm run build`는 최근 변경 기준 통과했다.
+   - `/worlds/` 대상 파일 범위에서 `rg "Gowun|Cormorant"`는 0건이다.
+   - 아직 남은 검수는 실브라우저 3뷰포트(1440 / 768 / 390) 시각 비교, console error 0, overflow 0, 목업(`v20~v24`) 1:1 대조다.
+
+8. **체크포인트**
+   - 현재 HEAD는 `ed78c38`이다.
+   - 이전 저장 태그 `작품세계_수정전`은 별도 체크포인트로 존재한다.
