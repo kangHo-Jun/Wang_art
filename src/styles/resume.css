@@ -14,35 +14,15 @@
 
 .resume-top {
   display: grid;
-  grid-template-columns: minmax(0, 540px) minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 548px) minmax(280px, 320px);
+  gap: 32px;
+  justify-content: space-between;
   align-items: start;
 }
 
 .resume-top-copy {
   min-width: 0;
   max-width: 540px;
-}
-
-.download {
-  display: block;
-  width: fit-content;
-  margin: 0 0 0 auto;
-  padding: 2px 0px 16px;
-  font-size: 15px;
-  font-weight: var(--fw-200);
-  letter-spacing: 0.3px;
-  line-height: 20px;
-  color: var(--color-ink);
-  text-decoration: underline;
-  transition: opacity var(--dur-hover) var(--ease-hover);
-}
-.download:hover {
-  opacity: var(--opacity-hover);
-}
-
-.download[aria-disabled="true"] {
-  cursor: default;
 }
 
 .resume-category {
@@ -97,7 +77,9 @@
 }
 
 .resume-photo {
-  margin: 96px 0 0;
+  width: 100%;
+  max-width: 320px;
+  margin: 64px 0 0 auto;
 }
 
 .resume-photo-image {
@@ -131,6 +113,155 @@
 
 .resume-detail {
   display: inline-block;
+}
+
+.artist-film-section {
+  margin-top: 52px;
+}
+
+.artist-film-card {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-ink-faint);
+}
+
+.artist-film-trigger {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.artist-film-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(26, 26, 26, 0.07);
+  background: #e0ded8;
+}
+
+.artist-film-thumb-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.artist-film-play {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(250, 250, 250, 0.68);
+  border-radius: 999px;
+  background: rgba(26, 26, 26, 0.18);
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(4px);
+}
+
+.artist-film-play::before {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 9px solid rgba(250, 250, 250, 0.88);
+  transform: translate(-35%, -50%);
+}
+
+.artist-film-copy {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding-top: 4px;
+}
+
+.artist-film-description {
+  margin-bottom: 0;
+  color: var(--color-ink-muted);
+}
+
+.artist-film-link {
+  width: fit-content;
+  font-size: 13px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: var(--color-red);
+  text-decoration: none;
+}
+
+.artist-film-link:hover {
+  opacity: var(--opacity-hover);
+}
+
+.artist-film-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+}
+
+.artist-film-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 250, 250, 0.6);
+  backdrop-filter: blur(4px) saturate(85%);
+}
+
+.artist-film-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(880px, calc(100% - 96px));
+  margin: 64px auto 0;
+  padding: 18px;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  background: rgba(250, 250, 250, 0.82);
+}
+
+.artist-film-close {
+  display: block;
+  margin: 0 0 16px auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.artist-film-frame-wrap {
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  background: rgba(250, 250, 250, 0.66);
+}
+
+.artist-film-frame {
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.artist-film-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.artist-film-caption {
+  margin: 14px 0 0;
+  color: var(--color-ink-muted);
+}
+
+body.artist-film-open {
+  overflow: hidden;
 }
 
 .collections-section {
@@ -180,9 +311,6 @@
   .resume-top-copy {
     max-width: none;
   }
-  .download {
-    margin: 0 0 24px;
-  }
   .resume-text--name {
     margin-top: 0;
   }
@@ -190,7 +318,23 @@
     margin-bottom: 24px;
   }
   .resume-photo {
-    margin-top: 12px;
+    max-width: none;
+    margin-top: 8px;
+  }
+  .artist-film-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .artist-film-trigger {
+    max-width: 244px;
+  }
+  .artist-film-dialog {
+    width: calc(100% - 32px);
+    margin-top: 24px;
+    padding: 14px;
+  }
+  .artist-film-backdrop {
+    backdrop-filter: blur(3px) saturate(85%);
   }
   .resume-category {
     margin: 40px 0 16px;

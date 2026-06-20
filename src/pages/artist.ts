@@ -15,6 +15,17 @@ const ARTIST_INTRO_TWO = `
   그의 화면에서 산수와 말, 새와 색은 단순한 소재가 아니라 인간이 머물고자 하는 내면의 장소를 향한 상징으로 작동한다.
 `
 
+const ARTIST_FILM_TITLE = 'ARTIST FILM'
+
+const ARTIST_FILM_COPY = '작업과 작품세계를 말하는 왕열 작가'
+
+const ARTIST_FILM_URL = 'https://www.youtube.com/watch?v=n0ndsSXbIDg'
+
+const ARTIST_FILM_EMBED_URL =
+  'https://www.youtube.com/embed/n0ndsSXbIDg?autoplay=1&rel=0'
+
+const ARTIST_FILM_THUMBNAIL = 'https://i.ytimg.com/vi/n0ndsSXbIDg/hqdefault.jpg'
+
 const EDUCATION = [
   '홍익대학교 미술대학 및 대학원 동양화과 졸업',
   '홍익대학교 대학원 미술학 박사',
@@ -58,6 +69,7 @@ const INSTITUTIONAL_COLLECTIONS = [
 export function initArtist(): void {
   initFadeUp()
   renderArtist()
+  initArtistFilm()
   animateArtist()
 }
 
@@ -68,8 +80,6 @@ function renderArtist(): void {
 
   container.innerHTML = `
     <section class="resume-shell">
-      <a href="#" class="download" aria-disabled="true">Download CV</a>
-
       <section class="resume-top">
         <div class="resume-top-copy">
           <div class="resume-text resume-text--name">${ARTIST_NAME}</div>
@@ -89,6 +99,42 @@ function renderArtist(): void {
         </figure>
       </section>
 
+      <section class="resume-section artist-film-section">
+        <h2 class="resume-category">${ARTIST_FILM_TITLE}</h2>
+        <div class="artist-film-card">
+          <button
+            type="button"
+            class="artist-film-trigger"
+            id="artistFilmTrigger"
+            aria-label="왕열 작가 소개 영상 재생"
+            aria-haspopup="dialog"
+            aria-controls="artistFilmOverlay"
+          >
+            <span class="artist-film-thumb">
+              <img
+                src="${ARTIST_FILM_THUMBNAIL}"
+                alt=""
+                class="artist-film-thumb-image"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="artist-film-play" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="artist-film-copy">
+            <p class="resume-text artist-film-description">${ARTIST_FILM_COPY}</p>
+            <a
+              href="${ARTIST_FILM_URL}"
+              target="_blank"
+              rel="noreferrer"
+              class="artist-film-link"
+            >
+              YouTube에서 보기 ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
       ${categoryHtml('Education', EDUCATION)}
       ${categoryHtml('Exhibitions & Career', EXHIBITIONS, true)}
       ${categoryHtml('Awards', AWARDS)}
@@ -101,7 +147,122 @@ function renderArtist(): void {
         </div>
       </section>
     </section>
+
+    <div
+      class="artist-film-overlay"
+      id="artistFilmOverlay"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="artistFilmOverlayTitle"
+    >
+      <div class="artist-film-backdrop" data-film-close="true"></div>
+      <div class="artist-film-dialog" tabindex="-1">
+        <button type="button" class="artist-film-close" id="artistFilmClose">
+          Close
+        </button>
+        <div class="artist-film-frame-wrap">
+          <div class="artist-film-frame" id="artistFilmFrame"></div>
+        </div>
+        <p class="resume-text artist-film-caption" id="artistFilmOverlayTitle">
+          ${ARTIST_FILM_COPY}
+        </p>
+      </div>
+    </div>
   `
+}
+
+function initArtistFilm(): void {
+  const overlayEl = document.getElementById('artistFilmOverlay')
+  const triggerEl = document.getElementById('artistFilmTrigger') as HTMLButtonElement | null
+  const closeBtnEl = document.getElementById('artistFilmClose') as HTMLButtonElement | null
+  const frameEl = document.getElementById('artistFilmFrame')
+  if (!overlayEl || !triggerEl || !closeBtnEl || !frameEl) return
+
+  const overlay = overlayEl
+  const trigger = triggerEl
+  const closeBtn = closeBtnEl
+  const frame = frameEl
+
+  let lastFocused: HTMLElement | null = null
+
+  function mountIframe(): void {
+    frame.innerHTML = `
+      <iframe
+        src="${ARTIST_FILM_EMBED_URL}"
+        title="왕열 작가 소개 영상"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    `
+  }
+
+  function unmountIframe(): void {
+    frame.innerHTML = ''
+  }
+
+  function getFocusable(): HTMLElement[] {
+    return Array.from(
+      overlay.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], iframe, [tabindex]:not([tabindex="-1"])',
+      ),
+    )
+  }
+
+  function openFilm(): void {
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : trigger
+    overlay.hidden = false
+    overlay.classList.add('is-open')
+    document.body.classList.add('artist-film-open')
+    mountIframe()
+    closeBtn.focus()
+  }
+
+  function closeFilm(): void {
+    overlay.classList.remove('is-open')
+    overlay.hidden = true
+    document.body.classList.remove('artist-film-open')
+    unmountIframe()
+    lastFocused?.focus()
+  }
+
+  trigger.addEventListener('click', openFilm)
+  closeBtn.addEventListener('click', closeFilm)
+  overlay.addEventListener('click', event => {
+    const target = event.target as HTMLElement
+    if (target.dataset.filmClose === 'true') {
+      closeFilm()
+    }
+  })
+
+  overlay.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      closeFilm()
+      return
+    }
+
+    if (event.key !== 'Tab') return
+
+    const focusable = getFocusable()
+    if (focusable.length === 0) return
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    const active = document.activeElement as HTMLElement | null
+
+    if (event.shiftKey && active === first) {
+      event.preventDefault()
+      last.focus()
+      return
+    }
+
+    if (!event.shiftKey && active === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  })
 }
 
 function categoryHtml(title: string, items: string[], isTimeline = false): string {
