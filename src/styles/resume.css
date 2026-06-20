@@ -79,7 +79,7 @@
 .resume-photo {
   width: 100%;
   max-width: 320px;
-  margin: 64px 0 0 auto;
+  margin: 112px 0 0 auto;
 }
 
 .resume-photo-image {
@@ -89,6 +89,15 @@
   object-fit: cover;
   object-position: 52% 42%;
   filter: grayscale(100%);
+}
+
+.resume-photo-caption {
+  margin: 10px 0 0;
+  font-size: 12px;
+  font-weight: var(--fw-200);
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  color: var(--color-ink-muted);
 }
 
 .text-span-bold {
@@ -319,7 +328,7 @@ body.artist-film-open {
   }
   .resume-photo {
     max-width: none;
-    margin-top: 8px;
+    margin-top: 20px;
   }
   .artist-film-card {
     grid-template-columns: 1fr;

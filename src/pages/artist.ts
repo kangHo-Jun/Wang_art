@@ -24,7 +24,7 @@ const ARTIST_FILM_URL = 'https://www.youtube.com/watch?v=n0ndsSXbIDg'
 const ARTIST_FILM_EMBED_URL =
   'https://www.youtube.com/embed/n0ndsSXbIDg?autoplay=1&rel=0'
 
-const ARTIST_FILM_THUMBNAIL = 'https://i.ytimg.com/vi/n0ndsSXbIDg/hqdefault.jpg'
+const ARTIST_FILM_THUMBNAIL = '/images/artist/wang-yeul-film-thumb.jpg'
 
 const EDUCATION = [
   '홍익대학교 미술대학 및 대학원 동양화과 졸업',
@@ -96,6 +96,7 @@ function renderArtist(): void {
             loading="eager"
             decoding="async"
           />
+          <figcaption class="resume-photo-caption">작업실의 왕열</figcaption>
         </figure>
       </section>
 
@@ -112,7 +113,7 @@ function renderArtist(): void {
           >
             <span class="artist-film-thumb">
               <img
-                src="${ARTIST_FILM_THUMBNAIL}"
+                src="${base}${ARTIST_FILM_THUMBNAIL}"
                 alt=""
                 class="artist-film-thumb-image"
                 loading="lazy"
