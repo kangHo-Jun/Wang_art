@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>왕열 Wang Yeul</title>
+  <meta name="description" content="왕열 작가의 공식 웹사이트. 대표작품과 작품세계를 감상합니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/Wang_art/assets/main-CVRV9nEk.js"></script>
+  <link rel="stylesheet" crossorigin href="/Wang_art/assets/main-CZZya29U.css">
+</head>
+<body data-page="home">
+
+  <!-- 네비바 -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="./" class="navbar-link logo">王烈 Wang Yeul</a>
+      <nav class="nav-menu" role="navigation">
+        <a href="./works/"       class="navbar-link big" data-nav="works">Selected Works</a>
+        <a href="./worlds/"      class="navbar-link big" data-nav="worlds">Worlds</a>
+        <a href="./artist/"      class="navbar-link big" data-nav="artist">Artist</a>
+        <a href="./contact/"     class="navbar-link big" data-nav="contact">Contact</a>
+      </nav>
+      <!-- 모바일 전용 햄버거 -->
+      <button class="menu-btn-mobile" id="menuBtnMobile" aria-label="메뉴">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 메인 비주얼 (Hero) -->
+    <div class="main-visual-wrapper" id="mainVisual"></div>
+
+    <!-- 시리즈 — Pierrick 핵심: 126px 모노 타이포 -->
+    <section class="series" id="seriesSection" aria-label="시리즈">
+      <div class="series-label">Series /</div>
+      <div class="series-list" id="seriesList"></div>
+    </section>
+
+    <!-- 작품 그리드 -->
+    <section class="wall" id="wallGrid" role="list" aria-label="작품 목록"></section>
+
+    <!-- 뉴스레터 -->
+    <section class="newsletter" id="newsletter" aria-label="뉴스레터 구독">
+      <form class="newsletter-form" id="subscribeForm" novalidate>
+        <h2 class="newsletter-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</h2>
+        <p class="newsletter-subtitle" data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
+        <div class="newsletter-input-row">
+          <input class="newsletter-input" id="subscribeEmail" type="email" required data-i18n-placeholder="subscribe.placeholder" data-i18n-aria-label="subscribe.aria" placeholder="Enter your email" aria-label="Enter your email" />
+          <button class="newsletter-submit" type="submit" data-i18n="subscribe.btn">구독</button>
+        </div>
+      </form>
+      <p class="newsletter-msg" id="subscribeMsg" aria-live="polite"></p>
+    </section>
+
+    <footer class="footer">
+      <a href="./"                                       class="footer-link footer-name">왕열 Wang Yeul</a>
+      <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" class="footer-link igdesktop">Instagram @wang_yeul</a>
+      <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" class="footer-link ig-mobile">Instagram</a>
+      <a href="mailto:wangyeul2963296@gmail.com?subject=Wang%20Yeul%20Inquiry" class="footer-link">Email</a>
+    </footer>
+  </main>
+
+</body>
+</html>

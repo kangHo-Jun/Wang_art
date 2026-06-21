@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S0 프로토타입 — 왕열 Wang Yeul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@200;300&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #fafafa;
+  --ink: #1a1410;
+  --ink-muted: rgba(26,20,16,0.40);
+}
+
+html, body { background: var(--bg); }
+
+/* ── Scroll container (300vh = 200vh scrollable at 900px viewport) ── */
+#sc {
+  position: relative;
+  height: 300vh;
+}
+
+/* ── Sticky panel ── */
+#sp {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Paper grain on sticky panel only ── */
+#sp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  opacity: 0.015;
+}
+
+/* ── Layers ── */
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#layer-art  { z-index: 1; opacity: 0; flex-direction: column; gap: 20px; padding: 0 clamp(24px, 8vw, 120px); }
+#layer-ink  { z-index: 2; }
+#layer-txt  { z-index: 3; opacity: 0; align-items: flex-end; padding-bottom: 22vh; }
+
+/* ── SVG ink dot ── */
+#inkSvg {
+  width: 400px;
+  height: 400px;
+  transform: scale(0.07);
+  transform-origin: center center;
+}
+@media (max-width: 480px) {
+  #inkSvg { width: 280px; height: 280px; }
+}
+
+/* ── "왕열의 세계는..." text ── */
+#mainTxt {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  line-height: 1.9;
+}
+
+/* ── Artwork ── */
+#artImg {
+  display: block;
+  max-width: min(68%, 820px);
+  max-height: 60vh;
+  object-fit: contain;
+}
+@media (max-width: 480px) {
+  #artImg { max-width: 90%; max-height: 52vh; }
+}
+
+#artCaption { text-align: center; }
+.cap-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.cap-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.3px;
+}
+
+/* ── Progress label ── */
+#dbg {
+  position: fixed;
+  bottom: 18px;
+  right: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(0,0,0,0.20);
+  z-index: 9999;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div id="sc">
+  <div id="sp">
+
+    <!-- Layer 1 : Artwork + Caption (bottom) -->
+    <div class="layer" id="layer-art">
+      <img id="artImg"
+           src="/Wang_art/images/2026/2025-utopia-meditation-acrylic-on-canvas-280cmx140cm.jpg"
+           alt=""
+           loading="eager"
+           decoding="async">
+      <div id="artCaption">
+        <p class="cap-title">신무릉도원 명상</p>
+        <p class="cap-meta">Acrylic on canvas · 280 × 140 cm · 2025</p>
+      </div>
+    </div>
+
+    <!-- Layer 2 : Ink dot -->
+    <div class="layer" id="layer-ink">
+      <svg id="inkSvg" viewBox="0 0 400 400"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <defs>
+          <!--
+            feTurbulence : 저주파 fractalNoise → 유기적 가장자리
+            feDisplacementMap : 노이즈로 형태 변위 → 불규칙 먹점
+          -->
+          <filter id="fd"
+                  x="-55%" y="-55%" width="210%" height="210%"
+                  color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise"
+                          baseFrequency="0.011 0.014"
+                          numOctaves="5"
+                          seed="17"
+                          result="nz"/>
+            <feDisplacementMap in="SourceGraphic" in2="nz"
+                               scale="26"
+                               xChannelSelector="R"
+                               yChannelSelector="G"/>
+          </filter>
+        </defs>
+
+        <!--
+          4 농도 레이어 — 바깥(옅음) → 안(짙음)
+          각 타원의 중심을 미세하게 어긋나게 → 비정형 먹점
+        -->
+        <g filter="url(#fd)">
+          <!-- L4 : outer halo (가장 옅음) -->
+          <ellipse cx="200" cy="204" rx="152" ry="144"
+                   fill="#221910" fill-opacity="0.18"/>
+          <!-- L3 : outer body -->
+          <ellipse cx="198" cy="200" rx="118" ry="112"
+                   fill="#14100a" fill-opacity="0.48"/>
+          <!-- L2 : mid body -->
+          <ellipse cx="202" cy="198" rx="80"  ry="76"
+                   fill="#0c0807" fill-opacity="0.80"/>
+          <!-- L1 : core (가장 짙음) -->
+          <ellipse cx="200" cy="201" rx="44"  ry="42"
+                   fill="#040302" fill-opacity="0.97"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Layer 3 : Text -->
+    <div class="layer" id="layer-txt">
+      <p id="mainTxt">왕열의 세계는, 한 점의 먹에서 시작된다.</p>
+    </div>
+
+  </div><!-- /sp -->
+</div><!-- /sc -->
+
+<div id="dbg">p = 0.000</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var sc       = document.getElementById('sc');
+  var inkSvg   = document.getElementById('inkSvg');
+  var layerInk = document.getElementById('layer-ink');
+  var layerTxt = document.getElementById('layer-txt');
+  var layerArt = document.getElementById('layer-art');
+  var dbg      = document.getElementById('dbg');
+
+  /* ── 수학 헬퍼 ── */
+  function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
+  function ss(e0, e1, x) {          /* smoothstep */
+    var t = clamp((x - e0) / (e1 - e0), 0, 1);
+    return t * t * (3 - 2 * t);
+  }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  /* ── 상태 업데이트 ── */
+  function update(p) {
+    /*
+     * 1. 먹점 scale  0.07 → 2.22
+     * 2. 텍스트      p 0.07 등장 / p 0.50–0.58 소멸
+     * 3. 먹점 opacity p 0.72–0.90 소멸
+     * 4. 작품 opacity p 0.72–0.90 등장
+     */
+
+    /* 1 */
+    var scale = lerp(0.07, 2.22, p);
+    inkSvg.style.transform = 'scale(' + scale.toFixed(5) + ')';
+
+    /* 2 */
+    var tIn  = ss(0.07, 0.18, p);
+    var tOut = ss(0.50, 0.58, p);
+    layerTxt.style.opacity = clamp(tIn - tOut, 0, 1).toFixed(4);
+
+    /* 3 */
+    var fade = ss(0.72, 0.90, p);
+    layerInk.style.opacity = (1 - fade).toFixed(4);
+
+    /* 4 */
+    layerArt.style.opacity = fade.toFixed(4);
+
+    dbg.textContent = 'p = ' + p.toFixed(3);
+  }
+
+  /* ── passive scroll + RAF 스로틀 ── */
+  var pending = false;
+  window.addEventListener('scroll', function () {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () {
+      pending = false;
+      var rect = sc.getBoundingClientRect();
+      var sh   = sc.offsetHeight - window.innerHeight;
+      update(clamp(-rect.top / sh, 0, 1));
+    });
+  }, { passive: true });
+
+  /* 초기 렌더 */
+  update(0);
+}());
+</script>
+</body>
+</html>
