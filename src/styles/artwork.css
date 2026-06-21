@@ -160,3 +160,26 @@
   .artwork-container     { margin: 0 var(--pad-mob); }
   .nav-artwork-container { width: var(--pad-mob); }  /* 20px */
 }
+
+/* 화살표 아이콘 */
+.nav-artwork-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-artwork-container.c-left::after {
+  content: '←';
+  font-size: 20px;
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+}
+.nav-artwork-container.c-right::after {
+  content: '→';
+  font-size: 20px;
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+}
+.nav-artwork-container.c-left:hover::after,
+.nav-artwork-container.c-right:hover::after {
+  color: var(--color-interactive-red);
+}

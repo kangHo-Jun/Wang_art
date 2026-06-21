@@ -98,6 +98,8 @@ function renderContact(): void {
         aria-label="작업실 이미지"
       >
         <div class="contact-studio-slider">
+          <button class="contact-slide-arrow contact-slide-arrow--prev" aria-label="이전">←</button>
+          <button class="contact-slide-arrow contact-slide-arrow--next" aria-label="다음">→</button>
         ${CONTACT_IMAGES.map((image, index) => `
           <figure class="contact-studio-slide contact-slide ${image.className}${index === 0 ? ' is-active' : ''}" data-slide="${index}">
             <img
