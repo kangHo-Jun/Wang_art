@@ -21,7 +21,7 @@ body.worlds-lock {
 .worlds-origin-cue-text,
 .worlds-axis-items-title {
   font-family: var(--font-mono);
-  font-size: var(--text-small);
+  font-size: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
@@ -52,7 +52,7 @@ body.worlds-lock {
 .worlds-return-body,
 .worlds-link {
   font-family: var(--font-sans);
-  font-size: var(--text-caption);
+  font-size: 18px;
   line-height: 1.78;
   color: var(--color-ink);
 }
@@ -241,7 +241,7 @@ body.worlds-lock {
 
 .worlds-axes-label-text {
   font-family: var(--font-mono);
-  font-size: var(--text-small);
+  font-size: 16px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-ink-dark);
@@ -392,14 +392,14 @@ body.worlds-lock {
 }
 
 .worlds-axis-item-title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.45;
 }
 
 .worlds-axis-item-body {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--color-ink-muted);
 }
 
@@ -422,14 +422,14 @@ body.worlds-lock {
 .worlds-axis-image-label {
   margin-bottom: 10px;
   font-family: var(--font-mono);
-  font-size: var(--text-small);
+  font-size: 16px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
 }
 
 .worlds-axis-image-label em {
-  font-size: 9.5px;
+  font-size: 16px;
   letter-spacing: 0.14em;
   font-style: normal;
   vertical-align: 1px;
@@ -457,7 +457,7 @@ body.worlds-lock {
 }
 
 .worlds-figure-title {
-  font-size: 13.5px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.45;
 }
@@ -467,7 +467,7 @@ body.worlds-lock {
 }
 
 .worlds-spec-line {
-  font-size: 12px;
+  font-size: 18px;
   color: var(--color-ink-muted);
 }
 

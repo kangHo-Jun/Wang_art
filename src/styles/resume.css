@@ -39,7 +39,7 @@
   display: block;
   width: 100%;
   margin: 0px 0px 16px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: var(--fw-200);
   letter-spacing: 0.3px;
   line-height: 21px;
@@ -93,7 +93,7 @@
 
 .resume-photo-caption {
   margin: 10px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: var(--fw-200);
   letter-spacing: 0.06em;
   line-height: 1.5;
@@ -198,7 +198,7 @@
 
 .artist-film-link {
   width: fit-content;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: var(--fw-200);
   letter-spacing: 0.08em;
   line-height: 1.5;
@@ -239,7 +239,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: var(--fw-200);
   letter-spacing: 0.08em;
   line-height: 1.4;
@@ -299,7 +299,7 @@ body.artist-film-open {
 .collection-item {
   padding: 14px 0;
   border-bottom: 1px solid var(--color-ink-faint);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: var(--fw-200);
   letter-spacing: 0.3px;
   line-height: 1.6;
