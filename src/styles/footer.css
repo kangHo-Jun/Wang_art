@@ -11,9 +11,13 @@
   font-size: var(--text-meta);   /* 14px */
   font-weight: var(--fw-400);
   color: var(--color-ink);
-  transition: opacity var(--dur-hover) var(--ease-hover);
+  transition: color var(--dur-hover) var(--ease-hover), opacity var(--dur-hover) var(--ease-hover);
 }
-.footer-link:hover { opacity: var(--opacity-hover); }
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--color-interactive-red);
+  opacity: 1;
+}
 .footer-name {
   font-family: var(--font-serif);
   font-size: var(--text-caption);  /* 15px */

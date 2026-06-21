@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -42,12 +42,12 @@
     <section class="wall" id="wallGrid" role="list" aria-label="작품 목록"></section>
 
     <!-- 뉴스레터 -->
-    <section class="newsletter" aria-label="뉴스레터 구독">
+    <section class="newsletter" id="newsletter" aria-label="뉴스레터 구독">
       <form class="newsletter-form" id="subscribeForm" novalidate>
         <h2 class="newsletter-title" data-i18n="subscribe.title">새로운 작품과 전시 소식을 받아보세요</h2>
         <p class="newsletter-subtitle" data-i18n="subscribe.sub">구독 취소 언제든 가능 · 이메일은 공개되지 않습니다</p>
         <div class="newsletter-input-row">
-          <input class="newsletter-input" id="subscribeEmail" type="email" placeholder="이메일 주소" aria-label="이메일 주소" />
+          <input class="newsletter-input" id="subscribeEmail" type="email" required data-i18n-placeholder="subscribe.placeholder" data-i18n-aria-label="subscribe.aria" placeholder="Enter your email" aria-label="Enter your email" />
           <button class="newsletter-submit" type="submit" data-i18n="subscribe.btn">구독</button>
         </div>
       </form>
@@ -56,9 +56,9 @@
 
     <footer class="footer">
       <a href="./"                                       class="footer-link footer-name">왕열 Wang Yeul</a>
-      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link igdesktop">Instagram @wangyeul</a>
-      <a href="https://instagram.com/wangyeul" target="_blank" class="footer-link ig-mobile">Instagram</a>
-      <a href="mailto:studio@wangyeul.com"              class="footer-link">Email</a>
+      <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" class="footer-link igdesktop">Instagram @wang_yeul</a>
+      <a href="https://www.instagram.com/wang_yeul/" target="_blank" rel="noopener noreferrer" class="footer-link ig-mobile">Instagram</a>
+      <a href="mailto:wangyeul2963296@gmail.com?subject=Wang%20Yeul%20Inquiry" class="footer-link">Email</a>
     </footer>
   </main>
 

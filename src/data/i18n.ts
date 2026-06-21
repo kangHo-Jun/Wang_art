@@ -39,4 +39,48 @@ export const I18N: I18nMap = {
   // ── 푸터 ──
   'footer.copy':       { ko: '© 2026 Wang Yeul. All rights reserved.', en: '© 2026 Wang Yeul. All rights reserved.', ja: '© 2026 Wang Yeul. All rights reserved.', zh: '© 2026 Wang Yeul. All rights reserved.' },
   'footer.note':       { ko: '현대 한국화가 · 단국대학교 예술대학 동양화과 교수 역임', en: 'Contemporary Korean Painter · Former Professor, Dankook University', ja: '現代韓国画家 · 檀国大学校芸術学部東洋画科元教授', zh: '当代韩国画家 · 前檀国大学艺术学院东洋画系教授' },
+
+  // ── Newsletter UI ──
+  'subscribe.title': {
+    ko: '새로운 작품과 전시 소식을 받아보세요',
+    en: 'Sign up to receive updates on new works and exhibitions',
+    ja: '新作と展示のお知らせを受け取りましょう',
+    zh: '订阅以接收新作与展览消息',
+  },
+  'subscribe.sub': {
+    ko: '구독 취소 언제든 가능 · 이메일은 공개되지 않습니다',
+    en: 'Unsubscribe anytime · Your email remains private',
+    ja: 'いつでも配信停止可能 · メールアドレスは公開されません',
+    zh: '可随时取消订阅 · 您的邮箱不会被公开',
+  },
+  'subscribe.placeholder': {
+    ko: '이메일 주소',
+    en: 'Enter your email',
+    ja: 'メールアドレス',
+    zh: '电子邮箱地址',
+  },
+  'subscribe.aria': {
+    ko: '이메일 주소',
+    en: 'Enter your email',
+    ja: 'メールアドレス',
+    zh: '电子邮箱地址',
+  },
+  'subscribe.btn': {
+    ko: '구독',
+    en: 'Subscribe',
+    ja: '購読',
+    zh: '订阅',
+  },
+  'subscribe.pending': {
+    ko: '준비 중입니다.',
+    en: 'Coming soon.',
+    ja: '準備中です。',
+    zh: '正在准备中。',
+  },
+  'subscribe.invalid': {
+    ko: '올바른 이메일 주소를 입력해 주세요.',
+    en: 'Please enter a valid email address.',
+    ja: '有効なメールアドレスを入力してください。',
+    zh: '请输入有效的电子邮箱地址。',
+  },
 }

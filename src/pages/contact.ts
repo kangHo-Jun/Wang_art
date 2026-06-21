@@ -16,8 +16,12 @@ const NAVER_MAP_URL =
   'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%A7%84%EC%9C%84%EB%A9%B4%20%EC%A7%84%EC%9C%842%EC%82%B0%EB%8B%A8%EB%A1%9C%20140%20%EB%8D%94%ED%8D%BC%EC%8A%A4%ED%8A%B8%ED%83%80%EC%9B%8C%ED%8F%89%ED%83%9D%20830%ED%98%B8'
 
 const EMAIL = 'wangyeul2963296@gmail.com'
-const INSTAGRAM_LABEL = 'Instagram.com/wang_yeul'
+const EMAIL_HREF = `mailto:${EMAIL}?subject=Wang%20Yeul%20Inquiry`
+const EMAIL_LABEL = 'Email'
+const INSTAGRAM_LABEL = 'Instagram @wang_yeul'
 const INSTAGRAM_URL = 'https://www.instagram.com/wang_yeul/'
+const NEWSLETTER_LABEL = 'Newsletter'
+const NEWSLETTER_URL = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/#newsletter`
 
 const CONTACT_IMAGES = [
   {
@@ -48,13 +52,13 @@ function renderContact(): void {
 
   container.innerHTML = `
     <section class="contact-page">
-      <section class="contact-info">
+      <section class="contact-container contact-info">
         <div class="contact-block contact-block--location">
           <p class="contact-label">${LOCATION_LABEL}</p>
           <a
             href="${NAVER_MAP_URL}"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="contact-address"
           >
             <span class="contact-address-block contact-address-ko">
@@ -73,24 +77,29 @@ function renderContact(): void {
         <div class="contact-block contact-block--contact">
           <p class="contact-label">${CONTACT_LABEL}</p>
           <div class="contact-lines">
-            <a href="mailto:${EMAIL}" class="contact-row contact-email-link">${EMAIL}</a>
+            <a href="${EMAIL_HREF}" class="contact-row contact-email-link">${EMAIL_LABEL}</a>
             <a
               href="${INSTAGRAM_URL}"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="contact-row contact-link"
             >${INSTAGRAM_LABEL}</a>
+            <a
+              href="${NEWSLETTER_URL}"
+              class="contact-row contact-link"
+            >${NEWSLETTER_LABEL}</a>
           </div>
         </div>
       </section>
 
       <section
-        class="contact-slider"
+        class="contact-studio"
         id="contactSlider"
         aria-label="작업실 이미지"
       >
+        <div class="contact-studio-slider">
         ${CONTACT_IMAGES.map((image, index) => `
-          <figure class="contact-slide ${image.className}${index === 0 ? ' is-active' : ''}" data-slide="${index}">
+          <figure class="contact-studio-slide contact-slide ${image.className}${index === 0 ? ' is-active' : ''}" data-slide="${index}">
             <img
               src="${base}${image.src}"
               alt="${image.alt}"
@@ -100,6 +109,7 @@ function renderContact(): void {
             />
           </figure>
         `).join('')}
+        </div>
       </section>
     </section>
   `

@@ -1,5 +1,6 @@
 import { FEATURED }    from '../data/artworks'
 import { navigateTo } from '../shared/animation'
+import { t } from '../shared/i18n-engine'
 
 const HERO_CATEGORIES = [
   { slug: '2jung', label: 'Double Structure' },
@@ -158,10 +159,10 @@ function initSubscribe(): void {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (!input?.value?.includes('@')) {
-      if (msg) msg.textContent = '올바른 이메일 주소를 입력해주세요.'
+    if (!input?.validity.valid) {
+      if (msg) msg.textContent = t('subscribe.invalid')
       return
     }
-    if (msg) msg.textContent = '준비 중입니다.'
+    if (msg) msg.textContent = t('subscribe.pending')
   })
 }
