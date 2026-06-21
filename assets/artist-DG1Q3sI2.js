@@ -1,4 +1,4 @@
-import{r as e,t}from"./main-BLW2HHhk.js";var n=`왕열 Wang Yeul`,r=`b. 1960 · 한국화 Korean Painting · 미술 교과서 등재`,i=`
+import{r as e,t}from"./main-LfjI2Djb.js";var n=`왕열 Wang Yeul`,r=`b. 1960 · 한국화 Korean Painting · 미술 교과서 등재`,i=`
   1960년 출생. <span class="text-span-bold">단국대학교 예술대학 교수 역임(1994–2020)</span>했으며, 서울을 기반으로 작업하고 있다.
   그의 작품은 <span class="text-span-bold">중·고등학교 미술 교과서에 등재</span>되어 한국 현대미술의 한 위치를 점하고 있다.
 `,a=`

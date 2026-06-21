@@ -46,6 +46,8 @@ var e=`LOCATION`,t=`CONTACT`,n=[`경기도 평택시 진위면 진위2산단로 
         aria-label="작업실 이미지"
       >
         <div class="contact-studio-slider">
+          <button class="contact-slide-arrow contact-slide-arrow--prev" aria-label="이전">←</button>
+          <button class="contact-slide-arrow contact-slide-arrow--next" aria-label="다음">→</button>
         ${d.map((e,t)=>`
           <figure class="contact-studio-slide contact-slide ${e.className}${t===0?` is-active`:``}" data-slide="${t}">
             <img
