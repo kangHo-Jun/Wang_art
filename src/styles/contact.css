@@ -7,7 +7,7 @@
 
 .contact-container,
 .contact-info {
-  width: min(80vw, 891px);
+  width: calc(100% - 288px);
   margin: 0 auto 40px;
   display: flex;
   flex-direction: row;
@@ -21,10 +21,10 @@
 }
 
 .contact-block {
-  width: 334px;
+  width: 50%;
   min-height: 264px;
   min-width: 0;
-  margin-left: 111px;
+  margin-left: 0;
 }
 
 .contact-label {
@@ -129,7 +129,7 @@
 
 .contact-studio {
   position: relative;
-  width: min(80vw, 891px);
+  width: calc(100% - 288px);
   margin: 0 auto;
 }
 
@@ -181,7 +181,7 @@
 @media (max-width: 1024px) {
   .contact-container,
   .contact-info {
-    width: min(calc(100% - 160px), 891px);
+    width: calc(100% - 288px);
   }
 
   .contact-block {

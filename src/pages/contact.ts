@@ -16,7 +16,7 @@ const NAVER_MAP_URL =
   'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%8F%89%ED%83%9D%EC%8B%9C%20%EC%A7%84%EC%9C%84%EB%A9%B4%20%EC%A7%84%EC%9C%842%EC%82%B0%EB%8B%A8%EB%A1%9C%20140%20%EB%8D%94%ED%8D%BC%EC%8A%A4%ED%8A%B8%ED%83%80%EC%9B%8C%ED%8F%89%ED%83%9D%20830%ED%98%B8'
 
 const EMAIL = 'wangyeul2963296@gmail.com'
-const EMAIL_HREF = `mailto:${EMAIL}?subject=Wang%20Yeul%20Inquiry`
+const EMAIL_HREF = `https://mail.google.com/mail/?view=cm&to=${EMAIL}&su=Wang%20Yeul%20Inquiry`
 const EMAIL_LABEL = 'Email'
 const INSTAGRAM_LABEL = 'Instagram @wang_yeul'
 const INSTAGRAM_URL = 'https://www.instagram.com/wang_yeul/'
@@ -77,7 +77,7 @@ function renderContact(): void {
         <div class="contact-block contact-block--contact">
           <p class="contact-label">${CONTACT_LABEL}</p>
           <div class="contact-lines">
-            <a href="${EMAIL_HREF}" class="contact-row contact-email-link">${EMAIL_LABEL}</a>
+            <a href="${EMAIL_HREF}" target="_blank" class="contact-row contact-email-link">${EMAIL_LABEL}</a>
             <a
               href="${INSTAGRAM_URL}"
               target="_blank"
