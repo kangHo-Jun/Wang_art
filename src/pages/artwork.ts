@@ -31,12 +31,15 @@ export function initArtwork(): void {
 
 function renderArtwork(idx: number, base: string): void {
   const art = ARTWORKS[idx]
-  document.title = `${art.titleEn} — 왕열 Wang Yeul`
+  const lang = navigator.language || navigator.languages?.[0] || 'en'
+  const isKorean = lang.startsWith('ko')
+  const title = isKorean ? art.titleKr : art.titleEn
+  document.title = `${title} — 왕열 Wang Yeul`
 
   const img = document.getElementById('artworkImg') as HTMLImageElement
   if (img) {
     img.src = `${base}/${art.imageSrc}`
-    img.alt = art.titleEn
+    img.alt = title
     // 이미지 로드 완료 후 magnifier 초기화 (broken image 시 스킵)
     initZoomWhenReady(img)
     gsap.fromTo(img,
@@ -50,7 +53,7 @@ function renderArtwork(idx: number, base: string): void {
   const medium = document.getElementById('labelMedium')
   const size   = document.getElementById('labelSize')
 
-  if (name)   name.textContent   = art.titleEn
+  if (name)   name.textContent   = title
   if (year)   year.textContent   = art.year   != null ? String(art.year) : ''
   if (medium) medium.textContent = art.medium ?? ''
   if (size)   size.textContent   = art.size   ?? ''

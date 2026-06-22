@@ -74,6 +74,9 @@ export function initViewer(artworks: Artwork[]): void {
   function show(idx: number): void {
     currentIndex = Math.max(0, Math.min(idx, artworkList.length - 1))
     const art = artworkList[currentIndex]
+    const lang = navigator.language || navigator.languages?.[0] || 'en'
+    const isKorean = lang.startsWith('ko')
+    const displayTitle = isKorean ? art.titleKr : art.titleEn
 
     const clickedCard = document.querySelector<HTMLElement>(
       `[data-artwork-id="${art.id}"]`
@@ -83,8 +86,8 @@ export function initViewer(artworks: Artwork[]): void {
     // 이미지 정보 채우기
     img.src = `${base}/${art.imageSrc}`
     img.alt = art.year != null ? `${art.titleEn}, ${art.year}` : art.titleEn
-    if (title)      title.textContent      = art.titleEn
-    if (titleKr)    titleKr.textContent    = art.titleKr
+    if (title)      title.textContent      = displayTitle
+    if (titleKr)    titleKr.textContent    = ''
     if (year)       year.textContent       = art.year != null && art.year > 0 ? String(art.year) : ''
     if (medium)     medium.textContent     = art.mediumKr ?? art.medium ?? ''
     if (size)       size.textContent       = art.size    ?? ''

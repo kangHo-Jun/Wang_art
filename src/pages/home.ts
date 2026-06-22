@@ -26,6 +26,9 @@ function renderMainVisual(): void {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   const firstFeatured = FEATURED[0]
   if (!firstFeatured) return
+  const lang = navigator.language || navigator.languages?.[0] || 'en'
+  const isKorean = lang.startsWith('ko')
+  const title = isKorean ? firstFeatured.titleKr : firstFeatured.titleEn
 
   const visualList = document.createElement('div')
   visualList.className = 'main-visual'
@@ -53,7 +56,7 @@ function renderMainVisual(): void {
   
   const name = document.createElement('span')
   name.className = 'label-name'
-  name.textContent = firstFeatured.titleEn
+  name.textContent = title
 
   const comma = document.createTextNode(', ')
 

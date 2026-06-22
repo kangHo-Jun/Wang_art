@@ -126,11 +126,15 @@ function appendToWall(artworks: Artwork[]): void {
   const frag = document.createDocumentFragment()
 
   artworks.forEach(art => {
+    const lang = navigator.language || navigator.languages?.[0] || 'en'
+    const isKorean = lang.startsWith('ko')
+    const title = isKorean ? art.titleKr : art.titleEn
+
     const item = document.createElement('div')
     item.className = 'wall-item'
     item.setAttribute('role', 'listitem')
     item.setAttribute('tabindex', '0')
-    item.setAttribute('aria-label', art.titleEn)
+    item.setAttribute('aria-label', title)
     item.dataset.artworkId = art.id
 
     const img = document.createElement('img')
